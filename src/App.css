@@ -11,7 +11,12 @@
     grid-area: header;
     background-color: #000000;
     text-align: left;
-    font-size: 12px;
+    font-size: 22px;
+}
+
+.App-header a {
+    color: white;
+    text-decoration: none
 }
 
 .App-main {
@@ -20,7 +25,9 @@
     text-align: center;
     font-size: 36px;
 }
-
+.App-logo {
+    text-align: left;
+}
 .App-footer {
     grid-area: footer;
     text-align: center;
