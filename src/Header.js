@@ -2,12 +2,14 @@ import './App.css';
 
 export default function Header() {
     return (
-        <header className="App-header">
-                <nav>
-                    <a href="#s">Inbox</a> | 
-                    <a href="#s">Outbox</a> | 
-                </nav> 
-        </header>
+        <div className="navbar">
+           <a href="/inbox">Inbox</a> 
+           <a href="/outbox">Outbox</a>
+           <div class="navbar-right">
+                <a href="/login">Login</a>
+           </div>
+            
+        </div>
     );
 }
     
