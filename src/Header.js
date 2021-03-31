@@ -6,6 +6,7 @@ export default function Header() {
            <a href="/inbox">Inbox</a> 
            <a href="/outbox">Outbox</a>
            <div class="navbar-right">
+                <a href="/logout">Logout</a>
                 <a href="/login">Login</a>
            </div>
             
