@@ -27,7 +27,9 @@
     text-align: left;
     font-size: 36px;
 }
-
+.panel {
+    text-align: center;
+}
 .footer {
     position: fixed;
     left: 0;
@@ -36,10 +38,28 @@
     text-align: center;
     font-size: 12px;
 }
-
-hr.solid {
-    border-top: 1px solid #bbb;
+.mainTable {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+table {
+    font-family: areal, sans-serif;
+    font-size: 18px;
+    width: 100%;
+    border-collapse: collapse;
     text-align: left;
-    margin-left:0;
-    width: 30%;
+
+}
+tr {
+    border:none;
+    border-bottom: 1px solid #dddddd;
+}
+#topRow {
+    border: none;
+    border-bottom: 3px solid #dddddd;
+}
+
+th, td {
+    padding: 8px;
 }
