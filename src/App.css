@@ -24,11 +24,16 @@
 
 .main {
     background-color: #FFFFFF;
-    text-align: left;
-    font-size: 36px;
 }
-.panel {
+.mainPanel {
     text-align: center;
+}
+
+.mainPanel a {
+    padding: 10px;
+    color: black;
+    margin-right: 3px;
+    border: 2px solid black;
 }
 .footer {
     position: fixed;
@@ -62,4 +67,28 @@ tr {
 
 th, td {
     padding: 8px;
+}
+.Login {
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -125px;
+    }
+
+.Login input, label, button {
+    width: 250px;
+    box-sizing: border-box;
+    margin: 5px;
+    display: block;
+}
+
+#submit {
+    background-color: grey;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+#submit:hover {
+    opacity: 0.8;
 }
