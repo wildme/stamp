@@ -48,6 +48,7 @@
     margin-right: 10px;
     margin-left: 10px;
 }
+
 table {
     font-family: areal, sans-serif;
     font-size: 18px;
@@ -70,25 +71,49 @@ th, td {
 }
 .Login {
     width: auto;
-    position: absolute;
+    padding: 10px;
+    position: absolute; 
     top: 50%;
     left: 50%;
-    margin: -125px 0 0 -125px;
-    }
+    margin: -150px 0 0 -150px;
+    border: 1px solid;
+    border-radius: 10px;
+}
 
-.Login input, label, button {
-    width: 250px;
-    box-sizing: border-box;
-    margin: 5px;
+.Login input {
+    width: 300px;
     display: block;
 }
 
-#submit {
+.Login button {
     background-color: grey;
+    width: 100%;
+    margin-top: 8px;
     border: none;
     height: 30px;
     cursor: pointer;
 }
-#submit:hover {
+
+.Login button:hover {
     opacity: 0.8;
+}
+.addRecord {
+    width: auto;
+    padding: 10px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.addRecord input {
+    width: 300px;
+    display: block;
+}
+
+.addRecord button {
+    margin-top: 8px;
+    float: right;
 }
