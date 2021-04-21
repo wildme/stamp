@@ -1,13 +1,29 @@
-export default function Login() {
+import React, {useState} from 'react';
+
+const Login = () => {
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div className="Login">
-          <div className="LoginForm">
             <label for="user"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username"  id="user" name="user"/>
+            <input
+                type="text"
+                placeholder="Enter Username"
+                name="user"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
             <label for="pass"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password"id="pass" name="pass"/>
-            <button type="submit" id="submit">Login</button>
-          </div>
+            <input
+                type="password"
+                placeholder="Enter Password"
+                name="pass"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="submit">Login</button>
         </div>
     );
 }
+export default Login;
