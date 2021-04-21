@@ -1,5 +1,16 @@
+import { useState } from 'react';
+
 export function InboxHeader() {
-    return <h3>Inbox</h3>
+    return (<h2>Inbox</h2>);
+}
+
+export function OutboxHeader() {
+    return (<h2>Outbox</h2>);
+}
+
+export function Hello() {
+    const [name] = useState('Stranger');
+    return (<h1>Hello, {name}</h1>);
 }
 
 export function InboxMain() {
@@ -20,26 +31,8 @@ export function InboxMain() {
                 <th>Note</th>
                 <th>File</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Test</td>
-                <td>Big Corp.</td>
-                <td>Konstantin</td>
-                <td>1-01-2021</td>
-                <td>test test</td>
-                <td>Document.doc</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Test2</td>
-                <td>Ajax</td>
-                <td>Konstantin</td>
-                <td>1-01-2021</td>
-                <td>test2 test</td>
-                <td>Document.docx</td>
-              </tr>
             </table>
           </div>  
-          </div>
+        </div>
     );
 }
