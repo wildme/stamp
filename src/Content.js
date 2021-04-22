@@ -4,8 +4,7 @@ import { NewInbox } from './NewRecord.js';
 import Login from './Login.js';
 import {
     BrowserRouter as Router,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 
 export default function Content() {
