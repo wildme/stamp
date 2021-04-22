@@ -1,11 +1,11 @@
 import { LOGIN, LOGOUT } from './actionTypes';
 
-export const login = (creds) => ({
+export const login = (data) => ({
     type: LOGIN,
-    payload: { creds }
+    payload: { data }
 });
 
-export const logout = (user) => ({
+export const logout = () => ({
     type: LOGOUT,
     payload: { user: null }
 });
