@@ -1,13 +1,20 @@
-import {LOGIN, LOGOUT} from './actionTypes';
+import { LOGIN, LOGOUT } from './actionTypes';
 
 const initialState = { user: null };
 
-const  login = (state, action) => {
-    state.user = action.payload;
+const rootReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOGIN: {
+            const { user } = action.payload;
+            return { ...state, user };
+        }
+        case LOGOUT: {
+            const { user } = action.payload;
+            return { ...state, user };
+        }
+        default:
+            return state;
+    }
 }
 
-const logout = (state) => {
-    state.user = null;
-}
-
-export login, logout;
+export default rootReducer;     
