@@ -1,8 +1,8 @@
 import { LOGIN, LOGOUT } from './actionTypes';
 
-export const login = (data) => ({
+export const login = (user) => ({
     type: LOGIN,
-    payload: { data }
+    payload: { user }
 });
 
 export const logout = () => ({
