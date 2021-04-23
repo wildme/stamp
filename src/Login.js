@@ -1,13 +1,10 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
 import { login } from './redux/actions';
 import { connect } from 'react-redux';
 
-const Login = () => {
+const Login = ({dispatch}) => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
-
-    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +15,8 @@ const Login = () => {
             loggedIn: true
             })
         );
+        setName("");
+        setPassword("");
     };
 
     return (
@@ -43,7 +42,4 @@ const Login = () => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return { user: state };
-};
-export default connect(mapStateToProps)(Login);
+export default connect()(Login);
