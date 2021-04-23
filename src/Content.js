@@ -7,7 +7,7 @@ import {
     Route
 } from "react-router-dom";
 
-export default function Content() {
+const Content = () => {
     return(
         <Router>
          <header>
@@ -19,8 +19,8 @@ export default function Content() {
           <Route exact path="/inbox" component={InboxMain} />
           <Route exact path="/inbox/new" component={NewInbox} />
           <Route exact path="/logout" component={Login} />
-          <Route exact path="/login" component={Login} />
          </main>
         </Router>
     );
 }
+export default Content;
