@@ -15,8 +15,6 @@ const HeaderLinks = () => {
 const HeaderBlank = () => {
     return (
         <div className="navbar">
-                <div className="navbar-right">
-                </div>
         </div>
     );
 }
