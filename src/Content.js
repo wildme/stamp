@@ -1,6 +1,6 @@
 import './App.css';
 import { Hello, InboxHeader, OutboxHeader, InboxMain } from './Main.js';
-import { NewInbox } from './NewRecord.js';
+import NewInbox from './NewRecord.js';
 import Login from './Login.js';
 import {
     BrowserRouter as Router,
