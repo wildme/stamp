@@ -1,23 +1,24 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 
-export function InboxHeader() {
+export const InboxHeader = () => {
     return (<h2>Inbox</h2>);
 }
 
-export function OutboxHeader() {
+export const OutboxHeader = () => {
     return (<h2>Outbox</h2>);
 }
 
-export function Hello() {
+export const Hello = () => {
     const [name] = useState('Stranger');
     return (<h1>Hello, {name}</h1>);
 }
 
-export function InboxMain() {
+export const InboxMain = () => {
     return (
         <div className="main">
           <div className="mainPanel">
-            <a href="/inbox/new">New</a>
+            <a href ="/inbox/new">New</a>
             <a href="/inbox/edit">Edit</a>
           </div>
           <div className="mainTable">
@@ -36,3 +37,4 @@ export function InboxMain() {
         </div>
     );
 }
+connect()(InboxMain);
