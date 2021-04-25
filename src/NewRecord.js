@@ -1,4 +1,6 @@
-export function NewInbox() {
+import { connect } from 'react-redux';
+
+const NewInbox = () => {
     return (
         <div className="addRecord">
           <label for="subj"><b>Subject</b></label>
@@ -23,3 +25,4 @@ export function NewInbox() {
         </div>
     );
 }
+export default connect()(NewInbox);
