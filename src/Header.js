@@ -1,13 +1,14 @@
 import './App.css';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const HeaderLinks = () => {
     return  (
         <div className="navbar">
-            <a href="/inbox">Inbox</a> 
-            <a href="/outbox">Outbox</a>
+            <NavLink to="/inbox">Inbox</NavLink> 
+            <NavLink to="/outbox">Outbox</NavLink>
                 <div className="navbar-right">
-                    <a href="/logout">Logout</a>
+                    <NavLink to="/logout">Logout</NavLink>
                 </div>
         </div>
     );
