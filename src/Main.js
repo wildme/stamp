@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 export const InboxHeader = () => {
     return (<h2>Inbox</h2>);
@@ -9,17 +8,12 @@ export const OutboxHeader = () => {
     return (<h2>Outbox</h2>);
 }
 
-export const Hello = () => {
-    const [name] = useState('Stranger');
-    return (<h1>Hello, {name}</h1>);
-}
-
 export const InboxMain = () => {
     return (
         <div className="main">
           <div className="mainPanel">
-            <a href ="/inbox/new">New</a>
-            <a href="/inbox/edit">Edit</a>
+            <NavLink to="/inbox/new">New</NavLink>
+            <NavLink to="/inbox/edit">Edit</NavLink>
           </div>
           <div className="mainTable">
             <table>
@@ -37,4 +31,3 @@ export const InboxMain = () => {
         </div>
     );
 }
-connect()(InboxMain);
