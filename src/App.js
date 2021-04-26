@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import Header from './Header.js';
 import Content from './Content.js';
@@ -8,11 +10,13 @@ import { connect } from 'react-redux';
 
 const App = ({user}) => {
   return (
-      <div className="main">
-        <Header />
-      {user ? <Content /> : <Login />}
-        <Footer />
-      </div>
+      <Router>
+        <Fragment>
+            <Header />
+            {user ? <Content /> : <Login />}
+            <Footer />
+        </Fragment>
+      </Router>
   );
 }
 
