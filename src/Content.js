@@ -2,7 +2,7 @@ import './App.css';
 import { Fragment } from 'react';
 import {InboxHeader, OutboxHeader, InboxMain } from './Main.js';
 import Hello from './Hello.js';
-import NewInbox from './NewRecord.js';
+import NewInbox from './NewInbox.js';
 import Logout from './Logout.js';
 import { Route } from "react-router-dom";
 
