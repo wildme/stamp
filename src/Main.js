@@ -1,13 +1,5 @@
 import { NavLink } from 'react-router-dom';
 
-export const InboxHeader = () => {
-    return (<h2>Inbox</h2>);
-}
-
-export const OutboxHeader = () => {
-    return (<h2>Outbox</h2>);
-}
-
 export const InboxMain = () => {
     return (
         <div className="main">
