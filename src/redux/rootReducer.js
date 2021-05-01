@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT, INBOX_ADD, OUTBOX_ADD } from './actionTypes';
 
-const initialState = { user: null, inbox: null, outbox: null };
+const initialState = { user: null, inbox: [], outbox: [] };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -16,7 +16,7 @@ const rootReducer = (state = initialState, action) => {
             const { id, content } = action.payload;
             return {
                 ...state,
-                inbox: {...state.inbox, [id]: { content }}
+                inbox: [...state.inbox, {id, ...content }]
             }
         }
         default:
