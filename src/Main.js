@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import InboxRows from './InboxRows.js';
 
 export const InboxMain = () => {
     return (
@@ -16,8 +17,8 @@ export const InboxMain = () => {
                 <th>Date</th>
                 <th>User</th>
                 <th>Note</th>
-                <th>File</th>
               </tr>
+                <InboxRows />
             </table>
           </div>  
         </div>
