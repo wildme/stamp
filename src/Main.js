@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import InboxRows from './InboxRows.js';
 
+const requestSort = () => {
+    return;
+}
+
 export const InboxMain = () => {
     return (
         <div className="main">
@@ -11,9 +15,21 @@ export const InboxMain = () => {
           <div className="mainTable">
             <table>
               <tr id="topRow">
-                <th>#</th>
+                <th><button
+                    type="button"
+                    onClick={() => requestSort('id')}
+                >
+                    #
+                </button>
+                </th>
                 <th>Subject</th>
-                <th>Sender</th>
+                <th><button
+                    type="button"
+                    onClick={() => requestSort('Sender')}
+                >
+                    Sender
+                </button>
+                </th>
                 <th>Date</th>
                 <th>User</th>
                 <th>Note</th>
