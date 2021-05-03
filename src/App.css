@@ -49,6 +49,7 @@
     margin-left: 10px;
 }
 
+
 table {
     font-family: areal, sans-serif;
     font-size: 18px;
@@ -57,10 +58,18 @@ table {
     text-align: left;
 
 }
+th > button {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+}
+
 tr {
-    border:none;
+    border: none;
     border-bottom: 1px solid #dddddd;
 }
+
 #topRow {
     border: none;
     border-bottom: 3px solid #dddddd;
@@ -69,6 +78,7 @@ tr {
 th, td {
     padding: 8px;
 }
+
 .Login {
     width: auto;
     padding: 10px;
