@@ -10,7 +10,7 @@ export const login = (user) => ({
 
 export const logout = () => ({
     type: LOGOUT,
-    payload: { user: null, inbox: null, outbox: null }
+    payload: { user: null, inbox: [], outbox: [] }
 });
 
 export const inbox_add = (content) => ({
