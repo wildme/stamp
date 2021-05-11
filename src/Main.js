@@ -1,12 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import InboxRows from './InboxRows.js';
 import { headInbox as head} from './TableHead.js';
+import useTableSort from './useTableSort.js';
+import SortIcon from './sortIcon.js';
 
 const handleSort = () => {
     return;
 }
 
 export const InboxMain = () => {
+    const { handleSort, sortColumn, sortDirection } = useTableSort();
     return (
         <div className="main">
           <div className="mainPanel">
@@ -15,6 +18,7 @@ export const InboxMain = () => {
           </div>
           <div className="mainTable">
             <table>
+                <thead>
               <tr id="topRow">
                 { head.map((item) => {
                     const { id = "", label = "", sortable } = item;
@@ -25,14 +29,17 @@ export const InboxMain = () => {
                                     type="button"
                                     onClick = {() => handleSort(id)}
                                 >
-                                    {label}
+                                    {label} <SortIcon direction={sortDirection}/>
                                 </button>) : label
                             }
                         </th>
                     );
                 })}
               </tr>
+                </thead>
+                <tbody>
                 <InboxRows />
+                </tbody>
             </table>
           </div>  
         </div>
