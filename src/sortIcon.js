@@ -1,10 +1,9 @@
-import { Fragment } from 'react';
-
 const SortIcon = ({direction = ""}) => {
     return (
-     <Fragment className={`sort-icon-${direction}`}>
-        <span className="arrow-up">▲</span><span className="arrow-down">▼</span>
-     </Fragment>
+     <section className="sort-icon">
+        <span className="arrow-up">▲</span>
+        <span className="arrow-down">▼</span>
+     </section>
     );
 };
 export default SortIcon;
