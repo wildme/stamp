@@ -1,8 +1,8 @@
 const SortIcon = ({direction = ""}) => {
     return (
-     <section className="sort-icon">
-        <span className="arrow-up">▲</span>
-        <span className="arrow-down">▼</span>
+     <section className={`sort-icon_${direction}`}>
+        <span id="arrow-up">▲</span>
+        <span id="arrow-down">▼</span>
      </section>
     );
 };
