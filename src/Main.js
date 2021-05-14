@@ -5,7 +5,7 @@ import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
 export const InboxMain = () => {
-    const { handleSort, sortColumn, sortDirection } = useTableSort();
+    const { handleSort, sortColumn, sortDirection, tableData } = useTableSort();
     return (
         <div className="main">
           <div className="mainPanel">
