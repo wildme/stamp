@@ -4,10 +4,6 @@ import { headInbox as head} from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-const handleSort = () => {
-    return;
-}
-
 export const InboxMain = () => {
     const { handleSort, sortColumn, sortDirection } = useTableSort();
     return (
@@ -22,6 +18,8 @@ export const InboxMain = () => {
               <tr id="topRow">
                 { head.map((item) => {
                     const { id = "", label = "", sortable } = item;
+                    const currentItem = sortColumn === id;
+                    const direction = currentItem ? sortDirection : ""; 
                     return (
                         <th key={id}>
                             { sortable ? (
@@ -29,7 +27,7 @@ export const InboxMain = () => {
                                     type="button"
                                     onClick = {() => handleSort(id)}
                                 >
-                                    {label} <SortIcon direction={sortDirection}/>
+                                    {label} <SortIcon direction={direction} />
                                 </button>) : label
                             }
                         </th>
