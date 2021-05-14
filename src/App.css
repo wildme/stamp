@@ -63,10 +63,26 @@ th > button {
     font-size: inherit;
     font-weight: bold;
 }
-.sort-icon {
+.sort-icon_ {
     display: inline;
     font-size: 14px;
     color: grey;
+}
+.sort-icon_asc {
+    display: inline;
+    font-size: 14px;
+    color: grey;
+}
+.sort-icon_desc {
+    display: inline;
+    font-size: 14px;
+    color: grey;
+}
+.sort-icon_asc span#arrow-up {
+    color: black
+}
+.sort-icon_desc span#arrow-down {
+    color: black
 }
 
 tr {
