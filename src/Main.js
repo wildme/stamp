@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import InboxRows from './InboxRows.js';
+import { connect } from 'react-redux';
+import InboxRows  from './InboxRows.js';
 import { headInbox as head} from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-export const InboxMain = () => {
-    const { handleSort, sortColumn, sortDirection, tableData } = useTableSort();
+const InboxMain = ({inbox}) => {
+    const { handleSort, sortColumn, sortDirection, tableData } = useTableSort(inbox);
+    console.log(tableData, sortDirection, sortColumn);
     return (
         <div className="main">
           <div className="mainPanel">
@@ -36,10 +38,17 @@ export const InboxMain = () => {
               </tr>
                 </thead>
                 <tbody>
-                <InboxRows />
+                <InboxRows rows={tableData} />
                 </tbody>
             </table>
           </div>  
         </div>
     );
+};
+
+const mapStateToProps = state => {
+    const { inbox } = state;
+    return { inbox };
 }
+
+export default connect(mapStateToProps)(InboxMain);
