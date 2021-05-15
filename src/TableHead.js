@@ -1,11 +1,11 @@
 export const headInbox = [
     {
-        id: 'number',
+        id: 'id',
         label: '#',
         sortable: true,
     },
     {
-        id: 'subject',
+        id: 'subj',
         label: 'Subject',
         sortable: false,
     },
