@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useTableSort = (data = [1, 2, 3]) => {
+const useTableSort = (data = []) => {
     const [sortColumn, setSortColumn] = useState("");
     const [sortDirection, setSortDirection] = useState("");
     const [tableData, setTableData] = useState(data);
@@ -24,20 +24,20 @@ const useTableSort = (data = [1, 2, 3]) => {
     const sortData = (column, direction) => {
         const dataType = typeof tableData[0][column];
         let sortResult = [];
-        let result = [];
+        let reverseResult = [];
         if (dataType === "string") {
             sortResult = sortString(tableData, column);
-            result = direction === 'desc'
-                ? sortResult.reverse()
-                : sortResult;
-            setTableData(result);
-                                                
+            reverseResult = direction === 'desc' ? sortResult.reverse() : sortResult;
+            setTableData(reverseResult);
         }
-
         if (dataType === "number") {
-            return sortResult = sortNumber(tableData, column);
+            sortResult = sortNumber(tableData, column);
+            reverseResult = direction === 'desc' ? sortResult.reverse() : sortResult;
+            setTableData(reverseResult);
         }
-        else { return tableData }
+        else { 
+            return tableData;
+        }
     };
 
     const handleSort = (column) => {
