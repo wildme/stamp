@@ -1,7 +1,7 @@
 import './App.css';
 import { connect } from 'react-redux';
 import { Fragment } from 'react';
-import { InboxMain } from './Main.js';
+import InboxMain from './Main.js';
 import NewInbox from './NewInbox.js';
 import Logout from './Logout.js';
 import { Route } from "react-router-dom";
