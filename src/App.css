@@ -84,12 +84,16 @@ th > button {
 .sort-icon_desc span#arrow-down {
     color: black
 }
-
 tr {
     border: none;
     border-bottom: 1px solid #dddddd;
 }
-
+svg#menu {
+    display: none;
+}
+.inbox-item:hover svg#menu {
+    display: block;
+}
 #topRow {
     border: none;
     border-bottom: 3px solid #dddddd;
