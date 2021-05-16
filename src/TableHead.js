@@ -32,5 +32,10 @@ export const headInbox = [
         label: 'Note',
         sortable: false,
     },
+    {
+        id: 'select',
+        label: 'Select',
+        sortable: false,
+    }
 
 ];
