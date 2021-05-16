@@ -7,12 +7,10 @@ import SortIcon from './sortIcon.js';
 
 const InboxMain = ({inbox}) => {
     const { handleSort, sortColumn, sortDirection, tableData } = useTableSort(inbox);
-    console.log(tableData, sortDirection, sortColumn);
     return (
         <div className="main">
           <div className="mainPanel">
             <NavLink to="/inbox/new">New</NavLink>
-            <NavLink to="/inbox/edit">Edit</NavLink>
           </div>
           <div className="mainTable">
             <table>
