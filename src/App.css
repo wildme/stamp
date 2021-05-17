@@ -94,6 +94,28 @@ svg#menu {
 .inbox-item:hover svg#menu {
     display: block;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 8px;
+    background-color: grey;
+    min-width: 90px;
+    overflow: auto;
+    z-index: 1;
+}
+.dropdown-content ul {
+    list-style-type: none;
+}
+.dropdown-content a {
+    font-size: 14px;
+    text-decoration: none;
+}
+
 #topRow {
     border: none;
     border-bottom: 3px solid #dddddd;
