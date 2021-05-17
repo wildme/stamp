@@ -1,14 +1,23 @@
 import { useState } from 'react';
 const RowActions = ({props}) => {
-    const [tableCheckbox, setTableCheckbox] = useState(false);
+    const handleClickKebab = (e) => {
+        e.preventDefault();
+        return;
+    }
     return (
-        <svg id="menu" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-            <a href="#">
-                <circle cx="5" cy="5" r="2" fill="black"/>
-                <circle cx="5" cy="10" r="2" fill="black"/>
-                <circle cx="5" cy="15" r="2" fill="black"/>
+        <div className="dropdown">
+            <a href="#menu" onClick={(e) => handleClickKebab(e)}>
+                <svg id="menu" width="17" height="17" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="3" r="2" fill="black"/>
+                    <circle cx="50%" cy="9" r="2" fill="black"/>
+                    <circle cx="50%" cy="15" r="2" fill="black"/>
+                </svg>
             </a>
-        </svg>
+            <ul id="row-dropdown" className="dropdown-content">
+                <li><a href="#edit">Edit</a></li>
+            </ul>
+        </div>
+
     );
 };
 export default RowActions;
