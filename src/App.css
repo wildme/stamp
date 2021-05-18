@@ -94,7 +94,7 @@ svg#menu {
 .inbox-item:hover svg#menu {
     display: block;
 }
-.dropdown {
+.kebab-icon {
     position: relative;
     display: inline-block;
 }
@@ -102,14 +102,16 @@ svg#menu {
 .dropdown-content {
     display: none;
     position: absolute;
-    padding: 8px;
     background-color: grey;
     min-width: 90px;
     overflow: auto;
     z-index: 1;
+    margin: 2px;
 }
 .dropdown-content ul {
     list-style-type: none;
+    padding: 2px;
+    margin: auto;
 }
 .dropdown-content a {
     font-size: 14px;
