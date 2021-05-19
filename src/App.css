@@ -100,14 +100,19 @@ svg#menu {
 }
 
 .dropdown-content {
-    display: none;
+    display: block;
     position: absolute;
-    background-color: grey;
+    background-color: white;
+    border: 1px solid;
     min-width: 90px;
     overflow: auto;
     z-index: 1;
     margin: 2px;
 }
+.dropdown-content-hidden {
+    display: none;
+}
+
 .dropdown-content ul {
     list-style-type: none;
     padding: 2px;
