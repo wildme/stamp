@@ -51,7 +51,7 @@
 
 table {
     font-family: areal, sans-serif;
-    font-size: 18px;
+    font-size: 19px;
     width: 100%;
     border-collapse: collapse;
     text-align: left;
@@ -97,6 +97,12 @@ svg#menu {
 .kebab-icon {
     position: relative;
     display: inline-block;
+    border: none;
+    border-radius: 4px;
+}
+
+.kebab-icon:hover {
+    background-color: #f2f2f2;
 }
 
 .dropdown-content {
