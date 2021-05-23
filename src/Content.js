@@ -17,6 +17,7 @@ const Content = ({user}) => {
          <main>
           <Route exact path="/inbox" component={InboxMain} />
           <Route exact path="/inbox/new" component={NewInbox} />
+          <Route exact path="/inbox/edit/:id" component={NewInbox} />
           <Route exact path="/logout" component={Logout} />
          </main>
         </Fragment>
