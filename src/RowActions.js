@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const RowActions = ({props}) => {
+const RowActions = ({id}) => {
     const [visibility, setVisibility] = useState(false);
     const dropdownRef = useRef(null);
     const handleClick = (e) => {
@@ -37,7 +37,7 @@ const RowActions = ({props}) => {
                         ref={dropdownRef}
                     >
                         <ul id="row-dropdown">
-                            <li><NavLink to="/inbox/new">Edit</NavLink></li>
+                            <li><NavLink to={`/inbox/edit/${id}`}>Edit</NavLink></li>
                         </ul>
                     </div>
             </div>
