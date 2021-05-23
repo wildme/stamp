@@ -8,7 +8,7 @@ const Inbox = ({entry}) => (
         <td>{entry.date}</td>
         <td>{entry.added}</td>
         <td>{entry.note}</td>
-        <td><RowActions props={entry.id} /></td>
+        <td><RowActions id={entry.id} /></td>
     </tr>
 );
 
