@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, INBOX_ADD, OUTBOX_ADD } from './actionTypes';
+import { LOGIN, LOGOUT, INBOX_ADD, INBOX_EDIT, OUTBOX_ADD } from './actionTypes';
 
 const initialState = { user: null, inbox: [], outbox: [] };
 
@@ -18,6 +18,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 inbox: [...state.inbox, {id, ...content }]
             }
+        }
+        case INBOX_EDIT: {
+            const { id, content } = action.payload;
+            const idx = state.inbox(x => x.id == id);
+            state.inbox[idx] = { ...state.inbox[idx], ...content };
+            return {...state };
         }
         default:
             return state;
