@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Fragment } from 'react';
 import InboxMain from './Main.js';
 import NewInbox from './NewInbox.js';
+import EditInbox from './EditInbox.js';
 import Logout from './Logout.js';
 import { Route } from "react-router-dom";
 
@@ -17,7 +18,7 @@ const Content = ({user}) => {
          <main>
           <Route exact path="/inbox" component={InboxMain} />
           <Route exact path="/inbox/new" component={NewInbox} />
-          <Route exact path="/inbox/edit/:id" component={NewInbox} />
+          <Route exact path="/inbox/edit/:id" component={EditInbox} />
           <Route exact path="/logout" component={Logout} />
          </main>
         </Fragment>
