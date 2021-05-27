@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { inbox_edit } from './redux/actions.js';
 import { connect } from 'react-redux';
 
-const EditInbox = ({props, dispatch}) => {
-    const InboxId = props.id;
-    const [subj, setSubj] = useState(props.subj);
-    const [sender, setSender] = useState(props.sender);
-    const [note, setNote] = useState(props.note);
+const EditInbox = ({inbox, dispatch}) => {
+    const { id } = useParams();
+    const prev = inbox.find(x => x.id == id);
+    const [subj, setSubj] = useState(prev.subj);
+    const [sender, setSender] = useState(prev.sender);
+    const [note, setNote] = useState(prev.note);
     
     const handleEditInbox = (e) => {
         e.preventDefault();
         dispatch(
-            inbox_edit({
+            inbox_edit(id, {
                 subj: subj,
                 sender: sender,
                 note: note
@@ -48,9 +50,13 @@ const EditInbox = ({props, dispatch}) => {
             onChange={(e) => setNote(e.target.value)}
         />
 
-          <button type="submit" onClick={(e) => handleEditInbox(e)} >Add</button>
+          <button type="submit" onClick={(e) => handleEditInbox(e)} >Update</button>
         </div>
     );
 }
 
-export default connect()(NewInbox);
+const mapStateToProps = (state) => {
+    const { inbox } = state;
+    return { inbox: inbox }
+}
+export default connect(mapStateToProps)(EditInbox);
