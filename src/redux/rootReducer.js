@@ -21,7 +21,7 @@ const rootReducer = (state = initialState, action) => {
         }
         case INBOX_EDIT: {
             const { id, content } = action.payload;
-            const idx = state.inbox(x => x.id == id);
+            const idx = state.inbox.findIndex(x => x.id == id);
             state.inbox[idx] = { ...state.inbox[idx], ...content };
             return {...state };
         }
