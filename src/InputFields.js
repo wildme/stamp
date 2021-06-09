@@ -1,16 +1,18 @@
-import { InputInboxAttrs } from './InputAttrs.js';
+import { Fragment } from 'react';
 
-const InputField = ({attrs, onChange}) => {
-    const handleInputChange = (e) = > {
+export const InputField = ({attrs, onChange}) => {
+    const handleInputChange = (e) => {
         onChange(e.target.value);
     };
-
     return (
-        <label for={for}><b>{text}</b><label>
+        <Fragment>
+        <label for={attrs.for}><b>{attrs.text}</b></label>
         <input
-            type={attrs.type},
-            name={attrs.name},
-            value={attrs.value},
-            onChange={(e) = > handleInputChange(e)}
+            type={attrs.type}
+            name={attrs.name}
+            value={attrs.value}
+            onChange={(e) => handleInputChange(e)}
         />
-};
+        </Fragment>
+    );
+}

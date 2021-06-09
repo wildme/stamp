@@ -1,6 +1,7 @@
-export const InputInboxAttrs = [
+export const InputAttrs = {
+    inbox: [
     {
-        for: "subj"
+        for: "subj",
         text: "Subject",
         name: "subj",
         type: "text",
@@ -19,5 +20,6 @@ export const InputInboxAttrs = [
         name: "note",
         type: "text",
     }
+    ]
 
-]; 
+}; 
