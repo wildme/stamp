@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 
-export const InputField = ({attrs, onChange}) => {
+export const InputField = ({attrs, setter, value}) => {
     const handleInputChange = (e) => {
-        onChange(e.target.value);
+        setter(e.target.value);
     };
     return (
         <Fragment>
@@ -10,7 +10,7 @@ export const InputField = ({attrs, onChange}) => {
         <input
             type={attrs.type}
             name={attrs.name}
-            value={attrs.value}
+            value={value}
             onChange={(e) => handleInputChange(e)}
         />
         </Fragment>
