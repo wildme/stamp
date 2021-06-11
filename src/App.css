@@ -187,11 +187,14 @@ th, td {
     float: right;
 }
 .options {
+    position: absolute;
+    background-color: white;
     list-style-type: none;
     padding-left: 0;
     border: 1px solid;
     overflow: auto;
-    max-height: 150px;
+    max-height: 200px;
+    z-index: 1;
 }
 
 .active-item, .options li:hover {
