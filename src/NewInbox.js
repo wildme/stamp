@@ -3,6 +3,8 @@ import { inbox_add } from './redux/actions.js';
 import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
+import  Autocomplete  from './Autocomplete.js';
+import { country_list } from './countries.js';
 
 const NewInbox = ({user, dispatch}) => {
     const [subj, setSubj] = useState("");
@@ -41,6 +43,7 @@ const NewInbox = ({user, dispatch}) => {
                     setter={setNote}
                     value={note}
         />
+        <Autocomplete options={country_list} />
         <button type="submit" onClick={(e) => handleAddInbox(e)} >Add</button>
         </div>
     );
