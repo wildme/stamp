@@ -186,14 +186,17 @@ th, td {
     margin-top: 8px;
     float: right;
 }
+
 .options {
     position: absolute;
+    width: 300px;
     background-color: white;
-    list-style-type: none;
-    padding-left: 0;
     border: 1px solid;
+    list-style-type: none;
     overflow: auto;
     max-height: 200px;
+    margin: auto;
+    padding: 3px;
     z-index: 1;
 }
 
