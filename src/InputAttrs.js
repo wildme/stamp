@@ -8,9 +8,9 @@ export const InputAttrs = {
     },
 
     {
-        for: "sender",
-        text: "Sender" ,
-        name: "sender",
+        for: "from",
+        text: "From",
+        name: "from",
         type: "text",
     },
 
