@@ -10,8 +10,8 @@ export const headInbox = [
         sortable: false,
     },
     {
-        id: 'sender',
-        label: 'Sender',
+        id: 'from',
+        label: 'From',
         sortable: true,
     },
 
