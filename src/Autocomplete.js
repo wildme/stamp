@@ -1,16 +1,15 @@
 import React, { useState, Fragment } from 'react';
 
-const Autocomplete = ({options}) => {
+const Autocomplete = ({options, value, setter, attrs}) => {
     const [matches, setMatches] = useState([]);
     const [activeItem, setActiveItem] = useState(0);
     const [visibility, setVisibility] = useState(false);
-    const [userInput, setUserInput] = useState("");
 
     const onKeyDown = (e) => {
         if (e.keyCode === 13) {
             setActiveItem(0);
             setVisibility(false);
-            setUserInput(matches[activeItem]);
+            setter(matches[activeItem]);
         }
         else if (e.keyCode === 38) {
             if (activeItem === 0) {
@@ -27,10 +26,10 @@ const Autocomplete = ({options}) => {
     };
     
     const onChange = (e) => {
-        setUserInput(e.currentTarget.value);
+        setter(e.currentTarget.value);
         setMatches(() => options.filter(
             (option) => 
-            option.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+            option.toLowerCase().indexOf(value.toLowerCase()) > -1
         )); 
         
         setVisibility(true);
@@ -38,31 +37,31 @@ const Autocomplete = ({options}) => {
     };
 
     const onClick = (e) => {
-        setUserInput(e.currentTarget.innerText);
+        setter(e.currentTarget.innerText);
         setMatches([]);
         setVisibility(false);
         setActiveItem(0);
     };
 
     let optionList;
-    if (visibility && userInput) {
+    if (visibility && value) {
         if (matches.length) {
             optionList = (
-            <ul className="options">
-                {matches.map((match, index) => {
-                    let className;
-                    if (index === activeItem) {
-                        className="active-item";
-                    }
-                    return (
-                        <li 
-                            className={className}
-                            key={match}
-                            onClick={onClick}>{match}
-                        </li>
-                    );
-                })}
-            </ul>
+                <ul className="options">
+                    {matches.map((match, index) => {
+                        let className;
+                        if (index === activeItem) {
+                            className="active-item";
+                        }
+                        return (
+                            <li 
+                                className={className}
+                                key={match}
+                                onClick={onClick}>{match}
+                            </li>
+                        );
+                    })}
+                </ul>
             );
         } else {
             optionList = (
@@ -74,10 +73,11 @@ const Autocomplete = ({options}) => {
     }
     return (
         <Fragment>
+        <label for={attrs.for}><b>{attrs.text}</b></label>
         <input
-            type="text"
-            name="from"
-            value={userInput}
+            type={attrs.type}
+            name={attrs.name}
+            value={value}
             onChange={onChange}
             onKeyDown={onKeyDown}
         />
