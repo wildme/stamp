@@ -1,10 +1,19 @@
 import { Fragment } from 'react';
+import Autocomplete from './Autocomplete.js';
+import { country_list } from './countries.js';
 
-export const InputField = ({attrs, setter, value}) => {
+export const InputField = ({attrs, setter, value, auto=false}) => {
     const handleInputChange = (e) => {
         setter(e.target.value);
     };
-    return (
+    return  (
+    auto ?
+        <Autocomplete options={country_list}
+            attrs={attrs}
+            value={value}
+            setter={setter}
+        />
+        :
         <Fragment>
         <label for={attrs.for}><b>{attrs.text}</b></label>
         <input
