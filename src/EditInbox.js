@@ -9,7 +9,7 @@ const EditInbox = ({inbox, dispatch}) => {
     const { id } = useParams();
     const prev = inbox.find(x => x.id == id);
     const [subj, setSubj] = useState(prev.subj);
-    const [sender, setSender] = useState(prev.sender);
+    const [from, setFrom] = useState(prev.from);
     const [note, setNote] = useState(prev.note);
     
     const handleEditInbox = (e) => {
@@ -17,12 +17,12 @@ const EditInbox = ({inbox, dispatch}) => {
         dispatch(
             inbox_edit(id, {
                 subj: subj,
-                sender: sender,
+                from: from,
                 note: note
             })
         );
         setSubj("");
-        setSender("");
+        setFrom("");
         setNote("");
     };
 
@@ -32,9 +32,10 @@ const EditInbox = ({inbox, dispatch}) => {
                     setter={setSubj}
                     value={subj}
         />
-        <InputField attrs={attrs.inbox.filter(x => x.name == "sender")[0]}
-                    setter={setSender}
-                    value={sender}
+        <InputField attrs={attrs.inbox.filter(x => x.name == "from")[0]}
+                    setter={setFrom}
+                    value={from}
+                    auto={true}
         />
         <InputField attrs={attrs.inbox.filter(x => x.name == "note")[0]}
                     setter={setNote}

@@ -3,12 +3,10 @@ import { inbox_add } from './redux/actions.js';
 import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
-import  Autocomplete  from './Autocomplete.js';
-import { country_list } from './countries.js';
 
 const NewInbox = ({user, dispatch}) => {
     const [subj, setSubj] = useState("");
-    const [sender, setSender] = useState("");
+    const [from, setFrom] = useState("");
     const date = new Date().toISOString();
     const added = user.name;
     const [note, setNote] = useState("");
@@ -18,14 +16,14 @@ const NewInbox = ({user, dispatch}) => {
         dispatch(
             inbox_add({
                 subj: subj,
-                sender: sender,
+                from: from,
                 date: date,
                 added: added,
                 note: note
             })
         );
         setSubj("");
-        setSender("");
+        setFrom("");
         setNote("");
     };
 
@@ -35,15 +33,15 @@ const NewInbox = ({user, dispatch}) => {
                     setter={setSubj}
                     value={subj}
         />
-        <InputField attrs={attrs.inbox.filter(x => x.name == "sender")[0]}
-                    setter={setSender}
-                    value={sender}
+        <InputField attrs={attrs.inbox.filter(x => x.name == "from")[0]}
+                    setter={setFrom}
+                    value={from}
+                    auto={true}
         />
         <InputField attrs={attrs.inbox.filter(x => x.name == "note")[0]}
                     setter={setNote}
                     value={note}
         />
-        <Autocomplete options={country_list} />
         <button type="submit" onClick={(e) => handleAddInbox(e)} >Add</button>
         </div>
     );
