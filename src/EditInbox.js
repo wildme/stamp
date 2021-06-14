@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { inbox_edit } from './redux/actions.js';
+import { inbox_edit, outbox_edit } from './redux/actions.js';
 import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
