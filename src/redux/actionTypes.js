@@ -3,3 +3,4 @@ export const LOGOUT = 'LOGOUT';
 export const INBOX_ADD = 'INBOX_ADD';
 export const INBOX_EDIT = 'INBOX_EDIT';
 export const OUTBOX_ADD = 'OUTBOX_ADD';
+export const OUTBOX_EDIT = 'OUTBOX_EDIT';

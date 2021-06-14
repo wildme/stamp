@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, INBOX_ADD, INBOX_EDIT, OUTBOX_ADD } from './actionTypes';
+import { LOGIN, LOGOUT, INBOX_ADD, INBOX_EDIT, OUTBOX_ADD, OUTBOX_EDIT  } from './actionTypes';
 
 let nextInboxID = 0;
 let nextOutboxID = 0;
@@ -26,4 +26,8 @@ export const inbox_edit = (inboxId, content) => ({
 export const outbox_add = (content) => ({
     type: OUTBOX_ADD,
     payload: { id: ++nextOutboxID, content }
+});
+export const outbox_edit = (outboxId, content) => ({
+    type: OUTBOX_EDIT,
+    payload: { id: outboxId, content }
 });
