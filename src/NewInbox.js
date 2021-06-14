@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { inbox_add } from './redux/actions.js';
+import { inbox_add, outbox_add } from './redux/actions.js';
 import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
