@@ -1,9 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const RowActions = ({id}) => {
     const [visibility, setVisibility] = useState(false);
     const dropdownRef = useRef(null);
+    const { pathname } = useLocation();
+    const box = /(in|out)box/.exec(pathname)[0];
+
     const handleClick = (e) => {
         e.preventDefault();
         if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
@@ -37,7 +41,7 @@ const RowActions = ({id}) => {
                         ref={dropdownRef}
                     >
                         <ul id="row-dropdown">
-                            <li><NavLink to={`/inbox/edit/${id}`}>Edit</NavLink></li>
+                            <li><NavLink to={"/" + `${box}` + "/edit/" + `${id}`}>Edit</NavLink></li>
                         </ul>
                     </div>
             </div>
