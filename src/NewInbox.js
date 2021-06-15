@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { inbox_add, outbox_add } from './redux/actions.js';
 import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
 const NewInbox = ({user, dispatch}) => {
+    const { pathname } = useLocation();
+    const box = /(in|out)box/.exec(pathname)[0];
     const [subj, setSubj] = useState("");
     const [from, setFrom] = useState("");
     const date = new Date().toISOString();
@@ -13,15 +16,28 @@ const NewInbox = ({user, dispatch}) => {
     
     const handleAddInbox = (e) => {
         e.preventDefault();
-        dispatch(
-            inbox_add({
-                subj: subj,
-                from: from,
-                date: date,
-                added: added,
-                note: note
-            })
-        );
+        if (/^\/inbox\//.test(pathname)) {
+            dispatch(
+                inbox_add({
+                    subj: subj,
+                    from: from,
+                    date: date,
+                    added: added,
+                    note: note
+                })
+            );
+        } else if (/^\/outbox\//.test(pathname)) {
+            dispatch(
+                outbox_add({
+                    subj: subj,
+                    to: from,
+                    date: date,
+                    added: added,
+                    note: note
+                })
+            );
+        }
+
         setSubj("");
         setFrom("");
         setNote("");
@@ -29,16 +45,16 @@ const NewInbox = ({user, dispatch}) => {
 
     return (
         <div className="addRecord">
-        <InputField attrs={attrs.inbox.filter(x => x.name == "subj")[0]}
+        <InputField attrs={attrs[`${box}`].filter(x => x.name == "subj")[0]}
                     setter={setSubj}
                     value={subj}
         />
-        <InputField attrs={attrs.inbox.filter(x => x.name == "from")[0]}
+        <InputField attrs={attrs[`${box}`].filter(x => x.name == "from" || x.name == "to")[0]}
                     setter={setFrom}
                     value={from}
                     auto={true}
         />
-        <InputField attrs={attrs.inbox.filter(x => x.name == "note")[0]}
+        <InputField attrs={attrs[`${box}`].filter(x => x.name == "note")[0]}
                     setter={setNote}
                     value={note}
         />
