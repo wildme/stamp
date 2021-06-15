@@ -17,8 +17,11 @@ const Content = ({user}) => {
          </header>
          <main>
           <Route exact path="/inbox" component={InboxMain} />
+          <Route exact path="/outbox" component={InboxMain} />
           <Route exact path="/inbox/new" component={NewInbox} />
+          <Route exact path="/outbox/new" component={NewInbox} />
           <Route exact path="/inbox/edit/:id" component={EditInbox} />
+          <Route exact path="/outbox/edit/:id" component={EditInbox} />
           <Route exact path="/logout" component={Logout} />
          </main>
         </Fragment>
