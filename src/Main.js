@@ -1,22 +1,30 @@
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import InboxRows  from './InboxRows.js';
 import { headInbox as head} from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-const InboxMain = ({inbox}) => {
-    const { handleSort, sortColumn, sortDirection, tableData } = useTableSort(inbox);
+const InboxMain = ({inbox, outbox}) => {
+    const { pathname } = useLocation();
+    const box = /(in|out)box/.exec(pathname)[0];
+    const currentTable = box == 'inbox' ? inbox : outbox;
+    const { handleSort,
+        sortColumn,
+        sortDirection,
+        tableData
+    } = useTableSort(currentTable);
     return (
         <div className="main">
           <div className="mainPanel">
-            <NavLink to="/inbox/new">New</NavLink>
+            <NavLink to={"/" + `${box}` + "/new"}>New</NavLink>
           </div>
           <div className="mainTable">
             <table>
                 <thead>
               <tr id="topRow">
-                { head.map((item) => {
+                { head[`${box}`].map((item) => {
                     const { id = "", label = "", sortable } = item;
                     const currentItem = sortColumn === id;
                     const direction = currentItem ? sortDirection : ""; 
@@ -45,8 +53,8 @@ const InboxMain = ({inbox}) => {
 };
 
 const mapStateToProps = state => {
-    const { inbox } = state;
-    return { inbox };
+    const { inbox, outbox } = state;
+    return { inbox, outbox };
 }
 
 export default connect(mapStateToProps)(InboxMain);
