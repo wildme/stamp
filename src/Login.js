@@ -20,24 +20,26 @@ const Login = ({dispatch}) => {
     };
 
     return (
-        <div className="Login">
-            <label for="user"><b>Username</b></label>
-            <input
-              type="text"
-              placeholder="Enter Username"
-              name="user"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label for="pass"><b>Password</b></label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="pass"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>
+        <div className="login">
+            <div className="login-input">
+                <label for="user"><b>Username</b></label>
+                <input
+                  type="text"
+                  placeholder="Enter Username"
+                  name="user"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <label for="pass"><b>Password</b></label>
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="pass"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>
+            </div>
         </div>
     );
 }
