@@ -44,21 +44,23 @@ const NewInbox = ({user, dispatch}) => {
     };
 
     return (
-        <div className="addRecord">
-        <InputField attrs={attrs[`${box}`].filter(x => x.name == "subj")[0]}
-                    setter={setSubj}
-                    value={subj}
-        />
-        <InputField attrs={attrs[`${box}`].filter(x => x.name == "from" || x.name == "to")[0]}
-                    setter={setFrom}
-                    value={from}
-                    auto={true}
-        />
-        <InputField attrs={attrs[`${box}`].filter(x => x.name == "note")[0]}
-                    setter={setNote}
-                    value={note}
-        />
-        <button type="submit" onClick={(e) => handleAddInbox(e)} >Add</button>
+        <div className="add-record">
+            <div className="record-input">
+                <InputField attrs={attrs[`${box}`].filter(x => x.name == "subj")[0]}
+                            setter={setSubj}
+                            value={subj}
+                />
+                <InputField attrs={attrs[`${box}`].filter(x => x.name == "from" || x.name == "to")[0]}
+                            setter={setFrom}
+                            value={from}
+                            auto={true}
+                />
+                <InputField attrs={attrs[`${box}`].filter(x => x.name == "note")[0]}
+                            setter={setNote}
+                            value={note}
+                />
+                <button type="submit" onClick={(e) => handleAddInbox(e)} >Add</button>
+            </div>
         </div>
     );
 }
