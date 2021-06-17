@@ -27,13 +27,43 @@
 }
 
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
     text-align: center;
     font-size: 12px;
 }
+.login {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: 500px;
+    justify-items: center;
+    align-items: center;
+
+}
+.login-input {
+    width: 310px;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.login-input input {
+    width: 300px;
+}
+
+.login-input button {
+    background-color: grey;
+    width: 310px;
+    margin-top: 8px;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+.login-input button:hover {
+    opacity: 0.8;
+}
+
 .main {
     background-color: #FFFFFF;
 }
@@ -143,53 +173,27 @@ th, td {
     padding: 8px;
 }
 
-.Login {
-    width: auto;
+.add-record {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: 500px;
+    justify-items: center;
+    align-items: center;
+}
+
+.record-input {
+    width: 310px;
     padding: 10px;
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    margin: -150px 0 0 -150px;
     border: 1px solid;
     border-radius: 10px;
 }
 
-.Login input {
+.record-input input {
     width: 300px;
-    display: block;
 }
 
-.Login button {
-    background-color: grey;
-    width: 100%;
+.record-input button {
     margin-top: 8px;
-    border: none;
-    height: 30px;
-    cursor: pointer;
-}
-
-.Login button:hover {
-    opacity: 0.8;
-}
-.addRecord {
-    width: auto;
-    padding: 10px;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    margin: -150px 0 0 -150px;
-    border: 1px solid;
-    border-radius: 10px;
-}
-
-.addRecord input {
-    width: 300px;
-    display: block;
-}
-
-.addRecord button {
-    margin-top: 8px;
-    float: right;
 }
 
 .options {
