@@ -12,8 +12,6 @@ const Content = ({user}) => {
         <Fragment>
          <header>
           <Route exact path="/" render={() => <h1>Hello, {user.name}</h1>} />
-          <Route exact path="/inbox" render={() => <h2>Inbox</h2>} />
-          <Route exact path="/outbox"  render={() => <h2>Outbox</h2>} />
          </header>
          <main>
           <Route exact path="/inbox" component={InboxMain} />
