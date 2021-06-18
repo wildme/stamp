@@ -32,6 +32,7 @@
     text-align: center;
     font-size: 12px;
 }
+
 .login {
     display: grid;
     grid-template-columns: 100%;
@@ -40,6 +41,7 @@
     align-items: center;
 
 }
+
 .login-input {
     width: 310px;
     padding: 10px;
@@ -64,21 +66,27 @@
     opacity: 0.8;
 }
 
-.main {
-    background-color: #FFFFFF;
+.page-content {
+    display: grid;
+    grid-template-columns: 100%;
 }
-.mainPanel {
+
+.page-title {
+    text-align: left;
+}
+
+.page-actions {
     text-align: center;
 }
 
-.mainPanel a {
+.page-actions a {
     padding: 10px;
     color: black;
     margin-right: 3px;
     border: 2px solid black;
 }
 
-.mainTable {
+.page-table {
     margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
@@ -90,45 +98,63 @@ table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-
 }
+
+tr {
+    border: none;
+    border-bottom: 1px solid #dddddd;
+}
+
+.top-row tr{
+    border: none;
+    border-bottom: 3px solid #dddddd;
+}
+
+th, td {
+    padding: 8px;
+}
+
 th > button {
     border: none;
     font-family: inherit;
     font-size: inherit;
     font-weight: bold;
 }
+
 .sort-icon_ {
     display: inline;
     font-size: 14px;
     color: grey;
 }
+
 .sort-icon_asc {
     display: inline;
     font-size: 14px;
     color: grey;
 }
+
 .sort-icon_desc {
     display: inline;
     font-size: 14px;
     color: grey;
 }
+
 .sort-icon_asc span#arrow-up {
     color: black
 }
+
 .sort-icon_desc span#arrow-down {
     color: black
 }
-tr {
-    border: none;
-    border-bottom: 1px solid #dddddd;
-}
+
 svg#menu {
     display: none;
 }
+
 .inbox-item:hover svg#menu {
     display: block;
 }
+
 .kebab-icon {
     position: relative;
     display: inline-block;
@@ -150,6 +176,7 @@ svg#menu {
     z-index: 1;
     margin: 2px;
 }
+
 .dropdown-content-hidden {
     display: none;
 }
@@ -159,18 +186,10 @@ svg#menu {
     padding: 2px;
     margin: auto;
 }
+
 .dropdown-content a {
     font-size: 14px;
     text-decoration: none;
-}
-
-#topRow {
-    border: none;
-    border-bottom: 3px solid #dddddd;
-}
-
-th, td {
-    padding: 8px;
 }
 
 .add-record {
@@ -214,6 +233,7 @@ th, td {
     color: white;
     cursor: pointer;
 }
+
 .options li:not(:last-of-type) {
     border-bottom: 1px solid grey;
 }
