@@ -16,38 +16,41 @@ const InboxMain = ({inbox, outbox}) => {
         tableData
     } = useTableSort(currentTable);
     return (
-        <div className="main">
-          <div className="mainPanel">
-            <NavLink to={"/" + `${box}` + "/new"}>New</NavLink>
-          </div>
-          <div className="mainTable">
-            <table>
-                <thead>
-              <tr id="topRow">
-                { head[`${box}`].map((item) => {
-                    const { id = "", label = "", sortable } = item;
-                    const currentItem = sortColumn === id;
-                    const direction = currentItem ? sortDirection : ""; 
-                    return (
-                        <th key={id}>
-                            { sortable ? (
-                                <button
-                                    type="button"
-                                    onClick = {() => handleSort(id)}
-                                >
-                                    {label} <SortIcon direction={direction} />
-                                </button>) : label
-                            }
-                        </th>
-                    );
-                })}
-              </tr>
-                </thead>
-                <tbody>
-                <InboxRows rows={tableData} />
-                </tbody>
-            </table>
-          </div>  
+        <div className="page-content">
+            <div className="page-title">
+                <h2>{box.toUpperCase()}</h2>
+            </div>
+            <div className="page-actions">
+              <NavLink to={"/" + `${box}` + "/new"}>New</NavLink>
+            </div>
+            <div className="page-table">
+              <table>
+                  <thead>
+                <tr className="top-row">
+                  { head[`${box}`].map((item) => {
+                      const { id = "", label = "", sortable } = item;
+                      const currentItem = sortColumn === id;
+                      const direction = currentItem ? sortDirection : ""; 
+                      return (
+                          <th key={id}>
+                              { sortable ? (
+                                  <button
+                                      type="button"
+                                      onClick = {() => handleSort(id)}
+                                  >
+                                      {label} <SortIcon direction={direction} />
+                                  </button>) : label
+                              }
+                          </th>
+                      );
+                  })}
+                </tr>
+                  </thead>
+                  <tbody>
+                  <InboxRows rows={tableData} />
+                  </tbody>
+              </table>
+            </div>  
         </div>
     );
 };
