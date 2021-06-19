@@ -9,8 +9,8 @@ import rootReducer from './redux/rootReducer';
 import { Provider } from 'react-redux';
 
 const store = createStore(
-    rootReducer,
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 ReactDOM.render(
   <Provider store={store}>
@@ -18,5 +18,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-

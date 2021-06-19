@@ -1,88 +1,87 @@
 import React, { useState, Fragment } from 'react';
 
-const Autocomplete = ({options, value, setter, attrs}) => {
-    const [matches, setMatches] = useState([]);
-    const [activeItem, setActiveItem] = useState(0);
-    const [visibility, setVisibility] = useState(false);
+const Autocomplete = ({ options, value, setter, attrs }) => {
+  const [matches, setMatches] = useState([]);
+  const [activeItem, setActiveItem] = useState(0);
+  const [visibility, setVisibility] = useState(false);
 
-    const onKeyDown = (e) => {
-        if (e.keyCode === 13) {
-            setActiveItem(0);
-            setVisibility(false);
-            setter(matches[activeItem]);
-        }
-        else if (e.keyCode === 38) {
-            if (activeItem === 0) {
-                return;
-            }
-            setActiveItem(activeItem - 1);
-        }
-        else if (e.keyCode === 40) {
-            if (activeItem - 1 === matches.length) {
-                return;
-            }
-            setActiveItem(activeItem + 1);
-        }
-    };
-    
-    const onChange = (e) => {
-        setter(e.currentTarget.value);
-        setMatches(() => options.filter(
-            (option) => 
-            option.toLowerCase().indexOf(value.toLowerCase()) > -1
-        )); 
-        
-        setVisibility(true);
-        setActiveItem(0);
-    };
-
-    const onClick = (e) => {
-        setter(e.currentTarget.innerText);
-        setMatches([]);
-        setVisibility(false);
-        setActiveItem(0);
-    };
-
-    let optionList;
-    if (visibility && value) {
-        if (matches.length) {
-            optionList = (
-                <ul className="options">
-                    {matches.map((match, index) => {
-                        let className;
-                        if (index === activeItem) {
-                            className="active-item";
-                        }
-                        return (
-                            <li 
-                                className={className}
-                                key={match}
-                                onClick={onClick}>{match}
-                            </li>
-                        );
-                    })}
-                </ul>
-            );
-        } else {
-            optionList = (
-                <div className="no-options">
-                    <em>No matches</em> 
-                </div>
-            );
-        }
+  const onKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      setActiveItem(0);
+      setVisibility(false);
+      setter(matches[activeItem]);
+    } else if (e.keyCode === 38) {
+      if (activeItem === 0) {
+        return;
+      }
+      setActiveItem(activeItem - 1);
+    } else if (e.keyCode === 40) {
+      if (activeItem - 1 === matches.length) {
+        return;
+      }
+      setActiveItem(activeItem + 1);
     }
-    return (
-        <Fragment>
-        <label for={attrs.for}><b>{attrs.text}</b></label>
-        <input
-            type={attrs.type}
-            name={attrs.name}
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-        />
-        {optionList}
-        </Fragment>
+  };
+
+  const onChange = (e) => {
+    setter(e.currentTarget.value);
+    setMatches(() =>
+      options.filter(
+        (option) => option.toLowerCase().indexOf(value.toLowerCase()) > -1
+      )
     );
+
+    setVisibility(true);
+    setActiveItem(0);
+  };
+
+  const onClick = (e) => {
+    setter(e.currentTarget.innerText);
+    setMatches([]);
+    setVisibility(false);
+    setActiveItem(0);
+  };
+
+  let optionList;
+  if (visibility && value) {
+    if (matches.length) {
+      optionList = (
+        <ul className="options">
+          {matches.map((match, index) => {
+            let className;
+            if (index === activeItem) {
+              className = 'active-item';
+            }
+            return (
+              <li className={className} key={match} onClick={onClick}>
+                {match}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    } else {
+      optionList = (
+        <div className="no-options">
+          <em>No matches</em>
+        </div>
+      );
+    }
+  }
+  return (
+    <Fragment>
+      <label for={attrs.for}>
+        <b>{attrs.text}</b>
+      </label>
+      <input
+        type={attrs.type}
+        name={attrs.name}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+      {optionList}
+    </Fragment>
+  );
 };
 export default Autocomplete;

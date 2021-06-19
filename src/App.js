@@ -8,20 +8,20 @@ import Login from './Login.js';
 
 import { connect } from 'react-redux';
 
-const App = ({user}) => {
+const App = ({ user }) => {
   return (
-      <Router>
-        <Fragment>
-            <Header />
-            {user ? <Content /> : <Login />}
-            <Footer />
-        </Fragment>
-      </Router>
+    <Router>
+      <Fragment>
+        <Header />
+        {user ? <Content /> : <Login />}
+        <Footer />
+      </Fragment>
+    </Router>
   );
-}
+};
 
 const mapStateToProps = (state) => {
-    const { user } = state;
-    return { user: user }
-}
+  const { user } = state;
+  return { user: user };
+};
 export default connect(mapStateToProps)(App);

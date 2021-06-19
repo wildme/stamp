@@ -1,239 +1,240 @@
 .navbar {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: 50px;
-    background-color: #000000;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-auto-rows: 50px;
+  background-color: #000000;
+  align-items: center;
 }
 
 .navbar a {
-    color: grey;
-    text-decoration: none;
-    font-size: 19px;
-    padding: 5px;
+  color: grey;
+  text-decoration: none;
+  font-size: 19px;
+  padding: 5px;
 }
 
 .navbar a:hover {
-    color: white;
-    text-decoration: none
+  color: white;
+  text-decoration: none;
 }
 
 .navbar-right {
-    text-align: right;
+  text-align: right;
 }
 
 .navbar-left {
-    text-align: left;
+  text-align: left;
 }
 
 .footer {
-    display: grid;
-    grid-template-columns: 100%;
-    text-align: center;
-    font-size: 12px;
+  display: grid;
+  grid-template-columns: 100%;
+  text-align: center;
+  font-size: 12px;
 }
 
 .login {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-auto-rows: 500px;
-    justify-items: center;
-    align-items: center;
-
+  display: grid;
+  grid-template-columns: 100%;
+  grid-auto-rows: 500px;
+  justify-items: center;
+  align-items: center;
 }
 
 .login-input {
-    width: 310px;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 10px;
+  width: 310px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
 }
 
 .login-input input {
-    width: 300px;
+  width: 300px;
 }
 
 .login-input button {
-    background-color: grey;
-    width: 310px;
-    margin-top: 8px;
-    border: none;
-    height: 30px;
-    cursor: pointer;
+  background-color: grey;
+  width: 310px;
+  margin-top: 8px;
+  border: none;
+  height: 30px;
+  cursor: pointer;
 }
 
 .login-input button:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .page-content {
-    display: grid;
-    grid-template-columns: 100%;
+  display: grid;
+  grid-template-columns: 100%;
 }
 
 .page-title {
-    text-align: left;
+  text-align: left;
 }
 
 .page-actions {
-    text-align: center;
+  text-align: center;
 }
 
 .page-actions a {
-    padding: 10px;
-    color: black;
-    margin-right: 3px;
-    border: 2px solid black;
+  padding: 10px;
+  color: black;
+  margin-right: 3px;
+  border: 2px solid black;
 }
 
 .page-table {
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 table {
-    font-family: areal, sans-serif;
-    font-size: 19px;
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+  font-family: areal, sans-serif;
+  font-size: 19px;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
 tr {
-    border: none;
-    border-bottom: 1px solid #dddddd;
+  border: none;
+  border-bottom: 1px solid #dddddd;
 }
 
-.top-row tr{
-    border: none;
-    border-bottom: 3px solid #dddddd;
+.top-row tr {
+  border: none;
+  border-bottom: 3px solid #dddddd;
 }
 
-th, td {
-    padding: 8px;
+th,
+td {
+  padding: 8px;
 }
 
 th > button {
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: bold;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
 }
 
 .sort-icon_ {
-    display: inline;
-    font-size: 14px;
-    color: grey;
+  display: inline;
+  font-size: 14px;
+  color: grey;
 }
 
 .sort-icon_asc {
-    display: inline;
-    font-size: 14px;
-    color: grey;
+  display: inline;
+  font-size: 14px;
+  color: grey;
 }
 
 .sort-icon_desc {
-    display: inline;
-    font-size: 14px;
-    color: grey;
+  display: inline;
+  font-size: 14px;
+  color: grey;
 }
 
 .sort-icon_asc span#arrow-up {
-    color: black
+  color: black;
 }
 
 .sort-icon_desc span#arrow-down {
-    color: black
+  color: black;
 }
 
 svg#menu {
-    display: none;
+  display: none;
 }
 
 .inbox-item:hover svg#menu {
-    display: block;
+  display: block;
 }
 
 .kebab-icon {
-    position: relative;
-    display: inline-block;
-    border: none;
-    border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
 }
 
 .kebab-icon:hover {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .dropdown-content {
-    display: block;
-    position: absolute;
-    background-color: white;
-    border: 1px solid;
-    min-width: 90px;
-    overflow: auto;
-    z-index: 1;
-    margin: 2px;
+  display: block;
+  position: absolute;
+  background-color: white;
+  border: 1px solid;
+  min-width: 90px;
+  overflow: auto;
+  z-index: 1;
+  margin: 2px;
 }
 
 .dropdown-content-hidden {
-    display: none;
+  display: none;
 }
 
 .dropdown-content ul {
-    list-style-type: none;
-    padding: 2px;
-    margin: auto;
+  list-style-type: none;
+  padding: 2px;
+  margin: auto;
 }
 
 .dropdown-content a {
-    font-size: 14px;
-    text-decoration: none;
+  font-size: 14px;
+  text-decoration: none;
 }
 
 .add-record {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-auto-rows: 500px;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-auto-rows: 500px;
+  justify-items: center;
+  align-items: center;
 }
 
 .record-input {
-    width: 310px;
-    padding: 10px;
-    border: 1px solid;
-    border-radius: 10px;
+  width: 310px;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
 }
 
 .record-input input {
-    width: 300px;
+  width: 300px;
 }
 
 .record-input button {
-    margin-top: 8px;
+  margin-top: 8px;
 }
 
 .options {
-    position: absolute;
-    width: 300px;
-    background-color: white;
-    border: 1px solid;
-    list-style-type: none;
-    overflow: auto;
-    max-height: 200px;
-    margin: auto;
-    padding: 3px;
-    z-index: 1;
+  position: absolute;
+  width: 300px;
+  background-color: white;
+  border: 1px solid;
+  list-style-type: none;
+  overflow: auto;
+  max-height: 200px;
+  margin: auto;
+  padding: 3px;
+  z-index: 1;
 }
 
-.active-item, .options li:hover {
-    background-color: black;
-    color: white;
-    cursor: pointer;
+.active-item,
+.options li:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 .options li:not(:last-of-type) {
-    border-bottom: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
