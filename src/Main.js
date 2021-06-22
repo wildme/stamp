@@ -9,7 +9,7 @@ import SortIcon from './sortIcon.js';
 const InboxMain = ({ inbox, outbox }) => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  const currentTable = box == 'inbox' ? inbox : outbox;
+  const currentTable = box === 'inbox' ? inbox : outbox;
   const { handleSort, sortColumn, sortDirection, tableData } =
     useTableSort(currentTable);
   return (
@@ -18,7 +18,7 @@ const InboxMain = ({ inbox, outbox }) => {
         <h2>{box.toUpperCase()}</h2>
       </div>
       <div className="page-actions">
-        <NavLink to={'/' + `${box}` + '/new'}>New</NavLink>
+        <NavLink to={`/${box}/new`}>New</NavLink>
       </div>
       <div className="page-table">
         <table>

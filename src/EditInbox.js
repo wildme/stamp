@@ -9,8 +9,8 @@ const EditInbox = ({ inbox, outbox, dispatch }) => {
   const { id } = useParams();
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  const currentTable = box == 'inbox' ? inbox : outbox;
-  const prev = currentTable.find((x) => x.id == id);
+  const currentTable = box === 'inbox' ? inbox : outbox;
+  const prev = currentTable.find((x) => x.id === Number(id));
   const [subj, setSubj] = useState(prev.subj);
   const [from, setFrom] = useState(prev.from || prev.to);
   const [note, setNote] = useState(prev.note);
@@ -43,20 +43,20 @@ const EditInbox = ({ inbox, outbox, dispatch }) => {
     <div className="add-record">
       <div className="record-input">
         <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name == 'subj')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
           setter={setSubj}
           value={subj}
         />
         <InputField
           attrs={
-            attrs[`${box}`].filter((x) => x.name == 'from' || x.name == 'to')[0]
+            attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
           }
           setter={setFrom}
           value={from}
           auto={true}
         />
         <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name == 'note')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
           setter={setNote}
           value={note}
         />

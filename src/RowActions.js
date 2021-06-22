@@ -30,7 +30,7 @@ const RowActions = ({ id }) => {
   return (
     <div className="actions">
       <div className="kebab-icon">
-        <a href="#" onClick={(e) => handleClick(e)}>
+        <a href={`${box}#`} onClick={(e) => handleClick(e)}>
           <svg
             id="menu"
             width="18"
@@ -50,7 +50,7 @@ const RowActions = ({ id }) => {
         >
           <ul id="row-dropdown">
             <li>
-              <NavLink to={'/' + `${box}` + '/edit/' + `${id}`}>Edit</NavLink>
+              <NavLink to={`/${box}/edit/${id}`}>Edit</NavLink>
             </li>
           </ul>
         </div>
