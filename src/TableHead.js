@@ -1,4 +1,4 @@
-export const headInbox = {
+export const head = {
   inbox: [
     {
       id: 'id',
