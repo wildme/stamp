@@ -6,7 +6,7 @@ import { head } from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-const InboxMain = ({ inbox, outbox }) => {
+const Main = ({ inbox, outbox }) => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
   const currentTable = box === 'inbox' ? inbox : outbox;
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
   return { inbox, outbox };
 };
 
-export default connect(mapStateToProps)(InboxMain);
+export default connect(mapStateToProps)(Main);
