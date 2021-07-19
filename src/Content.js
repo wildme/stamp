@@ -2,8 +2,8 @@ import './App.css';
 import { connect } from 'react-redux';
 import { Fragment } from 'react';
 import InboxMain from './Main.js';
-import NewInbox from './NewInbox.js';
-import EditInbox from './EditInbox.js';
+import NewRecord from './NewRecord.js';
+import EditRecord from './EditRecord.js';
 import Logout from './Logout.js';
 import { Route } from 'react-router-dom';
 
@@ -16,10 +16,10 @@ const Content = ({ user }) => {
       <main>
         <Route exact path="/inbox" component={InboxMain} />
         <Route exact path="/outbox" component={InboxMain} />
-        <Route exact path="/inbox/new" component={NewInbox} />
-        <Route exact path="/outbox/new" component={NewInbox} />
-        <Route exact path="/inbox/edit/:id" component={EditInbox} />
-        <Route exact path="/outbox/edit/:id" component={EditInbox} />
+        <Route exact path="/inbox/new" component={NewRecord} />
+        <Route exact path="/outbox/new" component={NewRecord} />
+        <Route exact path="/inbox/edit/:id" component={EditRecord} />
+        <Route exact path="/outbox/edit/:id" component={EditRecord} />
         <Route exact path="/logout" component={Logout} />
       </main>
     </Fragment>

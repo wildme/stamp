@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
-const EditInbox = ({ inbox, outbox, dispatch }) => {
+const EditRecord = ({ inbox, outbox, dispatch }) => {
   const { id } = useParams();
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
@@ -15,7 +15,7 @@ const EditInbox = ({ inbox, outbox, dispatch }) => {
   const [from, setFrom] = useState(prev.from || prev.to);
   const [note, setNote] = useState(prev.note);
 
-  const handleEditInbox = (e) => {
+  const handleEditRecord = (e) => {
     e.preventDefault();
     if (/^\/inbox\//.test(pathname)) {
       dispatch(
@@ -60,7 +60,7 @@ const EditInbox = ({ inbox, outbox, dispatch }) => {
           setter={setNote}
           value={note}
         />
-        <button type="submit" onClick={(e) => handleEditInbox(e)}>
+        <button type="submit" onClick={(e) => handleEditRecord(e)}>
           Update
         </button>
       </div>
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => {
   return { inbox: inbox, outbox: outbox };
 };
 
-export default connect(mapStateToProps)(EditInbox);
+export default connect(mapStateToProps)(EditRecord);

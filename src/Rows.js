@@ -1,7 +1,7 @@
-import Inbox from './Inbox.js';
+import Row from './Row.js';
 
-const InboxRows = ({ rows }) =>
+const Rows = ({ rows }) =>
   rows.map((row) => {
-    return <Inbox entry={row} />;
+    return <Row entry={row} />;
   });
-export default InboxRows;
+export default Rows;

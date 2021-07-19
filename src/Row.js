@@ -1,6 +1,6 @@
 import RowActions from './RowActions.js';
 
-const Inbox = ({ entry }) => (
+const Row = ({ entry }) => (
   <tr className="inbox-item">
     <td>{entry.id}</td>
     <td>{entry.subj}</td>
@@ -14,4 +14,4 @@ const Inbox = ({ entry }) => (
   </tr>
 );
 
-export default Inbox;
+export default Row;

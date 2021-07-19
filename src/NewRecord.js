@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
-const NewInbox = ({ user, dispatch }) => {
+const NewRecord = ({ user, dispatch }) => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
   const [subj, setSubj] = useState('');
@@ -14,7 +14,7 @@ const NewInbox = ({ user, dispatch }) => {
   const added = user.name;
   const [note, setNote] = useState('');
 
-  const handleAddInbox = (e) => {
+  const handleAddRecord = (e) => {
     e.preventDefault();
     if (/^\/inbox\//.test(pathname)) {
       dispatch(
@@ -64,7 +64,7 @@ const NewInbox = ({ user, dispatch }) => {
           setter={setNote}
           value={note}
         />
-        <button type="submit" onClick={(e) => handleAddInbox(e)}>
+        <button type="submit" onClick={(e) => handleAddRecord(e)}>
           Add
         </button>
       </div>
@@ -77,4 +77,4 @@ const mapStateToProps = (state) => {
   return { user: user };
 };
 
-export default connect(mapStateToProps)(NewInbox);
+export default connect(mapStateToProps)(NewRecord);
