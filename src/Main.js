@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Rows from './Rows.js';
-import { headInbox as head } from './TableHead.js';
+import { head } from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
