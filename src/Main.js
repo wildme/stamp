@@ -1,17 +1,28 @@
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Rows from './Rows.js';
 import { head } from './TableHead.js';
 import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-const Main = ({ inbox, outbox }) => {
+
+//const Main = ({ inbox, outbox }) => {
+const Main = () => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  const currentTable = box === 'inbox' ? inbox : outbox;
+  //const currentTable = box === 'inbox' ? inbox : outbox;
+  const [tbContent, setTbContent] = useState([]);
   const { handleSort, sortColumn, sortDirection, tableData } =
-    useTableSort(currentTable);
+    useTableSort(tbContent);
+
+  useEffect(() => {
+     fetch(`/api/${box}`)
+      .then(res => res.json())
+      .then(setTbContent)
+  }, [])
+
   return (
     <div className="page-content">
       <div className="page-title">
@@ -51,9 +62,10 @@ const Main = ({ inbox, outbox }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { inbox, outbox } = state;
-  return { inbox, outbox };
-};
-
-export default connect(mapStateToProps)(Main);
+//const mapStateToProps = (state) => {
+//  const { inbox, outbox } = state;
+//  return { inbox, outbox };
+//};
+//
+//export default connect(mapStateToProps)(Main);
+export default Main;
