@@ -4,9 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Rows from './Rows.js';
 import { head } from './TableHead.js';
-import useTableSort from './useTableSort.js';
+//import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
-
 
 //const Main = ({ inbox, outbox }) => {
 const Main = () => {
@@ -14,14 +13,25 @@ const Main = () => {
   const box = /(in|out)box/.exec(pathname)[0];
   //const currentTable = box === 'inbox' ? inbox : outbox;
   const [tbContent, setTbContent] = useState([]);
-  const { handleSort, sortColumn, sortDirection, tableData } =
-    useTableSort(tbContent);
+  const [column, setColumn] = useState('id');
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [queryString, setQueryString] = useState('')
+
+  const handleClick = (id) => {
+    let direction = 'asc';
+    if(column === id && sortOrder === 'asc') {
+      direction = 'desc';
+    }
+    setColumn(id);
+    setSortOrder(direction);
+    setQueryString(`?field=${column}&order=${sortOrder}`)
+  }
 
   useEffect(() => {
-     fetch(`/api/${box}`)
-      .then(res => res.json())
-      .then(setTbContent)
-  }, [])
+    fetch(`/api/${box}` + queryString)
+     .then(res => res.json())
+     .then(setTbContent)
+  }, [queryString])
 
   return (
     <div className="page-content">
@@ -37,12 +47,12 @@ const Main = () => {
             <tr className="top-row">
               {head[`${box}`].map((item) => {
                 const { id = '', label = '', sortable } = item;
-                const currentItem = sortColumn === id;
-                const direction = currentItem ? sortDirection : '';
+                const currentItem = column === id;
+                const direction = currentItem ? sortOrder : '';
                 return (
                   <th key={id}>
                     {sortable ? (
-                      <button type="button" onClick={() => handleSort(id)}>
+                      <button type="button" onClick={() => handleClick(id)}>
                         {label} <SortIcon direction={direction} />
                       </button>
                     ) : (
@@ -54,7 +64,7 @@ const Main = () => {
             </tr>
           </thead>
           <tbody>
-            <Rows rows={tableData} />
+            <Rows rows={tbContent} />
           </tbody>
         </table>
       </div>
