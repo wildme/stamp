@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-//import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Rows from './Rows.js';
 import { head } from './TableHead.js';
-//import useTableSort from './useTableSort.js';
 import SortIcon from './sortIcon.js';
 
-//const Main = ({ inbox, outbox }) => {
 const Main = () => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  //const currentTable = box === 'inbox' ? inbox : outbox;
   const [tbContent, setTbContent] = useState([]);
   const [column, setColumn] = useState('id');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [queryString, setQueryString] = useState('')
 
   const handleClick = (id) => {
     let direction = 'asc';
@@ -24,14 +19,14 @@ const Main = () => {
     }
     setColumn(id);
     setSortOrder(direction);
-    setQueryString(`?field=${column}&order=${sortOrder}`)
   }
 
   useEffect(() => {
+    const queryString = `?field=${column}&order=${sortOrder}`;
     fetch(`/api/${box}` + queryString)
      .then(res => res.json())
      .then(setTbContent)
-  }, [queryString])
+  }, [sortOrder])
 
   return (
     <div className="page-content">
@@ -72,10 +67,4 @@ const Main = () => {
   );
 };
 
-//const mapStateToProps = (state) => {
-//  const { inbox, outbox } = state;
-//  return { inbox, outbox };
-//};
-//
-//export default connect(mapStateToProps)(Main);
 export default Main;
