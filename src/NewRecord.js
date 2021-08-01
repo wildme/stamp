@@ -1,46 +1,45 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { inbox_add, outbox_add } from './redux/actions.js';
-import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
 const NewRecord = ({ user, dispatch }) => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  const [subj, setSubj] = useState('');
-  const [from, setFrom] = useState('');
-  const date = new Date().toISOString();
-  const added = user.name;
-  const [note, setNote] = useState('');
+  const [subject, setSubject] = useState('');
+  const [fromTo, setFromTo] = useState('');
+  const addedBy = 'admin';
+  const [notes, setNotes] = useState('');
 
   const handleAddRecord = (e) => {
     e.preventDefault();
     if (/^\/inbox\//.test(pathname)) {
-      dispatch(
-        inbox_add({
-          subj: subj,
-          from: from,
-          date: date,
-          added: added,
-          note: note,
+      fetch(`/api/inbox/new`, {
+        method: 'POST',
+        body: JSON.stringify({ subject , fromTo, addedBy, notes}),
+        headers: {'Content-Type': 'application/json'}
+      })
+        .then(res => {
+          if(res.status < 200 || res.status > 299) {
+            return alert('Error occured! Try again.');
+          }
         })
-      );
     } else if (/^\/outbox\//.test(pathname)) {
-      dispatch(
-        outbox_add({
-          subj: subj,
-          to: from,
-          date: date,
-          added: added,
-          note: note,
+      fetch(`/api/outbox/new`, {
+        method: 'POST',
+        body: JSON.stringify({ subject, fromTo, addedBy, notes }),
+        headers: {'Content-Type': 'application/json'}
+      })
+        .then(res => {
+          if(res.status < 200 || res.status > 299) {
+            return alert('Error occured! Try again.');
+          }
         })
-      );
+          
     }
-
-    setSubj('');
-    setFrom('');
-    setNote('');
+    setSubject('');
+    setFromTo('');
+    setNotes('');
   };
 
   return (
@@ -48,21 +47,21 @@ const NewRecord = ({ user, dispatch }) => {
       <div className="record-input">
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-          setter={setSubj}
-          value={subj}
+          setter={setSubject}
+          value={subject}
         />
         <InputField
           attrs={
             attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
           }
-          setter={setFrom}
-          value={from}
+          setter={setFromTo}
+          value={fromTo}
           auto={true}
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-          setter={setNote}
-          value={note}
+          setter={setNotes}
+          value={notes}
         />
         <button type="submit" onClick={(e) => handleAddRecord(e)}>
           Add
@@ -72,9 +71,4 @@ const NewRecord = ({ user, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { user } = state;
-  return { user: user };
-};
-
-export default connect(mapStateToProps)(NewRecord);
+export default NewRecord;
