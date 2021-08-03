@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
-const NewRecord = ({ user, dispatch }) => {
+const NewRecord = () => {
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
   const [subject, setSubject] = useState('');
