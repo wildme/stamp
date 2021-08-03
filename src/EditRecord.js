@@ -27,7 +27,13 @@ const EditRecord = () => {
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
     .then(res => res.json())
-  })
+      .then(data => data.map((item) => {
+        setSubject(item.subject);
+        setFromTo(item.from || item.to);
+        setNotes(item.notes);
+      })
+      )
+  }, [])
 
   return (
     <div className="add-record">
