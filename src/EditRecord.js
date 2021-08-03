@@ -1,64 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { inbox_edit, outbox_edit } from './redux/actions.js';
-import { connect } from 'react-redux';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
-const EditRecord = ({ inbox, outbox, dispatch }) => {
+const EditRecord = () => {
   const { id } = useParams();
   const { pathname } = useLocation();
   const box = /(in|out)box/.exec(pathname)[0];
-  const currentTable = box === 'inbox' ? inbox : outbox;
-  const prev = currentTable.find((x) => x.id === Number(id));
-  const [subj, setSubj] = useState(prev.subj);
-  const [from, setFrom] = useState(prev.from || prev.to);
-  const [note, setNote] = useState(prev.note);
+  const [subject, setSubject] = useState('');
+  const [fromTo, setFromTo] = useState('');
+  const [notes, setNotes] = useState('');
 
   const handleEditRecord = (e) => {
     e.preventDefault();
     if (/^\/inbox\//.test(pathname)) {
-      dispatch(
-        inbox_edit(id, {
-          subj: subj,
-          from: from,
-          note: note,
-        })
-      );
+    // some code goes here  
+      return;
     } else if (/^\/outbox\//.test(pathname)) {
-      dispatch(
-        outbox_edit(id, {
-          subj: subj,
-          to: from,
-          note: note,
-        })
-      );
+    // some code goes here  
     }
-    setSubj('');
-    setFrom('');
-    setNote('');
+    setSubject('');
+    setFromTo('');
+    setNotes('');
   };
+
+  useEffect(() => {
+    fetch(`/api/${box}/${id}`)
+    .then(res => res.json())
+  })
 
   return (
     <div className="add-record">
       <div className="record-input">
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-          setter={setSubj}
-          value={subj}
+          setter={setSubject}
+          value={subject}
         />
         <InputField
           attrs={
             attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
           }
-          setter={setFrom}
-          value={from}
+          setter={setFromTo}
+          value={fromTo}
           auto={true}
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-          setter={setNote}
-          value={note}
+          setter={setNotes}
+          value={notes}
         />
         <button type="submit" onClick={(e) => handleEditRecord(e)}>
           Update
@@ -68,9 +58,4 @@ const EditRecord = ({ inbox, outbox, dispatch }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { inbox, outbox } = state;
-  return { inbox: inbox, outbox: outbox };
-};
-
-export default connect(mapStateToProps)(EditRecord);
+export default EditRecord;
