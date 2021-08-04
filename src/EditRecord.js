@@ -13,12 +13,16 @@ const EditRecord = () => {
 
   const handleEditRecord = (e) => {
     e.preventDefault();
-    if (/^\/inbox\//.test(pathname)) {
-    // some code goes here  
-      return;
-    } else if (/^\/outbox\//.test(pathname)) {
-    // some code goes here  
-    }
+    fetch(`/api/${box}/update/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ subject , fromTo, notes}),
+      headers: {'Content-Type': 'application/json'}
+      })
+    .then(res => {
+      if(res.status < 200 || res.status > 299) {
+        return alert('Error occured! Try again.');
+        }
+    })
     setSubject('');
     setFromTo('');
     setNotes('');
