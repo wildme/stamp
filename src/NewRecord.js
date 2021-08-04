@@ -13,30 +13,16 @@ const NewRecord = () => {
 
   const handleAddRecord = (e) => {
     e.preventDefault();
-    if (/^\/inbox\//.test(pathname)) {
-      fetch(`/api/inbox/new`, {
-        method: 'POST',
-        body: JSON.stringify({ subject , fromTo, addedBy, notes}),
-        headers: {'Content-Type': 'application/json'}
+    fetch(`/api/${box}/new`, {
+      method: 'POST',
+      body: JSON.stringify({ subject , fromTo, addedBy, notes}),
+      headers: {'Content-Type': 'application/json'}
       })
-        .then(res => {
-          if(res.status < 200 || res.status > 299) {
-            return alert('Error occured! Try again.');
-          }
-        })
-    } else if (/^\/outbox\//.test(pathname)) {
-      fetch(`/api/outbox/new`, {
-        method: 'POST',
-        body: JSON.stringify({ subject, fromTo, addedBy, notes }),
-        headers: {'Content-Type': 'application/json'}
-      })
-        .then(res => {
-          if(res.status < 200 || res.status > 299) {
-            return alert('Error occured! Try again.');
-          }
-        })
-          
-    }
+    .then(res => {
+      if(res.status < 200 || res.status > 299) {
+        return alert('Error occured! Try again.');
+        }
+    })
     setSubject('');
     setFromTo('');
     setNotes('');
