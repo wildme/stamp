@@ -13,7 +13,7 @@ const App = ({ user }) => {
     <Router>
       <Fragment>
         <Header />
-        {user ? <Content /> : <Login />}
+        {user ? <Content user={user.name}/> : <Login />}
         <Footer />
       </Fragment>
     </Router>
