@@ -13,13 +13,11 @@ const Content = ({ user }) => {
         <Route exact path="/" render={() => <h1>Hello, {user}</h1>} />
       </header>
       <main>
+        <Route exact path="/logout" component={Logout} />
         <Route exact path="/inbox" component={Main} />
         <Route exact path="/outbox" component={Main} />
-        <Route exact path="/inbox/new" component={NewRecord} />
-        <Route exact path="/outbox/new" component={NewRecord} />
-        <Route exact path="/inbox/edit/:id" component={EditRecord} />
-        <Route exact path="/outbox/edit/:id" component={EditRecord} />
-        <Route exact path="/logout" component={Logout} />
+        <Route exact path="/:box/new" component={NewRecord} />
+        <Route exact path="/:box/edit/:id" component={EditRecord} />
       </main>
     </Fragment>
   );
