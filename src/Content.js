@@ -1,5 +1,4 @@
 import './App.css';
-import { connect } from 'react-redux';
 import { Fragment } from 'react';
 import Main from './Main.js';
 import NewRecord from './NewRecord.js';
@@ -11,7 +10,7 @@ const Content = ({ user }) => {
   return (
     <Fragment>
       <header>
-        <Route exact path="/" render={() => <h1>Hello, {user.name}</h1>} />
+        <Route exact path="/" render={() => <h1>Hello, {user}</h1>} />
       </header>
       <main>
         <Route exact path="/inbox" component={Main} />
@@ -26,8 +25,4 @@ const Content = ({ user }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const { user } = state;
-  return { user: user };
-};
-export default connect(mapStateToProps)(Content);
+export default Content;
