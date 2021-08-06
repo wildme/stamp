@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import Rows from './Rows.js';
 import { head } from './TableHead.js';
 import SortIcon from './sortIcon.js';
 
-const Main = () => {
-  const { pathname } = useLocation();
-  const box = /(in|out)box/.exec(pathname)[0];
+const Main = (page) => {
+  const box = page.location.pathname.slice(1);
   const [tbContent, setTbContent] = useState([]);
   const [column, setColumn] = useState('id');
   const [sortOrder, setSortOrder] = useState('asc');
