@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
 const NewRecord = () => {
-  const { pathname } = useLocation();
-  const box = /(in|out)box/.exec(pathname)[0];
+  const { box } = useParams();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const addedBy = 'admin';

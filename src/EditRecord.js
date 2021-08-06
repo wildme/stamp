@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
 const EditRecord = () => {
-  const { id } = useParams();
-  const { pathname } = useLocation();
-  const box = /(in|out)box/.exec(pathname)[0];
+  const { id, box } = useParams();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [notes, setNotes] = useState('');
