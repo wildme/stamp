@@ -24,7 +24,7 @@ const Main = (page) => {
     fetch(`/api/${box}` + queryString)
      .then(res => res.json())
      .then(setTbContent)
-  }, [sortOrder])
+  }, [sortOrder, column])
 
   return (
     <div className="page-content">
