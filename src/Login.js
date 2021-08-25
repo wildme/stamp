@@ -1,44 +1,42 @@
 import React, { useState } from 'react';
-import { login } from './redux/actions.js';
-import { connect } from 'react-redux';
 
 const Login = ({ dispatch }) => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(
-      login({
-        name: name,
-        password: password,
-        loggedIn: true,
-      })
-    );
-    setName('');
+    fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({username, password}),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(res => console.log(res.user.username))
+    
+    setUsername('');
     setPassword('');
   };
 
   return (
     <div className="login">
       <div className="login-input">
-        <label for="user">
+        <label for="username">
           <b>Username</b>
         </label>
         <input
           type="text"
           placeholder="Enter Username"
-          name="user"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <label for="pass">
+        <label for="password">
           <b>Password</b>
         </label>
         <input
           type="password"
           placeholder="Enter Password"
-          name="pass"
+          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -50,4 +48,4 @@ const Login = ({ dispatch }) => {
   );
 };
 
-export default connect()(Login);
+export default Login;
