@@ -11,7 +11,8 @@ const Login = ({ dispatch }) => {
       body: JSON.stringify({username, password}),
       headers: {'Content-Type': 'application/json'}
     })
-    .then(res => console.log(res.user.username))
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
     
     setUsername('');
     setPassword('');
