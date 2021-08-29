@@ -1,22 +1,47 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
-const Login = ({ dispatch }) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [jwt, setJwt] = useState('');
+  const [info, setInfo] = useState('');
+
+  const verifyToken =  (jwt) => {
+    const bearer = 'Bearer ' + jwt;
+    fetch('/api/token', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': bearer }
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     fetch('/api/login', {
       method: 'POST',
       body: JSON.stringify({username, password}),
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(data => {
+      data.jwt ? setJwt(data.jwt) : setInfo(data)
+    })
     .catch(err => console.log(err))
     
     setUsername('');
     setPassword('');
   };
+
+  if (jwt) {
+    verifyToken(jwt);
+      return <Redirect to="/" />
+    }
+  if (info) console.log(info);
 
   return (
     <div className="login">
