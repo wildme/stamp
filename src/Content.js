@@ -7,19 +7,19 @@ import Logout from './Logout.js';
 import Login from './Login.js';
 import { Route } from 'react-router-dom';
 
-const Content = () => {
+const Content = ({ token, user }) => {
   return (
     <Fragment>
       <header>
-        <Route exact path="/" render={() => <h1>Hello, Stranger</h1>} />
+        <Route exact path="/" render={() => <h1>Hello, { user.username}</h1>} />
       </header>
       <main>
         <Route exact path="/login" component={Login} />
-        {/*<Route exact path="/logout" component={Logout} />
+        <Route exact path="/logout" component={Logout} />
         <Route exact path="/inbox" component={Main} />
         <Route exact path="/outbox" component={Main} />
         <Route exact path="/:box/new" component={NewRecord} />
-      <Route exact path="/:box/edit/:id" component={EditRecord} /> */} 
+        <Route exact path="/:box/edit/:id" component={EditRecord} />
       </main>
     </Fragment>
   );

@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({setToken, setUser}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [jwt, setJwt] = useState('');
   const [info, setInfo] = useState('');
 
-  const verifyToken =  (jwt) => {
-    const bearer = 'Bearer ' + jwt;
-    fetch('/api/token', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': bearer }
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
-  };
+  //const getToken =  (jwt) => {
+  //  fetch('/api/token', {
+  //    method: 'GET',
+  //    headers: {
+  //      'Content-Type': 'application/json',
+  //  })
+  //    .then(res => res.json())
+  //    .then(data => console.log(data))
+  //    .catch(err => console.log(err))
+  //};
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,7 +26,12 @@ const Login = () => {
     })
     .then(res => res.json())
     .then(data => {
-      data.jwt ? setJwt(data.jwt) : setInfo(data)
+      if (data.token) {
+        setToken(data.token);
+        setUser(data.user);
+      } else {
+        setInfo(data);
+      }
     })
     .catch(err => console.log(err))
     
@@ -37,11 +39,11 @@ const Login = () => {
     setPassword('');
   };
 
-  if (jwt) {
-    verifyToken(jwt);
-      return <Redirect to="/" />
-    }
-  if (info) console.log(info);
+  //if (jwt) {
+  //  verifyToken(jwt);
+  //    return <Redirect to="/" />
+  //  }
+  //if (info) console.log(info);
 
   return (
     <div className="login">

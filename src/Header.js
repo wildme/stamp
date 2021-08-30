@@ -1,5 +1,4 @@
 import './App.css';
-import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const HeaderLinks = () => {
@@ -27,9 +26,5 @@ const HeaderBlank = () => {
 const Header = ({ user }) => {
   return user ? <HeaderLinks /> : <HeaderBlank />;
 };
-const mapStateToProps = (state) => {
-  const { user } = state;
-  return { user: user };
-};
 
-export default connect(mapStateToProps)(Header);
+export default Header;
