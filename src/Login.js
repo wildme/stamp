@@ -6,22 +6,11 @@ const Login = ({setToken, setUser}) => {
   const [password, setPassword] = useState('');
   const [info, setInfo] = useState('');
 
-  //const getToken =  (jwt) => {
-  //  fetch('/api/token', {
-  //    method: 'GET',
-  //    headers: {
-  //      'Content-Type': 'application/json',
-  //  })
-  //    .then(res => res.json())
-  //    .then(data => console.log(data))
-  //    .catch(err => console.log(err))
-  //};
-
   const handleLogin = (e) => {
     e.preventDefault();
     fetch('/api/login', {
       method: 'POST',
-      body: JSON.stringify({username, password}),
+      body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' }
     })
     .then(res => res.json())
@@ -38,12 +27,6 @@ const Login = ({setToken, setUser}) => {
     setUsername('');
     setPassword('');
   };
-
-  //if (jwt) {
-  //  verifyToken(jwt);
-  //    return <Redirect to="/" />
-  //  }
-  //if (info) console.log(info);
 
   return (
     <div className="login">
