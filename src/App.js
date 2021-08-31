@@ -8,14 +8,32 @@ import { Footer } from './Footer.js';
 import Login from './Login.js';
 
 const App = () => {
-const [token, setToken] = useState('');
-const [user, setUser] = useState('');
+  const [token, setToken] = useState('');
+  const [user, setUser] = useState('');
+  const getToken = () => {
+    fetch('/api/token', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setToken(data.token);
+      setUser(data.user);
+      return (<Content token={ token } user={ user } />);
+    })
+    .catch(err => console.log(err))
+  }
+
+  if (!token) getToken();
 
   return (
     <Router>
       <Fragment>
         <Header user={ user } />
-        { token ? <Content token={ token } user={ user } /> : <Login setToken={ setToken } setUser={ setUser } /> }
+        { token && user ?
+          <Content token={ token } user={ user } /> :
+          <Login setToken={ setToken } setUser={ setUser } />
+        }
         <Footer />
       </Fragment>
     </Router>
