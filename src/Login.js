@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-// setToken and setUser aren't being passed! Need Redux to move further!
-const Login = ({setToken, setUser}) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [info, setInfo] = useState('');
+
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const history = useHistory();
   const { from } = location.state || { from: { pathname: "/" } };
@@ -20,8 +23,8 @@ const Login = ({setToken, setUser}) => {
     .then(res => res.json())
     .then(data => {
       if (data.token) {
-        setToken(data.token);
-        setUser(data.user);
+        dispatch({ type: 'LOGIN', payload: { user: data.user } });
+        dispatch({ type: 'TOKEN', payload: { token: data.token }});
         history.replace(from);
       } else {
         setInfo(data);

@@ -1,14 +1,4 @@
-import {
-  LOGIN,
-  LOGOUT,
-  INBOX_ADD,
-  INBOX_EDIT,
-  OUTBOX_ADD,
-  OUTBOX_EDIT,
-} from './actionTypes';
-
-let nextInboxID = 0;
-let nextOutboxID = 0;
+import { LOGIN, LOGOUT } from './actionTypes';
 
 export const login = (user) => ({
   type: LOGIN,
@@ -17,24 +7,5 @@ export const login = (user) => ({
 
 export const logout = () => ({
   type: LOGOUT,
-  payload: { user: null, inbox: [], outbox: [] },
-});
-
-export const inbox_add = (content) => ({
-  type: INBOX_ADD,
-  payload: { id: ++nextInboxID, content },
-});
-
-export const inbox_edit = (inboxId, content) => ({
-  type: INBOX_EDIT,
-  payload: { id: inboxId, content },
-});
-
-export const outbox_add = (content) => ({
-  type: OUTBOX_ADD,
-  payload: { id: ++nextOutboxID, content },
-});
-export const outbox_edit = (outboxId, content) => ({
-  type: OUTBOX_EDIT,
-  payload: { id: outboxId, content },
+  payload: { user: null, token: null },
 });

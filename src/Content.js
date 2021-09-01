@@ -1,16 +1,18 @@
 import './App.css';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Fragment } from 'react';
 import Main from './Main.js';
+import Hello from './Hello.js';
 import NewRecord from './NewRecord.js';
 import EditRecord from './EditRecord.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
 import { Route, Redirect } from 'react-router-dom';
 
-const Content = ({ token, user }) => {
-  //const [isValid, setIsValid] = useState(false);
-  //const [expired, setExpired] = useState('');
+const Content = () => {
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
 
   const verifyToken = (accessToken) => {
     fetch('/api/verify/token', {
@@ -20,9 +22,8 @@ const Content = ({ token, user }) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data.status);
-      if (data.status === 401) return false;
-      if (data.status === 200) return true;
+      if (data.user === user.username) return true;
+      else return false;
     })
     .catch(err => console.log(err))
   };
@@ -44,9 +45,9 @@ const Content = ({ token, user }) => {
   return (
     <Fragment>
       <header>
-        <Route exact path="/" render={() => <h1>Hello, { user.username}</h1>} />
+        <Hello />
       </header>
-      <main>
+     <main>
         <Route exact path="/login" component={Login} />
     <PrivateRoute path="/inbox">
     <Main />

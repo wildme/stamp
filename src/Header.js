@@ -1,5 +1,6 @@
 import './App.css';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const HeaderLinks = () => {
   return (
@@ -23,7 +24,8 @@ const HeaderBlank = () => {
   );
 };
 
-const Header = ({ user }) => {
+const Header = () => {
+  const user = useSelector((state) => state.user);
   return user ? <HeaderLinks /> : <HeaderBlank />;
 };
 

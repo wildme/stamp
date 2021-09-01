@@ -1,5 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header.js';
@@ -8,8 +10,8 @@ import { Footer } from './Footer.js';
 import Login from './Login.js';
 
 const App = () => {
-  const [token, setToken] = useState('');
-  const [user, setUser] = useState('');
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
   const getToken = () => {
     fetch('/api/token', {
       method: 'GET',
@@ -17,9 +19,9 @@ const App = () => {
     })
     .then(res => res.json())
     .then(data => {
-      setToken(data.token);
-      setUser(data.user);
-      return (<Content token={ token } user={ user } />);
+      dispatch({ type: 'LOGIN', payload: { user: data.user } });
+      dispatch({ type: 'TOKEN', payload: { token: data.token }});
+
     })
     .catch(err => console.log(err))
   }
@@ -29,12 +31,8 @@ const App = () => {
   return (
     <Router>
       <Fragment>
-        <Header user={ user } />
-        {/* token && user ?
-          <Content token={ token } user={ user } /> :
-          <Login setToken={ setToken } setUser={ setUser } />
-       */}
-        <Content token={ token } user={ user } />
+        <Header />
+        <Content />
         <Footer />
       </Fragment>
     </Router>
