@@ -30,10 +30,11 @@ const App = () => {
     <Router>
       <Fragment>
         <Header user={ user } />
-        { token && user ?
+        {/* token && user ?
           <Content token={ token } user={ user } /> :
           <Login setToken={ setToken } setUser={ setUser } />
-        }
+       */}
+        <Content token={ token } user={ user } />
         <Footer />
       </Fragment>
     </Router>
