@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory, useLocation, Redirect } from 'react-router-dom';
 
+// setToken and setUser aren't being passed! Need Redux to move further!
 const Login = ({setToken, setUser}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [info, setInfo] = useState('');
+  const location = useLocation();
+  const history = useHistory();
+  const { from } = location.state || { from: { pathname: "/" } };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,6 +22,7 @@ const Login = ({setToken, setUser}) => {
       if (data.token) {
         setToken(data.token);
         setUser(data.user);
+        history.replace(from);
       } else {
         setInfo(data);
       }
