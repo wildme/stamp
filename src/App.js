@@ -10,23 +10,23 @@ import { Footer } from './Footer.js';
 import Login from './Login.js';
 
 const App = () => {
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.token);
-  const getToken = () => {
-    fetch('/api/token', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(res => res.json())
-    .then(data => {
-      dispatch({ type: 'LOGIN', payload: { user: data.user } });
-      dispatch({ type: 'TOKEN', payload: { token: data.token }});
+  //const dispatch = useDispatch();
+  //const token = useSelector((state) => state.token);
+  //const getToken = () => {
+  //  fetch('/api/token', {
+  //    method: 'GET',
+  //    headers: { 'Content-Type': 'application/json' }
+  //  })
+  //  .then(res => res.json())
+  //  .then(data => {
+  //    dispatch({ type: 'TOKEN', payload: { token: data.token }});
+  //  })
+  //  .catch(err => console.log(err))
+  //}
 
-    })
-    .catch(err => console.log(err))
-  }
-
-  if (!token) getToken();
+  //if (token === 'empty')  {
+  //  getToken();
+  //}
 
   return (
     <Router>

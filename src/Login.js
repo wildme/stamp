@@ -11,7 +11,8 @@ const Login = () => {
 
   const location = useLocation();
   const history = useHistory();
-  const { from } = location.state || { from: { pathname: "/" } };
+
+  const { from } = location.state || { from: { pathname: "/" } }; ;
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,15 +24,14 @@ const Login = () => {
     .then(res => res.json())
     .then(data => {
       if (data.token) {
-        dispatch({ type: 'LOGIN', payload: { user: data.user } });
         dispatch({ type: 'TOKEN', payload: { token: data.token }});
+        dispatch({ type: 'LOGIN', payload: { user: data.user } });
         history.replace(from);
       } else {
         setInfo(data);
       }
     })
     .catch(err => console.log(err))
-    
     setUsername('');
     setPassword('');
   };
