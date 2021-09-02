@@ -1,6 +1,4 @@
-//import { LOGIN, LOGOUT, TOKEN } from './actionTypes';
-
-const initialState = { user: [], token: ''};
+const initialState = { user: 'empty', token: 'empty' };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
