@@ -26,7 +26,7 @@ const HeaderBlank = () => {
 
 const Header = () => {
   const user = useSelector((state) => state.user);
-  return user ? <HeaderLinks /> : <HeaderBlank />;
+  return user !== 'empty' ? <HeaderLinks /> : <HeaderBlank />;
 };
 
 export default Header;
