@@ -1,10 +1,5 @@
 import { Fragment } from 'react';
 
-const Logout = () => {
-  return (
-    <Fragment>
-    </Fragment>
-  );
-};
+const Logout = () => { fetch('/api/logout'); };
 
 export default Logout;
