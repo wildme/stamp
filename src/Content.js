@@ -1,6 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Fragment } from 'react';
 import Main from './Main.js';
 import Hello from './Hello.js';
@@ -11,30 +11,32 @@ import Login from './Login.js';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 const Content = () => {
-  const [isValid, setIsValid] = useState(false);
-
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
 
   const verifyToken = (accessToken) => {
     fetch('/api/verify/token', {
       method: 'POST', 
-      body: JSON.stringify({ token }),
+      body: JSON.stringify({ token: accessToken }),
       headers: { 'Content-Type': 'application/json' }
     })
     .then(res => {
-      if (res.status === 200) setIsValid(true);
+      if (res.status === 401) {
+        dispatch({ type: 'TOKEN', payload:
+          { token: { string: accessToken, status: 'invalid' }}});
+      }
     })
     .catch(err => console.log(err))
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (token !== 'empty') verifyToken(token);
+    if (token !== 'empty') verifyToken(token.string);
     return (
       <Route
         {...rest}
       render={(props) => 
-        isValid ? (
+        token.status === 'valid' ? (
           <Component {...props} /> ) : (
             <Redirect
           to={{
