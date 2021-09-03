@@ -24,7 +24,8 @@ const Login = () => {
     .then(res => res.json())
     .then(data => {
       if (data.token) {
-        dispatch({ type: 'TOKEN', payload: { token: data.token }});
+        dispatch({ type: 'TOKEN', payload:
+          { token: { string: data.token, status: 'valid' }}});
         dispatch({ type: 'LOGIN', payload: { user: data.user } });
         history.replace(from);
       } else {
