@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation, Redirect } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
