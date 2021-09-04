@@ -53,6 +53,7 @@ const Content = () => {
     <Fragment>
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route exact path="/logout" component={Logout} />
         <PrivateRoute exact path="/" component={Hello} />
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
