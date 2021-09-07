@@ -8,7 +8,6 @@ const Login = () => {
   const [info, setInfo] = useState('');
 
   const dispatch = useDispatch();
-
   const location = useLocation();
   const history = useHistory();
 
@@ -38,31 +37,25 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login-input">
-        <label for="username">
-          <b>Username</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter Username"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label for="password">
-          <b>Password</b>
-        </label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit" onClick={(e) => handleLogin(e)}>
-          Login
-        </button>
+    <div className="login-grid-container">
+      <div className="login-form">
+        <form onSubmit={(e) => handleLogin(e)}>
+          <p><input
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          /></p>
+          <p><input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          /></p>
+          <input value="Login" id="submit" type="submit" />
+        </form>
       </div>
     </div>
   );
