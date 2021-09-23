@@ -22,6 +22,7 @@ const Content = () => {
     fetch('/api/refresh/token')
     .then(res => {
       if (res.status === 200) return res.json();
+      if (res.status === 401) history.replace('/login');
     })
     .then(data => {
       dispatch({ type: 'TOKEN', payload:
@@ -48,7 +49,7 @@ const Content = () => {
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (token !== 'empty') {
+    if (token.string && user.username) {
       verifyToken(token.string)
     } else {
       tryToRefreshToken();
