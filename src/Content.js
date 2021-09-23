@@ -48,9 +48,13 @@ const Content = () => {
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    token !== 'empty' ? 
-      verifyToken(token.string) :
+    if (token !== 'empty') {
+      verifyToken(token.string)
+    } else {
       tryToRefreshToken();
+      return <body></body>;
+    }
+  
     return (
       <Route
         {...rest}
