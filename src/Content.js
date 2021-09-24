@@ -22,7 +22,10 @@ const Content = () => {
     fetch('/api/refresh/token')
     .then(res => {
       if (res.status === 200) return res.json();
-      if (res.status === 401) history.replace('/login');
+      if (res.status === 401) { 
+        dispatch({ type: 'TOKEN', payload:
+          { token: { status: 'invalid' } }});
+      }
     })
     .then(data => {
       dispatch({ type: 'TOKEN', payload:
@@ -41,19 +44,19 @@ const Content = () => {
     })
     .then(res => {
       if (res.status === 401) {
-        dispatch({ type: 'TOKEN', payload:
-          { token: { string: accessToken, status: 'invalid' }}});
+        tryToRefreshToken();
       }
     })
     .catch(err => console.log(err))
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (token.string && user.username) {
-      verifyToken(token.string)
-    } else {
+    if (user.username && token.string) {
+      verifyToken(token.string);
+    }
+    if (token === 'empty' && user === 'empty') {
       tryToRefreshToken();
-      return <body></body>;
+      return <p></p>;
     }
   
     return (
