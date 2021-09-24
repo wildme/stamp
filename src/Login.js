@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [info, setInfo] = useState('');
+  const [loginFailure, setLoginFailure] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -22,7 +22,7 @@ const Login = () => {
     })
     .then(res => {
       if (res.status === 200) return res.json();
-      if (res.status === 401) setInfo('Bad username or password');
+      if (res.status === 401) setLoginFailure(true);
     })
     .then(data => {
         dispatch({ type: 'TOKEN', payload:
@@ -38,6 +38,7 @@ const Login = () => {
   return (
     <div className="login-grid-container">
       <div className="login-form">
+    { loginFailure && <p>Bad username or password</p> }
         <form onSubmit={(e) => handleLogin(e)}>
           <p><input
             type="text"
