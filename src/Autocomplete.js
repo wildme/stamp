@@ -70,7 +70,7 @@ const Autocomplete = ({ options, value, setter, attrs }) => {
   }
   return (
     <Fragment>
-      <label for={attrs.for}>
+      <label htmlFor={attrs.for}>
         <b>{attrs.text}</b>
       </label>
       <input

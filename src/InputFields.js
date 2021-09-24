@@ -15,7 +15,7 @@ export const InputField = ({ attrs, setter, value, auto = false }) => {
     />
   ) : (
     <Fragment>
-      <label for={attrs.for}>
+      <label htmlFor={attrs.for}>
         <b>{attrs.text}</b>
       </label>
       <input
