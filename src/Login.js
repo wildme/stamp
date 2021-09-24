@@ -20,20 +20,19 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status === 200) return res.json();
+      if (res.status === 401) setInfo('Bad username or password');
+    })
     .then(data => {
-      if (data.token) {
         dispatch({ type: 'TOKEN', payload:
           { token: { string: data.token, status: 'valid' }}});
         dispatch({ type: 'LOGIN', payload: { user: data.user } });
+        setUsername('');
+        setPassword('');
         history.replace(from);
-      } else {
-        setInfo(data);
-      }
     })
     .catch(err => console.log(err))
-    setUsername('');
-    setPassword('');
   };
 
   return (
