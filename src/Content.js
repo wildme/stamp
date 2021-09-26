@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import Main from './Main.js';
 import Hello from './Hello.js';
 import NewRecord from './NewRecord.js';
+import NewAccount from './NewAccount.js';
 import EditRecord from './EditRecord.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
@@ -81,6 +82,7 @@ const Content = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
+        <Route exact path="/signup" component={NewAccount} />
         <PrivateRoute exact path="/" component={Hello} />
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
