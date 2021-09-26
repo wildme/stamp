@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
+import { useSelector } from 'react-redux';
 
 const NewRecord = () => {
   const { box } = useParams();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
-  const addedBy = 'admin';
+  const addedBy = useSelector((state) => state.user.username);
   const [notes, setNotes] = useState('');
 
   const handleAddRecord = (e) => {
