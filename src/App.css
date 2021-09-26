@@ -43,7 +43,7 @@
 .login-form {
   border: 1px solid;
   width: 300px;
-  height: 200px;
+  height: auto;
   padding: 10px;
   border-radius: 5px;
 }
