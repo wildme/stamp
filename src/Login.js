@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
@@ -45,6 +45,7 @@ const Login = () => {
             placeholder="Enter Username"
             name="username"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
           /></p>
           <p><input
@@ -52,9 +53,11 @@ const Login = () => {
             placeholder="Enter Password"
             name="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
           /></p>
           <input value="Login" id="submit" type="submit" />
+          <span>Don't have an account? <NavLink to="/signup">Sign Up</NavLink></span>
         </form>
       </div>
     </div>
