@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 const NewAccount = () => {
   const [username, setUsername] = useState('');
@@ -7,7 +8,8 @@ const NewAccount = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
-  const [signupFailure, setSignupFailure] = useState('');
+  const [infoMsg, setInfoMsg] = useState('');
+  const [error, setError] = useState(false);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -21,12 +23,28 @@ const NewAccount = () => {
         firstname, lastname, email }),
       headers: { 'Content-Type': 'application/json' }
     })
-      .catch(err => console.log(err))
+    .then(res => {
+      if (res.status === 409) {
+        return res.json();
+      }
+      if (res.status === 201) {
+        setInfoMsg('Account created!');
+      }
+    })
+    .then(data => {
+      if (data.error) {
+        setError(true);
+        setInfoMsg(data.error);
+      }
+    })
+    .catch(err => console.log(err))
   };
 
   return (
     <div className="signup-grid-container">
       <div className="signup-form">
+    { error &&
+      <div className="error-message">{infoMsg}</div> }
         <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
           <p><input
             type="text"
