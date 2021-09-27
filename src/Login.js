@@ -38,7 +38,8 @@ const Login = () => {
   return (
     <div className="login-grid-container">
       <div className="login-form">
-    { loginFailure && <p>Bad username or password</p> }
+    { loginFailure && 
+      <div className="error-message">Bad username or password</div> }
         <form onSubmit={(e) => handleLogin(e)}>
           <p><input
             type="text"
@@ -57,7 +58,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           /></p>
           <input value="Login" id="submit" type="submit" />
-          <span>Don't have an account? <NavLink to="/signup">Sign Up</NavLink></span>
+          <div className="signup-message">Don't have an account?
+          <NavLink to="/signup">Sign Up</NavLink>
+          </div>
         </form>
       </div>
     </div>

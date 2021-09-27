@@ -26,8 +26,8 @@ const NewAccount = () => {
 
   return (
     <div className="signup-grid-container">
-      <div classname="signup-form">
-        <form onSubmit={(e) => handleSignup(e)} autocomplete="off">
+      <div className="signup-form">
+        <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
           <p><input
             type="text"
             placeholder="Username"
