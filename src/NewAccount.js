@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const NewAccount = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +10,8 @@ const NewAccount = () => {
   const [email, setEmail] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [error, setError] = useState(false);
+
+  const history = useHistory();
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ const NewAccount = () => {
       }
       if (res.status === 201) {
         setInfoMsg('Account created!');
+        history.replace('/login');
       }
     })
     .then(data => {
