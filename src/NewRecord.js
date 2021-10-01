@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ const NewRecord = () => {
   const [fromTo, setFromTo] = useState('');
   const addedBy = useSelector((state) => state.user.username);
   const [notes, setNotes] = useState('');
+  const history = useHistory();
 
   const handleAddRecord = (e) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ const NewRecord = () => {
     setSubject('');
     setFromTo('');
     setNotes('');
+    history.replace(`/${box}`);
   };
 
   return (

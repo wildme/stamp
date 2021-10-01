@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
 
@@ -8,6 +8,7 @@ const EditRecord = () => {
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [notes, setNotes] = useState('');
+  const history = useHistory();
 
   const handleEditRecord = (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ const EditRecord = () => {
     setSubject('');
     setFromTo('');
     setNotes('');
+    history.replace(`/${box}`);
   };
 
   useEffect(() => {
