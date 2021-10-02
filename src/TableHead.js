@@ -1,82 +1,18 @@
-export const head = {
-  inbox: [
-    {
-      id: 'id',
-      label: '#',
-      sortable: true,
-    },
-    {
-      id: 'subj',
-      label: 'Subject',
-      sortable: false,
-    },
-    {
-      id: 'from',
-      label: 'From',
-      sortable: true,
-    },
+import { headerColumns } from './headerColumns.js';
+import SortIcon from './sortIcon.js';
 
-    {
-      id: 'date',
-      label: 'Date',
-      sortable: false,
-    },
+const TableHead = ({ box, handleClick, sortOrder, column }) => 
+    headerColumns[`${box}`].map((item) => {
+    const { id = '', label = '', sortable } = item;
+    const currentItem = column === id;
+    const direction = currentItem ? sortOrder : '';
 
-    {
-      id: 'user',
-      label: 'User',
-      sortable: false,
-    },
+    return (
+      <th key={id}>{ sortable ? 
+        <button type="button" onClick={ () => handleClick(id) }>
+          { label } <SortIcon direction={ direction } /></button> : label }
+      </th>
+    )
+   }) 
 
-    {
-      id: 'note',
-      label: 'Note',
-      sortable: false,
-    },
-    {
-      id: 'select',
-      label: 'Select',
-      sortable: false,
-    },
-  ],
-  outbox: [
-    {
-      id: 'id',
-      label: '#',
-      sortable: true,
-    },
-    {
-      id: 'subj',
-      label: 'Subject',
-      sortable: false,
-    },
-    {
-      id: 'to',
-      label: 'To',
-      sortable: true,
-    },
-
-    {
-      id: 'date',
-      label: 'Date',
-      sortable: false,
-    },
-
-    {
-      id: 'user',
-      label: 'User',
-      sortable: false,
-    },
-
-    {
-      id: 'note',
-      label: 'Note',
-      sortable: false,
-    },
-    {
-      id: 'select',
-      label: 'Select',
-      sortable: false,
-    },
-  ],
-};
+export default TableHead;
