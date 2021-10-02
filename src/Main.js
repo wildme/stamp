@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation  } from 'react-router-dom';
+import TableHead from './TableHead.js';
 import Rows from './Rows.js';
-import { head } from './TableHead.js';
-import SortIcon from './sortIcon.js';
 
 const Main = () => {
   const location = useLocation();
@@ -39,22 +38,7 @@ const Main = () => {
         <table>
           <thead>
             <tr className="top-row">
-              {head[`${box}`].map((item) => {
-                const { id = '', label = '', sortable } = item;
-                const currentItem = column === id;
-                const direction = currentItem ? sortOrder : '';
-                return (
-                  <th key={id}>
-                    {sortable ? (
-                      <button type="button" onClick={() => handleClick(id)}>
-                        {label} <SortIcon direction={direction} />
-                      </button>
-                    ) : (
-                      label
-                    )}
-                  </th>
-                );
-              })}
+              <TableHead box={box} handleClick={handleClick} sortOrder={sortOrder} column={column} />
             </tr>
           </thead>
           <tbody>
@@ -63,7 +47,7 @@ const Main = () => {
         </table>
       </div>
     </div>
-  );
+  )
 };
 
 export default Main;
