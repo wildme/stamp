@@ -1,5 +1,3 @@
-import './App.css';
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Fragment } from 'react';
 import Main from './Main.js';
