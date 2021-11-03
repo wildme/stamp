@@ -5,12 +5,10 @@ const Row = ({ entry }) => (
     <td>{entry.id}</td>
     <td>{entry.subject}</td>
     <td>{entry.from || entry.to}</td>
-    <td>{entry.date}</td>
+    <td>{new Date(entry.date).toLocaleString('ru-Ru')}</td>
     <td>{entry.addedBy}</td>
     <td>{entry.notes}</td>
-    <td>
-      <RowActions id={entry.id} />
-    </td>
+    <td><RowActions id={entry.id} /></td>
   </tr>
 );
 
