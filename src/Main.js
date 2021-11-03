@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation  } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
 
-const Main = () => {
-  const location = useLocation();
-  const box = location.pathname.slice(1);
+const Main = (props) => {
+  const box = props.location.pathname.slice(1);
   const [tbContent, setTbContent] = useState([]);
   const [column, setColumn] = useState('id');
   const [sortOrder, setSortOrder] = useState('asc');
@@ -24,7 +23,7 @@ const Main = () => {
     fetch(`/api/${box}` + queryString)
      .then(res => res.json())
      .then(setTbContent)
-  }, [sortOrder, column, box])
+  }, [sortOrder, column])
 
   return (
     <div className="page-content">
