@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import { InputField } from './InputFields.js';
@@ -51,7 +51,7 @@ const NewRecord = () => {
           setter={setNotes}
           value={notes}
         />
-        <button type="submit" onClick={(e) => handleAddRecord(e)}>
+        <button type="submit" disabled={!subject || !fromTo} onClick={(e) => handleAddRecord(e)}>
           Add
         </button>
       </div>
