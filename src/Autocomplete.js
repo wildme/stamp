@@ -25,14 +25,10 @@ const Autocomplete = ({ value, setter, attrs, field }) => {
 
   const onChange = (e) => {
     setter(e.currentTarget.value);
-   // setMatches(() =>
-   //   options.filter(
-   //     (option) => option.toLowerCase().indexOf(value.toLowerCase()) > -1
-   //   )
-   // );
       fetch(`/api/contacts/search/by-${field}` + `?name=${value}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => data.map(item => item.name + ', ' + item.location))
+        .then(setMatches);
 
     setVisibility(true);
     setActiveItem(0);
