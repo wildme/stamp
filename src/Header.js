@@ -7,6 +7,7 @@ const HeaderLinks = () => {
       <div className="navbar-left">
         <NavLink to="/inbox">Inbox</NavLink>
         <NavLink to="/outbox">Outbox</NavLink>
+        <NavLink to="/contacts">Contacts</NavLink>
       </div>
       <div className="navbar-right">
         <NavLink to="/logout">Logout</NavLink>
