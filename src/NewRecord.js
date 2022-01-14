@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
-import { InputField } from './InputFields.js';
+import InputField from './InputFields.js';
 import { useSelector } from 'react-redux';
 
 const NewRecord = () => {
@@ -45,6 +45,7 @@ const NewRecord = () => {
           setter={setFromTo}
           value={fromTo}
           auto={true}
+          field='name'
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
