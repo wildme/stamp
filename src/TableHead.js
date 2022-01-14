@@ -1,8 +1,8 @@
 import { headerColumns } from './headerColumns.js';
 import SortIcon from './sortIcon.js';
 
-const TableHead = ({ box, handleClick, sortOrder, column }) => 
-    headerColumns[`${box}`].map((item) => {
+const TableHead = ({ table, handleClick, sortOrder, column }) => 
+    headerColumns[`${table}`].map((item) => {
     const { id = '', label = '', sortable } = item;
     const currentItem = column === id;
     const direction = currentItem ? sortOrder : '';
