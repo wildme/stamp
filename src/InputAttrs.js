@@ -43,4 +43,25 @@ export const InputAttrs = {
       type: 'text',
     },
   ],
+  contact: [
+    {
+      for: 'location',
+      text: 'Location',
+      name: 'location',
+      type: 'text',
+    },
+
+    {
+      for: 'name',
+      text: 'Name',
+      name: 'name',
+      type: 'text',
+    },
+    {
+      for: 'region',
+      text: 'Region',
+      name: 'region',
+      type: 'text'
+    }
+  ]
 };
