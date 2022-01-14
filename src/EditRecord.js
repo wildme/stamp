@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
-import { InputField } from './InputFields.js';
+import InputField from './InputFields.js';
 
 const EditRecord = () => {
   const { id, box } = useParams();
