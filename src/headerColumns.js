@@ -79,4 +79,21 @@ export const headerColumns = {
       sortable: false,
     },
   ],
+  contacts: [
+    {
+      id: 'location',
+      label: 'Location',
+      sortable: false,
+    },
+    {
+      id: 'region',
+      label: 'Region',
+      sortable: false
+    },
+    {
+      id: 'name',
+      label: 'Name',
+      sortable: false,
+    }
+  ]
 };
