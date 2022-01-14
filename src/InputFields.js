@@ -1,14 +1,14 @@
 import { Fragment } from 'react';
 import Autocomplete from './Autocomplete.js';
-import { country_list } from './countries.js';
+//import { country_list } from './countries.js';
 
-export const InputField = ({ attrs, setter, value, auto = false }) => {
+ const InputField = ({ attrs, setter, value, auto = false , field }) => {
   const handleInputChange = (e) => {
     setter(e.target.value);
   };
   return auto ? (
     <Autocomplete
-      options={country_list}
+      field={field}
       attrs={attrs}
       value={value}
       setter={setter}
@@ -25,5 +25,7 @@ export const InputField = ({ attrs, setter, value, auto = false }) => {
         onChange={(e) => handleInputChange(e)}
       />
     </Fragment>
-  );
+  )
 };
+
+export default InputField;
