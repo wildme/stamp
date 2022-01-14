@@ -7,6 +7,8 @@ import NewAccount from './NewAccount.js';
 import EditRecord from './EditRecord.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
+import AllContacts from './Contacts.js';
+import NewContact from './NewContact.js';
 import { Route, Redirect,
   Switch, useHistory, useLocation } from 'react-router-dom';
 
@@ -82,6 +84,8 @@ const Content = () => {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={NewAccount} />
         <PrivateRoute exact path="/" component={Hello} />
+        <PrivateRoute exact path="/contacts" component={AllContacts} />
+        <PrivateRoute exact path="/contacts/new" component={NewContact} />
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
         <PrivateRoute exact path="/:box/new" component={NewRecord} />
