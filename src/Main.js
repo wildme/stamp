@@ -37,11 +37,11 @@ const Main = (props) => {
         <table>
           <thead>
             <tr className="top-row">
-              <TableHead box={box} handleClick={handleClick} sortOrder={sortOrder} column={column} />
+              <TableHead table={box} handleClick={handleClick} sortOrder={sortOrder} column={column} />
             </tr>
           </thead>
           <tbody>
-            <Rows rows={tbContent} />
+            <Rows rows={tbContent} table="box"/>
           </tbody>
         </table>
       </div>
