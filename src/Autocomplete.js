@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 
-const Autocomplete = ({ options, value, setter, attrs }) => {
+const Autocomplete = ({ value, setter, attrs, field }) => {
   const [matches, setMatches] = useState([]);
   const [activeItem, setActiveItem] = useState(0);
   const [visibility, setVisibility] = useState(false);
@@ -25,11 +25,14 @@ const Autocomplete = ({ options, value, setter, attrs }) => {
 
   const onChange = (e) => {
     setter(e.currentTarget.value);
-    setMatches(() =>
-      options.filter(
-        (option) => option.toLowerCase().indexOf(value.toLowerCase()) > -1
-      )
-    );
+   // setMatches(() =>
+   //   options.filter(
+   //     (option) => option.toLowerCase().indexOf(value.toLowerCase()) > -1
+   //   )
+   // );
+      fetch(`/api/contacts/search/by-${field}` + `?name=${value}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
 
     setVisibility(true);
     setActiveItem(0);
