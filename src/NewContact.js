@@ -17,10 +17,10 @@ const NewContact = () => {
       headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-      if (res.status < 200 || res.status > 299) {
-        return alert('Error occured! Try again.');
-      }
+      if (!res.ok) throw new Error('Network issue occured');
     })
+    .catch(err => console.error(err))
+
     setOrgLocation('');
     setOrgRegion('');
     setOrgName('');

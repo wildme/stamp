@@ -17,11 +17,11 @@ const EditRecord = () => {
       body: JSON.stringify({ subject , fromTo, notes}),
       headers: {'Content-Type': 'application/json'}
       })
-    .then(res => {
-      if(res.status < 200 || res.status > 299) {
-        return alert('Error occured! Try again.');
-        }
-    })
+      .then(res => {
+        if (!res.ok) throw new Error('Network issue occured');
+      })
+      .catch(err => console.error(err))
+
     setSubject('');
     setFromTo('');
     setNotes('');
@@ -54,6 +54,7 @@ const EditRecord = () => {
           setter={setFromTo}
           value={fromTo}
           auto={true}
+          field='name'
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}

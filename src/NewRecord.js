@@ -19,11 +19,11 @@ const NewRecord = () => {
       body: JSON.stringify({ subject , fromTo, addedBy, notes}),
       headers: {'Content-Type': 'application/json'}
       })
-    .then(res => {
-      if(res.status < 200 || res.status > 299) {
-        return alert('Error occured! Try again.');
-        }
-    })
+      .then(res => {
+        if (!res.ok) throw new Error('Network issue occured');
+      })
+      .catch(err => console.error(err))
+
     setSubject('');
     setFromTo('');
     setNotes('');

@@ -28,7 +28,8 @@ const Autocomplete = ({ value, setter, attrs, field }) => {
       fetch(`/api/contacts/search/by-${field}` + `?name=${value}`)
         .then(res => res.json())
         .then(data => data.map(item => item.name + ', ' + item.location))
-        .then(setMatches);
+        .then(setMatches)
+        .catch(err => console.error(err))
 
     setVisibility(true);
     setActiveItem(0);
