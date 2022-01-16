@@ -6,7 +6,7 @@ import Rows from './Rows.js';
 const Main = (props) => {
   const box = props.location.pathname.slice(1);
   const [tbContent, setTbContent] = useState([]);
-  const [column, setColumn] = useState('id');
+  const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState('asc');
 
   const handleClick = (id) => {
@@ -21,8 +21,9 @@ const Main = (props) => {
   useEffect(() => {
     const queryString = `?field=${column}&order=${sortOrder}`;
     fetch(`/api/${box}` + queryString)
-     .then(res => res.json())
-     .then(setTbContent)
+    .then(res => res.json())
+    .then(setTbContent)
+    .catch(err => console.error(err))
   }, [sortOrder, column])
 
   return (
