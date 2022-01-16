@@ -3,7 +3,7 @@ export const headerColumns = {
     {
       id: 'id',
       label: '#',
-      sortable: true,
+      sortable: false,
     },
     {
       id: 'subj',
@@ -19,7 +19,7 @@ export const headerColumns = {
     {
       id: 'date',
       label: 'Date',
-      sortable: false,
+      sortable: true,
     },
 
     {
@@ -43,7 +43,7 @@ export const headerColumns = {
     {
       id: 'id',
       label: '#',
-      sortable: true,
+      sortable: false,
     },
     {
       id: 'subj',
@@ -59,7 +59,7 @@ export const headerColumns = {
     {
       id: 'date',
       label: 'Date',
-      sortable: false,
+      sortable: true,
     },
 
     {
