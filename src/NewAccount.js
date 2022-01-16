@@ -55,8 +55,8 @@ const NewAccount = () => {
             name="username"
             value={username}
             required
-            minlength="3"
-            maxlength="25"
+            minLength="3"
+            maxLength="25"
             onChange={(e) => setUsername(e.target.value)}
           /></p>
           <p><input
@@ -65,8 +65,8 @@ const NewAccount = () => {
             name="email"
             value={email}
             required
-            minlength="6"
-            maxlength="40"
+            minLength="6"
+            maxLength="40"
             onChange={(e) => setEmail(e.target.value)}
           /></p>
           <p><input
@@ -75,8 +75,8 @@ const NewAccount = () => {
             name="password"
             value={password}
             required
-            minlength="8"
-            maxlength="255"
+            minLength="8"
+            maxLength="255"
             onChange={(e) => setPassword(e.target.value)}
           /></p>
           <p><input
@@ -85,8 +85,8 @@ const NewAccount = () => {
             name="confirm-password"
             value={confirmPassword}
             required
-            minlength="8"
-            maxlength="255"
+            minLength="8"
+            maxLength="255"
             onChange={(e) => setConfirmPassword(e.target.value)}
           /></p>
           <p><input
@@ -95,7 +95,7 @@ const NewAccount = () => {
             name="firstname"
             value={firstname}
             required
-            maxlength="50"
+            maxLength="50"
             onChange={(e) => setFirstname(e.target.value)}
           /></p>
           <p><input
@@ -104,7 +104,7 @@ const NewAccount = () => {
             name="lastname"
             value={lastname}
             required
-            maxlength="50"
+            maxLength="50"
             onChange={(e) => setLastname(e.target.value)}
           /></p>
           <input value="Signup" id="submit" type="submit" />
