@@ -6,7 +6,7 @@ const RowActions = ({ id }) => {
   const [visibility, setVisibility] = useState(false);
   const dropdownRef = useRef(null);
   const { pathname } = useLocation();
-  const box = /(in|out)box/.exec(pathname)[0];
+  const box = pathname.slice(1);
 
   const handleClick = (e) => {
     e.preventDefault();
