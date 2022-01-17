@@ -5,6 +5,7 @@ import Hello from './Hello.js';
 import NewRecord from './NewRecord.js';
 import NewAccount from './NewAccount.js';
 import EditRecord from './EditRecord.js';
+import RecordCard from './RecordCard.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
 import AllContacts from './Contacts.js';
@@ -89,6 +90,7 @@ const Content = () => {
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
         <PrivateRoute exact path="/:box/new" component={NewRecord} />
+        <PrivateRoute exact path="/:box/:id" component={RecordCard} />
         <PrivateRoute exact path="/:box/edit/:id" component={EditRecord} />
     </Switch>
     </Fragment>
