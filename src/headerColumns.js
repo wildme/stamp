@@ -29,8 +29,8 @@ export const headerColumns = {
     },
 
     {
-      id: 'note',
-      label: 'Note',
+      id: 'replyTo',
+      label: 'Reply to',
       sortable: false,
     },
     {
@@ -69,8 +69,8 @@ export const headerColumns = {
     },
 
     {
-      id: 'note',
-      label: 'Note',
+      id: 'replyTo',
+      label: 'Reply to',
       sortable: false,
     },
     {

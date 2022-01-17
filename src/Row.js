@@ -11,7 +11,7 @@ const Row = ({ entry, table }) => {
       <td>{entry.from || entry.to}</td>
       <td>{new Date(entry.date).toLocaleString('ru-Ru')}</td>
       <td>{entry.addedBy}</td>
-      <td>{entry.notes}</td>
+      <td>{entry.replyTo || '-'}</td>
       <td><RowActions id={entry.id} /></td>
     </tr>
   }
