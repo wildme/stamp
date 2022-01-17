@@ -8,13 +8,14 @@ const EditRecord = () => {
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [notes, setNotes] = useState('');
+  const [replyTo, setReplyTo] = useState('');
   const history = useHistory();
 
   const handleEditRecord = (e) => {
     e.preventDefault();
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
-      body: JSON.stringify({ subject , fromTo, notes}),
+      body: JSON.stringify({ subject, fromTo, replyTo, notes}),
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
@@ -25,16 +26,18 @@ const EditRecord = () => {
     setSubject('');
     setFromTo('');
     setNotes('');
+    setReplyTo('');
     history.replace(`/${box}`);
   };
 
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
-    .then(res => res.json())
+      .then(res => res.json())
       .then(data => data.map((item) => {
         setSubject(item.subject);
         setFromTo(item.from || item.to);
         setNotes(item.notes);
+        setReplyTo(item.replyTo);
       })
       )
   }, [])
@@ -55,6 +58,11 @@ const EditRecord = () => {
           value={fromTo}
           auto={true}
           field='name'
+        />
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+          setter={setReplyTo}
+          value={replyTo}
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}

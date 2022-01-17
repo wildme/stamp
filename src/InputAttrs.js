@@ -20,6 +20,12 @@ export const InputAttrs = {
       name: 'note',
       type: 'text',
     },
+    {
+      for: 'replyTo',
+      text: 'Reply to',
+      name: 'replyTo',
+      type: 'text',
+    }
   ],
   outbox: [
     {
@@ -42,6 +48,12 @@ export const InputAttrs = {
       name: 'note',
       type: 'text',
     },
+    {
+      for: 'replyTo',
+      text: 'Reply to',
+      name: 'replyTo',
+      type: 'text',
+    }
   ],
   contact: [
     {

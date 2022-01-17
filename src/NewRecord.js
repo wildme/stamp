@@ -10,13 +10,14 @@ const NewRecord = () => {
   const [fromTo, setFromTo] = useState('');
   const addedBy = useSelector((state) => state.user.username);
   const [notes, setNotes] = useState('');
+  const [replyTo, setReplyTo] = useState('');
   const history = useHistory();
 
   const handleAddRecord = (e) => {
     e.preventDefault();
     fetch(`/api/${box}/new`, {
       method: 'POST',
-      body: JSON.stringify({ subject , fromTo, addedBy, notes}),
+      body: JSON.stringify({ subject, fromTo, addedBy, replyTo, notes}),
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
@@ -27,6 +28,7 @@ const NewRecord = () => {
     setSubject('');
     setFromTo('');
     setNotes('');
+    setReplyTo('');
     history.replace(`/${box}`);
   };
 
@@ -46,6 +48,11 @@ const NewRecord = () => {
           value={fromTo}
           auto={true}
           field='name'
+        />
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+          setter={setReplyTo}
+          value={replyTo}
         />
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
