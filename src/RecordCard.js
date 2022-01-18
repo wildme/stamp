@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useParams, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 
 const RecordCard = () => {
   const { id, box } = useParams();
-  const user = useSelector((state) => state.user.username);
+  //const user = useSelector((state) => state.user.username);
   const [idOfRec, setIdOfRec] = useState('');
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
@@ -16,6 +15,8 @@ const RecordCard = () => {
   const [date, setDate] = useState('');
   const [addedBy, setAddedBy] = useState('');
   const history = useHistory();
+  const dateStr = new Date(date).toLocaleString('ru-Ru'); 
+  const updatedStr = new Date(updated).toLocaleString('ru-Ru');
 
   const handleStatus = (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ const RecordCard = () => {
         else throw new Error('Network issue occured');
       })
       .catch(err => console.error(err))
-    //history.replace(`/${box}`);
+    history.replace(`/${box}`);
   };
 
   useEffect(() => {
@@ -59,14 +60,15 @@ const RecordCard = () => {
       <div className="record-card">
         <div className="record-header">
           {<h2>{box} #{idOfRec}</h2>}
+          <hr/>
         </div>
         <div className="record-fields">
           {<p><b>Subject</b>: {subject}</p>}
         {box === 'inbox' ? 
             <p><b>From</b>: {fromTo}</p> :
             <p><b>To</b>: {fromTo}</p>}
-          {<p><b>Date</b>: {new Date(date).toLocaleString('ru-Ru')}</p>}
-          {updated && <p><b>Updated</b>: {new Date(updated).toLocaleString('ru-Ru') || '-'}</p>}
+          {<p><b>Date</b>: {dateStr}</p>}
+          {updated && <p><b>Updated</b>: {updatedStr || '-'}</p>}
           {<p><b>Reply to</b>: {replyTo || '-'}</p>}
           {<p><b>User</b>: {addedBy}</p>}
           {<p><b>Status</b>: {statusOfRecord}</p>}

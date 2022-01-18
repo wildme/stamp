@@ -267,7 +267,15 @@ svg#menu {
 .record-card {
   padding: 15px;
   background-color: #efc868;
+  box-shadow: 4px 3px 8px 1px
 } 
+
+.record-card h2 {
+  color: #0066cc;
+}
+.record-card p {
+  font-family:verdana;
+}
 
 .record-header {
   text-align: center;
