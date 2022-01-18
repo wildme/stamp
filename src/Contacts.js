@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
+
+export const ContactsContext = createContext();
 
 const AllContacts = () => {
   const [tbContacts, setTbContacts] = useState([]);
@@ -33,7 +35,9 @@ const AllContacts = () => {
           </tr>
         </thead>
         <tbody>
-    { tbContacts && <Rows table="contacts" rows={tbContacts} />}
+            <ContactsContext.Provider value='contacts'>
+    { tbContacts && <Rows rows={tbContacts} />}
+            </ContactsContext.Provider>
        </tbody>
       </table>
     { infoMsg && <p>{infoMsg}</p> }

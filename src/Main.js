@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
+
+export const BoxContext = createContext();
 
 const Main = (props) => {
   const box = props.location.pathname.slice(1);
@@ -42,7 +44,9 @@ const Main = (props) => {
             </tr>
           </thead>
           <tbody>
-            <Rows rows={tbContent} table="box"/>
+            <BoxContext.Provider value={box}>
+              <Rows rows={tbContent}/>
+            </BoxContext.Provider>
           </tbody>
         </table>
       </div>

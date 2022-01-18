@@ -1,12 +1,18 @@
-import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { Fragment, useContext } from 'react';
 import RowActions from './RowActions.js';
+import { BoxContext } from './Main.js';
+import { ContactsContext } from './Contacts.js';
 
-const Row = ({ entry, table }) => {
+const Row = ({ entry }) => {
+  const box = useContext(BoxContext);
+  const contacts = useContext(ContactsContext);
+
   return (
   <Fragment>
-  { table === 'box' &&
+  { box &&
     <tr className="inbox-item">
-      <td>{entry.id}</td>
+      <td><Link to={`/${box}/${entry.id}`}>{entry.id}</Link></td>
       <td>{entry.subject}</td>
       <td>{entry.from || entry.to}</td>
       <td>{new Date(entry.date).toLocaleString('ru-Ru')}</td>
@@ -15,7 +21,7 @@ const Row = ({ entry, table }) => {
       <td><RowActions id={entry.id} /></td>
     </tr>
   }
-  { table === 'contacts' &&
+  { contacts &&
     <tr className="inbox-item">
       <td>{entry.location}</td>
       <td>{entry.region}</td>
