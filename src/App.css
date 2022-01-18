@@ -183,7 +183,7 @@ svg#menu {
 .kebab-icon:hover {
   background-color: #f2f2f2;
 }
-
+/* Context Menu */
 .dropdown-content {
   display: block;
   position: absolute;
@@ -256,3 +256,26 @@ svg#menu {
 .options li:not(:last-of-type) {
   border-bottom: 1px solid grey;
 }
+/* Record Card component*/
+.record-card-grid-container {
+  display: grid;
+  grid-auto-rows: 600px;
+  justify-items: center;
+  align-items: center;
+
+}
+.record-card {
+  padding: 15px;
+  background-color: #efc868;
+} 
+
+.record-header {
+  text-align: center;
+}
+.record-fields {
+  text-align: left;
+}
+.status-button button {
+  display: grid;
+  margin: auto;
+};

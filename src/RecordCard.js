@@ -47,7 +47,7 @@ const RecordCard = () => {
         setReplyTo(item.replyTo);
         setUpdated(item.updated);
         setStatus(item.status);
-        setDate(new Date(item.date).toLocaleString('ru-Ru'));
+        setDate(item.date);
         setAddedBy(item.addedBy);
         setNote(item.notes);
       })
@@ -55,21 +55,27 @@ const RecordCard = () => {
   }, [statusOfRecord])
 
   return (
-    <div className="page-content">
+    <div className="record-card-grid-container">
       <div className="record-card">
-        {<h1>{box}: #{idOfRec}</h1>}
-        {<p>Subject: {subject}</p>}
+        <div className="record-header">
+          {<h2>{box} #{idOfRec}</h2>}
+        </div>
+        <div className="record-fields">
+          {<p><b>Subject</b>: {subject}</p>}
         {box === 'inbox' ? 
-            <p>From: {fromTo}</p> :
-            <p>To: {fromTo}</p>}
-        {<p>Date: {date}</p>}
-        {updated && <p>Updated: {updated || '-'}</p>}
-        {<p>Reply to: {replyTo || '-'}</p>}
-        {<p>User: {addedBy}</p>}
-        {<p>Status: {statusOfRecord}</p>}
-        {<p>Note: {note}</p>}
+            <p><b>From</b>: {fromTo}</p> :
+            <p><b>To</b>: {fromTo}</p>}
+          {<p><b>Date</b>: {new Date(date).toLocaleString('ru-Ru')}</p>}
+          {updated && <p><b>Updated</b>: {new Date(updated).toLocaleString('ru-Ru') || '-'}</p>}
+          {<p><b>Reply to</b>: {replyTo || '-'}</p>}
+          {<p><b>User</b>: {addedBy}</p>}
+          {<p><b>Status</b>: {statusOfRecord}</p>}
+          {<p><b>Note</b>: {note}</p>}
+        </div>
+    <div className="status-button">
         <button  onClick={(e) => handleStatus(e)}>
     {statusOfRecord === 'active' ? 'Cancel' : 'Activate'}</button>
+    </div>
       </div>
     </div>
   );
