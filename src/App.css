@@ -1,3 +1,4 @@
+/* Navigation bar */
 .navbar {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -83,17 +84,20 @@ input#submit:hover {
   opacity: 0.8;
 }
 
+/* Main page: Boxes, Conatcts */
 .page-content {
   display: grid;
   grid-template-columns: 100%;
 }
 
 .page-title {
+  margin-left: 15px;
   text-align: left;
 }
 
 .page-actions {
   text-align: center;
+  margin: 10px;
 }
 
 .page-actions a {
@@ -104,14 +108,14 @@ input#submit:hover {
 }
 
 .page-table {
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 table {
-  font-family: areal, sans-serif;
-  font-size: 19px;
+  font-family:arial;
+  font-size: 17px;
   width: 100%;
   border-collapse: collapse;
   text-align: left;
@@ -119,17 +123,15 @@ table {
 
 tr {
   border: none;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #0099ff;
 }
 
-.top-row tr {
-  border: none;
-  border-bottom: 3px solid #dddddd;
-}
-
-th,
-td {
+th, td {
   padding: 8px;
+}
+
+.long-col-tbl {
+  width: 200px;
 }
 
 th > button {
@@ -139,6 +141,7 @@ th > button {
   font-weight: bold;
 }
 
+/* Sort icon styles */
 .sort-icon_ {
   display: inline;
   font-size: 14px;
@@ -169,7 +172,7 @@ svg#menu {
   display: none;
 }
 
-.inbox-item:hover svg#menu {
+.box-item:hover svg#menu {
   display: block;
 }
 
@@ -183,7 +186,7 @@ svg#menu {
 .kebab-icon:hover {
   background-color: #f2f2f2;
 }
-/* Context Menu */
+/* Row actions. Drop-down menu */
 .dropdown-content {
   display: block;
   position: absolute;
@@ -256,23 +259,27 @@ svg#menu {
 .options li:not(:last-of-type) {
   border-bottom: 1px solid grey;
 }
+
 /* Record Card component*/
 .record-card-grid-container {
   display: grid;
+  grid-template-columns: 100%;
   grid-auto-rows: 600px;
   justify-items: center;
   align-items: center;
-
 }
+
 .record-card {
   padding: 15px;
-  background-color: #efc868;
+  background-color: #ffe6b3;
+  border-radius: 6px;
   box-shadow: 4px 3px 8px 1px
 } 
 
 .record-card h2 {
   color: #0066cc;
 }
+
 .record-card p {
   font-family:verdana;
 }
@@ -283,7 +290,24 @@ svg#menu {
 .record-fields {
   text-align: left;
 }
-.status-button button {
+
+.record-status-button{
   display: grid;
   margin: auto;
-};
+}
+
+.record-status-button button {
+  padding: 7px;
+  border: 1px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.record-status-button button#active {
+  background-color: #ff4d4d;
+}
+
+.record-status-button button#canceled {
+  background-color: #33cc33;
+}
