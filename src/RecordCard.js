@@ -14,7 +14,7 @@ const RecordCard = () => {
   const [statusOfRecord, setStatus] = useState('');
   const [date, setDate] = useState('');
   const [addedBy, setAddedBy] = useState('');
-  const history = useHistory();
+  //const history = useHistory();
   const dateStr = new Date(date).toLocaleString('ru-Ru'); 
   const updatedStr = new Date(updated).toLocaleString('ru-Ru');
 
@@ -35,7 +35,7 @@ const RecordCard = () => {
         else throw new Error('Network issue occured');
       })
       .catch(err => console.error(err))
-    history.replace(`/${box}`);
+    //history.replace(`/${box}`);
   };
 
   useEffect(() => {
@@ -66,16 +66,16 @@ const RecordCard = () => {
           {<p><b>Subject</b>: {subject}</p>}
         {box === 'inbox' ? 
             <p><b>From</b>: {fromTo}</p> :
-            <p><b>To</b>: {fromTo}</p>}
+            <p><b>To</b>:{fromTo}</p>}
           {<p><b>Date</b>: {dateStr}</p>}
           {updated && <p><b>Updated</b>: {updatedStr || '-'}</p>}
           {<p><b>Reply to</b>: {replyTo || '-'}</p>}
           {<p><b>User</b>: {addedBy}</p>}
           {<p><b>Status</b>: {statusOfRecord}</p>}
-          {<p><b>Note</b>: {note}</p>}
+          {<p><b>Note</b>: {note || '-'}</p>}
         </div>
-    <div className="status-button">
-        <button  onClick={(e) => handleStatus(e)}>
+    <div className="record-status-button">
+        <button type="submit" id={statusOfRecord} onClick={(e) => handleStatus(e)}>
     {statusOfRecord === 'active' ? 'Cancel' : 'Activate'}</button>
     </div>
       </div>
