@@ -33,13 +33,13 @@ const RowActions = ({ id }) => {
         <a href={`${box}#`} onClick={(e) => handleClick(e)}>
           <svg
             id="menu"
-            width="18"
-            height="18"
+            width="16"
+            height="16"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="50%" cy="3" r="2" fill="black" />
-            <circle cx="50%" cy="9" r="2" fill="black" />
-            <circle cx="50%" cy="15" r="2" fill="black" />
+            <circle cx="50%" cy="2" r="2" fill="black" />
+            <circle cx="50%" cy="8" r="2" fill="black" />
+            <circle cx="50%" cy="14" r="2" fill="black" />
           </svg>
         </a>
         <div
