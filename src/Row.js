@@ -12,7 +12,7 @@ const Row = ({ entry }) => {
   return (
   <Fragment>
   { box &&
-    <tr>
+    <tr className="box-item">
       <td><Link to={`/${box}/${entry.id}`}>{entry.id}</Link></td>
       <td><div className="long-col-tbl">{entry.subject}</div></td>
       <td><div className="long-col-tbl">{entry.from || entry.to}</div></td>
@@ -23,7 +23,7 @@ const Row = ({ entry }) => {
     </tr>
   }
   { contacts &&
-    <tr>
+    <tr className="contact-item">
       <td>{entry.location}</td>
       <td>{entry.region}</td>
       <td>{entry.name}</td>
