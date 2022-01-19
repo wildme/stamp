@@ -132,6 +132,8 @@ th, td {
 
 .long-col-tbl {
   width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 th > button {
