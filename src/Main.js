@@ -39,7 +39,7 @@ const Main = (props) => {
       <div className="page-table">
         <table>
           <thead>
-            <tr className="top-row">
+            <tr>
               <TableHead table={box} handleClick={handleClick} sortOrder={sortOrder} column={column} />
             </tr>
           </thead>
