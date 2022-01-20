@@ -63,7 +63,7 @@ const RecordCard = () => {
           <hr/>
         </div>
         <div className="record-fields">
-          {<p><b>Subject</b>: {subject}</p>}
+          {<p><b>Subject</b>:<div className="long-field-card">{subject}</div></p>}
         {box === 'inbox' ? 
             <p><b>From</b>: {fromTo}</p> :
             <p><b>To</b>:{fromTo}</p>}
@@ -72,7 +72,7 @@ const RecordCard = () => {
           {<p><b>Reply to</b>: {replyTo || '-'}</p>}
           {<p><b>User</b>: {addedBy}</p>}
           {<p><b>Status</b>: {statusOfRecord}</p>}
-          {<p><b>Note</b>: {note || '-'}</p>}
+          {<p><b>Note</b>:<div className="long-field-card">{note || '-'}</div></p>}
         </div>
     <div className="record-status-button">
         <button type="submit" id={statusOfRecord} onClick={(e) => handleStatus(e)}>

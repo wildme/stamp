@@ -114,7 +114,7 @@ input#submit:hover {
 }
 
 table {
-  font-family:arial;
+  font-family: arial;
   font-size: 17px;
   width: 100%;
   border-collapse: collapse;
@@ -283,7 +283,7 @@ svg#menu {
 }
 
 .record-card p {
-  font-family:verdana;
+  font-family: arial;
 }
 
 .record-header {
@@ -312,4 +312,9 @@ svg#menu {
 
 .record-status-button button#canceled {
   background-color: #33cc33;
+}
+
+.long-field-card {
+  width: 300px;
+  overflow-wrap: break-word;
 }
