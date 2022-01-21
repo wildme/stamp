@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import Autocomplete from './Autocomplete.js';
-//import { country_list } from './countries.js';
 
  const InputField = ({ attrs, setter, value, auto = false , field }) => {
   const handleInputChange = (e) => {
