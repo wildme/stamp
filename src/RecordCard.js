@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-//import { useSelector } from 'react-redux';
 
 const RecordCard = () => {
   const { id, box } = useParams();
-  //const user = useSelector((state) => state.user.username);
   const [idOfRec, setIdOfRec] = useState('');
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
@@ -14,7 +12,7 @@ const RecordCard = () => {
   const [statusOfRecord, setStatus] = useState('');
   const [date, setDate] = useState('');
   const [addedBy, setAddedBy] = useState('');
-  //const history = useHistory();
+  const [file, setFile] = useState(null);
   const dateStr = new Date(date).toLocaleString('ru-Ru'); 
   const updatedStr = new Date(updated).toLocaleString('ru-Ru');
 
@@ -35,8 +33,23 @@ const RecordCard = () => {
         else throw new Error('Network issue occured');
       })
       .catch(err => console.error(err))
-    //history.replace(`/${box}`);
   };
+
+  const handleDownload = (e) => {
+    e.preventDefault(e);
+    fetch(`/api/download/${file.fsFilename}`)
+      .then(res => res.blob())
+      .then(blob => {
+        const objectURL = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = objectURL;
+        a.download=file.filename;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      })
+      .catch(err => console.error(err))
+  };
+
 
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
@@ -53,7 +66,16 @@ const RecordCard = () => {
         setNote(item.notes);
       })
       )
-  }, [statusOfRecord])
+
+  fetch(`/api/attachment/${box}/${id}`)
+      .then(res => {
+        if (res.status === 200) return res.json();
+        if (!res.ok) throw new Error('Network issue occured');
+    })
+      .then(data => setFile(data))
+      .catch(err => console.error(err))
+
+  }, [])
 
   return (
     <div className="record-card-grid-container">
@@ -74,6 +96,10 @@ const RecordCard = () => {
           {<p><b>Status</b>: {statusOfRecord}</p>}
           {<p><b>Note</b>:<div className="long-field-card">{note || '-'}</div></p>}
         </div>
+        {file && 
+          <div className="record-attachment">
+            <button type="button" onClick={(e) => handleDownload(e)}>{file.filename}</button>
+          </div>}
     <div className="record-status-button">
         <button type="submit" id={statusOfRecord} onClick={(e) => handleStatus(e)}>
     {statusOfRecord === 'active' ? 'Cancel' : 'Activate'}</button>
