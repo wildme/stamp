@@ -13,16 +13,15 @@ const NewRecord = () => {
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState();
   const history = useHistory();
-  const formData = new FormData();
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   }
 
-  const handleAddRecord = (e) => {
+  const handleAddRecord = async (e) => {
     e.preventDefault();
 
-    fetch(`/api/${box}/new`, {
+    const id = await fetch(`/api/${box}/new`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
       headers: {'Content-Type': 'application/json'}
@@ -31,20 +30,20 @@ const NewRecord = () => {
         if (res.ok) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
       })
-      .then(id => {
-        if (file) {
-          formData.append('File', file);
-          fetch(`/api/${box}/upload/${id}`, {
-            method: 'POST',
-            body: formData,
-            })
-            .then(res => {
-              if (!res.ok) throw new Error('Network issue occured');
-            })
-            .catch(err => console.error(err))
-    }
-      })
       .catch(err => console.error(err))
+
+   if (file) {
+     const formData = new FormData();
+     formData.append('file', file);
+     await fetch(`/api/${box}/upload/${id}`, {
+       method: 'POST',
+       body: formData,
+       })
+       .then(res => {
+         if (!res.ok) throw new Error('Network issue occured');
+       })
+       .catch(err => console.error(err))
+    }
 
     setSubject('');
     setFromTo('');
@@ -84,10 +83,8 @@ const NewRecord = () => {
         />
         <label htmlFor="file"><b>File</b></label>
         <input type="file" name="file" onChange={(e) => handleFile(e)}/>
-          
-          <button type="submit" disabled={!subject || !fromTo} onClick={(e) => handleAddRecord(e)}>
-          Add
-        </button>
+        <button type="submit" disabled={!subject || !fromTo} onClick={(e) => handleAddRecord(e)}>
+          Add</button>
       </div>
     </div>
   );
