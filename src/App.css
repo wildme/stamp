@@ -293,7 +293,7 @@ svg#menu {
   text-align: left;
 }
 
-.record-status-button{
+.record-status-button {
   display: grid;
   margin: auto;
 }
@@ -317,4 +317,23 @@ svg#menu {
 .long-field-card {
   width: 300px;
   overflow-wrap: break-word;
+}
+.record-attachment {
+  border: 3px solid;
+  border-style: double;
+  border-color: grey;
+  display: grid;
+  justify-items: center;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+.record-attachment button {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  text-decoration: underline;
+  color: blue;
+  margin: 5px;
+  cursor: pointer;
 }
