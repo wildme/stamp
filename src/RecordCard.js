@@ -50,7 +50,6 @@ const RecordCard = () => {
       .catch(err => console.error(err))
   };
 
-
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
       .then(res => res.json())
@@ -98,7 +97,7 @@ const RecordCard = () => {
         </div>
         {file && 
           <div className="record-attachment">
-            <button type="button" onClick={(e) => handleDownload(e)}>{file.filename}</button>
+            <a href="#" onClick={(e) => handleDownload(e)}>{file.filename}</a>
           </div>}
     <div className="record-status-button">
         <button type="submit" id={statusOfRecord} onClick={(e) => handleStatus(e)}>

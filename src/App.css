@@ -328,15 +328,6 @@ svg#menu {
   margin-bottom: 5px;
 }
 
-.record-attachment button {
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-  text-decoration: underline;
-  color: blue;
-  margin: 5px;
-  cursor: pointer;
-}
 /* EditRecord() Style */
 .edit-grid-container {
   display: grid;
