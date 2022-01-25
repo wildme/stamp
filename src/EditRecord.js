@@ -9,6 +9,8 @@ const EditRecord = () => {
   const [fromTo, setFromTo] = useState('');
   const [notes, setNotes] = useState('');
   const [replyTo, setReplyTo] = useState('');
+  const [file, setFile] = useState(null);
+  const [newFile, setNewFile] = useState(null);
   const history = useHistory();
 
   const handleEditRecord = (e) => {
@@ -30,6 +32,21 @@ const EditRecord = () => {
     history.replace(`/${box}`);
   };
 
+  const handleDownload = (e) => {
+    e.preventDefault(e);
+    fetch(`/api/download/${file.fsFilename}`)
+      .then(res => res.blob())
+      .then(blob => {
+        const objectURL = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = objectURL;
+        a.download=file.filename;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      })
+      .catch(err => console.error(err))
+  };
+
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
       .then(res => res.json())
@@ -40,38 +57,61 @@ const EditRecord = () => {
         setReplyTo(item.replyTo);
       })
       )
+
+    fetch(`/api/attachment/${box}/${id}`)
+      .then(res => {
+        if (res.status === 200) return res.json();
+        if (!res.ok) throw new Error('Network issue occured');
+    })
+      .then(data => setFile(data))
+      .catch(err => console.error(err))
+
   }, [])
 
   return (
-    <div className="add-record">
-      <div className="record-input">
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-          setter={setSubject}
-          value={subject}
-        />
-        <InputField
-          attrs={
-            attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
-          }
-          setter={setFromTo}
-          value={fromTo}
-          auto={true}
-          field='name'
-        />
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
-          setter={setReplyTo}
-          value={replyTo}
-        />
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-          setter={setNotes}
-          value={notes}
-        />
-        <button type="submit" onClick={(e) => handleEditRecord(e)}>
+    <div className="edit-grid-container">
+      <div className="edit-container">
+        <div className="input-container">
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+            setter={setSubject}
+            value={subject}
+          />
+          <InputField
+            attrs={
+              attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
+            }
+            setter={setFromTo}
+            value={fromTo}
+            auto={true}
+            field='name'
+          />
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+            setter={setReplyTo}
+            value={replyTo}
+          />
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+            setter={setNotes}
+            value={notes}
+          />
+        </div>
+        <div className="file-container">
+          <div>  
+            <input type="file" id="upload"/>
+          </div>
+          { file && <div>
+            <a href="#" onClick={(e) => handleDownload(e)}>Download</a>
+            <input type="checkbox" name="del-file" id="del"/>
+            <label for="del-file" value={true}>Delete file</label>
+          </div> }
+        </div>
+        <div className="update-btn-container">
+          <button type="submit" onClick={(e) => handleEditRecord(e)}>
           Update
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   );
