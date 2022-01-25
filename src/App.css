@@ -337,3 +337,35 @@ svg#menu {
   margin: 5px;
   cursor: pointer;
 }
+/* EditRecord() Style */
+.edit-grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80vh;
+  justify-items: center;
+  align-items: center;
+}
+
+.edit-container {
+  border: 1px solid;
+  border-radius: 10px;
+  width: 310px;
+  padding: 10px;
+}
+
+.input-container input {
+  width: 300px;
+}
+
+.file-container input#del {
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+.file-container input#upload {
+  margin-top: 8px;
+}
+
+.update-btn-container button {
+  margin-top: 8px;
+}
