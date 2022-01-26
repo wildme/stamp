@@ -37,7 +37,7 @@ const RecordCard = () => {
 
   const handleDownload = (e) => {
     e.preventDefault(e);
-    fetch(`/api/download/${file.fsFilename}`)
+    fetch(`/api/download/${file._id}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
@@ -62,7 +62,7 @@ const RecordCard = () => {
         setStatus(item.status);
         setDate(item.date);
         setAddedBy(item.addedBy);
-        setNote(item.notes);
+        setNote(item.note);
       })
       )
 
