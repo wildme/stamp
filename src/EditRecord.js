@@ -7,8 +7,9 @@ const EditRecord = () => {
   const { id, box } = useParams();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
-  const [notes, setNotes] = useState('');
+  const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
+  const [delFile, setDelFile] = useState(false);
   const [file, setFile] = useState(null);
   const [newFile, setNewFile] = useState(null);
   const history = useHistory();
@@ -17,7 +18,7 @@ const EditRecord = () => {
     e.preventDefault();
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
-      body: JSON.stringify({ subject, fromTo, replyTo, notes}),
+      body: JSON.stringify({ subject, fromTo, replyTo, note }),
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
@@ -25,16 +26,25 @@ const EditRecord = () => {
       })
       .catch(err => console.error(err))
 
+    if (delFile) {
+      const fileId = file._id;
+      fetch(`/api/delete/${fileId}`)
+        .then(res => {
+        if (!res.ok) throw new Error('Error occured!');
+        })
+        .catch(err => console.error(err))
+    }
+
     setSubject('');
     setFromTo('');
-    setNotes('');
+    setNote('');
     setReplyTo('');
     history.replace(`/${box}`);
   };
 
   const handleDownload = (e) => {
     e.preventDefault(e);
-    fetch(`/api/download/${file.fsFilename}`)
+    fetch(`/api/download/${file._id}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
@@ -47,13 +57,17 @@ const EditRecord = () => {
       .catch(err => console.error(err))
   };
 
+  const handleCheck = () => {
+    setDelFile(!delFile);
+  }
+
   useEffect(() => {
     fetch(`/api/${box}/${id}`)
       .then(res => res.json())
       .then(data => data.map((item) => {
         setSubject(item.subject);
         setFromTo(item.from || item.to);
-        setNotes(item.notes);
+        setNote(item.note);
         setReplyTo(item.replyTo);
       })
       )
@@ -65,7 +79,6 @@ const EditRecord = () => {
     })
       .then(data => setFile(data))
       .catch(err => console.error(err))
-
   }, [])
 
   return (
@@ -93,8 +106,8 @@ const EditRecord = () => {
           />
           <InputField
             attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-            setter={setNotes}
-            value={notes}
+            setter={setNote}
+            value={note}
           />
         </div>
         <div className="file-container">
@@ -103,8 +116,9 @@ const EditRecord = () => {
           </div>
           { file && <div>
             <a href="#" onClick={(e) => handleDownload(e)}>Download</a>
-            <input type="checkbox" name="del-file" id="del"/>
-            <label for="del-file" value={true}>Delete file</label>
+            <input type="checkbox" name="del-file" id="del" onChange={
+              () => handleCheck()} />
+            <label htmlFor="del-file">Delete file</label>
           </div> }
         </div>
         <div className="update-btn-container">
