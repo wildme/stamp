@@ -82,7 +82,7 @@ const NewRecord = () => {
           value={note}
         />
         <label htmlFor="file"><b>File</b></label>
-        <input type="file" name="file" onChange={(e) => handleFile(e)}/>
+        <input type="file" name="file" onChange={(e) => handleFile(e)} />
         <button type="submit" disabled={!subject || !fromTo} onClick={(e) => handleAddRecord(e)}>
           Add</button>
       </div>
