@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const RecordCard = () => {
   const { id, box } = useParams();
@@ -54,17 +54,18 @@ const RecordCard = () => {
     fetch(`/api/${box}/${id}`)
       .then(res => res.json())
       .then(data => data.map((item) => {
-        setIdOfRec(item.id);
-        setSubject(item.subject);
-        setFromTo(item.from || item.to);
-        setReplyTo(item.replyTo);
-        setUpdated(item.updated);
-        setStatus(item.status);
-        setDate(item.date);
-        setAddedBy(item.addedBy);
-        setNote(item.note);
-      })
-      )
+        return (
+        setIdOfRec(item.id),
+        setSubject(item.subject),
+        setFromTo(item.from || item.to),
+        setReplyTo(item.replyTo),
+        setUpdated(item.updated),
+        setStatus(item.status),
+        setDate(item.date),
+        setAddedBy(item.addedBy),
+        setNote(item.note)
+        )}
+      ))
 
   fetch(`/api/attachment/${box}/${id}`)
       .then(res => {
@@ -74,7 +75,7 @@ const RecordCard = () => {
       .then(data => setFile(data))
       .catch(err => console.error(err))
 
-  }, [])
+  })
 
   return (
     <div className="record-card-grid-container">
@@ -84,20 +85,20 @@ const RecordCard = () => {
           <hr/>
         </div>
         <div className="record-fields">
-          {<p><b>Subject</b>:<div className="long-field-card">{subject}</div></p>}
-        {box === 'inbox' ? 
-            <p><b>From</b>: {fromTo}</p> :
-            <p><b>To</b>:{fromTo}</p>}
-          {<p><b>Date</b>: {dateStr}</p>}
-          {updated && <p><b>Updated</b>: {updatedStr || '-'}</p>}
-          {<p><b>Reply to</b>: {replyTo || '-'}</p>}
-          {<p><b>User</b>: {addedBy}</p>}
-          {<p><b>Status</b>: {statusOfRecord}</p>}
-          {<p><b>Note</b>:<div className="long-field-card">{note || '-'}</div></p>}
+          <b>Subject</b>:<div className="long-field-card">{subject}</div>
+        { box === 'inbox' ?
+          <div><b>From</b>: {fromTo}</div> : <div><b>To</b>: {fromTo}</div>
+        }
+          {<div><b>Date</b>: {dateStr}</div>}
+          {updated && <div><b>Updated</b>: {updatedStr || '-'}</div>}
+          {<div><b>Reply to</b>: {replyTo || '-'}</div>}
+          {<div><b>User</b>: {addedBy}</div>}
+          {<div><b>Status</b>: {statusOfRecord}</div>}
+          {<div><b>Note</b>:<div className="long-field-card">{note || '-'}</div></div>}
         </div>
         {file && 
           <div className="record-attachment">
-            <a href="#" onClick={(e) => handleDownload(e)}>{file.filename}</a>
+            <a href={`/attachment/${file._id}`} onClick={(e) => handleDownload(e)}>{file.filename}</a>
           </div>}
     <div className="record-status-button">
         <button type="submit" id={statusOfRecord} onClick={(e) => handleStatus(e)}>

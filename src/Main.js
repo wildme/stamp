@@ -26,7 +26,7 @@ const Main = (props) => {
     .then(res => res.json())
     .then(setTbContent)
     .catch(err => console.error(err))
-  }, [sortOrder, column])
+  }, [sortOrder, column, box])
 
   return (
     <div className="page-content">

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const RowActions = ({ id }) => {
   const { pathname } = useLocation();
   const box = pathname.slice(1);
 
-  const handleClick = (e) => {
+  const handleClick = useCallback((e) => {
     e.preventDefault();
     if (
       dropdownRef.current !== null &&
@@ -16,7 +16,7 @@ const RowActions = ({ id }) => {
     ) {
       setVisibility(!visibility);
     }
-  };
+  }, [visibility] )
 
   useEffect(() => {
     if (visibility) {
@@ -25,7 +25,7 @@ const RowActions = ({ id }) => {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [visibility]);
+  }, [visibility, handleClick]);
 
   return (
     <div className="actions">
@@ -42,12 +42,9 @@ const RowActions = ({ id }) => {
             <circle cx="50%" cy="14" r="2" fill="black" />
           </svg>
         </a>
-        <div
-          className={
-            visibility ? 'dropdown-content' : 'dropdown-content-hidden'
-          }
-          ref={dropdownRef}
-        >
+        <div className={visibility ?
+            'dropdown-content' :
+            'dropdown-content-hidden'} ref={dropdownRef}>
           <ul id="row-dropdown">
             <li>
               <NavLink to={`/${box}/edit/${id}`}>Edit</NavLink>
