@@ -14,6 +14,10 @@ const EditRecord = () => {
   const [newFile, setNewFile] = useState(null);
   const history = useHistory();
 
+  const handleNewFile = (e) => {
+    setNewFile(e.target.files[0]);
+  };
+
   const handleEditRecord = (e) => {
     e.preventDefault();
     fetch(`/api/${box}/update/${id}`, {
@@ -26,13 +30,26 @@ const EditRecord = () => {
       })
       .catch(err => console.error(err))
 
-    if (delFile) {
+    if (delFile || (newFile && file)) {
       const fileId = file._id;
       fetch(`/api/delete/${fileId}`)
         .then(res => {
         if (!res.ok) throw new Error('Error occured!');
         })
         .catch(err => console.error(err))
+    }
+
+    if (newFile) {
+      const formData = new FormData();
+      formData.append('file', newFile);
+      fetch(`/api/${box}/upload/${id}`, {
+       method: 'POST',
+       body: formData,
+       })
+       .then(res => {
+         if (!res.ok) throw new Error('Network issue occured');
+       })
+       .catch(err => console.error(err))
     }
 
     setSubject('');
@@ -62,24 +79,27 @@ const EditRecord = () => {
   }
 
   useEffect(() => {
-    fetch(`/api/${box}/${id}`)
+    (async () => { await fetch(`/api/${box}/${id}`)
       .then(res => res.json())
       .then(data => data.map((item) => {
-        setSubject(item.subject);
-        setFromTo(item.from || item.to);
-        setNote(item.note);
-        setReplyTo(item.replyTo);
-      })
-      )
+        return (
+        setSubject(item.subject),
+        setFromTo(item.from || item.to),
+        setNote(item.note),
+        setReplyTo(item.replyTo)
+        )}
+      ))
+    })();
 
-    fetch(`/api/attachment/${box}/${id}`)
+    (async () => { await fetch(`/api/attachment/${box}/${id}`)
       .then(res => {
         if (res.status === 200) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
       .catch(err => console.error(err))
-  }, [])
+    })();
+  }, [box, id])
 
   return (
     <div className="edit-grid-container">
@@ -112,10 +132,10 @@ const EditRecord = () => {
         </div>
         <div className="file-container">
           <div>  
-            <input type="file" id="upload"/>
+            <input type="file" id="upload" onChange={(e) => handleNewFile(e)} />
           </div>
           { file && <div>
-            <a href="#" onClick={(e) => handleDownload(e)}>Download</a>
+            <a href={`/attachment/${file._id}`} onClick={(e) => handleDownload(e)}>Download</a>
             <input type="checkbox" name="del-file" id="del" onChange={
               () => handleCheck()} />
             <label htmlFor="del-file">Delete file</label>
