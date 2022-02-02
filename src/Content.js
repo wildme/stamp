@@ -20,8 +20,8 @@ const Content = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const tryToRefreshToken = () => {
-    fetch('/api/refresh/token')
+  const tryToRefreshToken = async () => {
+    await fetch("/api/refresh/token")
     .then(res => {
       if (res.status === 200) return res.json();
       if (res.status === 401) { 
@@ -35,11 +35,11 @@ const Content = () => {
       dispatch({ type: 'LOGIN', payload: { user: data.user } });
       history.replace(location.pathname);
   })
-    .catch(err => console.log(err));
+    .catch((e) => console.error(e));
   };
 
-  const verifyToken = (accessToken) => {
-    fetch('/api/verify/token', {
+  const verifyToken = async (accessToken) => {
+    await fetch("/api/verify/token", {
       method: 'POST', 
       body: JSON.stringify({ token: accessToken }),
       headers: { 'Content-Type': 'application/json' }
@@ -49,7 +49,7 @@ const Content = () => {
         tryToRefreshToken();
       }
     })
-    .catch(err => console.log(err))
+    .catch((e) => console.error(e))
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
