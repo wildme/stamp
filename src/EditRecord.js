@@ -97,7 +97,7 @@ const EditRecord = () => {
 
     (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
-        if (res.ok) return res.json();
+        if (res.status === 200) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
