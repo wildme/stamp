@@ -32,7 +32,7 @@ const RecordCard = () => {
         if (res.ok) setStatus(newStatus);
         else throw new Error('Network issue occured');
       })
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
   };
 
   const handleDownload = (e) => {
@@ -47,12 +47,18 @@ const RecordCard = () => {
         a.click();
         URL.revokeObjectURL(a.href);
       })
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
   };
 
   useEffect(() => {
-    fetch(`/api/${box}/${id}`)
-      .then(res => res.json())
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    (async () => { await fetch(`/api/${box}/${id}`, { signal })
+      .then(res => { 
+        if (res.ok) return res.json();
+        if (!res.ok) throw new Error('Network issue occured');
+      })
       .then(data => data.map((item) => {
         return (
         setIdOfRec(item.id),
@@ -66,16 +72,20 @@ const RecordCard = () => {
         setNote(item.note)
         )}
       ))
+      .catch((e) => console.error(e))
+    })();
 
-  fetch(`/api/attachment/${box}/${id}`)
+    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.ok) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
+    })();
 
-  })
+    return () => { abortController.abort(); };
+  }, [box, id])
 
   return (
     <div className="record-card-grid-container">
