@@ -1,20 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const HeaderLinks = () => {
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <NavLink to="/inbox">Inbox</NavLink>
-        <NavLink to="/outbox">Outbox</NavLink>
-        <NavLink to="/contacts">Contacts</NavLink>
+        <Link to="/inbox">Inbox</Link>
+        <Link to="/outbox">Outbox</Link>
+        <Link to="/contacts">Contacts</Link>
       </div>
       <div className="navbar-right">
-        <NavLink to="/logout">Logout</NavLink>
+        <Link to="/logout">Logout</Link>
       </div>
     </div>
   );
 };
+
 const HeaderBlank = () => {
   return (
     <div className="navbar">
@@ -24,9 +25,7 @@ const HeaderBlank = () => {
   );
 };
 
-const Header = () => {
+export const Header = () => {
   const user = useSelector((state) => state.user);
   return user !== 'empty' ? <HeaderLinks /> : <HeaderBlank />;
 };
-
-export default Header;
