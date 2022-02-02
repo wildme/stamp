@@ -95,9 +95,9 @@ const EditRecord = () => {
         .catch((e) => console.error(e))
     })();
 
-    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal: signal })
+    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.ok) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
