@@ -21,11 +21,18 @@ const Main = (props) => {
   }
 
   useEffect(() => {
-    const queryString = `?field=${column}&order=${sortOrder}`;
-    fetch(`/api/${box}` + queryString)
-    .then(res => res.json())
-    .then(setTbContent)
-    .catch(err => console.error(err))
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    (async () => {
+      await fetch(`/api/${box}?field=${column}&order=${sortOrder}`, { signal })
+        .then(res => res.json())
+        .then(setTbContent)
+        .catch((e) => console.error(e))
+    })();
+
+    return () => { abortController.abort(); };
+
   }, [sortOrder, column, box])
 
   return (

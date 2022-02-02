@@ -28,7 +28,7 @@ const EditRecord = () => {
       .then(res => {
         if (!res.ok) throw new Error('Network issue occured');
       })
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
 
     if (delFile || (newFile && file)) {
       const fileId = file._id;
@@ -36,7 +36,7 @@ const EditRecord = () => {
         .then(res => {
         if (!res.ok) throw new Error('Error occured!');
         })
-        .catch(err => console.error(err))
+        .catch((e) => console.error(e))
     }
 
     if (newFile) {
@@ -49,7 +49,7 @@ const EditRecord = () => {
        .then(res => {
          if (!res.ok) throw new Error('Network issue occured');
        })
-       .catch(err => console.error(err))
+       .catch((e) => console.error(e))
     }
 
     setSubject('');
@@ -71,7 +71,7 @@ const EditRecord = () => {
         a.click();
         URL.revokeObjectURL(a.href);
       })
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
   };
 
   const handleCheck = () => {
@@ -79,7 +79,10 @@ const EditRecord = () => {
   }
 
   useEffect(() => {
-    (async () => { await fetch(`/api/${box}/${id}`)
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    (async () => { await fetch(`/api/${box}/${id}`, { signal: signal })
       .then(res => res.json())
       .then(data => data.map((item) => {
         return (
@@ -89,17 +92,21 @@ const EditRecord = () => {
         setReplyTo(item.replyTo)
         )}
       ))
+        .catch((e) => console.error(e))
     })();
 
-    (async () => { await fetch(`/api/attachment/${box}/${id}`)
+    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal: signal })
       .then(res => {
         if (res.status === 200) return res.json();
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
     })();
-  }, [box, id])
+
+    return () => { abortController.abort(); };
+
+  }, [box, id]);
 
   return (
     <div className="edit-grid-container">

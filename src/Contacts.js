@@ -10,13 +10,18 @@ const AllContacts = () => {
   const [infoMsg, setInfoMsg] = useState('');
 
   useEffect(() => {
-    fetch("/api/contacts")
-    .then(res => {
-      if (res.status === 200) return res.json();
-      if (res.status === 204) setInfoMsg('No contacts');
-    })
-    .then(data => setTbContacts(data))
-    .catch(err => console.log(err));
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    fetch("/api/contacts", { signal })
+      .then(res => {
+        if (res.status === 200) return res.json();
+        if (res.status === 204) setInfoMsg('No contacts');
+      })
+      .then(data => setTbContacts(data))
+      .catch((e) => console.error(e));
+
+    return () => { abortController.abort(); };
   }, [])
 
   return (
