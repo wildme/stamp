@@ -4,8 +4,17 @@ import { useDispatch } from 'react-redux';
 const Logout = () => {
   const dispatch = useDispatch();
 
-  fetch('/api/logout');
-  dispatch({ type: 'LOGOUT', payload: { user: 'empty', token: 'empty' }});
+  (async () => {
+    await fetch("/api/logout")
+      .then(res => {
+        if (res.ok) {
+          dispatch({ type: 'LOGOUT', payload: { user: 'empty', token: 'empty' }});
+        }
+        if (!res.ok) throw new Error('Network issue occured');
+      })
+      .catch((e) => console.error(e))
+  })();
+
   return <Redirect to='/login' />
 };
 
