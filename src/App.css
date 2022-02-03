@@ -103,7 +103,6 @@ input#submit:hover {
 .page-actions a {
   padding: 10px;
   color: black;
-  margin-right: 3px;
   border: 2px solid black;
 }
 
@@ -360,3 +359,36 @@ svg#menu {
 .update-btn-container button {
   margin-top: 8px;
 }
+
+/* 404 error page */
+.error404-grid-container {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  justify-items: center;
+  align-items: center;
+  font-family: arial;
+  margin: 40px;
+}
+
+.error404-main-title {
+  font-size: 26px;
+}
+
+.error404-bg-code {
+  font-size: 10vh;
+}
+
+.error404-description {
+  font-size: 14px;
+}
+
+.error404-home-link {
+  margin: 10px;
+}
+
+.error404-home-link a {
+  padding: 10px;
+  color: black;
+  border: 2px solid black;
+};
