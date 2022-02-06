@@ -11,6 +11,7 @@ import Login from './Login.js';
 import AllContacts from './Contacts.js';
 import NewContact from './NewContact.js';
 import PageNotFound from './404.js';
+import UserProfile from './UserProfile.js';
 import { Route, Redirect,
   Switch, useHistory, useLocation } from 'react-router-dom';
 
@@ -90,8 +91,9 @@ const Content = () => {
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
+        <PrivateRoute path="/my-profile" component={UserProfile} />
         <PrivateRoute exact path="/:box/new" component={NewRecord} />
-        <PrivateRoute exact path="/:box/:id" component={RecordCard} />
+        <PrivateRoute exact path="/:box/view/:id" component={RecordCard} />
         <PrivateRoute exact path="/:box/edit/:id" component={EditRecord} />
         <PrivateRoute path="*" component={PageNotFound} />
     </Switch>

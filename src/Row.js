@@ -13,7 +13,7 @@ const Row = ({ entry }) => {
   <Fragment>
   { box &&
     <tr className="box-item">
-      <td><Link to={`/${box}/${entry.id}`}>{entry.id}</Link></td>
+      <td><Link to={`/${box}/view/${entry.id}`}>{entry.id}</Link></td>
       <td><div className="long-col-tbl">{entry.subject}</div></td>
       <td><div className="long-col-tbl">{entry.from || entry.to}</div></td>
       <td>{dateStr}</td>
