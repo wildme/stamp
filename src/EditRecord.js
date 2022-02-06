@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 
 const EditRecord = () => {
   const { id, box } = useParams();
+  const [noData, setNoData] = useState(false);
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
@@ -83,7 +84,10 @@ const EditRecord = () => {
     const { signal } = abortController;
 
     (async () => { await fetch(`/api/${box}/${id}`, { signal: signal })
-      .then(res => res.json())
+      .then(res =>  {
+        if (res.status === 200) return res.json();
+        if (res.status === 204) setNoData(true);
+      })
       .then(data => data.map((item) => {
         return (
         setSubject(item.subject),
@@ -98,6 +102,7 @@ const EditRecord = () => {
     (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
+        if (res.status === 204) setFile(null);
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
@@ -105,10 +110,9 @@ const EditRecord = () => {
     })();
 
     return () => { abortController.abort(); };
-
   }, [box, id]);
 
-  return (
+    return noData ? <Redirect to="/page-not-found" /> : (
     <div className="edit-grid-container">
       <div className="edit-container">
         <div className="input-container">

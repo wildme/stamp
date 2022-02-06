@@ -55,7 +55,7 @@ const NewRecord = () => {
   
 
   return (
-    <div className="add-record">
+    <div className="add-record-grid-container">
       <div className="record-input">
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
