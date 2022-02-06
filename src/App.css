@@ -184,6 +184,7 @@ svg#menu {
 .kebab-icon:hover {
   background-color: #f2f2f2;
 }
+
 /* Row actions. Drop-down menu */
 .dropdown-content {
   display: block;
@@ -211,14 +212,39 @@ svg#menu {
   text-decoration: none;
 }
 
-.add-record-grid-container, .add-contact-grid-container {
+/* New contact form */
+.add-contact-grid-container {
   display: grid;
   grid-auto-rows: 80vh;
   justify-items: center;
   align-items: center;
 }
 
-.record-input, .contact-input {
+.contact-input {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+.contact-input input {
+  display: grid;
+  width: 300px;
+  height: 30px;
+}
+.contact-input button {
+  margin-top: 8px;
+}
+
+/* New record form */
+.add-record-grid-container {
+  display: grid;
+  grid-auto-rows: 80vh;
+  justify-items: center;
+  align-items: center;
+}
+
+.record-input {
   width: auto;
   height: auto;
   padding: 10px;
@@ -226,13 +252,13 @@ svg#menu {
   border-radius: 10px;
 }
 
-.record-input, .contact-input input {
+.record-input input {
   display: grid;
   width: 300px;
   height: 30px;
 }
 
-.record-input, .contact-input button {
+.record-input button {
   margin-top: 8px;
 }
 
