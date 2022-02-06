@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory, useLocation, NavLink } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
@@ -32,7 +32,7 @@ const Login = () => {
         setPassword('');
         history.replace(from);
     })
-    .catch(err => console.log(err))
+    .catch((e) => console.error(e))
   };
 
   return (
@@ -41,25 +41,27 @@ const Login = () => {
     { loginFailure && 
       <div className="error-message">Bad username or password</div> }
         <form onSubmit={(e) => handleLogin(e)}>
-          <p><input
+          <input
             type="text"
             placeholder="Enter Username"
             name="username"
             value={username}
             required
             onChange={(e) => setUsername(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="password"
             placeholder="Enter Password"
             name="password"
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
-          /></p>
-          <input value="Login" id="submit" type="submit" />
-          <div className="signup-message">Don't have an account?
-          <NavLink to="/signup">Sign Up</NavLink>
+          />
+          <div className="login-btn-container">
+            <input value="Login" id="submit" type="submit" />
+          </div>
+          <div className="signup-message">
+            Don't have an account? <Link to="/signup">Sign Up</Link>
           </div>
         </form>
       </div>

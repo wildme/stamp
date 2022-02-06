@@ -56,35 +56,44 @@ const NewRecord = () => {
 
   return (
     <div className="add-record-grid-container">
-      <div className="record-input">
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-          setter={setSubject}
-          value={subject}
-        />
-        <InputField
-          attrs={
-            attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
-          }
-          setter={setFromTo}
-          value={fromTo}
-          auto={true}
-          field='name'
-        />
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
-          setter={setReplyTo}
-          value={replyTo}
-        />
-        <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-          setter={setNote}
-          value={note}
-        />
-        <label htmlFor="file"><b>File</b></label>
-        <input type="file" name="file" onChange={(e) => handleFile(e)} />
-        <button type="submit" disabled={!subject || !fromTo} onClick={(e) => handleAddRecord(e)}>
-          Add</button>
+      <div className="add-container">
+        <div className="add-input-container">
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+            setter={setSubject}
+            value={subject}
+          />
+          <InputField
+            attrs={
+              attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
+            }
+            setter={setFromTo}
+            value={fromTo}
+            auto={true}
+            field='name'
+          />
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+            setter={setReplyTo}
+            value={replyTo}
+          />
+          <InputField
+            attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+            setter={setNote}
+            value={note}
+          />
+        </div>
+        <div className="add-file-container">
+          <div>
+            <label htmlFor="file"><b>File</b></label>
+          </div>
+          <input type="file" name="file" id="upload"
+          onChange={(e) => handleFile(e)} />
+        </div>
+        <div className="add-btn-container">
+          <button type="submit" disabled={!subject || !fromTo}
+            onClick={(e) => handleAddRecord(e)}>Add</button>
+        </div>
       </div>
     </div>
   );

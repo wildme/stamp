@@ -33,34 +33,81 @@
   text-align: center;
   font-size: 12px;
 }
-
-/* Login/Signup page */
-.login-grid-container, .signup-grid-container {
+/* Signup page */
+.signup-grid-container {
   display: grid;
   grid-auto-rows: 80vh; 
   justify-items: center;
   align-items: center;
 }
 
-.login-form, .signup-form {
+.signup-form {
   border: 1px solid;
-  width: auto;
-  height: auto;
-  padding: 10px;
   border-radius: 5px;
+  width: auto;
+  padding: 10px;
 }
-
-.login-form input, .signup-form input {
+.signup-form input {
+  display: grid;
   width: 300px;
   height: 40px;
+  margin: 8px;
   -box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
-
 .signup-message {
   padding-top: 10px;
   font-size: 14px;
   text-align: left;
+}
+.signup-btn-container input#submit {
+  margin-top: 8px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.signup-btn-container input#submit:hover {
+  opacity: 0.8;
+}
+
+/* Login page */
+.login-grid-container {
+  display: grid;
+  grid-auto-rows: 80vh; 
+  justify-items: center;
+  align-items: center;
+}
+
+.login-form {
+  border: 1px solid;
+  border-radius: 5px;
+  width: auto;
+  padding: 10px;
+}
+
+.login-form input {
+  display: grid;
+  width: 300px;
+  height: 40px;
+  margin: 8px;
+  -box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.login-btn-container input#submit {
+  margin-top: 8px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.login-btn-container input#submit:hover {
+  opacity: 0.8;
 }
 
 .error-message {
@@ -68,17 +115,6 @@
   font-weight: bold;
   text-align: center;
   color: red;
-}
-
-input#submit {
-  background-color: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-input#submit:hover {
-  opacity: 0.8;
 }
 
 /* Main page: Boxes, Conatcts */
@@ -236,7 +272,7 @@ svg#menu {
   margin-top: 8px;
 }
 
-/* New record form */
+/* New record page */
 .add-record-grid-container {
   display: grid;
   grid-auto-rows: 80vh;
@@ -244,22 +280,33 @@ svg#menu {
   align-items: center;
 }
 
-.record-input {
-  width: auto;
-  height: auto;
-  padding: 10px;
+.add-container {
   border: 1px solid;
   border-radius: 10px;
+  width: auto;
+  padding: 10px;
 }
 
-.record-input input {
+.add-input-container input {
   display: grid;
   width: 300px;
   height: 30px;
 }
 
-.record-input button {
+.add-file-container input#upload {
   margin-top: 8px;
+}
+
+.add-btn-container {
+  display: grid;
+}
+.add-btn-container button {
+  margin-top: 8px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .options {
@@ -371,23 +418,32 @@ svg#menu {
   padding: 10px;
 }
 
-.input-container input {
+.edit-input-container input {
   display: grid;
   width: 300px;
   height: 30px;
 }
 
-.file-container input#del {
+.edit-file-container input#del {
   margin-top: 8px;
   margin-left: 15px;
 }
 
-.file-container input#upload {
+.edit-file-container input#upload {
   margin-top: 8px;
+}
+
+.update-btn-container {
+  display: grid;
 }
 
 .update-btn-container button {
   margin-top: 8px;
+  height: 40px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 /* 404 error page */

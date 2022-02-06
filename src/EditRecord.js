@@ -115,7 +115,7 @@ const EditRecord = () => {
     return noData ? <Redirect to="/page-not-found" /> : (
     <div className="edit-grid-container">
       <div className="edit-container">
-        <div className="input-container">
+        <div className="edit-input-container">
           <InputField
             attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
             setter={setSubject}
@@ -141,21 +141,22 @@ const EditRecord = () => {
             value={note}
           />
         </div>
-        <div className="file-container">
+        <div className="edit-file-container">
           <div>  
             <input type="file" id="upload" onChange={(e) => handleNewFile(e)} />
           </div>
           { file && <div>
-            <a href={`/attachment/${file._id}`} onClick={(e) => handleDownload(e)}>Download</a>
-            <input type="checkbox" name="del-file" id="del" onChange={
-              () => handleCheck()} />
+            <a href={`/attachment/${file._id}`}
+            onClick={(e) => handleDownload(e)}>Download
+            </a>
+            <input type="checkbox" name="del-file" id="del"
+            onChange={() => handleCheck()} />
             <label htmlFor="del-file">Delete file</label>
           </div> }
         </div>
         <div className="update-btn-container">
           <button type="submit" onClick={(e) => handleEditRecord(e)}>
-          Update
-          </button>
+          Update</button>
         </div>
       </div>
     </div>

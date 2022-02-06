@@ -26,9 +26,7 @@ const NewAccount = () => {
       headers: { 'Content-Type': 'application/json' }
     })
     .then(res => {
-      if (res.status === 409) {
-        return res.json();
-      }
+      if (res.status === 409) return res.json();
       if (res.status === 201) {
         setInfoMsg('Account created!');
         history.replace('/login');
@@ -40,7 +38,7 @@ const NewAccount = () => {
         setInfoMsg(data.error);
       }
     })
-    .catch(err => console.log(err))
+    .catch((e) => console.error(e))
   };
 
   return (
@@ -49,7 +47,7 @@ const NewAccount = () => {
     { error &&
       <div className="error-message">{infoMsg}</div> }
         <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
-          <p><input
+          <input
             type="text"
             placeholder="Username"
             name="username"
@@ -58,8 +56,8 @@ const NewAccount = () => {
             minLength="3"
             maxLength="25"
             onChange={(e) => setUsername(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="email"
             placeholder="Email"
             name="email"
@@ -68,8 +66,8 @@ const NewAccount = () => {
             minLength="6"
             maxLength="40"
             onChange={(e) => setEmail(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="password"
             placeholder="Password"
             name="password"
@@ -78,8 +76,8 @@ const NewAccount = () => {
             minLength="8"
             maxLength="255"
             onChange={(e) => setPassword(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="password"
             placeholder="Confirm password"
             name="confirm-password"
@@ -88,8 +86,8 @@ const NewAccount = () => {
             minLength="8"
             maxLength="255"
             onChange={(e) => setConfirmPassword(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="text"
             placeholder="Firstname"
             name="firstname"
@@ -97,8 +95,8 @@ const NewAccount = () => {
             required
             maxLength="50"
             onChange={(e) => setFirstname(e.target.value)}
-          /></p>
-          <p><input
+          />
+          <input
             type="text"
             placeholder="Lastname"
             name="lastname"
@@ -106,8 +104,10 @@ const NewAccount = () => {
             required
             maxLength="50"
             onChange={(e) => setLastname(e.target.value)}
-          /></p>
-          <input value="Signup" id="submit" type="submit" />
+          />
+          <div className="signup-btn-container">
+            <input value="Signup" id="submit" type="submit" />
+          </div>
         </form>
       </div>
     </div>
