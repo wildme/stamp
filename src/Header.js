@@ -10,6 +10,7 @@ const HeaderLinks = () => {
         <Link to="/contacts">Contacts</Link>
       </div>
       <div className="navbar-right">
+        <Link to="/my-profile">Profile</Link>
         <Link to="/logout">Logout</Link>
       </div>
     </div>
