@@ -1,4 +1,4 @@
-/* Navigation bar */
+/* Navbar */
 .navbar {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -37,24 +37,21 @@
 /* Login/Signup page */
 .login-grid-container, .signup-grid-container {
   display: grid;
-  grid-auto-rows: 400px;
+  grid-auto-rows: 80vh; 
   justify-items: center;
   align-items: center;
-}
-.signup-grid-container {
-  grid-auto-rows: 500px;
 }
 
 .login-form, .signup-form {
   border: 1px solid;
-  width: 300px;
+  width: auto;
   height: auto;
   padding: 10px;
   border-radius: 5px;
 }
 
 .login-form input, .signup-form input {
-  width: 100%;
+  width: 300px;
   height: 40px;
   -box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -142,7 +139,7 @@ th > button {
   font-weight: bold;
 }
 
-/* Sort icon styles */
+/* Sort icon */
 .sort-icon_ {
   display: inline;
   font-size: 14px;
@@ -214,23 +211,25 @@ svg#menu {
   text-decoration: none;
 }
 
-.add-record {
+.add-record-grid-container {
   display: grid;
-  grid-template-columns: 100%;
-  grid-auto-rows: 500px;
+  grid-auto-rows: 80vh;
   justify-items: center;
   align-items: center;
 }
 
 .record-input {
-  width: 310px;
+  width: auto;
+  height: auto;
   padding: 10px;
   border: 1px solid;
   border-radius: 10px;
 }
 
 .record-input input {
+  display: grid;
   width: 300px;
+  height: 30px;
 }
 
 .record-input button {
@@ -261,7 +260,7 @@ svg#menu {
   border-bottom: 1px solid grey;
 }
 
-/* Record Card component*/
+/* Record card page */
 .record-card-grid-container {
   display: grid;
   grid-template-columns: 100%;
@@ -317,6 +316,10 @@ svg#menu {
   width: 300px;
   overflow-wrap: break-word;
 }
+
+.record-attr {
+  padding: 5px;
+}
 .record-attachment {
   border: 3px solid;
   border-style: double;
@@ -327,10 +330,9 @@ svg#menu {
   margin-bottom: 5px;
 }
 
-/* EditRecord() Style */
+/* Edit record page */
 .edit-grid-container {
   display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: 80vh;
   justify-items: center;
   align-items: center;
@@ -339,12 +341,14 @@ svg#menu {
 .edit-container {
   border: 1px solid;
   border-radius: 10px;
-  width: 310px;
+  width: auto;
   padding: 10px;
 }
 
 .input-container input {
+  display: grid;
   width: 300px;
+  height: 30px;
 }
 
 .file-container input#del {
@@ -391,4 +395,50 @@ svg#menu {
   padding: 10px;
   color: black;
   border: 2px solid black;
-};
+}
+
+/* User profile page */
+.user-profile-grid-container {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-row-gap: 8px;
+  grid-column-gap: 30px;
+  margin: 8px;
+}
+.user-profile-title {
+  grid-column: 1 / span 2;
+  padding: 8px;
+}
+
+.user-profile-navbar {
+  font-size: 22px;
+}
+
+.user-profile-navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-profile-navbar a {
+  display: grid;
+  border-radius: 4px;
+  text-decoration: none;
+  color: grey;
+  padding: 8px;
+}
+
+.user-profile-navbar a#active {
+  background-color: #000000;
+  color: white;
+}
+
+.user-profile-navbar a:hover:not(#active) {
+  background-color: #94b8b8;
+  color: white;
+}
+
+.user-profile-info {
+  border: 1px solid black;
+  padding: 10px;
+}
