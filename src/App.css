@@ -211,14 +211,14 @@ svg#menu {
   text-decoration: none;
 }
 
-.add-record-grid-container {
+.add-record-grid-container, .add-contact-grid-container {
   display: grid;
   grid-auto-rows: 80vh;
   justify-items: center;
   align-items: center;
 }
 
-.record-input {
+.record-input, .contact-input {
   width: auto;
   height: auto;
   padding: 10px;
@@ -226,13 +226,13 @@ svg#menu {
   border-radius: 10px;
 }
 
-.record-input input {
+.record-input, .contact-input input {
   display: grid;
   width: 300px;
   height: 30px;
 }
 
-.record-input button {
+.record-input, .contact-input button {
   margin-top: 8px;
 }
 

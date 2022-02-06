@@ -28,8 +28,8 @@ const NewContact = () => {
   };
 
   return (
-     <div className="add-record">
-       <div className="record-input">
+     <div className="add-contact-grid-container">
+       <div className="contact-input">
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
            setter={setOrgLocation}
