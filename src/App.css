@@ -33,6 +33,7 @@
   text-align: center;
   font-size: 12px;
 }
+
 /* Signup page */
 .signup-grid-container {
   display: grid;
@@ -63,9 +64,9 @@
 .signup-btn-container input#submit {
   margin-top: 8px;
   height: 40px;
-  background-color: black;
-  color: white;
+  background-color: #2eb82e;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -100,9 +101,9 @@
 .login-btn-container input#submit {
   margin-top: 8px;
   height: 40px;
-  background-color: black;
-  color: white;
+  background-color: #2eb82e;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -268,8 +269,26 @@ svg#menu {
   width: 300px;
   height: 30px;
 }
+
+.contact-input {
+  display: grid;
+}
+
 .contact-input button {
   margin-top: 8px;
+  height: 40px;
+  background-color: #2eb82e;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.contact-input button:disabled {
+  background-color: #e6e6e6;
+}
+
+.contact-input button:hover:enabled {
+  background-color: #00b300;
 }
 
 /* New record page */
@@ -303,12 +322,21 @@ svg#menu {
 .add-btn-container button {
   margin-top: 8px;
   height: 40px;
-  background-color: black;
-  color: white;
+  background-color: #2eb82e;
   border: none;
   cursor: pointer;
+  border-radius: 6px;
 }
 
+.add-btn-container button:disabled {
+  background-color: #e6e6e6;
+}
+
+.add-btn-container button:hover:enabled {
+  background-color: #00b300;
+}
+
+/* Context menu */
 .options {
   position: absolute;
   width: 300px;
@@ -440,10 +468,14 @@ svg#menu {
 .update-btn-container button {
   margin-top: 8px;
   height: 40px;
-  background-color: black;
-  color: white;
+  background-color: #2eb82e;
   border: none;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+.update-btn-container button:hover {
+  background-color: #00b300;
 }
 
 /* 404 error page */
@@ -482,16 +514,30 @@ svg#menu {
 /* User profile page */
 .user-profile-grid-container {
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: auto;
+  margin: 10px;
+  justify-items: center;
+  align-items: center;
+}
+.user-profile-container {
+  display: grid;
+  grid-template-columns: 200px 500px;
   grid-row-gap: 8px;
   grid-column-gap: 30px;
   margin: 8px;
 }
+
 .user-profile-title {
   grid-column: 1 / span 2;
   padding: 8px;
 }
 
+.user-profile-title h2 {
+  margin: 0;
+}
+.user-profile-title p {
+  margin: 0;
+}
 .user-profile-navbar {
   font-size: 22px;
 }
@@ -521,6 +567,43 @@ svg#menu {
 }
 
 .user-profile-info {
-  border: 1px solid black;
-  padding: 10px;
+}
+
+.user-info-grid-container {
+  display: grid;
+  width: 300px;
+}
+
+.user-info-title-container {
+  border-bottom: 1px solid grey;
+}
+
+.user-info-title-container h2 {
+  margin: 0;
+}
+
+.user-info-input-container {
+  display: grid;
+  padding-top: 8px;
+}
+
+.user-info-input-container input {
+  margin-top: 8px;
+  height: 30px;
+}
+.user-info-update-btn-container {
+  display: grid;
+}
+
+.user-info-update-btn-container button {
+  margin-top: 8px;
+  height: 40px;
+  background-color: #2eb82e;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.user-info-update-btn-container button:hover {
+  background-color: #00b300;
 }
