@@ -19,7 +19,7 @@ const NewAccount = () => {
       alert('Passwords don\'t match');
       return;
     }
-    fetch('/api/signup', {
+    fetch("/api/signup", {
       method: 'POST',
       body: JSON.stringify({ username, password,
         firstname, lastname, email }),
@@ -42,73 +42,74 @@ const NewAccount = () => {
   };
 
   return (
-    <div className="signup-grid-container">
-      <div className="signup-form">
-    { error &&
-      <div className="error-message">{infoMsg}</div> }
-        <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={username}
-            required
-            minLength="3"
-            maxLength="25"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            required
-            minLength="6"
-            maxLength="40"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            required
-            minLength="8"
-            maxLength="255"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm password"
-            name="confirm-password"
-            value={confirmPassword}
-            required
-            minLength="8"
-            maxLength="255"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Firstname"
-            name="firstname"
-            value={firstname}
-            required
-            maxLength="50"
-            onChange={(e) => setFirstname(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Lastname"
-            name="lastname"
-            value={lastname}
-            required
-            maxLength="50"
-            onChange={(e) => setLastname(e.target.value)}
-          />
-          <div className="signup-btn-container">
-            <input value="Signup" id="submit" type="submit" />
-          </div>
-        </form>
+    <div className="login-grid-container">
+      <div className="login-form-container">
+    {error &&
+        <div className="login-error-msg">{infoMsg}</div>}
+          <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
+            <div className="login-input-container">
+              <input
+                type="text"
+                placeholder="Username"
+                name="username"
+                value={username}
+                required
+                minLength="3"
+                maxLength="25"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                required
+                minLength="6"
+                maxLength="40"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                required
+                minLength="8"
+                maxLength="255"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm password"
+                name="confirm-password"
+                value={confirmPassword}
+                required
+                minLength="8"
+                maxLength="255"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Firstname"
+                name="firstname"
+                value={firstname}
+                required
+                maxLength="50"
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Lastname"
+                name="lastname"
+                value={lastname}
+                maxLength="50"
+                onChange={(e) => setLastname(e.target.value)}
+              />
+            </div>
+            <div className="login-btn-container">
+              <input value="Signup" id="submit" type="submit" />
+            </div>
+          </form>
       </div>
     </div>
   );

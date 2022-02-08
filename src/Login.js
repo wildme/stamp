@@ -15,7 +15,7 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch('/api/login', {
+    fetch("/api/login", {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' }
@@ -37,33 +37,35 @@ const Login = () => {
 
   return (
     <div className="login-grid-container">
-      <div className="login-form">
-    { loginFailure && 
-      <div className="error-message">Bad username or password</div> }
-        <form onSubmit={(e) => handleLogin(e)}>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="username"
-            value={username}
-            required
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="login-btn-container">
-            <input value="Login" id="submit" type="submit" />
+      <div className="login-form-container">
+    {loginFailure && 
+        <div className="login-error-msg">Bad username or password</div>}
+          <form onSubmit={(e) => handleLogin(e)}>
+            <div className="login-input-container">
+              <input
+                type="text"
+                placeholder="Enter Username"
+                name="username"
+                value={username}
+                required
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Enter Password"
+                name="password"
+                value={password}
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="login-btn-container">
+              <input value="Login" id="submit" type="submit" />
+            </div>
+          </form>
+          <div className="login-signup-msg">
+              Don't have an account? <Link to="/signup">Sign Up</Link>
           </div>
-          <div className="signup-message">
-            Don't have an account? <Link to="/signup">Sign Up</Link>
-          </div>
-        </form>
       </div>
     </div>
   );

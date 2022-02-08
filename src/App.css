@@ -34,46 +34,6 @@
   font-size: 12px;
 }
 
-/* Signup page */
-.signup-grid-container {
-  display: grid;
-  grid-auto-rows: 80vh; 
-  justify-items: center;
-  align-items: center;
-}
-
-.signup-form {
-  border: 1px solid;
-  border-radius: 5px;
-  width: auto;
-  padding: 10px;
-}
-.signup-form input {
-  display: grid;
-  width: 300px;
-  height: 40px;
-  margin: 8px;
-  -box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-.signup-message {
-  padding-top: 10px;
-  font-size: 14px;
-  text-align: left;
-}
-.signup-btn-container input#submit {
-  margin-top: 8px;
-  height: 40px;
-  background-color: #2eb82e;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.signup-btn-container input#submit:hover {
-  opacity: 0.8;
-}
-
 /* Login page */
 .login-grid-container {
   display: grid;
@@ -82,20 +42,26 @@
   align-items: center;
 }
 
-.login-form {
+.login-form-container {
   border: 1px solid;
   border-radius: 5px;
   width: auto;
   padding: 10px;
 }
 
-.login-form input {
+.login-input-conatiner {
+  display: grid;
+}
+
+.login-input-container input {
   display: grid;
   width: 300px;
   height: 40px;
-  margin: 8px;
-  -box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  margin-top: 8px;
+}
+
+.login-btn-container {
+  display: grid;
 }
 
 .login-btn-container input#submit {
@@ -111,14 +77,19 @@
   opacity: 0.8;
 }
 
-.error-message {
+.login-signup-msg {
+  padding-top: 8px;
+  font-size: 14px;
+}
+
+.login-error-msg {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
   color: red;
 }
 
-/* Main page: Boxes, Conatcts */
+/* Main page. Content */
 .page-content {
   display: grid;
   grid-template-columns: 100%;
@@ -249,7 +220,7 @@ svg#menu {
   text-decoration: none;
 }
 
-/* New contact form */
+/* New contact page */
 .add-contact-grid-container {
   display: grid;
   grid-auto-rows: 80vh;
@@ -285,6 +256,7 @@ svg#menu {
 
 .contact-input button:disabled {
   background-color: #e6e6e6;
+  cursor: default;
 }
 
 .contact-input button:hover:enabled {
@@ -330,6 +302,7 @@ svg#menu {
 
 .add-btn-container button:disabled {
   background-color: #e6e6e6;
+  cursor: default;
 }
 
 .add-btn-container button:hover:enabled {
@@ -595,7 +568,7 @@ svg#menu {
   display: grid;
 }
 
-.user-info-update-btn-container button {
+.user-info-update-btn-container button, input#submit {
   margin-top: 8px;
   height: 40px;
   background-color: #2eb82e;
@@ -604,6 +577,15 @@ svg#menu {
   border-radius: 6px;
 }
 
-.user-info-update-btn-container button:hover {
+.user-info-update-btn-container button:hover, input#submit:hover {
+  background-color: #00b300;
+}
+
+.user-info-update-btn-container button:disabled {
+  background-color: #e6e6e6;
+  cursor: default;
+}
+
+.user-info-update-btn-container button:hover:enabled {
   background-color: #00b300;
 }
