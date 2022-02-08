@@ -46,11 +46,14 @@ const UserProfile = () => {
         </div>
         <div className="user-profile-info">
           <Switch>
-            <Route path={`${url}/e-mail`} render={() => <Email email={email} setter={setEmail} />} />
+            <Route path={`${url}/e-mail`} render={() => <Email user={user}
+              email={email} setter={setEmail} />}
+            />
             <Route path={`${url}/password`} render={() => <Password />} />
             <Route path="*" render={() =>
-              <PersonalInfo firstname={firstname} lastname={lastname}
-                setterF={setFirstname} setterL={setLastname} /> }
+              <PersonalInfo user={user} firstname={firstname}
+                lastname={lastname} setterF={setFirstname}
+              setterL={setLastname} />}
             />
           </Switch>
         </div>
