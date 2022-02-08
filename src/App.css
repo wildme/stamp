@@ -510,6 +510,7 @@ svg#menu {
 }
 .user-profile-title p {
   margin: 0;
+  color: #0066ff;
 }
 .user-profile-navbar {
   font-size: 22px;
@@ -588,4 +589,11 @@ svg#menu {
 
 .user-info-update-btn-container button:hover:enabled {
   background-color: #00b300;
+}
+
+.user-info-msg {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: red;
 }
