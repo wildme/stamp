@@ -25,3 +25,5 @@ yarn-error.log*
 # Vim temp files
 *\.swp
 ~*
+ # npm lock file
+package-lock.json
