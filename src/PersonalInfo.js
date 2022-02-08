@@ -1,4 +1,4 @@
-const PersonalInfo = ({ firstname, lastname, setterF, setterL }) => {
+const PersonalInfo = ({ user, firstname, lastname, setterF, setterL }) => {
 
 const handleFirstnameChange = (e) => {
   setterF(e.target.value);
@@ -10,7 +10,15 @@ const handleLastnameChange = (e) => {
 
 const handleInfoUpdate = (e) => {
   e.preventDefault();
-  return;
+  fetch("/api/user/update/info", {
+    method: 'POST',
+    body: JSON.stringify({user, firstname, lastname}),
+    headers: {'Content-Type': 'application/json'}
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Network issue occured");
+    })
+    .catch((e) => console.error(e))
 };
 
   return (
@@ -20,17 +28,26 @@ const handleInfoUpdate = (e) => {
       </div>
       <div className="user-info-input-container">
         <label htmlFor="firstname"><b>Firstname</b></label>
-        <input type="text" name="firstname" value={firstname}
+        <input
+          type="text"
+          name="firstname"
+          value={firstname}
           onChange={(e) => handleFirstnameChange(e)}
         />
         <label htmlFor="lastname"><b>Lastname</b></label>
-        <input type="text" name="lastname" value={lastname}
+        <input
+          type="text"
+          name="lastname"
+          value={lastname}
           onChange={(e) => handleLastnameChange(e)}
         />
       </div>
       <div className="user-info-update-btn-container">
-        <button type="submit" onClick={(e) => handleInfoUpdate(e)}>
-          Update</button>
+        <button
+          type="submit"
+          disabled={!firstname}
+          onClick={(e) => handleInfoUpdate(e)}>Change
+        </button>
       </div>
     </div>
   );
