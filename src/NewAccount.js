@@ -15,8 +15,11 @@ const NewAccount = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+    if (error) setError(false);
+
     if (password !== confirmPassword) {
-      alert('Passwords don\'t match');
+      setError(true);
+      setInfoMsg("Passwords don't match");
       return;
     }
     fetch("/api/signup", {
@@ -30,6 +33,10 @@ const NewAccount = () => {
       if (res.status === 201) {
         setInfoMsg('Account created!');
         history.replace('/login');
+      }
+      if (res.status === 500) {
+        setError(true);
+        setInfoMsg("Couldn't create an account. Try Again.");
       }
     })
     .then(data => {
