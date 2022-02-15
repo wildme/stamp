@@ -31,6 +31,11 @@ const NewContact = () => {
      <div className="add-contact-grid-container">
        <div className="contact-input">
          <InputField
+           attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
+           setter={setOrgName}
+           value={orgName}
+         />
+         <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
            setter={setOrgLocation}
            value={orgLocation}
@@ -40,11 +45,6 @@ const NewContact = () => {
            setter={setOrgRegion}
            value={orgRegion}
          />
-         <InputField
-           attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
-           setter={setOrgName}
-           value={orgName}
-         /> 
          <button type="submit" disabled={!orgName || !orgLocation} onClick={(e) => handleAddContact(e)}>
           Add
          </button> 
