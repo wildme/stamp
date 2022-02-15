@@ -24,9 +24,9 @@ const Row = ({ entry }) => {
   }
   { contacts &&
     <tr className="contact-item">
+      <td>{entry.name}</td>
       <td>{entry.location}</td>
       <td>{entry.region}</td>
-      <td>{entry.name}</td>
     </tr>
   }
   </Fragment>

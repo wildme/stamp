@@ -81,6 +81,11 @@ export const headerColumns = {
   ],
   contacts: [
     {
+      id: 'name',
+      label: 'Name',
+      sortable: false,
+    },
+    {
       id: 'location',
       label: 'Location',
       sortable: false,
@@ -89,11 +94,6 @@ export const headerColumns = {
       id: 'region',
       label: 'Region',
       sortable: false
-    },
-    {
-      id: 'name',
-      label: 'Name',
-      sortable: false,
     }
   ]
 };
