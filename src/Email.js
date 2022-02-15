@@ -15,6 +15,7 @@ const handleEmailUpdate = (e) => {
     headers: {'Content-Type': 'application/json'}
   })
     .then(res => {
+      if (res.status === 500) setInfoMsg("Couldn't update email");
       if (res.status === 409) setInfoMsg("Email is taken");
     })
     .catch((e) => console.error(e))

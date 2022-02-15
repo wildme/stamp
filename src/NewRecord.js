@@ -12,6 +12,9 @@ const NewRecord = () => {
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState();
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
+
   const history = useHistory();
 
   const handleFile = (e) => {
@@ -27,22 +30,27 @@ const NewRecord = () => {
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
-        if (res.ok) return res.json();
-        if (!res.ok) throw new Error('Network issue occured');
+        if (res.status === 500) {
+          setError(true);
+          setInfoMsg("Failed to add record");
+        }
       })
-      .catch(err => console.error(err))
+      .catch((e) => console.error(e))
 
-   if (file) {
-     const formData = new FormData();
-     formData.append('file', file);
-     await fetch(`/api/${box}/upload/${id}`, {
-       method: 'POST',
-       body: formData,
-       })
-       .then(res => {
-         if (!res.ok) throw new Error('Network issue occured');
-       })
-       .catch(err => console.error(err))
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      await fetch(`/api/${box}/upload/${id}`, {
+        method: 'POST',
+        body: formData,
+        })
+        .then(res => {
+          if (res.status === 500) {
+            setError(true);
+            setInfoMsg("Couldn't upload file");
+          }
+        })
+        .catch((e) => console.error(e))
     }
 
     setSubject('');

@@ -5,7 +5,6 @@ import InputField from './InputFields.js';
 
 const EditRecord = () => {
   const { id, box } = useParams();
-  const [noData, setNoData] = useState(false);
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
@@ -13,6 +12,9 @@ const EditRecord = () => {
   const [delFile, setDelFile] = useState(false);
   const [file, setFile] = useState(null);
   const [newFile, setNewFile] = useState(null);
+  const [noData, setNoData] = useState(false);
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
   const history = useHistory();
 
   const handleNewFile = (e) => {
@@ -27,7 +29,10 @@ const EditRecord = () => {
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
-        if (!res.ok) throw new Error('Network issue occured');
+        if (res.status === 500) {
+          setError(true);
+          setInfoMsg("Couldn't update record");
+        }
       })
       .catch((e) => console.error(e))
 
@@ -35,7 +40,10 @@ const EditRecord = () => {
       const fileId = file._id;
       fetch(`/api/delete/${fileId}`)
         .then(res => {
-        if (!res.ok) throw new Error('Error occured!');
+          if (res.status === 500) {
+            setError(true);
+            setInfoMsg("Couldn't delete file");
+          }
         })
         .catch((e) => console.error(e))
     }
@@ -48,7 +56,10 @@ const EditRecord = () => {
        body: formData,
        })
        .then(res => {
-         if (!res.ok) throw new Error('Network issue occured');
+         if (res.status === 500) {
+           setError(true);
+           setInfoMsg("Couldn't upload file");
+         }
        })
        .catch((e) => console.error(e))
     }

@@ -34,6 +34,7 @@ const Password = ({user}) => {
       headers: {'Content-Type': 'application/json'}
     })
       .then(res => {
+        if (res.status === 500) setInfoMsg("Couldn't update email");
         if (res.status === 409) setErrorMsg("wrong password");
       })
       .catch((e) => console.error(e))

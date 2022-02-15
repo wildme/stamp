@@ -3,7 +3,6 @@ import { useParams, Redirect } from 'react-router-dom';
 
 const RecordCard = () => {
   const { id, box } = useParams();
-  const [noData, setNoData] = useState(false);
   const [idOfRec, setIdOfRec] = useState('');
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
@@ -14,6 +13,9 @@ const RecordCard = () => {
   const [date, setDate] = useState('');
   const [addedBy, setAddedBy] = useState('');
   const [file, setFile] = useState(null);
+  const [noData, setNoData] = useState(false);
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
   const dateStr = new Date(date).toLocaleString('ru-Ru'); 
   const updatedStr = new Date(updated).toLocaleString('ru-Ru');
 
@@ -31,7 +33,10 @@ const RecordCard = () => {
     })
       .then(res => {
         if (res.ok) setStatus(newStatus);
-        else throw new Error('Network issue occured');
+        if (res.status === 500) {
+          setError(true);
+          setInfoMsg("Couldn't update status");
+        }
       })
       .catch((e) => console.error(e))
   };

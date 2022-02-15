@@ -10,6 +10,8 @@ const Main = (props) => {
   const [tbContent, setTbContent] = useState([]);
   const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
 
   const handleClick = (id) => {
     let direction = 'asc';
@@ -26,7 +28,13 @@ const Main = (props) => {
 
     (async () => {
       await fetch(`/api/${box}?field=${column}&order=${sortOrder}`, { signal })
-        .then(res => res.json())
+        .then(res => {
+          if (res.ok) return res.json();
+          if (res.status === 500) {
+            setError(true);
+            setInfoMsg("Couldn't retrieve records");
+          }
+         })
         .then(setTbContent)
         .catch((e) => console.error(e))
     })();

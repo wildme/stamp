@@ -1,24 +1,31 @@
+import { useState } from 'react';
+
 const PersonalInfo = ({ user, firstname, lastname, setterF, setterL }) => {
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
 
-const handleFirstnameChange = (e) => {
-  setterF(e.target.value);
-};
+  const handleFirstnameChange = (e) => {
+    setterF(e.target.value);
+  };
 
-const handleLastnameChange = (e) => {
-  setterL(e.target.value);
-};
+  const handleLastnameChange = (e) => {
+    setterL(e.target.value);
+  };
 
-const handleInfoUpdate = (e) => {
-  e.preventDefault();
-  fetch("/api/user/update/info", {
-    method: 'POST',
-    body: JSON.stringify({user, firstname, lastname}),
-    headers: {'Content-Type': 'application/json'}
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Network issue occured");
+  const handleInfoUpdate = (e) => {
+    e.preventDefault();
+    fetch("/api/user/update/info", {
+      method: 'POST',
+      body: JSON.stringify({user, firstname, lastname}),
+      headers: {'Content-Type': 'application/json'}
     })
-    .catch((e) => console.error(e))
+      .then(res => {
+        if (res.status === 500) {
+          setError(true);
+          setInfoMsg("Couldn't update user info");
+        }
+      })
+      .catch((e) => console.error(e))
 };
 
   return (
