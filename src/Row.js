@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Fragment, useContext } from 'react';
-import RowActions from './RowActions.js';
+import { useSelector } from 'react-redux';
+import { HiPencil } from 'react-icons/hi';
 import { BoxContext } from './Main.js';
 import { ContactsContext } from './Contacts.js';
 
@@ -8,6 +9,8 @@ const Row = ({ entry }) => {
   const box = useContext(BoxContext);
   const contacts = useContext(ContactsContext);
   const dateStr = new Date(entry.date).toLocaleString('ru-Ru');
+  const user = useSelector((state) => state.user);
+  const accessToEdit = user.admin || (user.username === entry.addedBy);
 
   return (
   <Fragment>
@@ -19,7 +22,9 @@ const Row = ({ entry }) => {
       <td>{dateStr}</td>
       <td>{entry.addedBy}</td>
       <td>{entry.replyTo || '-'}</td>
-      <td><RowActions id={entry.id} /></td>
+      <td>{ accessToEdit &&
+          <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link> }
+      </td>
     </tr>
   }
   { contacts &&
