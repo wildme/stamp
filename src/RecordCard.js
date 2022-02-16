@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const RecordCard = () => {
   const { id, box } = useParams();
@@ -18,6 +19,8 @@ const RecordCard = () => {
   const [infoMsg, setInfoMsg] = useState('');
   const dateStr = new Date(date).toLocaleString('ru-Ru'); 
   const updatedStr = new Date(updated).toLocaleString('ru-Ru');
+  const user = useSelector((state) => state.user);
+  const accessToEdit = user.admin || (user.username === addedBy);
 
   const handleStatus = (e) => {
     e.preventDefault();
@@ -132,8 +135,8 @@ const RecordCard = () => {
         </div> }
         <div className="record-status-button">
           <button type="submit" id={statusOfRecord}
-          onClick={(e) => handleStatus(e)}>
-          { statusOfRecord === 'active' ? 'Cancel' : 'Activate' }
+             onClick={(e) => handleStatus(e)} hidden={!accessToEdit}>
+             { statusOfRecord === 'active' ? 'Cancel' : 'Activate' }
           </button>
         </div>
       </div>
