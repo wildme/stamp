@@ -15,7 +15,7 @@ const Row = ({ entry }) => {
   return (
   <Fragment>
   { box &&
-    <tr className="box-item">
+    <tr className="box-item" id={entry.status}>
       <td><Link to={`/${box}/view/${entry.id}`}>{entry.id}</Link></td>
       <td><div className="long-col-tbl">{entry.subject}</div></td>
       <td><div className="long-col-tbl">{entry.from || entry.to}</div></td>

@@ -116,6 +116,7 @@
   margin-right: 15px;
   margin-left: 15px;
 }
+/* Table: Inbox, Outbox, Contacts */
 
 table {
   font-family: arial;
@@ -130,6 +131,9 @@ tr {
   border-bottom: 1px solid #0099ff;
 }
 
+tr#canceled {
+  background-color: #ffe6e6;
+}
 th, td {
   padding: 8px;
 }
@@ -172,10 +176,6 @@ th > button {
 
 .sort-icon_desc span#arrow-down {
   color: black;
-}
-
-.box-item:hover svg#menu {
-  display: block;
 }
 
 /* New contact page */
