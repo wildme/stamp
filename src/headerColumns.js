@@ -34,8 +34,8 @@ export const headerColumns = {
       sortable: false,
     },
     {
-      id: 'select',
-      label: 'Select',
+      id: 'actions',
+      label: 'Actions',
       sortable: false,
     },
   ],
@@ -74,8 +74,8 @@ export const headerColumns = {
       sortable: false,
     },
     {
-      id: 'select',
-      label: 'Select',
+      id: 'action',
+      label: 'Actions',
       sortable: false,
     },
   ],
