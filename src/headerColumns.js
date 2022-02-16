@@ -94,6 +94,11 @@ export const headerColumns = {
       id: 'region',
       label: 'Region',
       sortable: false
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      sortable: false
     }
   ]
 };
