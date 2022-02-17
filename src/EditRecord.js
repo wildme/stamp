@@ -26,7 +26,7 @@ const EditRecord = () => {
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, replyTo, note }),
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
       })
       .then(res => {
         if (res.status === 500) {
@@ -38,7 +38,7 @@ const EditRecord = () => {
 
     if (delFile || (newFile && file)) {
       const fileId = file._id;
-      fetch(`/api/delete/${fileId}`)
+      fetch(`/api/attachment/delete/${fileId}`)
         .then(res => {
           if (res.status === 500) {
             setError(true);
