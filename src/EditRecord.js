@@ -21,8 +21,7 @@ const EditRecord = () => {
     setNewFile(e.target.files[0]);
   };
 
-  const handleEditRecord = (e) => {
-    e.preventDefault();
+  const handleEditRecord = () => {
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, replyTo, note }),
@@ -64,15 +63,16 @@ const EditRecord = () => {
        .catch((e) => console.error(e))
     }
 
-    setSubject('');
-    setFromTo('');
-    setNote('');
-    setReplyTo('');
-    history.replace(`/${box}`);
+    if (!error) {
+      setSubject('');
+      setFromTo('');
+      setNote('');
+      setReplyTo('');
+      history.replace(`/${box}`);
+    }
   };
 
-  const handleDownload = (e) => {
-    e.preventDefault(e);
+  const handleDownload = () => {
     fetch(`/api/download/${file._id}`)
       .then(res => res.blob())
       .then(blob => {
@@ -158,7 +158,7 @@ const EditRecord = () => {
           </div>
           { file && <div>
             <a href={`/attachment/${file._id}`}
-            onClick={(e) => handleDownload(e)}>Download
+            onClick={() => handleDownload()}>Download
             </a>
             <input type="checkbox" name="del-file" id="del"
             onChange={() => handleCheck()} />
@@ -166,7 +166,7 @@ const EditRecord = () => {
           </div> }
         </div>
         <div className="update-btn-container">
-          <button type="submit" onClick={(e) => handleEditRecord(e)}>
+          <button type="submit" onClick={() => handleEditRecord()}>
           Update</button>
         </div>
       </div>
