@@ -53,12 +53,14 @@ const NewRecord = () => {
         .catch((e) => console.error(e))
     }
 
-    setSubject('');
-    setFromTo('');
-    setNote('');
-    setReplyTo('');
-    setFile('');
-    history.replace(`/${box}`);
+    if (!error) {
+      setSubject('');
+      setFromTo('');
+      setNote('');
+      setReplyTo('');
+      setFile('');
+      history.replace(`/${box}`);
+    }
   };
   
 
