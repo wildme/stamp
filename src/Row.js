@@ -1,15 +1,18 @@
 import { Link } from 'react-router-dom';
 import { useState, Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { HiPencil, HiCheckCircle, HiXCircle } from 'react-icons/hi';
+import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { BoxContext } from './Main.js';
 import { ContactsContext } from './Contacts.js';
 
 const Row = ({ entry }) => {
   const [editOn, setEditOn] = useState(false);
-  const [newName, setNewName] = useState('');
-  const [newLocation, setNewLocation] = useState('');
-  const [newRegion, setNewRegion] = useState('');
+  const [name, setName] = useState(entry.name);
+  const [location, setLocation] = useState(entry.location);
+  const [region, setRegion] = useState(entry.region);
+  const [hidden, setHidden] = useState(false);
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
 
   const box = useContext(BoxContext);
   const contacts = useContext(ContactsContext);
@@ -17,18 +20,45 @@ const Row = ({ entry }) => {
   const user = useSelector((state) => state.user);
   const accessToEdit = user.admin || (user.username === entry.addedBy);
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const handleEdit = () => {
     setEditOn(true);
   };
-  const handleSubmit = (e, id) => {
-    // Add fetch() call here
-    e.preventDefault();
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure?")) {
+      fetch(`/api/contact/delete/${id}`)
+        .then(res => {
+          if (res.ok) setHidden(true);
+          if (res.status === 500) {
+            setError(true);
+            setInfoMsg("Couldn't delete contact");
+          }
+        })
+        .catch((e) => console.error(e))
+    }
+  }
+
+  const handleSubmit = (id) => {
+    fetch("/api/contact/update", {
+      method: 'POST',
+      body: JSON.stringify({ id, name, location, region }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => {
+        if (res.ok) setEditOn(false);
+        if (res.status === 500) {
+          setError(true);
+          setInfoMsg("Couldn't update contact");
+        }
+      })
+      .catch((e) => console.error(e))
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
     setEditOn(false);
+    setName(entry.name);
+    setLocation(entry.location);
+    setRegion(entry.region);
   };
 
   return (
@@ -47,22 +77,27 @@ const Row = ({ entry }) => {
     </tr>
   }
   { contacts &&
-    <tr className="contact-item">
-      <td>{ editOn ? <input type="text" value={entry.name}
-        onChange={(e) => setNewName(e.target.value)} />  : entry.name }
+    <tr className="contact-item" hidden={hidden}>
+      <td>{ editOn ? <input type="text" value={name}
+        onChange={(e) => setName(e.target.value)} /> : name }
       </td>
-      <td>{ editOn ? <input type="text" value={entry.location}
-        onChange={(e) => setNewLocation(e.target.value)}/> : entry.location }
+      <td>{ editOn ? <input type="text" value={location}
+        onChange={(e) => setLocation(e.target.value)}/> : location }
       </td>
-      <td>{ editOn ? <input type="text" value={entry.region}
-        onChange={(e) => setNewRegion(e.target.value)}/> : entry.region}
+      <td>{ editOn ? <input type="text" value={region}
+        onChange={(e) => setRegion(e.target.value)}/> : region}
       </td>
       <td>{ !editOn ?
-        <a href="#" onClick={(e) => handleEdit(e)}><HiPencil /></a> :
-        <>
-          <a href="#" onClick={(e) => handleSubmit(e, entry._id)}><HiCheckCircle /></a>
-          <a href="#" onClick={(e) => handleCancel(e)}><HiXCircle /></a>
-        </>
+          <>
+            <button onClick={() => handleEdit()}><HiPencil /></button>
+            <button onClick={() => handleDelete(entry._id)}><HiTrash /></button>
+          </> :
+          <>
+            <button
+              onClick={() => handleSubmit(entry._id)}><HiCheckCircle />
+            </button>
+            <button onClick={() => handleCancel()}><HiXCircle /></button>
+          </>
         }
       </td>
     </tr>
