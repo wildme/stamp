@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import PageNotFound from './404.js';
+import FlashMessage from './FlashMessage.js'
 
 const EditRecord = () => {
   const { id, box } = useParams();
@@ -124,6 +125,7 @@ const EditRecord = () => {
 
     return noData ? <PageNotFound /> : (
       <div className="edit-grid-container">
+        { infoMsg && <FlashMessage msg={infoMsg} /> }
         <div className="edit-container">
           <div className="edit-input-container">
             <InputField

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
+import FlashMessage from './FlashMessage.js'
 
 const NewContact = () => {
   const [orgLocation, setOrgLocation] = useState('');
   const [orgRegion, setOrgRegion] = useState('');
   const [orgName, setOrgName] = useState('');
+  const [error, setError] = useState(false);
+  const [infoMsg, setInfoMsg] = useState('');
   const history = useHistory();
 
   const handleAddContact = (e) => {
@@ -17,18 +20,24 @@ const NewContact = () => {
       headers: {'Content-Type': 'application/json'}
     })
     .then(res => {
-      if (!res.ok) throw new Error('Network issue occured');
+      if (res.status === 500) {
+        setError(true);
+        setInfoMsg("Couldn't add new contact");
+      }
     })
     .catch(err => console.error(err))
 
-    setOrgLocation('');
-    setOrgRegion('');
-    setOrgName('');
-    history.replace('/contacts');
+    if (!error) {
+      setOrgLocation('');
+      setOrgRegion('');
+      setOrgName('');
+      history.replace('/contacts');
+    }
   };
 
   return (
      <div className="add-contact-grid-container">
+       { infoMsg && <FlashMessage msg={infoMsg} /> }
        <div className="contact-input">
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}

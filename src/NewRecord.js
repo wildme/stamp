@@ -3,6 +3,7 @@ import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import { useSelector } from 'react-redux';
+import FlashMessage from './FlashMessage.js'
 
 const NewRecord = () => {
   const { box } = useParams();
@@ -66,6 +67,7 @@ const NewRecord = () => {
 
   return (
     <div className="add-record-grid-container">
+      { infoMsg && <FlashMessage msg={infoMsg} /> }
       <div className="add-container">
         <div className="add-input-container">
           <InputField
