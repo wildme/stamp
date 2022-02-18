@@ -1,29 +1,31 @@
 import { useState, useEffect } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PageNotFound from './404.js';
 
 const RecordCard = () => {
   const { id, box } = useParams();
-  const [idOfRec, setIdOfRec] = useState('');
-  const [subject, setSubject] = useState('');
-  const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState('');
-  const [replyTo, setReplyTo] = useState('');
-  const [updated, setUpdated] = useState('');
-  const [statusOfRecord, setStatus] = useState('');
-  const [date, setDate] = useState('');
-  const [addedBy, setAddedBy] = useState('');
+  const [idOfRec, setIdOfRec] = useState(id);
+  const [subject, setSubject] = useState('Loading...');
+  const [fromTo, setFromTo] = useState('Loading...');
+  const [note, setNote] = useState('-');
+  const [replyTo, setReplyTo] = useState('-');
+  const [updated, setUpdated] = useState(null);
+  const [statusOfRecord, setStatus] = useState('Loading...');
+  const [date, setDate] = useState(null);
+  const [addedBy, setAddedBy] = useState('Loading...');
   const [file, setFile] = useState(null);
   const [noData, setNoData] = useState(false);
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
-  const dateStr = new Date(date).toLocaleString('ru-Ru'); 
-  const updatedStr = new Date(updated).toLocaleString('ru-Ru');
+  const dateStr = date ?
+    new Date(date).toLocaleString('ru-Ru') : 'None';
+  const updatedStr = updated ?
+    new Date(updated).toLocaleString('ru-Ru') : 'None';
   const user = useSelector((state) => state.user);
   const accessToEdit = user.admin || (user.username === addedBy);
 
-  const handleStatus = (e) => {
-    e.preventDefault();
+  const handleStatus = () => {
     let newStatus = 'canceled';
     statusOfRecord === newStatus ?
       newStatus = 'active' :
@@ -63,7 +65,7 @@ const RecordCard = () => {
     const abortController = new AbortController();
     const { signal } = abortController;
 
-    (async () => { await fetch(`/api/${box}/${id}`, { signal })
+    fetch(`/api/${box}/${id}`, { signal })
       .then(res => { 
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
@@ -83,22 +85,19 @@ const RecordCard = () => {
         )}
       ))
       .catch((e) => console.error(e))
-    })();
 
-    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
+    fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
-        if (res.status === 204) setFile(null);
         if (!res.ok) throw new Error('Network issue occured');
     })
       .then(data => setFile(data))
       .catch((e) => console.error(e))
-    })();
 
     return () => { abortController.abort(); };
   }, [box, id])
 
-  return noData ? <Redirect to="/page-not-found" /> : (
+  return noData ? <PageNotFound /> : (
     <div className="record-card-grid-container">
       <div className="record-card">
         <div className="record-header">
@@ -135,7 +134,7 @@ const RecordCard = () => {
         </div> }
         <div className="record-status-button">
           <button type="submit" id={statusOfRecord}
-             onClick={(e) => handleStatus(e)} hidden={!accessToEdit}>
+             onClick={() => handleStatus()} hidden={!accessToEdit}>
              { statusOfRecord === 'active' ? 'Cancel' : 'Activate' }
           </button>
         </div>

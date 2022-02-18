@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
+import PageNotFound from './404.js';
 
 const EditRecord = () => {
   const { id, box } = useParams();
@@ -94,7 +95,7 @@ const EditRecord = () => {
     const abortController = new AbortController();
     const { signal } = abortController;
 
-    (async () => { await fetch(`/api/${box}/${id}`, { signal: signal })
+    fetch(`/api/${box}/${id}`, { signal: signal })
       .then(res =>  {
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
@@ -108,9 +109,8 @@ const EditRecord = () => {
         )}
       ))
         .catch((e) => console.error(e))
-    })();
 
-    (async () => { await fetch(`/api/attachment/${box}/${id}`, { signal })
+    fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setFile(null);
@@ -118,59 +118,59 @@ const EditRecord = () => {
     })
       .then(data => setFile(data))
       .catch((e) => console.error(e))
-    })();
 
     return () => { abortController.abort(); };
   }, [box, id]);
 
-    return noData ? <Redirect to="/page-not-found" /> : (
-    <div className="edit-grid-container">
-      <div className="edit-container">
-        <div className="edit-input-container">
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-            setter={setSubject}
-            value={subject}
-          />
-          <InputField
-            attrs={
-              attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
-            }
-            setter={setFromTo}
-            value={fromTo}
-            auto={true}
-            field='name'
-          />
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
-            setter={setReplyTo}
-            value={replyTo}
-          />
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-            setter={setNote}
-            value={note}
-          />
-        </div>
-        <div className="edit-file-container">
-          <div>  
-            <input type="file" id="upload" onChange={(e) => handleNewFile(e)} />
+    return noData ? <PageNotFound /> : (
+      <div className="edit-grid-container">
+        <div className="edit-container">
+          <div className="edit-input-container">
+            <InputField
+              attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+              setter={setSubject}
+              value={subject}
+            />
+            <InputField
+              attrs={
+                attrs[`${box}`].filter((x) => x.name === 'from' ||
+                  x.name === 'to')[0]
+              }
+              setter={setFromTo}
+              value={fromTo}
+              auto={true}
+              field='name'
+            />
+            <InputField
+              attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+              setter={setReplyTo}
+              value={replyTo}
+            />
+            <InputField
+              attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+              setter={setNote}
+              value={note}
+            />
           </div>
-          { file && <div>
-            <a href={`/attachment/${file._id}`}
-            onClick={() => handleDownload()}>Download
-            </a>
-            <input type="checkbox" name="del-file" id="del"
-            onChange={() => handleCheck()} />
-            <label htmlFor="del-file">Delete file</label>
-          </div> }
-        </div>
-        <div className="update-btn-container">
-          <button type="submit" onClick={() => handleEditRecord()}>
-          Update</button>
+          <div className="edit-file-container">
+            <div>  
+              <input type="file" id="upload" onChange={(e) => handleNewFile(e)} />
+            </div>
+            { file && <div>
+              <a href={`/attachment/${file._id}`}
+              onClick={() => handleDownload()}>Download
+              </a>
+              <input type="checkbox" name="del-file" id="del"
+              onChange={() => handleCheck()} />
+              <label htmlFor="del-file">Delete file</label>
+            </div> }
+          </div>
+          <div className="update-btn-container">
+            <button type="submit" onClick={() => handleEditRecord()}>
+            Update</button>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 
