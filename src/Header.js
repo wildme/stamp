@@ -27,6 +27,6 @@ const HeaderBlank = () => {
 };
 
 export const Header = () => {
-  const user = useSelector((state) => state.user);
-  return user !== 'empty' ? <HeaderLinks /> : <HeaderBlank />;
+  const loggedIn = useSelector((state) => state.user.loggedIn);
+  return loggedIn ? <HeaderLinks /> : <HeaderBlank />;
 };
