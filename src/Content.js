@@ -22,43 +22,47 @@ const Content = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const tryToRefreshToken = async () => {
-    await fetch("/api/refresh/token")
-    .then(res => {
-      if (res.status === 200) return res.json();
-      if (res.status === 401) { 
+  const tryToRefreshToken = () => {
+    fetch("/api/refresh/token")
+      .then(res => {
+        if (res.status === 200) return res.json();
+        if (res.status === 401) {
+          dispatch({ type: 'TOKEN', payload:
+            { token: { string: null } }});
+          dispatch({ type: 'LOGIN', payload:
+            { user: { username: null, admin: null, loggedIn: false } }});
+        }
+      })
+      .then(data => {
         dispatch({ type: 'TOKEN', payload:
-          { token: { status: 'invalid' } }});
-      }
-    })
-    .then(data => {
-      dispatch({ type: 'TOKEN', payload:
-          { token: { string: data.token, status: 'valid' }}});
-      dispatch({ type: 'LOGIN', payload: { user: data.user } });
-      history.replace(location.pathname);
+          { token: { string: data.token } }});
+        dispatch({ type: 'LOGIN', payload:
+          { user: { username: data.user.username,
+            admin: data.user.admin, loggedIn: true } }});
+        history.replace(location.pathname);
   })
-    .catch((e) => console.error(e));
+      .catch((e) => console.error(e));
   };
 
-  const verifyToken = async (accessToken) => {
-    await fetch("/api/verify/token", {
+  const verifyToken = (accessToken) => {
+    fetch("/api/verify/token", {
       method: 'POST', 
       body: JSON.stringify({ token: accessToken }),
       headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => {
-      if (res.status === 401) {
-        tryToRefreshToken();
-      }
-    })
-    .catch((e) => console.error(e))
+      .then(res => {
+        if (res.status === 401) {
+          tryToRefreshToken();
+        }
+      })
+      .catch((e) => console.error(e))
   };
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (user.username && token.string) {
+    if (user.loggedIn) {
       verifyToken(token.string);
     }
-    if (token === 'empty' && user === 'empty') {
+    if (!user.loggedIn && !token) {
       tryToRefreshToken();
       return <p></p>;
     }
@@ -67,11 +71,9 @@ const Content = () => {
       <Route
         {...rest}
       render={(props) => 
-        token.status === 'valid' ? (
-          <Component {...props} /> ) : (
-            <Redirect
-          to={{
-            pathname: "/login", state: { from: props.location }
+        user.loggedIn ? <Component {...props} /> : (
+            <Redirect to={{
+              pathname: "/login", state: { from: props.location }
           }}
           />
         )
