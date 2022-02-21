@@ -20,26 +20,28 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
       headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => {
-      if (res.status === 200) return res.json();
-      if (res.status === 401) setLoginFailure(true);
-    })
-    .then(data => {
-        dispatch({ type: 'TOKEN', payload:
-          { token: { string: data.token, status: 'valid' }}});
-        dispatch({ type: 'LOGIN', payload: { user: data.user } });
-        setUsername('');
-        setPassword('');
-        history.replace(from);
-    })
-    .catch((e) => console.error(e))
+      .then(res => {
+        if (res.status === 200) return res.json();
+        if (res.status === 401) setLoginFailure(true);
+      })
+      .then(data => {
+        dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+        dispatch({ type: 'LOGIN', payload:
+          { user: { username: data.user.username,
+            admin: data.user.admin, loggedIn: true }}
+        });
+          setUsername('');
+          setPassword('');
+          history.replace(from);
+      })
+      .catch((e) => console.error(e))
   };
 
   return (
     <div className="login-grid-container">
       <div className="login-form-container">
-    {loginFailure && 
-        <div className="login-error-msg">Bad username or password</div>}
+    { loginFailure &&
+        <div className="login-error-msg">Bad username or password</div> }
           <form onSubmit={(e) => handleLogin(e)}>
             <div className="login-input-container">
               <input
