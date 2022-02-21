@@ -1,21 +1,20 @@
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Logout = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  (async () => {
-    await fetch("/api/logout")
-      .then(res => {
-        if (res.ok) {
-          dispatch({ type: 'LOGOUT', payload: { user: 'empty', token: 'empty' }});
-        }
-        if (!res.ok) throw new Error('Network issue occured');
-      })
-      .catch((e) => console.error(e))
-  })();
-
-  return <Redirect to='/login' />
+  fetch("/api/logout")
+    .then(res => {
+      if (res.ok) {
+        dispatch({ type: 'LOGOUT',
+          payload: { user: { loggedIn: false }, token: null }});
+        history.replace("/login");
+      }
+    })
+    .catch((e) => console.error(e))
+  return null;
 };
 
 export default Logout;
