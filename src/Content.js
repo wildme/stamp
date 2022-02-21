@@ -34,12 +34,14 @@ const Content = () => {
         }
       })
       .then(data => {
-        dispatch({ type: 'TOKEN', payload:
-          { token: { string: data.token } }});
-        dispatch({ type: 'LOGIN', payload:
-          { user: { username: data.user.username,
-            admin: data.user.admin, loggedIn: true } }});
-        history.replace(location.pathname);
+        if (data) {
+          dispatch({ type: 'TOKEN', payload:
+            { token: { string: data.token } }});
+          dispatch({ type: 'LOGIN', payload:
+            { user: { username: data.user.username,
+              admin: data.user.admin, loggedIn: true } }});
+          history.replace(location.pathname);
+        }
   })
       .catch((e) => console.error(e));
   };

@@ -25,14 +25,16 @@ const Login = () => {
         if (res.status === 401) setLoginFailure(true);
       })
       .then(data => {
-        dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
-        dispatch({ type: 'LOGIN', payload:
-          { user: { username: data.user.username,
-            admin: data.user.admin, loggedIn: true }}
-        });
-          setUsername('');
-          setPassword('');
-          history.replace(from);
+        if (data) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          dispatch({ type: 'LOGIN', payload:
+            { user: { username: data.user.username,
+              admin: data.user.admin, loggedIn: true }}
+          });
+            setUsername('');
+            setPassword('');
+            history.replace(from);
+        }
       })
       .catch((e) => console.error(e))
   };
