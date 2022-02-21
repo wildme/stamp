@@ -1,4 +1,4 @@
-const initialState = { user: 'empty', token: 'empty' };
+const initialState = { user: { loggedIn: false }, token: null };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
