@@ -269,6 +269,31 @@ th > button {
   background-color: #00b300;
 }
 
+/* Autocomplete menu */
+.options {
+  position: absolute;
+  width: 300px;
+  background-color: white;
+  border: 1px solid;
+  list-style-type: none;
+  overflow: auto;
+  max-height: 200px;
+  margin: auto;
+  padding: 3px;
+  z-index: 1;
+}
+
+.active-item,
+.options li:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.options li:not(:last-of-type) {
+  border-bottom: 1px solid grey;
+}
+
 /* Record card page */
 .record-card-grid-container {
   display: grid;
@@ -536,6 +561,11 @@ th > button {
 }
 
 /* Flash Message */
+.flash-msg-grid-container {
+  display: grid;
+  justify-items: center;
+}
+
 .flash-msg-container {
   padding: 10px;
   border: 2px #4d4d4d;
@@ -552,3 +582,5 @@ th > button {
   cursor: pointer;
   float: right;
 }
+
+
