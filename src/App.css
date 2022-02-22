@@ -153,6 +153,7 @@ th > button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: 17px;
 }
 
 /* Sort icon */
@@ -266,31 +267,6 @@ th > button {
 
 .add-btn-container button:hover:enabled {
   background-color: #00b300;
-}
-
-/* Context menu */
-.options {
-  position: absolute;
-  width: 300px;
-  background-color: white;
-  border: 1px solid;
-  list-style-type: none;
-  overflow: auto;
-  max-height: 200px;
-  margin: auto;
-  padding: 3px;
-  z-index: 1;
-}
-
-.active-item,
-.options li:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-
-.options li:not(:last-of-type) {
-  border-bottom: 1px solid grey;
 }
 
 /* Record card page */
