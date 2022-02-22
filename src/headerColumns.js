@@ -96,8 +96,8 @@ export const headerColumns = {
       sortable: false
     },
     {
-      id: 'edit',
-      label: 'Edit',
+      id: 'actions',
+      label: 'Actions',
       sortable: false
     }
   ]
