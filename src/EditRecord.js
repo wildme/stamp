@@ -65,16 +65,11 @@ const EditRecord = () => {
        .catch((e) => console.error(e))
     }
 
-    if (!error) {
-      setSubject('');
-      setFromTo('');
-      setNote('');
-      setReplyTo('');
-      history.replace(`/${box}`);
-    }
+    if (!error) history.replace(`/${box}`);
   };
 
-  const handleDownload = () => {
+  const handleDownload = (e) => {
+    e.preventDefault();
     fetch(`/api/download/${file._id}`)
       .then(res => res.blob())
       .then(blob => {
@@ -103,10 +98,10 @@ const EditRecord = () => {
       })
       .then(data => data.map((item) => {
         return (
-        setSubject(item.subject),
-        setFromTo(item.from || item.to),
-        setNote(item.note),
-        setReplyTo(item.replyTo)
+          setSubject(item.subject),
+          setFromTo(item.from || item.to),
+          setNote(item.note),
+          setReplyTo(item.replyTo)
         )}
       ))
         .catch((e) => console.error(e))
@@ -115,7 +110,10 @@ const EditRecord = () => {
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setFile(null);
-        if (!res.ok) throw new Error('Network issue occured');
+        if (!res.ok) {
+          setError(true);
+          setInfoMsg("Couldn't get the attachmnet");
+        }
     })
       .then(data => setFile(data))
       .catch((e) => console.error(e))
@@ -160,16 +158,16 @@ const EditRecord = () => {
             </div>
             { file && <div>
               <a href={`/attachment/${file._id}`}
-              onClick={() => handleDownload()}>Download
+                onClick={(e) => handleDownload(e)}>Download
               </a>
               <input type="checkbox" name="del-file" id="del"
-              onChange={() => handleCheck()} />
+                onChange={() => handleCheck()} />
               <label htmlFor="del-file">Delete file</label>
             </div> }
           </div>
           <div className="update-btn-container">
-            <button type="submit" onClick={() => handleEditRecord()}>
-            Update</button>
+            <button type="submit" onClick={() => handleEditRecord()}>Update
+            </button>
           </div>
         </div>
       </div>
