@@ -1,13 +1,15 @@
 import { useState, useEffect, createContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
+import FlashMessage from './FlashMessage.js'
 
 export const ContactsContext = createContext();
 
 const AllContacts = () => {
   const [tbContacts, setTbContacts] = useState([]);
   const [infoMsg, setInfoMsg] = useState('');
+  const [noData, setNoData] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -16,7 +18,8 @@ const AllContacts = () => {
     fetch("/api/contacts", { signal })
       .then(res => {
         if (res.status === 200) return res.json();
-        if (res.status === 204) setInfoMsg('No contacts');
+        if (res.status === 500) setInfoMsg("Couldn't get contacts");
+        if (res.status === 204) setNoData(true);
       })
       .then(data => setTbContacts(data))
       .catch((e) => console.error(e));
@@ -29,8 +32,13 @@ const AllContacts = () => {
     <div className="page-title">
       <h2>CONTACTS</h2>
     </div>
+    { infoMsg &&
+      <div className="flash-msg-grid-container">
+        <FlashMessage msg={infoMsg} />
+      </div>
+    }
     <div className="page-actions">
-      <NavLink to="/contacts/new">New</NavLink>
+      <Link to="/contacts/new">New</Link>
     </div>
     <div className="page-table">
       <table>
@@ -45,7 +53,7 @@ const AllContacts = () => {
             </ContactsContext.Provider>
        </tbody>
       </table>
-    { infoMsg && <p>{infoMsg}</p> }
+    { noData && <p><i>No contacts</i></p> }
     </div>
   </div>
   )
