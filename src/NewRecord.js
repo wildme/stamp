@@ -54,14 +54,7 @@ const NewRecord = () => {
         .catch((e) => console.error(e))
     }
 
-    if (!error) {
-      setSubject('');
-      setFromTo('');
-      setNote('');
-      setReplyTo('');
-      setFile('');
-      history.replace(`/${box}`);
-    }
+    if (!error) history.replace(`/${box}`);
   };
   
 
@@ -76,9 +69,8 @@ const NewRecord = () => {
             value={subject}
           />
           <InputField
-            attrs={
-              attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]
-            }
+            attrs={attrs[`${box}`].filter((x) => x.name === 'from' ||
+              x.name === 'to')[0]}
             setter={setFromTo}
             value={fromTo}
             auto={true}
@@ -100,11 +92,12 @@ const NewRecord = () => {
             <label htmlFor="file"><b>File</b></label>
           </div>
           <input type="file" name="file" id="upload"
-          onChange={(e) => handleFile(e)} />
+            onChange={(e) => handleFile(e)} />
         </div>
         <div className="add-btn-container">
           <button type="submit" disabled={!subject || !fromTo}
-            onClick={(e) => handleAddRecord(e)}>Add</button>
+            onClick={(e) => handleAddRecord(e)}>Add
+          </button>
         </div>
       </div>
     </div>
