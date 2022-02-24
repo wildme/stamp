@@ -48,7 +48,7 @@ const Login = () => {
             <div className="login-input-container">
               <input
                 type="text"
-                placeholder="Enter Username"
+                placeholder="Username"
                 name="username"
                 value={username}
                 required
@@ -56,7 +56,7 @@ const Login = () => {
               />
               <input
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Password"
                 name="password"
                 value={password}
                 required
