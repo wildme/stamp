@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginFailure, setLoginFailure] = useState(false);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -48,7 +50,7 @@ const Login = () => {
             <div className="login-input-container">
               <input
                 type="text"
-                placeholder="Username"
+                placeholder={t('login.placeholder1')}
                 name="username"
                 value={username}
                 required
@@ -56,7 +58,7 @@ const Login = () => {
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={t('login.placeholder2')}
                 name="password"
                 value={password}
                 required
@@ -64,11 +66,11 @@ const Login = () => {
               />
             </div>
             <div className="login-btn-container">
-              <input value="Login" id="submit" type="submit" />
+              <input value={t('login.button')} id="submit" type="submit" />
             </div>
           </form>
-          <div className="login-signup-msg">
-              Don't have an account? <Link to="/signup">Sign Up</Link>
+          <div className="login-signup-msg">{t('login.string')}
+              <Link to="/signup">{t('login.link')}</Link>
           </div>
       </div>
     </div>
