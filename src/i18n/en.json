@@ -1,0 +1,9 @@
+{
+  "login": {
+    "placeholder1": "Username",
+    "placeholder2": "Password",
+    "button": "Login",
+    "string": "Don't have an account?",
+    "link": "Signup"
+  }
+}
