@@ -4,6 +4,22 @@
     "placeholder2": "Password",
     "button": "Login",
     "string": "Don't have an account?",
-    "link": "Signup"
+    "link": "Signup",
+    "infoMsg1": "Incorrect username or password",
+    "infoMsg2": "Unable to login"
+  },
+  "signup": {
+    "placeholder1": "Username",
+    "placeholder2": "E-mail",
+    "placeholder3": "Password",
+    "placeholder4": "Repeat password",
+    "placeholder5": "Firstname",
+    "placeholder6": "Lastname",
+    "button": "Signup",
+    "infoMsg1": "Passwords not match",
+    "infoMsg2": "Username is taken",
+    "infoMsg3": "Email is taken",
+    "infoMsg4": "Error occured. Try again",
+    "infoMsg5": "Account has been created"
   }
 }
