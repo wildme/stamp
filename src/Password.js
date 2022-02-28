@@ -1,30 +1,33 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Password = ({user}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+  const [oldPassInfo, setOldPassInfo] = useState('');
+  const [newPassInfo, setNewPassInfo] = useState('');
+  const { t } = useTranslation();
 
   const handleOldPass = (e) => {
-    setErrorMsg("");
+    setOldPassInfo("");
     setOldPass(e.target.value);
   };
 
   const handleNewPass = (e) => {
-    setInfoMsg("");
+    setNewPassInfo("");
     setNewPass(e.target.value);
   };
 
   const handleConfirmPass = (e) => {
-    setInfoMsg("");
+    setNewPassInfo("");
     setConfirmPass(e.target.value);
   }
   const handlePassUpdate = (e) => {
     e.preventDefault();
     if (newPass !== confirmPass) {
-      setInfoMsg("passwords do not match");
+      setNewPassInfo(t('password.infoMsg1'));
       return;
     }
 
@@ -34,20 +37,22 @@ const Password = ({user}) => {
       headers: {'Content-Type': 'application/json'}
     })
       .then(res => {
-        if (res.status === 500) setInfoMsg("Couldn't update email");
-        if (res.status === 409) setErrorMsg("wrong password");
+        if (res.status === 500) setInfoMsg(t('password.infoMsg2'));
+        if (res.status === 409) setOldPassInfo(t('password.infoMsg3'));
       })
       .catch((e) => console.error(e))
 };
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
-        <h2>Change password</h2>
+        <h2>{ t('password.title') }</h2>
       </div>
       <form onSubmit={(e) => handlePassUpdate(e)} autoComplete="off">
         <div className="user-info-input-container">
-          <label htmlFor="old-pass"><b>Old password</b>
-            {errorMsg && <span className="user-info-msg"> {errorMsg}</span>}
+          <label htmlFor="old-pass"><b>{ t('password.label1') }</b>
+            { oldPassInfo &&
+                <span className="user-info-msg"> {oldPassInfo}</span>
+            }
           </label>
           <input
             type="password"
@@ -56,8 +61,10 @@ const Password = ({user}) => {
             required
             onChange={(e) => handleOldPass(e)}
           />
-          <label htmlFor="new-pass"><b>New password</b>
-            {infoMsg && <span className="user-info-msg"> {infoMsg}</span>}
+          <label htmlFor="new-pass"><b>{ t('password.label2') }</b>
+            { newPassInfo &&
+                <span className="user-info-msg"> {newPassInfo}</span>
+            }
           </label>
           <input
             type="password"
@@ -66,7 +73,7 @@ const Password = ({user}) => {
             required
             onChange={(e) => handleNewPass(e)}
           />
-          <label htmlFor="confirm-pass"><b>Confirm new password</b></label>
+          <label htmlFor="confirm-pass"><b>{ t('password.label3') }</b></label>
           <input
             type="password"
             name="confirm-pass"
@@ -76,7 +83,7 @@ const Password = ({user}) => {
           />
         </div>
         <div className="user-info-update-btn-container">
-          <input value="Change" id="submit" type="submit" />
+          <input value={ t('password.button') } id="submit" type="submit" />
         </div>
       </form>
     </div>
