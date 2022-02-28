@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Email = ({ user, email, setter }) => {
   const [infoMsg, setInfoMsg] = useState('');
+  const { t } = useTranslation();
 
   const handleEmailChange = (e) => {
     setter(e.target.value);
@@ -15,8 +17,8 @@ const handleEmailUpdate = (e) => {
     headers: {'Content-Type': 'application/json'}
   })
     .then(res => {
-      if (res.status === 500) setInfoMsg("Couldn't update email");
-      if (res.status === 409) setInfoMsg("Email is taken");
+      if (res.status === 500) setInfoMsg(t('email.label1'));
+      if (res.status === 409) setInfoMsg(t('email.label2'));
     })
     .catch((e) => console.error(e))
 };
@@ -24,10 +26,10 @@ const handleEmailUpdate = (e) => {
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
-        <h2>Change email</h2>
+        <h2>{ t('email.title') }</h2>
       </div>
       <div className="user-info-input-container">
-        <label htmlFor="email"><b>Email</b></label>
+        <label htmlFor="email"><b>{ t('email.label1') }</b></label>
         <input
           type="email"
           name="email"
@@ -40,7 +42,7 @@ const handleEmailUpdate = (e) => {
         <button
           type="submit"
           disabled={!email}
-          onClick={(e) => handleEmailUpdate(e)}>Change
+          onClick={(e) => handleEmailUpdate(e)}>{ t('email.button') }
         </button>
       </div>
     </div>
