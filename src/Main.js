@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
 import FlashMessage from './FlashMessage.js'
@@ -14,6 +15,7 @@ const Main = (props) => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const [noData, setNoData] = useState(false);
+  const { t } = useTranslation();
 
   const handleClick = (id) => {
     let direction = 'asc';
@@ -36,7 +38,7 @@ const Main = (props) => {
         if (res.status === 204) setNoData(true);
         if (res.status === 500) {
           setError(true);
-          setInfoMsg("Couldn't retrieve records");
+          setInfoMsg(t('main.infoMsg1'));
         }
        })
       .then(setTbContent)
@@ -49,7 +51,7 @@ const Main = (props) => {
   return (
     <div className="page-content">
       <div className="page-title">
-        <h2>{box.toUpperCase()}</h2>
+    <h2>{ box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox') }</h2>
       </div>
       { infoMsg &&
       <div className="flash-msg-grid-container">
@@ -57,7 +59,7 @@ const Main = (props) => {
       </div>
       }
       <div className="page-actions">
-        <Link to={`/${box}/new`}>New</Link>
+        <Link to={`/${box}/new`}>{t('main.link')}</Link>
       </div>
       <div className="page-table">
         <table>
@@ -74,7 +76,7 @@ const Main = (props) => {
             </BoxContext.Provider>
           </tbody>
         </table>
-        { noData && <p><i>No records</i></p> }
+        { noData && <p><i>{t('main.infoMsg2')}</i></p> }
       </div>
     </div>
   )
