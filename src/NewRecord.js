@@ -3,6 +3,7 @@ import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import FlashMessage from './FlashMessage.js'
 
 const NewRecord = () => {
@@ -15,6 +16,7 @@ const NewRecord = () => {
   const [file, setFile] = useState();
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
+  const { t } = useTranslation();
 
   const history = useHistory();
 
@@ -33,7 +35,7 @@ const NewRecord = () => {
       .then(res => {
         if (res.status === 500) {
           setError(true);
-          setInfoMsg("Failed to add record");
+          setInfoMsg(t('newRecord.infoMsg1'));
         }
       })
       .catch((e) => console.error(e))
@@ -48,7 +50,7 @@ const NewRecord = () => {
         .then(res => {
           if (res.status === 500) {
             setError(true);
-            setInfoMsg("Couldn't upload file");
+            setInfoMsg(t('newRecord.infoMsg2'));
           }
         })
         .catch((e) => console.error(e))
@@ -96,7 +98,7 @@ const NewRecord = () => {
         </div>
         <div className="add-btn-container">
           <button type="submit" disabled={!subject || !fromTo}
-            onClick={(e) => handleAddRecord(e)}>Add
+            onClick={(e) => handleAddRecord(e)}>{ t('newRecord.button') }
           </button>
         </div>
       </div>
