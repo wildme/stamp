@@ -71,6 +71,17 @@ const resources = {
         infoMsg2: en.password.infoMsg2,
         infoMsg3: en.password.infoMsg3
       },
+      newRecord: {
+        label1: en.newRecord.label1,
+        label2: en.newRecord.label2,
+        label3: en.newRecord.label3,
+        label4: en.newRecord.label4,
+        label5: en.newRecord.label5,
+        label6: en.newRecord.label6,
+        button: en.newRecord.button,
+        infoMsg1: en.newRecord.infoMsg1,
+        infoMsg2: en.newRecord.infoMsg2
+      },
       main: {
         titleInbox: en.main.titleInbox,
         titleOutbox: en.main.titleOutbox,
@@ -147,6 +158,17 @@ const resources = {
         infoMsg1: ru.password.infoMsg1,
         infoMsg2: ru.password.infoMsg2,
         infoMsg3: ru.password.infoMsg3
+      },
+      newRecord: {
+        label1: ru.newRecord.label1,
+        label2: ru.newRecord.label2,
+        label3: ru.newRecord.label3,
+        label4: ru.newRecord.label4,
+        label5: ru.newRecord.label5,
+        label6: ru.newRecord.label6,
+        button: ru.newRecord.button,
+        infoMsg1: ru.newRecord.infoMsg1,
+        infoMsg2: ru.newRecord.infoMsg2
       },
       main: {
         titleInbox: ru.main.titleInbox,
