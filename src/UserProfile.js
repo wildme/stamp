@@ -1,6 +1,7 @@
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import PersonalInfo from './PersonalInfo.js';
 import Email from './Email.js';
 import Password from './Password.js';
@@ -11,6 +12,7 @@ const UserProfile = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -35,13 +37,19 @@ const UserProfile = () => {
       <div className="user-profile-container">
         <div className="user-profile-title">
           <h2>{firstname} {lastname}</h2>
-          <p>Your profile</p>
+          <p>{ t('userProfile.subTitle') }</p>
         </div>
         <div className="user-profile-navbar">
           <ul>
-            <li><Link to={`${path}`} id="active">Personal info</Link></li>
-            <li><Link to={`${path}/e-mail`}>Email</Link></li>
-            <li><Link to={`${path}/password`}>Password</Link></li>
+            <li>
+              <Link to={`${path}`} id="active">{ t('userProfile.item1') }</Link>
+            </li>
+            <li>
+              <Link to={`${path}/e-mail`}>{ t('userProfile.item2') }</Link>
+            </li>
+            <li>
+              <Link to={`${path}/password`}>{ t('userProfile.item3') }</Link>
+            </li>
           </ul>
         </div>
         <div className="user-profile-info">
