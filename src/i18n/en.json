@@ -19,7 +19,57 @@
     "infoMsg1": "Passwords not match",
     "infoMsg2": "Username is taken",
     "infoMsg3": "Email is taken",
-    "infoMsg4": "Error occured. Try again",
+    "infoMsg4": "Error. Try again",
     "infoMsg5": "Account has been created"
+  },
+  "navbar": {
+    "inbox": "Inbox",
+    "outbox": "Outbox",
+    "contacts": "Contacts",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "infoMsg1": "Error. Couldn't retrieve data",
+    "infoMsg2": "No contacts",
+    "link": "New"
+  },
+  "userProfile": {
+    "subTitle": "Your profile",
+    "item1": "Personal info",
+    "item2": "E-mail",
+    "item3": "Password"
+  },
+   "personalInfo": {
+    "title": "Change user info",
+    "label1": "Firstname",
+    "label2": "Lastname",
+    "infoMsg1": "Couldn't update user info",
+    "button": "Change"
+  },
+  "email": {
+    "title": "Change e-mail",
+    "label1": "e-mail",
+    "button": "Change",
+    "infoMsg1": "Error. Couldn't change e-mail",
+    "infoMsg2": "E-mail is taken"
+  },
+  "password": {
+    "title": "Change password",
+    "label1": "Password",
+    "label2": "New password",
+    "label3": "Repeat new password",
+    "button": "Change",
+    "infoMsg1": "Passwords not match",
+    "infoMsg2": "Error. Couldn't change password",
+    "infoMsg3": "Wrong password"
+  },
+  "main": {
+    "titleInbox": "Inbox",
+    "titleOutbox": "Outbox",
+    "link": "New",
+    "infoMsg1": "Error. Couldn't retrieve data",
+    "infoMsg2": "No records"
   }
 }
