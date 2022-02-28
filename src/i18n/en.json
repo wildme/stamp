@@ -31,7 +31,7 @@
   },
   "contacts": {
     "title": "Contacts",
-    "infoMsg1": "Error. Couldn't retrieve data",
+    "infoMsg1": "Error. Failed to retrieve data",
     "infoMsg2": "No contacts",
     "link": "New"
   },
@@ -45,14 +45,14 @@
     "title": "Change user info",
     "label1": "Firstname",
     "label2": "Lastname",
-    "infoMsg1": "Couldn't update user info",
+    "infoMsg1": "Failed to update user info",
     "button": "Change"
   },
   "email": {
     "title": "Change e-mail",
     "label1": "e-mail",
     "button": "Change",
-    "infoMsg1": "Error. Couldn't change e-mail",
+    "infoMsg1": "Error. Failed to change e-mail",
     "infoMsg2": "E-mail is taken"
   },
   "password": {
@@ -62,14 +62,25 @@
     "label3": "Repeat new password",
     "button": "Change",
     "infoMsg1": "Passwords not match",
-    "infoMsg2": "Error. Couldn't change password",
+    "infoMsg2": "Error. Failed to change password",
     "infoMsg3": "Wrong password"
+  },
+  "newRecord": {
+    "label1": "Subject",
+    "label2": "From",
+    "label3": "To",
+    "label4": "Reply to",
+    "label5": "Note",
+    "label6": "File",
+    "button": "Add",
+    "infoMsg1": "Error. Failed to add record",
+    "infoMsg2": "Error. Failed to upload file"
   },
   "main": {
     "titleInbox": "Inbox",
     "titleOutbox": "Outbox",
     "link": "New",
-    "infoMsg1": "Error. Couldn't retrieve data",
+    "infoMsg1": "Error. Failed to retrieve data",
     "infoMsg2": "No records"
   }
 }
