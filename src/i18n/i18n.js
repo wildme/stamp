@@ -82,12 +82,61 @@ const resources = {
         infoMsg1: en.newRecord.infoMsg1,
         infoMsg2: en.newRecord.infoMsg2
       },
+      editRecord: {
+        link: en.editRecord.link,
+        label1: en.editRecord.label1,
+        button: en.editRecord.button,
+        infoMsg1: en.editRecord.infoMsg1,
+        infoMsg2: en.editRecord.infoMsg2,
+        infoMsg3: en.editRecord.infoMsg3,
+        infoMsg4: en.editRecord.infoMsg4
+      },
+      recordCard: {
+        titleinbox: en.recordCard.titleinbox,
+        titleoutbox: en.recordCard.titleoutbox,
+        subject: en.recordCard.subject,
+        from: en.recordCard.from,
+        to: en.recordCard.to,
+        date: en.recordCard.date,
+        updated: en.recordCard.updated, 
+        replyTo: en.recordCard.replyTo,
+        user: en.recordCard.user,
+        status: en.recordCard.status,
+        note: en.recordCard.note,
+        button1: en.recordCard.button1,
+        button2: en.recordCard.button2,
+        infoMsg1: en.recordCard.infoMsg1,
+        infoMsg2: en.recordCard.infoMsg2,
+        infoMsg3: en.recordCard.infoMsg3
+      },
+      newContact: {
+        label1: en.newContact.label1,
+        label2: en.newContact.label2,
+        label3: en.newContact.label3,
+        button: en.newContact.button,
+        infoMsg: en.newContact.infoMsg
+      },
       main: {
         titleInbox: en.main.titleInbox,
         titleOutbox: en.main.titleOutbox,
         link: en.main.link,
         infoMsg1: en.main.infoMsg1,
         infoMsg2: en.main.infoMsg2
+      },
+      headerCellBox: {
+        label1: en.headerCellBox.label1,
+        label2: en.headerCellBox.label2,
+        label3: en.headerCellBox.label3,
+        label4: en.headerCellBox.label4,
+        label5: en.headerCellBox.label5,
+        label6: en.headerCellBox.label6,
+        label7: en.headerCellBox.label7
+      },
+      headerCellContacts: {
+        label1: en.headerCellContacts.label1,
+        label2: en.headerCellContacts.label2,
+        label3: en.headerCellContacts.label3,
+        label4: en.headerCellContacts.label4
       }
     }
   },
@@ -170,12 +219,61 @@ const resources = {
         infoMsg1: ru.newRecord.infoMsg1,
         infoMsg2: ru.newRecord.infoMsg2
       },
+      editRecord: {
+        link: ru.editRecord.link,
+        label1: ru.editRecord.label1,
+        button: ru.editRecord.button,
+        infoMsg1: ru.editRecord.infoMsg1,
+        infoMsg2: ru.editRecord.infoMsg2,
+        infoMsg3: ru.editRecord.infoMsg3,
+        infoMsg4: ru.editRecord.infoMsg4
+      },
+      recordCard: {
+        titleinbox: ru.recordCard.titleinbox,
+        titleoutbox: ru.recordCard.titleoutbox,
+        subject: ru.recordCard.subject,
+        from: ru.recordCard.from,
+        to: ru.recordCard.to,
+        date: ru.recordCard.date,
+        updated: ru.recordCard.updated, 
+        replyTo: ru.recordCard.replyTo,
+        user: ru.recordCard.user,
+        status: ru.recordCard.status,
+        note: ru.recordCard.note,
+        button1: ru.recordCard.button1,
+        button2: ru.recordCard.button2,
+        infoMsg1: ru.recordCard.infoMsg1,
+        infoMsg2: ru.recordCard.infoMsg2,
+        infoMsg3: ru.recordCard.infoMsg3
+      },
+      newContact: {
+        "label1": ru.newContact.label1,
+        "label2": ru.newContact.label2,
+        "label3": ru.newContact.label3,
+        "button": ru.newContact.button,
+        "infoMsg": ru.newContact.infoMsg
+      },
       main: {
         titleInbox: ru.main.titleInbox,
         titleOutbox: ru.main.titleOutbox,
         link: ru.main.link,
         infoMsg1: ru.main.infoMsg1,
         infoMsg2: ru.main.infoMsg2
+      },
+      headerCellBox: {
+        label1: ru.headerCellBox.label1,
+        label2: ru.headerCellBox.label2,
+        label3: ru.headerCellBox.label3,
+        label4: ru.headerCellBox.label4,
+        label5: ru.headerCellBox.label5,
+        label6: ru.headerCellBox.label6,
+        label7: ru.headerCellBox.label7
+      },
+      headerCellContacts: {
+        label1: ru.headerCellContacts.label1,
+        label2: ru.headerCellContacts.label2,
+        label3: ru.headerCellContacts.label3,
+        label4: ru.headerCellContacts.label4
       }
     }
   }
