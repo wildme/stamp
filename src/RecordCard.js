@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import PageNotFound from './404.js';
 
 const RecordCard = () => {
@@ -18,6 +19,7 @@ const RecordCard = () => {
   const [noData, setNoData] = useState(false);
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
+  const { t } = useTranslation();
   const dateStr = date ?
     new Date(date).toLocaleString('ru-Ru') : 'None';
   const updatedStr = updated ?
@@ -40,7 +42,7 @@ const RecordCard = () => {
         if (res.ok) setStatus(newStatus);
         if (res.status === 500) {
           setError(true);
-          setInfoMsg("Couldn't update status");
+          setInfoMsg(t('recordCard.infoMsg1'));
         }
       })
       .catch((e) => console.error(e))
@@ -69,7 +71,7 @@ const RecordCard = () => {
       .then(res => { 
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
-        if (!res.ok) throw new Error('Network issue occured');
+        if (!res.ok) setInfoMsg(t('recordCard.infoMsg2'));
       })
       .then(data => data.map((item) => {
         return (
@@ -89,7 +91,7 @@ const RecordCard = () => {
     fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
-        if (!res.ok) throw new Error('Network issue occured');
+        if (!res.ok) setInfoMsg(t('recordCard.infoMsg3'));
     })
       .then(data => setFile(data))
       .catch((e) => console.error(e))
@@ -101,29 +103,42 @@ const RecordCard = () => {
     <div className="record-card-grid-container">
       <div className="record-card">
         <div className="record-header">
-          { <h2>{box} #{idOfRec}</h2> }
+          { <h2>{ t(`recordCard.title${box}`) } #{idOfRec}</h2> }
           <hr/>
         </div>
         <div className="record-fields">
-          <div className="record-attr"><b>Subject</b>:
+          <div className="record-attr"><b>{ t('recordCard.subject') }</b>:
             <div className="long-field-card">{subject}</div>
           </div>
         { box === 'inbox' ?
-          <div className="record-attr"><b>From</b>: {fromTo}</div> :
-          <div className="record-attr"><b>To</b>: {fromTo}</div> }
-        { <div className="record-attr"><b>Date</b>: {dateStr}</div> }
+          <div className="record-attr">
+            <b>{ t('recordCard.from') }</b>: {fromTo}
+          </div> :
+          <div className="record-attr">
+            <b>{ t('recordCard.to') }</b>: {fromTo}
+          </div>
+        }
+        <div className="record-attr">
+          <b>{ t('recordCard.date') }</b>: {dateStr}
+        </div>
         { updated &&
-            <div className="record-attr"><b>Updated</b>: {updatedStr || '-'}
-        </div> }
-        { <div className="record-attr"><b>Reply to</b>: {replyTo || '-'}
-        </div> }
-        { <div className="record-attr"><b>User</b>: {addedBy}
-        </div> }
-        { <div className="record-attr"><b>Status</b>: {statusOfRecord}
-        </div> }
-        { <div className="record-attr"><b>Note</b>:
-            <div className="long-field-card">{note || '-'}</div>
-        </div> }
+        <div className="record-attr">
+          <b>{ t('recordCard.updated') }</b>: {updatedStr || '-'}
+        </div>
+        }
+        <div className="record-attr">
+          <b>{ t('recordCard.replyTo') }</b>: {replyTo || '-'}
+        </div>
+        <div className="record-attr">
+          <b>{ t('recordCard.user') }</b>: {addedBy}
+        </div>
+        <div className="record-attr">
+          <b>{ t('recordCard.status') }</b>: {statusOfRecord}
+        </div>
+        <div className="record-attr">
+          <b>{ t('recordCard.note') }</b>:
+          <div className="long-field-card">{note || '-'}</div>
+        </div> 
         </div>
         { file && <div className="record-attr">
           <div className="record-attachment">
@@ -131,11 +146,14 @@ const RecordCard = () => {
               onClick={(e) => handleDownload(e)}>{file.filename}
             </a>
           </div>
-        </div> }
+        </div>
+        }
         <div className="record-status-button">
           <button type="submit" id={statusOfRecord}
              onClick={() => handleStatus()} hidden={!accessToEdit}>
-             { statusOfRecord === 'active' ? 'Cancel' : 'Activate' }
+             { statusOfRecord === 'active' ? t('recordCard.button2') :
+                  t('recordCard.button1')
+             }
           </button>
         </div>
       </div>
