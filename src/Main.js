@@ -66,7 +66,7 @@ const Main = (props) => {
           <thead>
             <tr>
               <TableHead table={box} handleClick={handleClick}
-                sortOrder={sortOrder} column={column}
+                sortOrder={sortOrder} column={column} t={t}
               />
             </tr>
           </thead>
