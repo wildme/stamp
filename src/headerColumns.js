@@ -7,35 +7,35 @@ export const headerColumns = {
     },
     {
       id: 'subj',
-      label: 'Subject',
+      label: 'headerCellBox.label1',
       sortable: false,
     },
     {
       id: 'from',
-      label: 'From',
+      label: 'headerCellBox.label2',
       sortable: true,
     },
 
     {
       id: 'date',
-      label: 'Date',
+      label: 'headerCellBox.label4',
       sortable: true,
     },
 
     {
       id: 'user',
-      label: 'User',
+      label: 'headerCellBox.label5',
       sortable: false,
     },
 
     {
       id: 'replyTo',
-      label: 'Reply to',
+      label: 'headerCellBox.label6',
       sortable: false,
     },
     {
       id: 'actions',
-      label: 'Actions',
+      label: 'headerCellBox.label7',
       sortable: false,
     },
   ],
@@ -47,57 +47,57 @@ export const headerColumns = {
     },
     {
       id: 'subj',
-      label: 'Subject',
+      label: 'headerCellBox.label1',
       sortable: false,
     },
     {
       id: 'to',
-      label: 'To',
+      label: 'headerCellBox.label3',
       sortable: true,
     },
 
     {
       id: 'date',
-      label: 'Date',
+      label: 'headerCellBox.label4',
       sortable: true,
     },
 
     {
       id: 'user',
-      label: 'User',
+      label: 'headerCellBox.label5',
       sortable: false,
     },
 
     {
       id: 'replyTo',
-      label: 'Reply to',
+      label: 'headerCellBox.label6',
       sortable: false,
     },
     {
       id: 'action',
-      label: 'Actions',
+      label: 'headerCellBox.label7',
       sortable: false,
     },
   ],
   contacts: [
     {
       id: 'name',
-      label: 'Name',
+      label: 'headerCellContacts.label1',
       sortable: false,
     },
     {
       id: 'location',
-      label: 'Location',
+      label: 'headerCellContacts.label2',
       sortable: false,
     },
     {
       id: 'region',
-      label: 'Region',
+      label: 'headerCellContacts.label3',
       sortable: false
     },
     {
       id: 'actions',
-      label: 'Actions',
+      label: 'headerCellContacts.label4',
       sortable: false
     }
   ]
