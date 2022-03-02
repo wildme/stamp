@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory  } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import FlashMessage from './FlashMessage.js'
@@ -11,6 +12,7 @@ const NewContact = () => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleAddContact = (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const NewContact = () => {
     .then(res => {
       if (res.status === 500) {
         setError(true);
-        setInfoMsg("Couldn't add new contact");
+        setInfoMsg(t('newContact.infoMsg'));
       }
     })
     .catch(err => console.error(err))
@@ -54,9 +56,12 @@ const NewContact = () => {
            setter={setOrgRegion}
            value={orgRegion}
          />
-         <button type="submit" disabled={!orgName || !orgLocation} onClick={(e) => handleAddContact(e)}>
-          Add
-         </button> 
+         <button
+           type="submit"
+           disabled={!orgName || !orgLocation}
+           onClick={(e) => handleAddContact(e)}>
+           { t('newContact.button') }
+         </button>
        </div>
      </div>
   );
