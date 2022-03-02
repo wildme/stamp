@@ -91,7 +91,7 @@ const NewRecord = () => {
         </div>
         <div className="add-file-container">
           <div>
-            <label htmlFor="file"><b>File</b></label>
+            <label htmlFor="file"><b>{ t('newRecord.label6') }</b></label>
           </div>
           <input type="file" name="file" id="upload"
             onChange={(e) => handleFile(e)} />
