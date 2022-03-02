@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import PageNotFound from './404.js';
@@ -18,6 +19,7 @@ const EditRecord = () => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleNewFile = (e) => {
     setNewFile(e.target.files[0]);
@@ -32,7 +34,7 @@ const EditRecord = () => {
       .then(res => {
         if (res.status === 500) {
           setError(true);
-          setInfoMsg("Couldn't update record");
+          setInfoMsg(t('editRecord.infoMsg1'));
         }
       })
       .catch((e) => console.error(e))
@@ -43,7 +45,7 @@ const EditRecord = () => {
         .then(res => {
           if (res.status === 500) {
             setError(true);
-            setInfoMsg("Couldn't delete file");
+            setInfoMsg(t('editRecord.infoMsg2'));
           }
         })
         .catch((e) => console.error(e))
@@ -59,7 +61,7 @@ const EditRecord = () => {
        .then(res => {
          if (res.status === 500) {
            setError(true);
-           setInfoMsg("Couldn't upload file");
+           setInfoMsg(t('editRecord.infoMsg3'));
          }
        })
        .catch((e) => console.error(e))
@@ -112,7 +114,7 @@ const EditRecord = () => {
         if (res.status === 204) setFile(null);
         if (!res.ok) {
           setError(true);
-          setInfoMsg("Couldn't get the attachmnet");
+          setInfoMsg(t('editRecord.infoMsg4'));
         }
     })
       .then(data => setFile(data))
@@ -154,19 +156,23 @@ const EditRecord = () => {
           </div>
           <div className="edit-file-container">
             <div>  
-              <input type="file" id="upload" onChange={(e) => handleNewFile(e)} />
+              <input type="file" id="upload"
+                onChange={(e) => handleNewFile(e)} />
             </div>
-            { file && <div>
+            { file &&
+            <div>
               <a href={`/attachment/${file._id}`}
-                onClick={(e) => handleDownload(e)}>Download
+                onClick={(e) => handleDownload(e)}>{ t('editRecord.link') }
               </a>
               <input type="checkbox" name="del-file" id="del"
                 onChange={() => handleCheck()} />
-              <label htmlFor="del-file">Delete file</label>
-            </div> }
+              <label htmlFor="del-file">{ t('editRecord.label1') }</label>
+            </div>
+            }
           </div>
           <div className="update-btn-container">
-            <button type="submit" onClick={() => handleEditRecord()}>Update
+            <button type="submit"
+              onClick={() => handleEditRecord()}>{ t('editRecord.button') }
             </button>
           </div>
         </div>
