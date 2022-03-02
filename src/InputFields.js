@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 import Autocomplete from './Autocomplete.js';
 
  const InputField = ({ attrs, setter, value, auto = false , field }) => {
+  const { t } = useTranslation();
   const handleInputChange = (e) => {
     setter(e.target.value);
   };
@@ -11,11 +13,12 @@ import Autocomplete from './Autocomplete.js';
       attrs={attrs}
       value={value}
       setter={setter}
+      t={t}
     />
   ) : (
     <Fragment>
       <label htmlFor={attrs.for}>
-        <b>{attrs.text}</b>
+        <b>{ t(attrs.text) }</b>
       </label>
       <input
         type={attrs.type}
