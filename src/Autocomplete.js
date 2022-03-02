@@ -1,6 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import { useState, Fragment } from 'react';
 
-const Autocomplete = ({ value, setter, attrs, field }) => {
+const Autocomplete = ({ value, setter, attrs, field, t }) => {
   const [matches, setMatches] = useState([]);
   const [activeItem, setActiveItem] = useState(0);
   const [visibility, setVisibility] = useState(false);
@@ -71,7 +71,7 @@ const Autocomplete = ({ value, setter, attrs, field }) => {
   return (
     <Fragment>
       <label htmlFor={attrs.for}>
-        <b>{attrs.text}</b>
+        <b>{ t(attrs.text) }</b>
       </label>
       <input
         type={attrs.type}
