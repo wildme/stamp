@@ -46,7 +46,7 @@ const AllContacts = () => {
       <table>
         <thead>
           <tr className="top-row">
-            <TableHead table="contacts" />
+            <TableHead table="contacts" t={t}/>
           </tr>
         </thead>
         <tbody>
