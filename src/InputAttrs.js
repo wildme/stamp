@@ -2,76 +2,75 @@ export const InputAttrs = {
   inbox: [
     {
       for: 'subj',
-      text: 'Subject',
+      text: 'newRecord.label1',
       name: 'subj',
-      type: 'text',
+      type: 'text'
     },
 
     {
       for: 'from',
-      text: 'From',
+      text: 'newRecord.label2',
       name: 'from',
-      type: 'text',
+      type: 'text'
     },
 
     {
       for: 'note',
-      text: 'Note',
+      text: 'newRecord.label5',
       name: 'note',
-      type: 'text',
+      type: 'text'
     },
     {
       for: 'replyTo',
-      text: 'Reply to',
+      text: 'newRecord.label4',
       name: 'replyTo',
-      type: 'text',
+      type: 'text'
     }
   ],
   outbox: [
     {
       for: 'subj',
-      text: 'Subject',
+      text: 'newRecord.label1',
       name: 'subj',
-      type: 'text',
+      type: 'text'
     },
 
     {
       for: 'to',
-      text: 'To',
+      text: 'newRecord.label3',
       name: 'to',
-      type: 'text',
+      type: 'text'
     },
 
     {
       for: 'note',
-      text: 'Note',
+      text: 'newRecord.label5',
       name: 'note',
-      type: 'text',
+      type: 'text'
     },
     {
       for: 'replyTo',
-      text: 'Reply to',
+      text: 'newRecord.label4',
       name: 'replyTo',
-      type: 'text',
+      type: 'text'
     }
   ],
   contact: [
     {
-      for: 'location',
-      text: 'Location',
-      name: 'location',
-      type: 'text',
-    },
-
-    {
       for: 'name',
-      text: 'Name',
+      text: 'newContact.label1',
       name: 'name',
-      type: 'text',
+      type: 'text'
+    },
+    {
+      for: 'location',
+      text: 'newContact.label2',
+      name: 'location',
+      type: 'text'
     },
     {
       for: 'region',
-      text: 'Region',
+      text: 'newContact.label3',
       name: 'region',
       type: 'text'
     }
