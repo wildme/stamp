@@ -85,6 +85,11 @@
     "infoMsg3": "Error. Failed to upload file",
     "infoMsg4": "Error. Failed to get file"
   },
+  "editContact": {
+    "infoMsg1": "Error. Failed to update contact",
+    "infoMsg2": "Error. Failed to delete contact",
+    "confirm": "Are you sure?"
+  },
   "recordCard": {
     "titleinbox": "Inbox",
     "titleoutbox": "Outbox",
