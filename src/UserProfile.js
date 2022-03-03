@@ -9,6 +9,7 @@ import Password from './Password.js';
 const UserProfile = () => {
   const { path, url } = useRouteMatch();
   const user = useSelector((state) => state.user.username);
+  const fullname = useSelector((state) => state.user.fullname);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ const UserProfile = () => {
     <div className="user-profile-grid-container">
       <div className="user-profile-container">
         <div className="user-profile-title">
-          <h2>{firstname} {lastname}</h2>
+          <h2>{fullname}</h2>
           <p>{ t('userProfile.subTitle') }</p>
         </div>
         <div className="user-profile-navbar">
