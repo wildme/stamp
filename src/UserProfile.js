@@ -1,5 +1,4 @@
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PersonalInfo from './PersonalInfo.js';
@@ -8,36 +7,14 @@ import Password from './Password.js';
 
 const UserProfile = () => {
   const { path, url } = useRouteMatch();
-  const user = useSelector((state) => state.user.username);
-  const fullname = useSelector((state) => state.user.fullname);
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
+  const { username, fullname } = useSelector((state) => state.user);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const { signal } = abortController;
-
-    fetch(`/api/user/${user}`, { signal })
-      .then(res => {
-        if (res.status === 200) return res.json();
-      })
-      .then(data => {
-        setFirstname(data.firstname);
-        setLastname(data.lastname);
-        setEmail(data.email);
-      })
-      .catch((e) => console.error(e))
-
-    return () => { abortController.abort(); };
-  }, [user]);
 
   return (
     <div className="user-profile-grid-container">
       <div className="user-profile-container">
         <div className="user-profile-title">
-          <h2>{fullname}</h2>
+          <h2>{ fullname }</h2>
           <p>{ t('userProfile.subTitle') }</p>
         </div>
         <div className="user-profile-navbar">
@@ -55,16 +32,14 @@ const UserProfile = () => {
         </div>
         <div className="user-profile-info">
           <Switch>
-            <Route path={`${url}/e-mail`} render={() =>
-                <Email user={user} email={email} setter={setEmail} />}
+            <Route path={`${url}/e-mail`}
+              render={() => <Email user={username} t={t}/>}
             />
-            <Route path={`${url}/password`} render={() =>
-                <Password user={user} />}
+            <Route path={`${url}/password`}
+              render={() => <Password user={username} t={t} />}
             />
-            <Route path="*" render={() =>
-              <PersonalInfo user={user} firstname={firstname}
-                lastname={lastname} setterF={setFirstname}
-              setterL={setLastname} />}
+            <Route path="*"
+              render={() => <PersonalInfo user={username} t={t} />}
             />
           </Switch>
         </div>
