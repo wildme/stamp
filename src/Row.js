@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 import { BoxContext } from './Main.js';
 import { ContactsContext } from './Contacts.js';
 
@@ -13,6 +14,7 @@ const Row = ({ entry }) => {
   const [hidden, setHidden] = useState(false);
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
+  const { t } = useTranslation();
 
   const box = useContext(BoxContext);
   const contacts = useContext(ContactsContext);
@@ -25,13 +27,13 @@ const Row = ({ entry }) => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm(t('editContact.confirm'))) {
       fetch(`/api/contact/delete/${id}`)
         .then(res => {
           if (res.ok) setHidden(true);
           if (res.status === 500) {
             setError(true);
-            setInfoMsg("Couldn't delete contact");
+            setInfoMsg(t('editContact.infoMsg2'));
           }
         })
         .catch((e) => console.error(e))
@@ -48,7 +50,7 @@ const Row = ({ entry }) => {
         if (res.ok) setEditOn(false);
         if (res.status === 500) {
           setError(true);
-          setInfoMsg("Couldn't update contact");
+          setInfoMsg(t('editContact.infoMsg1'));
         }
       })
       .catch((e) => console.error(e))
