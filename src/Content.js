@@ -39,6 +39,7 @@ const Content = () => {
             { token: { string: data.token } }});
           dispatch({ type: 'LOGIN', payload:
             { user: { username: data.user.username,
+              fullname: data.user.fullname,
               admin: data.user.admin, loggedIn: true } }});
           history.replace(location.pathname);
         }
