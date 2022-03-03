@@ -91,6 +91,11 @@ const resources = {
         infoMsg3: en.editRecord.infoMsg3,
         infoMsg4: en.editRecord.infoMsg4
       },
+      editContact: {
+        infoMsg1: en.editContact.infoMsg1,
+        infoMsg2: en.editContact.infoMsg2,
+        confirm: en.editContact.confirm
+      },
       recordCard: {
         titleinbox: en.recordCard.titleinbox,
         titleoutbox: en.recordCard.titleoutbox,
@@ -227,6 +232,11 @@ const resources = {
         infoMsg2: ru.editRecord.infoMsg2,
         infoMsg3: ru.editRecord.infoMsg3,
         infoMsg4: ru.editRecord.infoMsg4
+      },
+      editContact: {
+        infoMsg1: ru.editContact.infoMsg1,
+        infoMsg2: ru.editContact.infoMsg2,
+        confirm: ru.editContact.confirm
       },
       recordCard: {
         titleinbox: ru.recordCard.titleinbox,
