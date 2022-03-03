@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-const Password = ({user}) => {
+const Password = ({user, t}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
   const [oldPassInfo, setOldPassInfo] = useState('');
   const [newPassInfo, setNewPassInfo] = useState('');
-  const { t } = useTranslation();
 
   const handleOldPass = (e) => {
     setOldPassInfo("");
@@ -23,9 +21,11 @@ const Password = ({user}) => {
   const handleConfirmPass = (e) => {
     setNewPassInfo("");
     setConfirmPass(e.target.value);
-  }
+  };
+
   const handlePassUpdate = (e) => {
     e.preventDefault();
+
     if (newPass !== confirmPass) {
       setNewPassInfo(t('password.infoMsg1'));
       return;
@@ -41,7 +41,8 @@ const Password = ({user}) => {
         if (res.status === 409) setOldPassInfo(t('password.infoMsg3'));
       })
       .catch((e) => console.error(e))
-};
+  };
+
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
