@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Email = ({ user, t }) => {
-  const [email, setEmail] = useState('');
+  const state = useSelector((state) => state.info);
+  const [email, setEmail] = useState(state.email);
   const [infoMsg, setInfoMsg] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleEmailUpdate = (e) => {
     e.preventDefault();
@@ -13,26 +16,16 @@ const Email = ({ user, t }) => {
       headers: {'Content-Type': 'application/json'}
     })
       .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: 'INFO', payload:
+            { info: {...state,  email: email } }
+          });
+        }
         if (res.status === 500) setInfoMsg(t('email.infoMsg1'));
         if (res.status === 409) setInfoMsg(t('email.infoMsg2'));
       })
       .catch((e) => console.error(e))
   };
-  useEffect(() => {
-    const abortController = new AbortController();
-    const { signal } = abortController;
-
-    fetch(`/api/user/${user}`, { signal })
-      .then(res => {
-        if (res.status === 200) return res.json();
-      })
-      .then(data => {
-        setEmail(data.email);
-      })
-      .catch((e) => console.error(e))
-
-    return () => { abortController.abort(); };
-  }, []);
 
   return (
     <div className="user-info-grid-container">
