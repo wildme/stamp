@@ -81,13 +81,6 @@
   font-size: 14px;
 }
 
-.login-error-msg {
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  color: red;
-}
-
 /* Main page. Content */
 .page-content {
   display: grid;
