@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PersonalInfo = ({ user, t }) => {
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [error, setError] = useState(false);
+const PersonalInfo = ({ user, name1, name2, t }) => {
+  const [firstname, setFirstname] = useState(name1);
+  const [lastname, setLastname] = useState(name2);
   const [infoMsg, setInfoMsg] = useState('');
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.user);
+  const state = useSelector((state) => state.info);
 
   const handleInfoUpdate = (e) => {
     e.preventDefault();
@@ -19,33 +18,16 @@ const PersonalInfo = ({ user, t }) => {
     })
       .then(res => {
         if (res.status === 200) {
-          dispatch({ type: 'LOGIN', payload:
-            { user: {...state,  fullname: [firstname, lastname].join(' ') }}});
+          dispatch({ type: 'INFO', payload:
+            { info: {...state,  fullname: [firstname, lastname].join(' ') } }
+          });
         }
         if (res.status === 500) {
-          setError(true);
           setInfoMsg(t('personalInfo.infoMsg'));
         }
       })
       .catch((e) => console.error(e))
   };
-
-  useEffect(() => {
-    const abortController = new AbortController();
-    const { signal } = abortController;
-
-    fetch(`/api/user/${user}`, { signal })
-      .then(res => {
-        if (res.status === 200) return res.json();
-      })
-      .then(data => {
-        setFirstname(data.firstname);
-        setLastname(data.lastname);
-      })
-      .catch((e) => console.error(e))
-
-    return () => { abortController.abort(); };
-  }, []);
 
   return (
     <div className="user-info-grid-container">
