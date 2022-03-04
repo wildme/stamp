@@ -39,11 +39,16 @@ const Login = () => {
       })
       .then(data => {
         if (data) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          dispatch({ type: 'TOKEN', payload:
+            { token: { string: data.token } }
+          });
           dispatch({ type: 'LOGIN', payload:
             { user: { username: data.user.username,
-              fullname: data.user.fullname,
               admin: data.user.admin, loggedIn: true }}
+          });
+          dispatch({ type: 'INFO', payload:
+            { info: { fullname:  data.user.fullname,
+              email: data.user.email }}
           });
         if (!error) history.replace(from);
         }
