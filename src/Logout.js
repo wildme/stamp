@@ -9,7 +9,7 @@ const Logout = () => {
     .then(res => {
       if (res.ok) {
         dispatch({ type: 'LOGOUT',
-          payload: { user: { loggedIn: false }, token: null }});
+          payload: { user: { loggedIn: false }, token: null, info: null }});
         history.replace("/login");
       }
     })
