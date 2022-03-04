@@ -7,7 +7,9 @@ import Password from './Password.js';
 
 const UserProfile = () => {
   const { path, url } = useRouteMatch();
-  const { username, fullname } = useSelector((state) => state.user);
+  const username = useSelector((state) => state.user.username);
+  const fullname = useSelector((state) => state.info.fullname);
+  const [name1, name2] = fullname.split(' ');
   const { t } = useTranslation();
 
   return (
@@ -33,13 +35,14 @@ const UserProfile = () => {
         <div className="user-profile-info">
           <Switch>
             <Route path={`${url}/e-mail`}
-              render={() => <Email user={username} t={t}/>}
+              render={() => <Email user={username} t={t} />}
             />
             <Route path={`${url}/password`}
               render={() => <Password user={username} t={t} />}
             />
             <Route path="*"
-              render={() => <PersonalInfo user={username} t={t} />}
+              render={() => <PersonalInfo user={username}
+                name1={name1} name2={name2} t={t} />}
             />
           </Switch>
         </div>
