@@ -1,4 +1,4 @@
-const initialState = { user: { loggedIn: false }, token: null };
+const initialState = { user: { loggedIn: false }, token: null, info: null };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,8 +11,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, token };
     }
     case 'LOGOUT': {
-      const { user, token } = action.payload;
-      return { ...state, user, token };
+      const { user, token, info } = action.payload;
+      return { ...state, user, token, info };
+    }
+    case 'INFO': {
+      const { info } = action.payload;
+      return { ...state, info };
     }
     default: return state;
   }
