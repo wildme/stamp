@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { HiEyeOff, HiEye } from 'react-icons/hi';
 
 const Password = ({user, t}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [showPassNew, setShowPassNew] = useState(false);
+  const [showPassRepeat, setShowPassRepeat] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const [oldPassInfo, setOldPassInfo] = useState('');
   const [newPassInfo, setNewPassInfo] = useState('');
@@ -21,6 +24,16 @@ const Password = ({user, t}) => {
   const handleConfirmPass = (e) => {
     setNewPassInfo("");
     setConfirmPass(e.target.value);
+  };
+
+  const handleShowPassNew = (e) => {
+    e.preventDefault()
+    setShowPassNew(!showPassNew);
+  };
+
+  const handleShowPassRepeat = (e) => {
+    e.preventDefault()
+    setShowPassRepeat(!showPassRepeat);
   };
 
   const handlePassUpdate = (e) => {
@@ -52,7 +65,7 @@ const Password = ({user, t}) => {
         <div className="user-info-input-container">
           <label htmlFor="old-pass"><b>{ t('password.label1') }</b>
             { oldPassInfo &&
-                <span className="user-info-msg"> {oldPassInfo}</span>
+              <span className="user-info-msg"> {oldPassInfo}</span>
             }
           </label>
           <input
@@ -64,24 +77,38 @@ const Password = ({user, t}) => {
           />
           <label htmlFor="new-pass"><b>{ t('password.label2') }</b>
             { newPassInfo &&
-                <span className="user-info-msg"> {newPassInfo}</span>
+              <span className="user-info-msg"> {newPassInfo}</span>
             }
           </label>
-          <input
-            type="password"
-            name="new-pass"
-            value={newPass}
-            required
-            onChange={(e) => handleNewPass(e)}
-          />
+          <div className="user-info-pass-container">
+            <input
+              type={showPassNew ? "text" : "password"}
+              id="pass"
+              name="new-pass"
+              value={newPass}
+              required
+              onChange={(e) => handleNewPass(e)}
+            />
+            <button id="pass"
+              onClick={(e) => handleShowPassNew(e)}>
+              { showPassNew ? <HiEye /> : <HiEyeOff /> }
+            </button>
+          </div>
           <label htmlFor="confirm-pass"><b>{ t('password.label3') }</b></label>
-          <input
-            type="password"
-            name="confirm-pass"
-            value={confirmPass}
-            required
-            onChange={(e) => handleConfirmPass(e)}
-          />
+          <div className="user-info-pass-container">
+            <input
+              type={showPassRepeat ? "text" : "password"}
+              id="pass"
+              name="confirm-pass"
+              value={confirmPass}
+              required
+              onChange={(e) => handleConfirmPass(e)}
+            />
+            <button id="pass"
+              onClick={(e) => handleShowPassRepeat(e)}>
+                { showPassRepeat ? <HiEye /> : <HiEyeOff /> }
+            </button>
+          </div>
         </div>
         <div className="user-info-update-btn-container">
           <input value={ t('password.button') } id="submit" type="submit" />
