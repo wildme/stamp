@@ -516,6 +516,31 @@ th > button {
   margin-top: 8px;
   height: 30px;
 }
+
+.user-info-input-container input:focus {
+  outline: none;
+}
+
+.user-info-pass-container {
+  display: grid;
+  grid-template-columns: 90% auto;
+  border: 1px solid;
+  padding: 4px;
+}
+
+.user-info-input-container input#pass {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-info-input-container button#pass {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 17px;
+}
+
 .user-info-update-btn-container {
   display: grid;
 }
