@@ -83,7 +83,8 @@
     "infoMsg1": "Error. Failed to update record",
     "infoMsg2": "Error. Failed to delete file",
     "infoMsg3": "Error. Failed to upload file",
-    "infoMsg4": "Error. Failed to get file"
+    "infoMsg4": "Error. Failed to get file",
+    "infoMsg5": "Max file size exceeded"
   },
   "editContact": {
     "infoMsg1": "Error. Failed to update contact",
