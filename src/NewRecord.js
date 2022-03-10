@@ -14,27 +14,26 @@ const NewRecord = () => {
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState();
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
-  const { t } = useTranslation();
-
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   }
 
-  const handleAddRecord = async (e) => {
+  const handleAddRecord = (e) => {
     e.preventDefault();
-
-    const id = await fetch(`/api/${box}/new`, {
+    const id = fetch(`/api/${box}/new`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
+        if ((res.status === 200) && !file) {
+          history.push(`/${box}`);
+        }
         if (res.status === 500) {
-          setError(true);
           setInfoMsg(t('newRecord.infoMsg1'));
         }
       })
@@ -43,22 +42,24 @@ const NewRecord = () => {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      await fetch(`/api/${box}/upload/${id}`, {
+      fetch(`/api/${box}/upload/${id}`, {
         method: 'POST',
         body: formData,
         })
         .then(res => {
+          if (res.status === 200) {
+            history.push(`/${box}`);
+         }
+          if (res.status === 413) {
+           setInfoMsg(t('editRecord.infoMsg5'));
+         }
           if (res.status === 500) {
-            setError(true);
             setInfoMsg(t('newRecord.infoMsg2'));
           }
         })
         .catch((e) => console.error(e))
     }
-
-    if (!error) history.replace(`/${box}`);
   };
-  
 
   return (
     <div className="add-record-grid-container">
