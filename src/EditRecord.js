@@ -16,7 +16,6 @@ const EditRecord = () => {
   const [file, setFile] = useState(null);
   const [newFile, setNewFile] = useState(null);
   const [noData, setNoData] = useState(false);
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const history = useHistory();
   const { t } = useTranslation();
@@ -25,49 +24,8 @@ const EditRecord = () => {
     setNewFile(e.target.files[0]);
   };
 
-  const handleEditRecord = () => {
-    fetch(`/api/${box}/update/${id}`, {
-      method: 'POST',
-      body: JSON.stringify({ subject, fromTo, replyTo, note }),
-      headers: { 'Content-Type': 'application/json' }
-      })
-      .then(res => {
-        if (res.status === 500) {
-          setError(true);
-          setInfoMsg(t('editRecord.infoMsg1'));
-        }
-      })
-      .catch((e) => console.error(e))
-
-    if (delFile || (newFile && file)) {
-      const fileId = file._id;
-      fetch(`/api/attachment/delete/${fileId}`)
-        .then(res => {
-          if (res.status === 500) {
-            setError(true);
-            setInfoMsg(t('editRecord.infoMsg2'));
-          }
-        })
-        .catch((e) => console.error(e))
-    }
-
-    if (newFile) {
-      const formData = new FormData();
-      formData.append('file', newFile);
-      fetch(`/api/${box}/upload/${id}`, {
-       method: 'POST',
-       body: formData,
-       })
-       .then(res => {
-         if (res.status === 500) {
-           setError(true);
-           setInfoMsg(t('editRecord.infoMsg3'));
-         }
-       })
-       .catch((e) => console.error(e))
-    }
-
-    if (!error) history.replace(`/${box}`);
+  const handleCheck = () => {
+    setDelFile(!delFile);
   };
 
   const handleDownload = (e) => {
@@ -85,9 +43,57 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
   };
 
-  const handleCheck = () => {
-    setDelFile(!delFile);
-  }
+  const handleEditRecord = () => {
+    fetch(`/api/${box}/update/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({ subject, fromTo, replyTo, note }),
+      headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => {
+        if ((res.status === 200) && !newFile && !delFile) {
+          history.push(`/${box}`);
+        }
+        if (res.status === 500) {
+          setInfoMsg(t('editRecord.infoMsg1'));
+        }
+      })
+      .catch((e) => console.error(e))
+
+    if (delFile || (newFile && file)) {
+      const fileId = file._id;
+      fetch(`/api/attachment/delete/${fileId}`)
+        .then(res => {
+          if ((res.status === 200) && !newFile) {
+            history.push(`/${box}`);
+          }
+          if (res.status === 500) {
+            setInfoMsg(t('editRecord.infoMsg2'));
+          }
+        })
+        .catch((e) => console.error(e))
+    }
+
+    if (newFile) {
+      const formData = new FormData();
+      formData.append('file', newFile);
+      fetch(`/api/${box}/upload/${id}`, {
+        method: 'POST',
+        body: formData,
+       })
+       .then(res => {
+         if (res.status === 200) {
+            history.push(`/${box}`);
+         }
+         if (res.status === 413) {
+           setInfoMsg(t('editRecord.infoMsg5'));
+         }
+         if (res.status === 500) {
+           setInfoMsg(t('editRecord.infoMsg3'));
+         }
+       })
+       .catch((e) => console.error(e))
+    }
+  };
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -108,12 +114,11 @@ const EditRecord = () => {
       ))
         .catch((e) => console.error(e))
 
-    fetch(`/api/attachment/${box}/${id}`, { signal })
+    fetch(`/api/attachment/${box}/${id}`, { signal: signal })
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setFile(null);
         if (!res.ok) {
-          setError(true);
           setInfoMsg(t('editRecord.infoMsg4'));
         }
     })
