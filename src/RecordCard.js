@@ -137,13 +137,14 @@ const RecordCard = () => {
         </div>
         <div className="record-attr">
           <b>{ t('recordCard.note') }</b>:
-          <div className="long-field-card">{note || '-'}</div>
+          <div className="record-break-line">{note || '-'}</div>
         </div> 
         </div>
         { file && <div className="record-attr">
           <div className="record-attachment">
             <a href={`/attachment/${file._id}`}
-              onClick={(e) => handleDownload(e)}>{file.filename}
+              onClick={(e) => handleDownload(e)}>
+              <div className="record-hidden-line">{file.filename}</div>
             </a>
           </div>
         </div>
