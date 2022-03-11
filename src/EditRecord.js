@@ -97,9 +97,9 @@ const EditRecord = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const { signal } = abortController;
+    const signal = abortController.signal;
 
-    fetch(`/api/${box}/${id}`, { signal: signal })
+    fetch(`/api/${box}/${id}`, { signal })
       .then(res =>  {
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
@@ -114,7 +114,7 @@ const EditRecord = () => {
       ))
         .catch((e) => console.error(e))
 
-    fetch(`/api/attachment/${box}/${id}`, { signal: signal })
+    fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setFile(null);
@@ -126,7 +126,7 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [box, id]);
+  }, [box, id, t]);
 
     return noData ? <PageNotFound /> : (
       <div className="edit-grid-container">
