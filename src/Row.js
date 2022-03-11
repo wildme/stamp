@@ -12,7 +12,6 @@ const Row = ({ entry }) => {
   const [location, setLocation] = useState(entry.location);
   const [region, setRegion] = useState(entry.region);
   const [hidden, setHidden] = useState(false);
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const { t } = useTranslation();
 
@@ -32,7 +31,6 @@ const Row = ({ entry }) => {
         .then(res => {
           if (res.ok) setHidden(true);
           if (res.status === 500) {
-            setError(true);
             setInfoMsg(t('editContact.infoMsg2'));
           }
         })
@@ -49,7 +47,6 @@ const Row = ({ entry }) => {
       .then(res => {
         if (res.ok) setEditOn(false);
         if (res.status === 500) {
-          setError(true);
           setInfoMsg(t('editContact.infoMsg1'));
         }
       })
