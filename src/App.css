@@ -239,6 +239,7 @@ th > button {
 
 .add-file-container input#upload {
   margin-top: 8px;
+  width: 300px;
 }
 
 .add-btn-container {
@@ -338,14 +339,21 @@ th > button {
   background-color: #33cc33;
 }
 
-.long-field-card {
+.record-break-line {
   width: 300px;
   overflow-wrap: break-word;
+}
+
+.record-hidden-line {
+  width: 300px;
+  text-align: center;
+  overflow: hidden;
 }
 
 .record-attr {
   padding: 5px;
 }
+
 .record-attachment {
   border: 3px solid;
   border-style: double;
@@ -384,6 +392,7 @@ th > button {
 
 .edit-file-container input#upload {
   margin-top: 8px;
+  width: 300px;
 }
 
 .update-btn-container {
