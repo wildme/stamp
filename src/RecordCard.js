@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PageNotFound from './404.js';
+import FlashMessage from './FlashMessage.js'
 
 const RecordCard = () => {
   const { id, box } = useParams();
@@ -17,7 +18,6 @@ const RecordCard = () => {
   const [addedBy, setAddedBy] = useState('Loading...');
   const [file, setFile] = useState(null);
   const [noData, setNoData] = useState(false);
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState('');
   const { t } = useTranslation();
   const dateStr = date ?
@@ -41,7 +41,6 @@ const RecordCard = () => {
       .then(res => {
         if (res.ok) setStatus(newStatus);
         if (res.status === 500) {
-          setError(true);
           setInfoMsg(t('recordCard.infoMsg1'));
         }
       })
@@ -65,7 +64,7 @@ const RecordCard = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const { signal } = abortController;
+    const signal = abortController.signal;
 
     fetch(`/api/${box}/${id}`, { signal })
       .then(res => { 
@@ -97,10 +96,11 @@ const RecordCard = () => {
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [box, id])
+  }, [box, id, t])
 
   return noData ? <PageNotFound /> : (
     <div className="record-card-grid-container">
+      { infoMsg && <FlashMessage msg={infoMsg} /> }
       <div className="record-card">
         <div className="record-header">
           { <h2>{ t(`recordCard.title${box}`) } #{idOfRec}</h2> }
