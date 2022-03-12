@@ -39,6 +39,7 @@ const resources = {
       contacts: {
         title: en.contacts.title,
         infoMsg1: en.contacts.infoMsg1,
+        infoMsg2: en.contacts.infoMsg2,
         link: en.contacts.link
       },
       userProfile: {
