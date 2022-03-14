@@ -50,8 +50,8 @@ const AllContacts = () => {
           </tr>
         </thead>
         <tbody>
-            <ContactsContext.Provider value='contacts'>
-    { tbContacts && <Rows rows={tbContacts} />}
+            <ContactsContext.Provider value={setInfoMsg}>
+    { tbContacts && <Rows rows={tbContacts} kind='contacts' />}
             </ContactsContext.Provider>
        </tbody>
       </table>
