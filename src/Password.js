@@ -1,28 +1,22 @@
 import { useState } from 'react';
 import { HiEyeOff, HiEye } from 'react-icons/hi';
 
-const Password = ({user, t}) => {
+const Password = ({user, t, setter}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [showPassNew, setShowPassNew] = useState(false);
   const [showPassRepeat, setShowPassRepeat] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
-  const [oldPassInfo, setOldPassInfo] = useState('');
-  const [newPassInfo, setNewPassInfo] = useState('');
 
   const handleOldPass = (e) => {
-    setOldPassInfo("");
     setOldPass(e.target.value);
   };
 
   const handleNewPass = (e) => {
-    setNewPassInfo("");
     setNewPass(e.target.value);
   };
 
   const handleConfirmPass = (e) => {
-    setNewPassInfo("");
     setConfirmPass(e.target.value);
   };
 
@@ -40,7 +34,7 @@ const Password = ({user, t}) => {
     e.preventDefault();
 
     if (newPass !== confirmPass) {
-      setNewPassInfo(t('password.infoMsg1'));
+      setter(t('password.infoMsg1'));
       return;
     }
 
@@ -50,8 +44,8 @@ const Password = ({user, t}) => {
       headers: {'Content-Type': 'application/json'}
     })
       .then(res => {
-        if (res.status === 500) setInfoMsg(t('password.infoMsg2'));
-        if (res.status === 409) setOldPassInfo(t('password.infoMsg3'));
+        if (res.status === 500) setter(t('password.infoMsg2'));
+        if (res.status === 409) setter(t('password.infoMsg3'));
       })
       .catch((e) => console.error(e))
   };
@@ -63,11 +57,7 @@ const Password = ({user, t}) => {
       </div>
       <form onSubmit={(e) => handlePassUpdate(e)} autoComplete="off">
         <div className="user-info-input-container">
-          <label htmlFor="old-pass"><b>{ t('password.label1') }</b>
-            { oldPassInfo &&
-              <span className="user-info-msg"> {oldPassInfo}</span>
-            }
-          </label>
+          <label htmlFor="old-pass"><b>{ t('password.label1') }</b></label>
           <input
             type="password"
             name="old-pass"
@@ -75,11 +65,7 @@ const Password = ({user, t}) => {
             required
             onChange={(e) => handleOldPass(e)}
           />
-          <label htmlFor="new-pass"><b>{ t('password.label2') }</b>
-            { newPassInfo &&
-              <span className="user-info-msg"> {newPassInfo}</span>
-            }
-          </label>
+          <label htmlFor="new-pass"><b>{ t('password.label2') }</b></label>
           <div className="user-info-pass-container">
             <input
               type={showPassNew ? "text" : "password"}
