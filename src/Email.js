@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Email = ({ user, t }) => {
+const Email = ({ user, t, setter }) => {
   const state = useSelector((state) => state.info);
   const [email, setEmail] = useState(state.email);
-  const [infoMsg, setInfoMsg] = useState('');
 
   const dispatch = useDispatch();
 
@@ -21,8 +20,8 @@ const Email = ({ user, t }) => {
             { info: {...state,  email: email } }
           });
         }
-        if (res.status === 500) setInfoMsg(t('email.infoMsg1'));
-        if (res.status === 409) setInfoMsg(t('email.infoMsg2'));
+        if (res.status === 500) setter(t('email.infoMsg1'));
+        if (res.status === 409) setter(t('email.infoMsg2'));
       })
       .catch((e) => console.error(e))
   };
@@ -42,9 +41,6 @@ const Email = ({ user, t }) => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      { infoMsg &&
-      <div className="user-info-msg">{infoMsg}</div>
-      }
       <div className="user-info-update-btn-container">
         <button
           type="submit"
