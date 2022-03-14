@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PersonalInfo = ({ user, name1, name2, t }) => {
+const PersonalInfo = ({ user, name1, name2, t, setter }) => {
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
-  const [infoMsg, setInfoMsg] = useState('');
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state.info);
@@ -23,7 +22,7 @@ const PersonalInfo = ({ user, name1, name2, t }) => {
           });
         }
         if (res.status === 500) {
-          setInfoMsg(t('personalInfo.infoMsg'));
+          setter(t('personalInfo.infoMsg'));
         }
       })
       .catch((e) => console.error(e))
