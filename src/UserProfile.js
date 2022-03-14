@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PersonalInfo from './PersonalInfo.js';
 import Email from './Email.js';
 import Password from './Password.js';
+import FlashMessage from './FlashMessage.js';
 
 const UserProfile = () => {
   const { path, url } = useRouteMatch();
+  const [infoMsg, setInfoMsg] = useState('');
   const username = useSelector((state) => state.user.username);
   const fullname = useSelector((state) => state.info.fullname);
   const [name1, name2] = fullname.split(' ');
@@ -14,6 +17,7 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-grid-container">
+      { infoMsg && <FlashMessage msg={infoMsg} /> }
       <div className="user-profile-container">
         <div className="user-profile-title">
           <h2>{ fullname }</h2>
@@ -35,14 +39,33 @@ const UserProfile = () => {
         <div className="user-profile-info">
           <Switch>
             <Route path={`${url}/e-mail`}
-              render={() => <Email user={username} t={t} />}
+              render={() =>
+                <Email
+                  user={username}
+                  t={t}
+                  setter={setInfoMsg}
+                />
+              }
             />
             <Route path={`${url}/password`}
-              render={() => <Password user={username} t={t} />}
+              render={() =>
+                  <Password
+                    user={username}
+                    t={t}
+                    setter={setInfoMsg}
+                  />
+              }
             />
             <Route path="*"
-              render={() => <PersonalInfo user={username}
-                name1={name1} name2={name2} t={t} />}
+              render={() =>
+                  <PersonalInfo
+                    user={username}
+                    name1={name1}
+                    name2={name2}
+                    t={t}
+                    setter={setInfoMsg}
+                  />
+              }
             />
           </Switch>
         </div>
