@@ -72,7 +72,7 @@ const Main = (props) => {
           </thead>
           <tbody>
             <BoxContext.Provider value={box}>
-              { tbContent && <Rows rows={tbContent}/> }
+              { tbContent && <Rows rows={tbContent} kind='box' /> }
             </BoxContext.Provider>
           </tbody>
         </table>
