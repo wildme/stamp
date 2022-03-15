@@ -8,7 +8,7 @@ import EditRecord from './EditRecord.js';
 import RecordCard from './RecordCard.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
-import AllContacts from './Contacts.js';
+import Contacts from './Contacts.js';
 import NewContact from './NewContact.js';
 import PageNotFound from './404.js';
 import UserProfile from './UserProfile.js';
@@ -96,7 +96,7 @@ const Content = () => {
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={NewAccount} />
         <PrivateRoute exact path="/" component={Hello} />
-        <PrivateRoute exact path="/contacts" component={AllContacts} />
+        <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
         <PrivateRoute exact path="/inbox" component={Main} />
         <PrivateRoute exact path="/outbox" component={Main} />
@@ -105,7 +105,7 @@ const Content = () => {
         <PrivateRoute exact path="/:box/view/:id" component={RecordCard} />
         <PrivateRoute exact path="/:box/edit/:id" component={EditRecord} />
         <PrivateRoute path="*" component={PageNotFound} />
-    </Switch>
+      </Switch>
     </Fragment>
   );
 };
