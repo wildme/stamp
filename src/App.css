@@ -1,8 +1,14 @@
-/* Navbar */
+/* Fonts */
+@font-face {
+  font-family: Lalezar;
+  src: url(./fonts/Lalezar-Regular.ttf);
+}
+
+/* Navigation bar */
 .navbar {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-auto-rows: 50px;
+  grid-template-columns: 7rem auto auto;
+  grid-auto-rows: 55px;
   background-color: #000000;
   align-items: center;
 }
@@ -27,6 +33,18 @@
   text-align: left;
 }
 
+.logo {
+  display: grid;
+  font-family: Lalezar;
+}
+
+.logo a#logo {
+  color: white;
+  font-size: 35px;
+  padding: 5px;
+}
+
+/* Footer */
 .footer {
   display: grid;
   grid-template-columns: 100%;
