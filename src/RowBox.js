@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom';
 import { Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { HiPencil } from 'react-icons/hi';
+import i18n from 'i18next';
 import { BoxContext } from './Main.js';
 
 const RowBox = ({ entry }) => {
   const box = useContext(BoxContext);
-  const dateStr = new Date(entry.date).toLocaleString('ru-Ru');
+  const dateStr = new Date(entry.date).toLocaleString(i18n.language);
   const admin = useSelector((state) => state.user.admin);
   const username = useSelector((state) => state.user.username);
   const accessToEdit = admin || (username === entry.addedBy);
