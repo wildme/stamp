@@ -30,7 +30,7 @@ const Main = (props) => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const { signal } = abortController;
+    const signal = abortController.signal;
 
     fetch(`/api/${box}?field=${column}&order=${sortOrder}`, { signal })
       .then(res => {
@@ -46,12 +46,14 @@ const Main = (props) => {
 
     return () => { abortController.abort(); };
 
-  }, [sortOrder, column, box])
+  }, [sortOrder, column, box, t])
 
   return (
     <div className="page-content">
       <div className="page-title">
-    <h2>{ box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox') }</h2>
+        <h2>
+          { box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox') }
+        </h2>
       </div>
       { infoMsg &&
       <div className="flash-msg-grid-container">
