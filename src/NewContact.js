@@ -16,6 +16,7 @@ const NewContact = () => {
 
   const handleAddContact = (e) => {
     e.preventDefault();
+    infoMsg && setInfoMsg('');
     fetch('/api/contacts/new', {
       method: 'POST',
       body: JSON.stringify({ orgLocation, orgRegion, orgName }),
