@@ -29,6 +29,7 @@ const RowContacts = ({ entry }) => {
   }
 
   const handleSubmit = (id) => {
+    setter('');
     fetch("/api/contact/update", {
       method: 'POST',
       body: JSON.stringify({ id, name, location, region }),
