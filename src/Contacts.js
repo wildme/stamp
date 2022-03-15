@@ -27,7 +27,7 @@ const Contacts = () => {
       .catch((e) => console.error(e));
 
     return () => { abortController.abort(); };
-  }, [])
+  }, [t])
 
   return (
     <div className="page-content">
