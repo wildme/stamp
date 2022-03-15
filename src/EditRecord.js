@@ -43,7 +43,9 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
   };
 
-  const handleEditRecord = () => {
+  const handleEditRecord = (e) => {
+    e.preventDefault();
+    infoMsg && setInfoMsg('');
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, replyTo, note }),
@@ -177,7 +179,7 @@ const EditRecord = () => {
           </div>
           <div className="update-btn-container">
             <button type="submit"
-              onClick={() => handleEditRecord()}>{ t('editRecord.button') }
+              onClick={(e) => handleEditRecord(e)}>{ t('editRecord.button') }
             </button>
           </div>
         </div>
