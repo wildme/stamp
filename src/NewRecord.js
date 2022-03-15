@@ -24,6 +24,7 @@ const NewRecord = () => {
 
   const handleAddRecord = (e) => {
     e.preventDefault();
+    infoMsg && setInfoMsg('');
     const id = fetch(`/api/${box}/new`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
