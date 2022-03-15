@@ -7,7 +7,7 @@
 /* Navigation bar */
 .navbar {
   display: grid;
-  grid-template-columns: 7rem auto auto;
+  grid-template-columns: auto auto;
   grid-auto-rows: 55px;
   background-color: #000000;
   align-items: center;
@@ -18,6 +18,13 @@
   text-decoration: none;
   font-size: 19px;
   padding: 5px;
+}
+
+.navbar a#logo {
+  color: #ffffff;
+  font-family: Lalezar;
+  font-size: 40px;
+  padding: 0 20px 0 20px;
 }
 
 .navbar a:hover {
@@ -31,17 +38,6 @@
 
 .navbar-left {
   text-align: left;
-}
-
-.logo {
-  display: grid;
-  font-family: Lalezar;
-}
-
-.logo a#logo {
-  color: white;
-  font-size: 35px;
-  padding: 5px;
 }
 
 /* Footer */
@@ -142,6 +138,7 @@ tr {
 tr#canceled {
   background-color: #ffe6e6;
 }
+
 th, td {
   padding: 8px;
 }
@@ -470,6 +467,7 @@ th > button {
   justify-items: center;
   align-items: center;
 }
+
 .user-profile-container {
   display: grid;
   grid-template-columns: 200px 500px;
@@ -592,17 +590,6 @@ th > button {
 
 .user-info-update-btn-container button:hover:enabled {
   background-color: #00b300;
-}
-
-.user-info-msg {
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  color: red;
-}
-
-.user-info-msg span {
-  color: red;
 }
 
 /* Flash Message */
