@@ -7,7 +7,7 @@ import FlashMessage from './FlashMessage.js'
 
 export const ContactsContext = createContext();
 
-const AllContacts = () => {
+const Contacts = () => {
   const [tbContacts, setTbContacts] = useState([]);
   const [infoMsg, setInfoMsg] = useState('');
   const [noData, setNoData] = useState(false);
@@ -15,7 +15,7 @@ const AllContacts = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    const { signal } = abortController;
+    const signal = abortController.signal;
 
     fetch("/api/contacts", { signal })
       .then(res => {
@@ -30,35 +30,39 @@ const AllContacts = () => {
   }, [])
 
   return (
-  <div className="page-content">
-    <div className="page-title">
-      <h2>{ t('contacts.title') }</h2>
-    </div>
-    { infoMsg &&
-      <div className="flash-msg-grid-container">
-        <FlashMessage msg={infoMsg} />
+    <div className="page-content">
+      <div className="page-title">
+        <h2>{ t('contacts.title') }</h2>
       </div>
-    }
-    <div className="page-actions">
-      <Link to="/contacts/new">{ t('contacts.link') }</Link>
+      { infoMsg &&
+        <div className="flash-msg-grid-container">
+          <FlashMessage msg={infoMsg} />
+        </div>
+      }
+      <div className="page-actions">
+        <Link to="/contacts/new">{ t('contacts.link') }</Link>
+      </div>
+      <div className="page-table">
+        <table>
+          <thead>
+            <tr className="top-row">
+              <TableHead table="contacts" t={t}/>
+            </tr>
+          </thead>
+          <tbody>
+              <ContactsContext.Provider value={setInfoMsg}>
+          { tbContacts &&
+              <Rows rows={tbContacts} kind='contacts' />
+          }
+              </ContactsContext.Provider>
+         </tbody>
+        </table>
+      { noData &&
+          <p><i>{ t('contacts.infoMsg2') }</i></p>
+      }
+      </div>
     </div>
-    <div className="page-table">
-      <table>
-        <thead>
-          <tr className="top-row">
-            <TableHead table="contacts" t={t}/>
-          </tr>
-        </thead>
-        <tbody>
-            <ContactsContext.Provider value={setInfoMsg}>
-    { tbContacts && <Rows rows={tbContacts} kind='contacts' />}
-            </ContactsContext.Provider>
-       </tbody>
-      </table>
-    { noData && <p><i>{ t('contacts.infoMsg2') }</i></p> }
-    </div>
-  </div>
   )
 };
 
-export default AllContacts;
+export default Contacts;
