@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import PageNotFound from './404.js';
 import FlashMessage from './FlashMessage.js'
 
@@ -21,9 +22,9 @@ const RecordCard = () => {
   const [infoMsg, setInfoMsg] = useState('');
   const { t } = useTranslation();
   const dateStr = date ?
-    new Date(date).toLocaleString('ru-Ru') : 'None';
+    new Date(date).toLocaleString(i18n.language) : 'None';
   const updatedStr = updated ?
-    new Date(updated).toLocaleString('ru-Ru') : 'None';
+    new Date(updated).toLocaleString(i18n.language) : 'None';
   const user = useSelector((state) => state.user);
   const accessToEdit = user.admin || (user.username === addedBy);
 
