@@ -7,6 +7,9 @@ const HeaderLinks = () => {
 
   return (
     <div className="navbar">
+       <div className="logo">
+         <Link to="/" id="logo">Stamp</Link>
+       </div>
       <div className="navbar-left">
         <Link to="/inbox">{t('navbar.inbox')}</Link>
         <Link to="/outbox">{t('navbar.outbox')}</Link>
