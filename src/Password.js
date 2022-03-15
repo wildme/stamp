@@ -32,7 +32,7 @@ const Password = ({user, t, setter}) => {
 
   const handlePassUpdate = (e) => {
     e.preventDefault();
-
+    setter('');
     if (newPass !== confirmPass) {
       setter(t('password.infoMsg1'));
       return;

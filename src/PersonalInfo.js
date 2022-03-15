@@ -10,6 +10,7 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
 
   const handleInfoUpdate = (e) => {
     e.preventDefault();
+    setter('');
     fetch("/api/user/update/info", {
       method: 'POST',
       body: JSON.stringify({user, firstname, lastname}),

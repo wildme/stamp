@@ -9,6 +9,7 @@ const Email = ({ user, t, setter }) => {
 
   const handleEmailUpdate = (e) => {
     e.preventDefault();
+    setter('');
     fetch("/api/user/update/email", {
       method: 'POST',
       body: JSON.stringify({user, email}),
