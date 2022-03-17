@@ -579,17 +579,13 @@ th > button {
   border-radius: 6px;
 }
 
-.user-info-update-btn-container button:hover, input#submit:hover {
+.user-info-update-btn-container button:enabled, input#submit:enabled {
   background-color: #00b300;
 }
 
-.user-info-update-btn-container button:disabled {
+.user-info-update-btn-container button:disabled, input#submit:disabled {
   background-color: #e6e6e6;
   cursor: default;
-}
-
-.user-info-update-btn-container button:hover:enabled {
-  background-color: #00b300;
 }
 
 /* Flash Message */
