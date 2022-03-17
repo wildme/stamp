@@ -97,7 +97,12 @@ const Password = ({user, t, setter}) => {
           </div>
         </div>
         <div className="user-info-update-btn-container">
-          <input value={ t('password.button') } id="submit" type="submit" />
+          <input
+            type="submit"
+            id="submit"
+            value={ t('password.button') }
+            disabled={!oldPass || !newPass || !confirmPass}
+          />
         </div>
       </form>
     </div>
