@@ -55,7 +55,7 @@ const Password = ({user, t, setter}) => {
       <div className="user-info-title-container">
         <h2>{ t('password.title') }</h2>
       </div>
-      <form onSubmit={(e) => handlePassUpdate(e)} autoComplete="off">
+      <form onSubmit={(e) => handlePassUpdate(e)}>
         <div className="user-info-input-container">
           <label htmlFor="old-pass"><b>{ t('password.label1') }</b></label>
           <input
@@ -75,7 +75,9 @@ const Password = ({user, t, setter}) => {
               required
               onChange={(e) => handleNewPass(e)}
             />
-            <button id="pass"
+            <button
+              id="pass"
+              type="button"
               onClick={(e) => handleShowPassNew(e)}>
               { showPassNew ? <HiEye /> : <HiEyeOff /> }
             </button>
@@ -90,9 +92,11 @@ const Password = ({user, t, setter}) => {
               required
               onChange={(e) => handleConfirmPass(e)}
             />
-            <button id="pass"
+            <button
+              id="pass"
+              type="button"
               onClick={(e) => handleShowPassRepeat(e)}>
-                { showPassRepeat ? <HiEye /> : <HiEyeOff /> }
+              { showPassRepeat ? <HiEye /> : <HiEyeOff /> }
             </button>
           </div>
         </div>
