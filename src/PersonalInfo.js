@@ -23,7 +23,7 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
           });
         }
         if (res.status === 500) {
-          setter(t('personalInfo.infoMsg'));
+          setter(t('personalInfo.infoMsg1'));
         }
       })
       .catch((e) => console.error(e))
