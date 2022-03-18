@@ -45,7 +45,7 @@
     "title": "Change user info",
     "label1": "Firstname",
     "label2": "Lastname",
-    "infoMsg1": "Failed to update user info",
+    "infoMsg1": "Error. Failed to update user info",
     "button": "Change"
   },
   "email": {
