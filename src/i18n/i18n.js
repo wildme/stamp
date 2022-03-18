@@ -53,6 +53,7 @@ const resources = {
         label1: en.personalInfo.label1,
         label2: en.personalInfo.label2,
         label3: en.personalInfo.label3,
+        infoMsg1: en.personalInfo.infoMsg1,
         button: en.personalInfo.button
       },
       email: {
@@ -196,6 +197,7 @@ const resources = {
         label1: ru.personalInfo.label1,
         label2: ru.personalInfo.label2,
         label3: ru.personalInfo.label3,
+        infoMsg1: ru.personalInfo.infoMsg1,
         button: ru.personalInfo.button
       },
       email: {
