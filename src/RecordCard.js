@@ -19,7 +19,7 @@ const RecordCard = () => {
   const [addedBy, setAddedBy] = useState('Loading...');
   const [file, setFile] = useState(null);
   const [noData, setNoData] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
   const dateStr = date ?
     new Date(date).toLocaleString(i18n.language) : 'None';
@@ -42,7 +42,7 @@ const RecordCard = () => {
       .then(res => {
         if (res.ok) setStatus(newStatus);
         if (res.status === 500) {
-          setInfoMsg(t('recordCard.infoMsg1'));
+          setInfoMsg({str: t('recordCard.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
@@ -71,7 +71,9 @@ const RecordCard = () => {
       .then(res => { 
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
-        if (!res.ok) setInfoMsg(t('recordCard.infoMsg2'));
+        if (!res.ok) {
+          setInfoMsg({str: t('recordCard.infoMsg2'), id: Math.random()});
+        }
       })
       .then(data => data.map((item) => {
         return (
@@ -91,7 +93,9 @@ const RecordCard = () => {
     fetch(`/api/attachment/${box}/${id}`, { signal })
       .then(res => {
         if (res.status === 200) return res.json();
-        if (!res.ok) setInfoMsg(t('recordCard.infoMsg3'));
+        if (!res.ok) {
+          setInfoMsg({str: t('recordCard.infoMsg3'), id: Math.random()});
+        }
     })
       .then(data => setFile(data))
       .catch((e) => console.error(e))
@@ -101,7 +105,7 @@ const RecordCard = () => {
 
   return noData ? <PageNotFound /> : (
     <div className="record-card-grid-container">
-      { infoMsg && <FlashMessage msg={infoMsg} /> }
+      { infoMsg.str && <FlashMessage msg={infoMsg} id={infoMsg.id} /> }
       <div className="record-card">
         <div className="record-header">
           { <h2>{ t(`recordCard.title${box}`) } #{idOfRec}</h2> }
