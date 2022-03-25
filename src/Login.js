@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -19,7 +19,6 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (infoMsg) setInfoMsg('');
     if (error) setError(false);
 
     fetch("/api/login", {
@@ -28,13 +27,15 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.status === 200) {
+          return res.json();
+        }
         if (res.status === 500) {
           setError(true);
-          setInfoMsg(t('login.infoMsg2'));
+          setInfoMsg({str: t('login.infoMsg2'), id: Math.random()});
         }
         if (res.status === 401) {
-          setInfoMsg(t('login.infoMsg1'));
+          setInfoMsg({str: t('login.infoMsg1'), id: Math.random()});
         }
       })
       .then(data => {
@@ -58,7 +59,7 @@ const Login = () => {
 
   return (
     <div className="login-grid-container">
-      { infoMsg && <FlashMessage msg={infoMsg} /> }
+      { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <div className="login-form-container">
         <form onSubmit={(e) => handleLogin(e)}>
           <div className="login-input-container">
