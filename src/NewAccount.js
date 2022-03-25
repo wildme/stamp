@@ -10,50 +10,53 @@ const NewAccount = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
   const history = useHistory();
 
+  function cmpPass(pass1, pass2) {
+    if (pass1 === pass2) return true;
+    else return false;
+  }
   const handleSignup = (e) => {
     e.preventDefault();
-    setInfoMsg('');
+    const match = cmpPass(password, confirmPassword);
 
-    if (password !== confirmPassword) {
-      setInfoMsg(t('signup.infoMsg1'));
-      return null;
+    if (match) {
+      fetch("/api/signup", {
+        method: 'POST',
+        body: JSON.stringify({ username, password,
+          firstname, lastname, email }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => {
+        if (res.status === 409) return res.json();
+        if (res.status === 201) {
+          setInfoMsg({str: t('signup.infoMsg5'), id: Math.random()});
+          history.replace('/login');
+        }
+        if (res.status === 500) {
+          setInfoMsg({str: t('signup.infoMsg4'), id: Math.random()});
+        }
+      })
+      .then(data => {
+        if (data && data.error === 'user exists') {
+          setInfoMsg({str: t('signup.infoMsg2'), id: Math.random()});
+        }
+
+        if (data && data.error === 'email exists') {
+          setInfoMsg({str: t('signup.infoMsg3'), id: Math.random()});
+        }
+      })
+      .catch((e) => console.error(e))
+    } else {
+      setInfoMsg({str: t('signup.infoMsg1'), id: Math.random()});
     }
-
-    fetch("/api/signup", {
-      method: 'POST',
-      body: JSON.stringify({ username, password,
-        firstname, lastname, email }),
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(res => {
-      if (res.status === 409) return res.json();
-      if (res.status === 201) {
-        setInfoMsg(t('signup.infoMsg5'));
-        history.replace('/login');
-      }
-      if (res.status === 500) {
-        setInfoMsg(t('signup.infoMsg4'));
-      }
-    })
-    .then(data => {
-      if (data && data.error === 'user exists') {
-        setInfoMsg(t('signup.infoMsg2'));
-      }
-
-      if (data && data.error === 'email exists') {
-        setInfoMsg(t('signup.infoMsg3'));
-      }
-    })
-    .catch((e) => console.error(e))
   };
 
   return (
     <div className="login-grid-container">
-      { infoMsg && <FlashMessage msg={infoMsg} /> }
+      { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <div className="login-form-container">
         <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
           <div className="login-input-container">
@@ -63,7 +66,7 @@ const NewAccount = () => {
               name="username"
               value={username}
               required
-              minLength="3"
+              minLength="2"
               maxLength="25"
               onChange={(e) => setUsername(e.target.value)}
             />
