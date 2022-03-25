@@ -9,7 +9,6 @@ const Email = ({ user, t, setter }) => {
 
   const handleEmailUpdate = (e) => {
     e.preventDefault();
-    setter('');
     if (email === state.email) return;
 
     fetch("/api/user/update/email", {
@@ -23,8 +22,12 @@ const Email = ({ user, t, setter }) => {
             { info: {...state,  email: email } }
           });
         }
-        if (res.status === 500) setter(t('email.infoMsg1'));
-        if (res.status === 409) setter(t('email.infoMsg2'));
+        if (res.status === 500) {
+          setter({str: t('email.infoMsg1'), id: Math.random()});
+        }
+        if (res.status === 409) {
+          setter({str: t('email.infoMsg2'), id: Math.random()});
+        }
       })
       .catch((e) => console.error(e))
   };
@@ -32,10 +35,10 @@ const Email = ({ user, t, setter }) => {
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
-        <h2>{ t('email.title') }</h2>
+        <h2>{t('email.title')}</h2>
       </div>
       <div className="user-info-input-container">
-        <label htmlFor="email"><b>{ t('email.label1') }</b></label>
+        <label htmlFor="email"><b>{t('email.label1')}</b></label>
         <input
           type="email"
           name="email"
@@ -48,7 +51,7 @@ const Email = ({ user, t, setter }) => {
         <button
           type="submit"
           disabled={!email}
-          onClick={(e) => handleEmailUpdate(e)}>{ t('email.button') }
+          onClick={(e) => handleEmailUpdate(e)}>{t('email.button')}
         </button>
       </div>
     </div>
