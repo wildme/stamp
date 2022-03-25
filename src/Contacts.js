@@ -9,7 +9,7 @@ export const ContactsContext = createContext();
 
 const Contacts = () => {
   const [tbContacts, setTbContacts] = useState([]);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [noData, setNoData] = useState(false);
   const { t } = useTranslation();
 
@@ -20,7 +20,9 @@ const Contacts = () => {
     fetch("/api/contacts", { signal })
       .then(res => {
         if (res.status === 200) return res.json();
-        if (res.status === 500) setInfoMsg(t('contacts.infoMsg1'));
+        if (res.status === 500) {
+          setInfoMsg({str: t('contacts.infoMsg1'), id: Math.random()});
+        }
         if (res.status === 204) setNoData(true);
       })
       .then(data => setTbContacts(data))
@@ -34,9 +36,9 @@ const Contacts = () => {
       <div className="page-title">
         <h2>{ t('contacts.title') }</h2>
       </div>
-      { infoMsg &&
+      { infoMsg.str &&
         <div className="flash-msg-grid-container">
-          <FlashMessage msg={infoMsg} />
+          <FlashMessage msg={infoMsg.str} id={infoMsg.id} />
         </div>
       }
       <div className="page-actions">
