@@ -10,7 +10,6 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
 
   const handleInfoUpdate = (e) => {
     e.preventDefault();
-    setter('');
     fetch("/api/user/update/info", {
       method: 'POST',
       body: JSON.stringify({user, firstname, lastname}),
@@ -23,7 +22,7 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
           });
         }
         if (res.status === 500) {
-          setter(t('personalInfo.infoMsg1'));
+          setter({str: t('personalInfo.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
@@ -32,10 +31,10 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
-        <h2>{ t('personalInfo.title') }</h2>
+        <h2>{t('personalInfo.title')}</h2>
       </div>
       <div className="user-info-input-container">
-        <label htmlFor="firstname"><b>{ t('personalInfo.label1') }</b></label>
+        <label htmlFor="firstname"><b>{t('personalInfo.label1')}</b></label>
         <input
           type="text"
           name="firstname"
@@ -43,7 +42,7 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
           required
           onChange={(e) => setFirstname(e.target.value)}
         />
-        <label htmlFor="lastname"><b>{ t('personalInfo.label2') }</b></label>
+        <label htmlFor="lastname"><b>{t('personalInfo.label2')}</b></label>
         <input
           type="text"
           name="lastname"
@@ -55,7 +54,7 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
         <button
           type="submit"
           disabled={!firstname}
-          onClick={(e) => handleInfoUpdate(e)}>{ t('personalInfo.button') }
+          onClick={(e) => handleInfoUpdate(e)}>{t('personalInfo.button')}
         </button>
       </div>
     </div>
