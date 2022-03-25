@@ -10,13 +10,12 @@ const NewContact = () => {
   const [orgRegion, setOrgRegion] = useState('');
   const [orgName, setOrgName] = useState('');
   const [error, setError] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const history = useHistory();
   const { t } = useTranslation();
 
   const handleAddContact = (e) => {
     e.preventDefault();
-    infoMsg && setInfoMsg('');
     fetch('/api/contacts/new', {
       method: 'POST',
       body: JSON.stringify({ orgLocation, orgRegion, orgName }),
@@ -25,7 +24,7 @@ const NewContact = () => {
     .then(res => {
       if (res.status === 500) {
         setError(true);
-        setInfoMsg(t('newContact.infoMsg'));
+        setInfoMsg({str: t('newContact.infoMsg'), id: Math.random()});
       }
     })
     .catch(err => console.error(err))
@@ -40,7 +39,7 @@ const NewContact = () => {
 
   return (
      <div className="add-contact-grid-container">
-       { infoMsg && <FlashMessage msg={infoMsg} /> }
+       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
        <div className="contact-input">
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
