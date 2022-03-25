@@ -9,7 +9,7 @@ import FlashMessage from './FlashMessage.js';
 
 const UserProfile = () => {
   const { path, url } = useRouteMatch();
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0 });
   const username = useSelector((state) => state.user.username);
   const fullname = useSelector((state) => state.info.fullname);
   const [name1, name2] = fullname.split(' ');
@@ -17,7 +17,7 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-grid-container">
-      { infoMsg && <FlashMessage msg={infoMsg} /> }
+    { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id } /> }
       <div className="user-profile-container">
         <div className="user-profile-title">
           <h2>{ fullname }</h2>
