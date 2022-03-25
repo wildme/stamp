@@ -21,7 +21,7 @@ const RowContacts = ({ entry }) => {
         .then(res => {
           if (res.ok) setHidden(true);
           if (res.status === 500) {
-            setter(t('editContact.infoMsg2'));
+            setter({str: t('editContact.infoMsg2'), id: Math.random()});
           }
         })
         .catch((e) => console.error(e))
@@ -38,7 +38,7 @@ const RowContacts = ({ entry }) => {
       .then(res => {
         if (res.ok) setEditOn(false);
         if (res.status === 500) {
-          setter(t('editContact.infoMsg1'));
+          setter({str: t('editContact.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
