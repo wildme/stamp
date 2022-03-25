@@ -8,9 +8,9 @@ const Logout = () => {
   fetch("/api/logout")
     .then(res => {
       if (res.ok) {
+        history.push("/login");
         dispatch({ type: 'LOGOUT',
           payload: { user: { loggedIn: false }, token: null, info: null }});
-        history.replace("/login");
       }
     })
     .catch((e) => console.error(e))
