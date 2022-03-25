@@ -1,53 +1,49 @@
 import { useState } from 'react';
 import { HiEyeOff, HiEye } from 'react-icons/hi';
 
-const Password = ({user, t, setter}) => {
+const Password = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [showPassNew, setShowPassNew] = useState(false);
   const [showPassRepeat, setShowPassRepeat] = useState(false);
 
-  const handleOldPass = (e) => {
-    setOldPass(e.target.value);
-  };
-
-  const handleNewPass = (e) => {
-    setNewPass(e.target.value);
-  };
-
-  const handleConfirmPass = (e) => {
-    setConfirmPass(e.target.value);
-  };
-
   const handleShowPassNew = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setShowPassNew(!showPassNew);
   };
 
   const handleShowPassRepeat = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setShowPassRepeat(!showPassRepeat);
   };
 
-  const handlePassUpdate = (e) => {
-    e.preventDefault();
-    setter('');
-    if (newPass !== confirmPass) {
-      setter(t('password.infoMsg1'));
-      return;
-    }
+  function cmpPass(pass1, pass2) {
+    if (pass1 === pass2) return true;
+    else return false;
+  }
 
-    fetch("/api/user/update/password", {
-      method: 'POST',
-      body: JSON.stringify({user, oldPass, newPass}),
-      headers: {'Content-Type': 'application/json'}
-    })
-      .then(res => {
-        if (res.status === 500) setter(t('password.infoMsg2'));
-        if (res.status === 409) setter(t('password.infoMsg3'));
+  const handlePassUpdate = (e) => {
+    e.preventDefault()
+    let match = cmpPass(newPass, confirmPass);
+    if (match) {
+      fetch("/api/user/update/password", {
+        method: 'POST',
+        body: JSON.stringify({user, oldPass, newPass}),
+        headers: {'Content-Type': 'application/json'}
       })
-      .catch((e) => console.error(e))
+        .then(res => {
+          if (res.status === 500) {
+            setter({str: t('password.infoMsg2'), id: Math.random()});
+          }
+          if (res.status === 409) {
+            setter({str: t('password.infoMsg3'), id: Math.random()});
+          }
+        })
+        .catch((e) => console.error(e))
+    } else {
+      setter({str: t('password.infoMsg1'), id: Math.random()});
+    }
   };
 
   return (
@@ -63,7 +59,7 @@ const Password = ({user, t, setter}) => {
             name="old-pass"
             value={oldPass}
             required
-            onChange={(e) => handleOldPass(e)}
+            onChange={(e) => setOldPass(e.target.value)}
           />
           <label htmlFor="new-pass"><b>{ t('password.label2') }</b></label>
           <div className="user-info-pass-container">
@@ -73,7 +69,9 @@ const Password = ({user, t, setter}) => {
               name="new-pass"
               value={newPass}
               required
-              onChange={(e) => handleNewPass(e)}
+              minLength="8"
+              maxLength="255"
+              onChange={(e) => setNewPass(e.target.value)}
             />
             <button
               id="pass"
@@ -90,7 +88,9 @@ const Password = ({user, t, setter}) => {
               name="confirm-pass"
               value={confirmPass}
               required
-              onChange={(e) => handleConfirmPass(e)}
+              minLength="8"
+              maxLength="255"
+              onChange={(e) => setConfirmPass(e.target.value)}
             />
             <button
               id="pass"
