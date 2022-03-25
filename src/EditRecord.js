@@ -16,17 +16,9 @@ const EditRecord = () => {
   const [file, setFile] = useState(null);
   const [newFile, setNewFile] = useState(null);
   const [noData, setNoData] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const history = useHistory();
   const { t } = useTranslation();
-
-  const handleNewFile = (e) => {
-    setNewFile(e.target.files[0]);
-  };
-
-  const handleCheck = () => {
-    setDelFile(!delFile);
-  };
 
   const handleDownload = (e) => {
     e.preventDefault();
@@ -45,7 +37,6 @@ const EditRecord = () => {
 
   const handleEditRecord = (e) => {
     e.preventDefault();
-    infoMsg && setInfoMsg('');
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, replyTo, note }),
@@ -56,7 +47,7 @@ const EditRecord = () => {
           history.push(`/${box}`);
         }
         if (res.status === 500) {
-          setInfoMsg(t('editRecord.infoMsg1'));
+          setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
@@ -69,7 +60,7 @@ const EditRecord = () => {
             history.push(`/${box}`);
           }
           if (res.status === 500) {
-            setInfoMsg(t('editRecord.infoMsg2'));
+            setInfoMsg({str: t('editRecord.infoMsg2'), id: Math.random()});
           }
         })
         .catch((e) => console.error(e))
@@ -87,10 +78,10 @@ const EditRecord = () => {
             history.push(`/${box}`);
          }
          if (res.status === 413) {
-           setInfoMsg(t('editRecord.infoMsg5'));
+           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
          }
          if (res.status === 500) {
-           setInfoMsg(t('editRecord.infoMsg3'));
+           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
          }
        })
        .catch((e) => console.error(e))
@@ -121,7 +112,7 @@ const EditRecord = () => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setFile(null);
         if (!res.ok) {
-          setInfoMsg(t('editRecord.infoMsg4'));
+          setInfoMsg({str: t('editRecord.infoMsg4'), id: Math.random()});
         }
     })
       .then(data => setFile(data))
@@ -132,7 +123,7 @@ const EditRecord = () => {
 
     return noData ? <PageNotFound /> : (
       <div className="edit-grid-container">
-        { infoMsg && <FlashMessage msg={infoMsg} /> }
+        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id}/> }
         <div className="edit-container">
           <div className="edit-input-container">
             <InputField
@@ -164,22 +155,22 @@ const EditRecord = () => {
           <div className="edit-file-container">
             <div>  
               <input type="file" id="upload"
-                onChange={(e) => handleNewFile(e)} />
+                onChange={(e) => setNewFile(e.target.files[0])} />
             </div>
             { file &&
             <div>
               <a href={`/attachment/${file._id}`}
-                onClick={(e) => handleDownload(e)}>{ t('editRecord.link') }
+                onClick={(e) => handleDownload(e)}>{t('editRecord.link')}
               </a>
               <input type="checkbox" name="del-file" id="del"
-                onChange={() => handleCheck()} />
-              <label htmlFor="del-file">{ t('editRecord.label1') }</label>
+                onChange={() => setDelFile(!delFile)} />
+              <label htmlFor="del-file">{t('editRecord.label1')}</label>
             </div>
             }
           </div>
           <div className="update-btn-container">
             <button type="submit"
-              onClick={(e) => handleEditRecord(e)}>{ t('editRecord.button') }
+              onClick={(e) => handleEditRecord(e)}>{t('editRecord.button')}
             </button>
           </div>
         </div>
