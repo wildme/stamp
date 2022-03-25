@@ -14,17 +14,13 @@ const NewRecord = () => {
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState();
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [fileError, setFileError] = useState(false);
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
-  }
-
   const handleAddRecord = (e) => {
     e.preventDefault();
-    infoMsg && setInfoMsg('');
     const id = fetch(`/api/${box}/new`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
@@ -35,7 +31,7 @@ const NewRecord = () => {
           history.push(`/${box}`);
         }
         if (res.status === 500) {
-          setInfoMsg(t('newRecord.infoMsg1'));
+          setInfoMsg({str: t('newRecord.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
@@ -52,10 +48,12 @@ const NewRecord = () => {
             history.push(`/${box}`);
          }
           if (res.status === 413) {
-           setInfoMsg(t('editRecord.infoMsg5'));
+            setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
+            setFileError(true);
          }
           if (res.status === 500) {
-            setInfoMsg(t('newRecord.infoMsg2'));
+            setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
+            setFileError(true);
           }
         })
         .catch((e) => console.error(e))
@@ -64,7 +62,7 @@ const NewRecord = () => {
 
   return (
     <div className="add-record-grid-container">
-      { infoMsg && <FlashMessage msg={infoMsg} /> }
+      { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <div className="add-container">
         <div className="add-input-container">
           <InputField
@@ -93,14 +91,14 @@ const NewRecord = () => {
         </div>
         <div className="add-file-container">
           <div>
-            <label htmlFor="file"><b>{ t('newRecord.label6') }</b></label>
+            <label htmlFor="file"><b>{t('newRecord.label6')}</b></label>
           </div>
           <input type="file" name="file" id="upload"
-            onChange={(e) => handleFile(e)} />
+            onChange={(e) => setFile(e.target.files[0])} />
         </div>
         <div className="add-btn-container">
-          <button type="submit" disabled={!subject || !fromTo}
-            onClick={(e) => handleAddRecord(e)}>{ t('newRecord.button') }
+          <button type="submit" disabled={!subject || !fromTo || fileError}
+            onClick={(e) => handleAddRecord(e)}>{t('newRecord.button')}
           </button>
         </div>
       </div>
