@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import Logo from './Logo.js'
 
 const HeaderLinks = () => {
   const { t } = useTranslation();
 
   return (
     <div className="navbar">
+      <div className="navbar-logo">
+        <Link to="/"><Logo /></Link>
+      </div>
       <div className="navbar-left">
-        <Link to="/" id="logo">Stamp</Link>
         <Link to="/inbox">{t('navbar.inbox')}</Link>
         <Link to="/outbox">{t('navbar.outbox')}</Link>
         <Link to="/contacts">{t('navbar.contacts')}</Link>
