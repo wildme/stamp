@@ -1,13 +1,7 @@
-/* Fonts */
-@font-face {
-  font-family: Lalezar;
-  src: url(./fonts/Lalezar-Regular.ttf);
-}
-
 /* Navigation bar */
 .navbar {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 120px auto auto;
   grid-auto-rows: 55px;
   background-color: #000000;
   align-items: center;
@@ -18,13 +12,6 @@
   text-decoration: none;
   font-size: 19px;
   padding: 5px;
-}
-
-.navbar a#logo {
-  color: #ffffff;
-  font-family: Lalezar;
-  font-size: 40px;
-  padding: 0 20px 0 20px;
 }
 
 .navbar a:hover {
