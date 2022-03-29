@@ -6,7 +6,6 @@ import Content from './Content.js';
 import { Footer } from './Footer.js';
 
 const App = () => {
-
   return (
     <Router>
       <Fragment>
