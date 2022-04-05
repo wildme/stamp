@@ -60,34 +60,30 @@ const Login = () => {
   return (
     <div className="login-grid-container">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-      <div className="login-form-container">
-        <form onSubmit={(e) => handleLogin(e)}>
-          <div className="login-input-container">
-            <input
-                type="text"
-                placeholder={t('login.placeholder1')}
-                name="username"
-                value={username}
-                required
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder={t('login.placeholder2')}
-                name="password"
-                value={password}
-                required
-                onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="login-btn-container">
-              <input value={t('login.button')} id="submit" type="submit" />
-          </div>
-        </form>
-      <div className="login-signup-msg">{t('login.string')}
-        <Link to="/signup">{t('login.link')}</Link>
-      </div>
-      </div>
+      <form onSubmit={(e) => handleLogin(e)}>
+        <div className="login-input-container">
+          <input
+            type="text"
+            placeholder={t('login.placeholder1')}
+            name="username"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder={t('login.placeholder2')}
+            name="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input value={t('login.button')} id="submit" type="submit" />
+          <span className="login-bottom-msg">{t('login.string')}
+            <Link to="/signup">{t('login.link')}</Link>
+          </span>
+        </div>
+      </form>
     </div>
   );
 };
