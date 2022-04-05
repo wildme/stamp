@@ -10,7 +10,7 @@ const PasswordInputEye = (props) => {
   };
 
   return (
-    <div className="user-info-pass-container">
+    <div className="password-input-container">
       <input
         type={showPass ? "text" : "password"}
         placeholder={props.place ? props.place : ""}
