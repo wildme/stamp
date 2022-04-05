@@ -57,72 +57,68 @@ const Signup = () => {
   return (
     <div className="login-grid-container">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-      <div className="login-form-container">
-        <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
-          <div className="login-input-container">
-            <input
-              type="text"
-              placeholder={t('signup.placeholder1')}
-              name="username"
-              value={username}
-              required
-              minLength="2"
-              maxLength="25"
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder={t('signup.placeholder2')}
-              name="email"
-              value={email}
-              required
-              minLength="6"
-              maxLength="40"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder={t('signup.placeholder3')}
-              name="password"
-              value={password}
-              required
-              minLength="8"
-              maxLength="255"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder={t('signup.placeholder4')}
-              name="confirm-password"
-              value={confirmPassword}
-              required
-              minLength="8"
-              maxLength="255"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder={t('signup.placeholder5')}
-              name="firstname"
-              value={firstname}
-              required
-              maxLength="50"
-              onChange={(e) => setFirstname(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder={t('signup.placeholder6')}
-              name="lastname"
-              value={lastname}
-              maxLength="50"
-              onChange={(e) => setLastname(e.target.value)}
-            />
-          </div>
-          <div className="login-btn-container">
-            <input value={t('signup.button')} id="submit" type="submit" />
-          </div>
-        </form>
-      </div>
+      <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
+        <div className="login-input-container">
+          <input
+            type="text"
+            placeholder={t('signup.placeholder1')}
+            name="username"
+            value={username}
+            required
+            minLength="2"
+            maxLength="25"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder={t('signup.placeholder2')}
+            name="email"
+            value={email}
+            required
+            minLength="6"
+            maxLength="40"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder={t('signup.placeholder3')}
+            name="password"
+            value={password}
+            required
+            minLength="8"
+            maxLength="255"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder={t('signup.placeholder4')}
+            name="confirm-password"
+            value={confirmPassword}
+            required
+            minLength="8"
+            maxLength="255"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder={t('signup.placeholder5')}
+            name="firstname"
+            value={firstname}
+            required
+            maxLength="50"
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder={t('signup.placeholder6')}
+            name="lastname"
+            value={lastname}
+            maxLength="50"
+            onChange={(e) => setLastname(e.target.value)}
+          />
+          <input value={t('signup.button')} id="submit" type="submit" />
+        </div>
+      </form>
     </div>
   );
 };
