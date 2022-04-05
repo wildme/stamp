@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Main from './Main.js';
 import Hello from './Hello.js';
 import NewRecord from './NewRecord.js';
-import NewAccount from './NewAccount.js';
+import Signup from './Signup.js';
 import EditRecord from './EditRecord.js';
 import RecordCard from './RecordCard.js';
 import Logout from './Logout.js';
@@ -94,7 +94,7 @@ const Content = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
-        <Route exact path="/signup" component={NewAccount} />
+        <Route exact path="/signup" component={Signup} />
         <PrivateRoute exact path="/" component={Hello} />
         <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
