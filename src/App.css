@@ -42,42 +42,33 @@
   align-items: center;
 }
 
-.login-form-container {
+.login-input-container {
+  display: grid;
+  width: 300px;
   border: 1px solid;
   border-radius: 5px;
   padding: 10px;
   margin: 100px 0 100px 0;
 }
 
-.login-input-conatiner {
-  display: grid;
-}
-
 .login-input-container input {
   display: grid;
-  width: 300px;
   height: 40px;
   margin-top: 8px;
 }
 
-.login-btn-container {
-  display: grid;
-}
-
-.login-btn-container input#submit {
-  margin-top: 8px;
-  height: 40px;
+.login-input-container input#submit {
   background-color: #2eb82e;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.login-btn-container input#submit:hover {
+.login-input-container input#submit:hover {
   opacity: 0.8;
 }
 
-.login-signup-msg {
+.login-bottom-msg {
   padding-top: 8px;
   font-size: 14px;
 }
@@ -501,9 +492,6 @@ th > button {
 .user-profile-navbar a:hover:not(#active) {
   background-color: #94b8b8;
   color: white;
-}
-
-.user-profile-info {
 }
 
 .user-info-grid-container {
