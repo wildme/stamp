@@ -1,22 +1,10 @@
 import { useState } from 'react';
-import { HiEyeOff, HiEye } from 'react-icons/hi';
+import PasswordInputEye from './PasswordInputEye.js';
 
 const Password = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-  const [showPassNew, setShowPassNew] = useState(false);
-  const [showPassRepeat, setShowPassRepeat] = useState(false);
-
-  const handleShowPassNew = (e) => {
-    e.preventDefault();
-    setShowPassNew(!showPassNew);
-  };
-
-  const handleShowPassRepeat = (e) => {
-    e.preventDefault();
-    setShowPassRepeat(!showPassRepeat);
-  };
 
   function cmpPass(pass1, pass2) {
     if (pass1 === pass2) return true;
@@ -62,43 +50,17 @@ const Password = ({user, t, setter, setter2}) => {
             onChange={(e) => setOldPass(e.target.value)}
           />
           <label htmlFor="new-pass"><b>{ t('password.label2') }</b></label>
-          <div className="user-info-pass-container">
-            <input
-              type={showPassNew ? "text" : "password"}
-              id="pass"
-              name="new-pass"
-              value={newPass}
-              required
-              minLength="8"
-              maxLength="255"
-              onChange={(e) => setNewPass(e.target.value)}
-            />
-            <button
-              id="pass"
-              type="button"
-              onClick={(e) => handleShowPassNew(e)}>
-              { showPassNew ? <HiEye /> : <HiEyeOff /> }
-            </button>
-          </div>
+          <PasswordInputEye
+            pass={newPass}
+            setter={setNewPass}
+            name="new-pass"
+          />
           <label htmlFor="confirm-pass"><b>{ t('password.label3') }</b></label>
-          <div className="user-info-pass-container">
-            <input
-              type={showPassRepeat ? "text" : "password"}
-              id="pass"
-              name="confirm-pass"
-              value={confirmPass}
-              required
-              minLength="8"
-              maxLength="255"
-              onChange={(e) => setConfirmPass(e.target.value)}
-            />
-            <button
-              id="pass"
-              type="button"
-              onClick={(e) => handleShowPassRepeat(e)}>
-              { showPassRepeat ? <HiEye /> : <HiEyeOff /> }
-            </button>
-          </div>
+          <PasswordInputEye
+            pass={confirmPass}
+            setter={setConfirmPass}
+            name="confirm-pass"
+          />
         </div>
         <div className="user-info-update-btn-container">
           <input
