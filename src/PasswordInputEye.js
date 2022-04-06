@@ -23,7 +23,6 @@ const PasswordInputEye = (props) => {
         onChange={(e) => props.setter(e.target.value)}
       />
       <button
-        id="pass"
         type="button"
         onClick={(e) => handleShowPass(e)}>
         { showPass ? <HiEye /> : <HiEyeOff /> }
