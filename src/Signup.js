@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import FlashMessage from './FlashMessage.js'
+import FlashMessage from './FlashMessage.js';
+import PasswordInputEye from './PasswordInputEye.js';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -79,25 +80,17 @@ const Signup = () => {
             maxLength="40"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            type="password"
+          <PasswordInputEye
+            pass={password}
+            setter={setPassword}
             placeholder={t('signup.placeholder3')}
-            name="password"
-            value={password}
-            required
-            minLength="8"
-            maxLength="255"
-            onChange={(e) => setPassword(e.target.value)}
+            styles={{marginTop: "8px"}}
           />
-          <input
-            type="password"
+          <PasswordInputEye
+            pass={confirmPassword}
+            setter={setConfirmPassword}
             placeholder={t('signup.placeholder4')}
-            name="confirm-password"
-            value={confirmPassword}
-            required
-            minLength="8"
-            maxLength="255"
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            styles={{marginTop: "8px"}}
           />
           <input
             type="text"
