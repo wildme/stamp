@@ -3,6 +3,7 @@ import { HiEyeOff, HiEye } from 'react-icons/hi';
 
 const PasswordInputEye = (props) => {
   const [showPass, setShowPass] = useState(false);
+  const styles = props.styles || {};
 
   const handleShowPass = (e) => {
     e.preventDefault();
@@ -10,12 +11,11 @@ const PasswordInputEye = (props) => {
   };
 
   return (
-    <div className="password-input-container">
+    <div className="password-input-container" style={{...styles}}>
       <input
         type={showPass ? "text" : "password"}
-        placeholder={props.place ? props.place : ""}
-        id="pass"
-        name={props.name ? props.name : "pass"}
+        placeholder={props.placeholder || ""}
+        name={props.name || "pass"}
         value={props.pass}
         required
         minLength="8"
