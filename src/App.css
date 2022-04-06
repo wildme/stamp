@@ -70,7 +70,12 @@
 
 .login-bottom-msg {
   padding-top: 8px;
-  font-size: 14px;
+  font-size: 12px;
+  color: #57565d;
+}
+.signup-password-hint {
+  font-size: 12px;
+  color: #57565d;
 }
 
 /* Main page. Content */
@@ -536,6 +541,10 @@ th > button {
 .user-info-update-btn-container button:disabled, input#submit:disabled {
   background-color: #e6e6e6;
   cursor: default;
+}
+.user-info-hint {
+  font-size: 12px;
+  color: #57565d;
 }
 
 /* PasswordInputEye component */
