@@ -20,6 +20,11 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
           dispatch({ type: 'INFO', payload:
             { info: {...state,  fullname: [firstname, lastname].join(' ') } }
           });
+          setter({
+            str: t('personalInfo.infoMsg2'),
+            id: Math.random(),
+            type: 'success'
+          });
         }
         if (res.status === 500) {
           setter({str: t('personalInfo.infoMsg1'), id: Math.random()});

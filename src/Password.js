@@ -21,6 +21,13 @@ const Password = ({user, t, setter, setter2}) => {
         headers: {'Content-Type': 'application/json'}
       })
         .then(res => {
+          if (res.status === 200) {
+            setter({
+              str: t('password.infoMsg4'),
+              id: Math.random(),
+              type: 'success'
+            });
+          }
           if (res.status === 500) {
             setter({str: t('password.infoMsg2'), id: Math.random()});
           }

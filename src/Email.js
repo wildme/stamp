@@ -21,6 +21,7 @@ const Email = ({ user, t, setter }) => {
           dispatch({ type: 'INFO', payload:
             { info: {...state,  email: email } }
           });
+          setter({str: t('email.infoMsg3'), id: Math.random(), type: 'success'});
         }
         if (res.status === 500) {
           setter({str: t('email.infoMsg1'), id: Math.random()});
