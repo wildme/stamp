@@ -46,6 +46,7 @@
     "label1": "Firstname",
     "label2": "Lastname",
     "infoMsg1": "Error. Failed to update user info",
+    "infoMsg2": "Personal info has been successfully updated",
     "button": "Change"
   },
   "email": {
@@ -53,7 +54,8 @@
     "label1": "e-mail",
     "button": "Change",
     "infoMsg1": "Error. Failed to change e-mail",
-    "infoMsg2": "E-mail is taken"
+    "infoMsg2": "E-mail is taken",
+    "infoMsg3": "E-mail has been successfully changed"
   },
   "password": {
     "title": "Change password",
@@ -63,7 +65,8 @@
     "button": "Change",
     "infoMsg1": "Passwords not match",
     "infoMsg2": "Error. Failed to change password",
-    "infoMsg3": "Wrong password"
+    "infoMsg3": "Wrong password",
+    "infoMsg4": "Password has been successfully changed"
   },
   "newRecord": {
     "label1": "Subject",
