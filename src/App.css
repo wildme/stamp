@@ -516,30 +516,6 @@ th > button {
   height: 30px;
 }
 
-.password-input-container {
-  display: grid;
-  grid-template-columns: 90% auto;
-  border: 1px solid;
-  padding: 4px;
-}
-
-.password-input-container button#pass {
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  font-size: 17px;
-}
-
-.password-input-container input#pass {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.password-input-container input:focus {
-  outline: none;
-}
-
 .user-info-update-btn-container {
   display: grid;
 }
@@ -560,6 +536,31 @@ th > button {
 .user-info-update-btn-container button:disabled, input#submit:disabled {
   background-color: #e6e6e6;
   cursor: default;
+}
+
+/* PasswordInputEye component */
+.password-input-container {
+  display: grid;
+  grid-template-columns: 90% auto;
+  border: 1px solid;
+  padding: 4px;
+}
+
+.password-input-container button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 17px;
+}
+
+.password-input-container input {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.password-input-container input:focus {
+  outline: none;
 }
 
 /* Flash Message */
