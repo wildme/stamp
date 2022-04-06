@@ -54,6 +54,7 @@ const resources = {
         label2: en.personalInfo.label2,
         label3: en.personalInfo.label3,
         infoMsg1: en.personalInfo.infoMsg1,
+        infoMsg2: en.personalInfo.infoMsg2,
         button: en.personalInfo.button
       },
       email: {
@@ -61,7 +62,8 @@ const resources = {
         label1: en.email.label1,
         button: en.email.button,
         infoMsg1: en.email.infoMsg1,
-        infoMsg2: en.email.infoMsg2
+        infoMsg2: en.email.infoMsg2,
+        infoMsg3: en.email.infoMsg3
       },
       password: {
         title: en.password.title,
@@ -71,7 +73,8 @@ const resources = {
         button: en.password.button,
         infoMsg1: en.password.infoMsg1,
         infoMsg2: en.password.infoMsg2,
-        infoMsg3: en.password.infoMsg3
+        infoMsg3: en.password.infoMsg3,
+        infoMsg4: en.password.infoMsg4
       },
       newRecord: {
         label1: en.newRecord.label1,
@@ -198,6 +201,7 @@ const resources = {
         label2: ru.personalInfo.label2,
         label3: ru.personalInfo.label3,
         infoMsg1: ru.personalInfo.infoMsg1,
+        infoMsg2: ru.personalInfo.infoMsg2,
         button: ru.personalInfo.button
       },
       email: {
@@ -206,6 +210,7 @@ const resources = {
         button: ru.email.button,
         infoMsg1: ru.email.infoMsg1,
         infoMsg2: ru.email.infoMsg2,
+        infoMsg3: ru.email.infoMsg3
       },
       password: {
         title: ru.password.title,
@@ -215,7 +220,8 @@ const resources = {
         button: ru.password.button,
         infoMsg1: ru.password.infoMsg1,
         infoMsg2: ru.password.infoMsg2,
-        infoMsg3: ru.password.infoMsg3
+        infoMsg3: ru.password.infoMsg3,
+        infoMsg4: ru.password.infoMsg4
       },
       newRecord: {
         label1: ru.newRecord.label1,
