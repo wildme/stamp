@@ -44,11 +44,11 @@ const Password = ({user, t, setter, setter2}) => {
   return (
     <div className="user-info-grid-container">
       <div className="user-info-title-container">
-        <h2>{ t('password.title') }</h2>
+        <h2>{t('password.title')}</h2>
       </div>
       <form onSubmit={(e) => handlePassUpdate(e)}>
         <div className="user-info-input-container">
-          <label htmlFor="old-pass"><b>{ t('password.label1') }</b></label>
+          <label htmlFor="old-pass"><b>{t('password.label1')}</b></label>
           <input
             type="password"
             name="old-pass"
@@ -56,13 +56,14 @@ const Password = ({user, t, setter, setter2}) => {
             required
             onChange={(e) => setOldPass(e.target.value)}
           />
-          <label htmlFor="new-pass"><b>{ t('password.label2') }</b></label>
+          <label htmlFor="new-pass"><b>{t('password.label2')}</b></label>
           <PasswordInputEye
             pass={newPass}
             setter={setNewPass}
             name="new-pass"
           />
-          <label htmlFor="confirm-pass"><b>{ t('password.label3') }</b></label>
+          <em className="user-info-hint">{t('password.string')}</em>
+          <label htmlFor="confirm-pass"><b>{t('password.label3')}</b></label>
           <PasswordInputEye
             pass={confirmPass}
             setter={setConfirmPass}
