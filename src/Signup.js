@@ -86,6 +86,7 @@ const Signup = () => {
             placeholder={t('signup.placeholder3')}
             styles={{marginTop: "8px"}}
           />
+          <em className="signup-password-hint">{t('signup.string')}</em>
           <PasswordInputEye
             pass={confirmPassword}
             setter={setConfirmPassword}
