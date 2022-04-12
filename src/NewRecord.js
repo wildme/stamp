@@ -19,9 +19,9 @@ const NewRecord = () => {
   const history = useHistory();
   const { t } = useTranslation();
 
-  const handleAddRecord = (e) => {
+  const handleAddRecord = async (e) => {
     e.preventDefault();
-    const id = fetch(`/api/${box}/new`, {
+    const id = await fetch(`/api/${box}/new`, {
       method: 'POST',
       body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
       headers: {'Content-Type': 'application/json'}
@@ -33,13 +33,17 @@ const NewRecord = () => {
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg1'), id: Math.random()});
         }
+        if (file) {
+          return res.json();
+        }
       })
+      .then(data => data)
       .catch((e) => console.error(e))
 
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      fetch(`/api/${box}/upload/${id}`, {
+      await fetch(`/api/${box}/upload/${id}`, {
         method: 'POST',
         body: formData,
         })
