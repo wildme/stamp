@@ -169,7 +169,7 @@ const EditRecord = () => {
             }
           </div>
           <div className="update-btn-container">
-            <button type="submit"
+            <button type="submit" disabled={!subject || !fromTo}
               onClick={(e) => handleEditRecord(e)}>{t('editRecord.button')}
             </button>
           </div>
