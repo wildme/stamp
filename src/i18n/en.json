@@ -17,6 +17,7 @@
     "placeholder6": "Lastname",
     "button": "Signup",
     "string": "At least 8 characters",
+    "tooltip1": "Must begin with a latin letter, allowed digits and underscores",
     "infoMsg1": "Passwords not match",
     "infoMsg2": "Username is taken",
     "infoMsg3": "Email is taken",
@@ -142,5 +143,8 @@
     "label2": "Location",
     "label3": "Country",
     "label4": "Actions"
+  },
+  "passwordInputEye": {
+    "tooltip": "Aa-Zz 0-9 ! @ # $ % ^ * _ +"
   }
 }
