@@ -60,6 +60,7 @@ const Password = ({user, t, setter, setter2}) => {
           <PasswordInputEye
             pass={newPass}
             setter={setNewPass}
+            title={t('passwordInputEye.tooltip')}
             name="new-pass"
           />
           <em className="user-info-hint">{t('password.string')}</em>
@@ -67,6 +68,7 @@ const Password = ({user, t, setter, setter2}) => {
           <PasswordInputEye
             pass={confirmPass}
             setter={setConfirmPass}
+            title={t('passwordInputEye.tooltip')}
             name="confirm-pass"
           />
         </div>
