@@ -23,6 +23,7 @@ const resources = {
         placeholder5: en.signup.placeholder5,
         placeholder6: en.signup.placeholder6,
         button: en.signup.button,
+        tooltip1: en.signup.tooltip1,
         string: en.signup.string,
         infoMsg1: en.signup.infoMsg1,
         infoMsg2: en.signup.infoMsg2,
@@ -150,6 +151,9 @@ const resources = {
         label2: en.headerCellContacts.label2,
         label3: en.headerCellContacts.label3,
         label4: en.headerCellContacts.label4
+      },
+      passwordInputEye: {
+        tooltip: en.passwordInputEye.tooltip
       }
     }
   },
@@ -172,6 +176,8 @@ const resources = {
         placeholder5: ru.signup.placeholder5,
         placeholder6: ru.signup.placeholder6,
         button: ru.signup.button,
+        tooltip1: ru.signup.tooltip1,
+        tooltip2: ru.signup.tooltip2,
         string: ru.signup.string,
         infoMsg1: ru.signup.infoMsg1,
         infoMsg2: ru.signup.infoMsg2,
@@ -299,6 +305,9 @@ const resources = {
         label2: ru.headerCellContacts.label2,
         label3: ru.headerCellContacts.label3,
         label4: ru.headerCellContacts.label4
+      },
+      passwordInputEye: {
+        tooltip: ru.passwordInputEye.tooltip
       }
     }
   }
