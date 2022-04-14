@@ -18,6 +18,8 @@ const PasswordInputEye = (props) => {
         name={props.name || "pass"}
         value={props.pass}
         required
+        pattern="^[A-Za-z0-9!@#$%+^*_]+$"
+        title={props.title}
         minLength="8"
         maxLength="255"
         onChange={(e) => props.setter(e.target.value)}
