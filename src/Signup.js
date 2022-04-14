@@ -58,7 +58,7 @@ const Signup = () => {
   return (
     <div className="login-grid-container">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-      <form onSubmit={(e) => handleSignup(e)} autoComplete="off">
+      <form onSubmit={(e) => handleSignup(e)}>
         <div className="login-input-container">
           <input
             type="text"
@@ -66,6 +66,8 @@ const Signup = () => {
             name="username"
             value={username}
             required
+            pattern="^[A-Za-z]\w+$"
+            title={t('signup.tooltip1')}
             minLength="2"
             maxLength="25"
             onChange={(e) => setUsername(e.target.value)}
@@ -84,6 +86,7 @@ const Signup = () => {
             pass={password}
             setter={setPassword}
             placeholder={t('signup.placeholder3')}
+            title={t('passwordInputEye.tooltip')}
             styles={{marginTop: "8px"}}
           />
           <em className="signup-password-hint">{t('signup.string')}</em>
@@ -91,6 +94,7 @@ const Signup = () => {
             pass={confirmPassword}
             setter={setConfirmPassword}
             placeholder={t('signup.placeholder4')}
+            title={t('passwordInputEye.tooltip')}
             styles={{marginTop: "8px"}}
           />
           <input
