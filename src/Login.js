@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import FlashMessage from './FlashMessage.js'
+import FlashMessage from './FlashMessage.js';
+import ForgotPassModal from './ForgotPassModal.js';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -79,11 +81,21 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <input value={t('login.button')} id="submit" type="submit" />
-          <span className="login-bottom-msg">{t('login.string')}
+          <span className="login-bottom-msg">{t('login.string')}&nbsp;
             <Link to="/signup">{t('login.link')}</Link>
+          </span>
+          <span className="login-bottom-msg">Забыли&nbsp;
+            <button
+              type="button"
+              onClick={() => setOpenModal(true)}>пароль
+            </button>?
           </span>
         </div>
       </form>
+      <ForgotPassModal
+        openModal={openModal}
+        closeModal={() => setOpenModal(false)}
+      />
     </div>
   );
 };
