@@ -638,4 +638,16 @@ th > button {
 
 .forgot-pass-input-container input {
   height: 40px;
+  margin-top: 8px;
+}
+
+.forgot-pass-header {
+  text-align: center;
+}
+
+.forgot-pass-header button {
+  float: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
