@@ -84,10 +84,10 @@ const Login = () => {
           <span className="login-bottom-msg">{t('login.string')}&nbsp;
             <Link to="/signup">{t('login.link')}</Link>
           </span>
-          <span className="login-bottom-msg">Забыли&nbsp;
+          <span className="login-bottom-msg">{t('login.string2')}&nbsp;
             <button
               type="button"
-              onClick={() => setOpenModal(true)}>пароль
+              onClick={() => setOpenModal(true)}>{t('login.button2')}
             </button>?
           </span>
         </div>
@@ -95,6 +95,7 @@ const Login = () => {
       <ForgotPassModal
         openModal={openModal}
         closeModal={() => setOpenModal(false)}
+        t={t}
       />
     </div>
   );
