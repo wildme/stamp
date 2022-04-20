@@ -10,7 +10,9 @@ const resources = {
         placeholder1: en.login.placeholder1,
         placeholder2: en.login.placeholder2,
         button: en.login.button,
+        button2: en.login.button2,
         string: en.login.string,
+        string2: en.login.string2,
         link: en.login.link,
         infoMsg1: en.login.infoMsg1,
         infoMsg2: en.login.infoMsg2
@@ -154,6 +156,17 @@ const resources = {
       },
       passwordInputEye: {
         tooltip: en.passwordInputEye.tooltip
+      },
+      forgotPassword: {
+        label1: en.forgotPassword.label1,
+        placeholder1: en.forgotPassword.placeholder1,
+        placeholder2: en.forgotPassword.placeholder2,
+        button1: en.forgotPassword.button1,
+        infoMsg1: en.forgotPassword.infoMsg1,
+        infoMsg2: en.forgotPassword.infoMsg2,
+        infoMsg3: en.forgotPassword.infoMsg3,
+        infoMsg4: en.forgotPassword.infoMsg4,
+        infoMsg5: en.forgotPassword.infoMsg5
       }
     }
   },
@@ -163,7 +176,9 @@ const resources = {
         placeholder1: ru.login.placeholder1,
         placeholder2: ru.login.placeholder2,
         button: ru.login.button,
+        button2: ru.login.button2,
         string: ru.login.string,
+        string2: ru.login.string2,
         link: ru.login.link,
         infoMsg1: ru.login.infoMsg1,
         infoMsg2: ru.login.infoMsg2,
@@ -308,6 +323,17 @@ const resources = {
       },
       passwordInputEye: {
         tooltip: ru.passwordInputEye.tooltip
+      },
+      forgotPassword: {
+        label1: ru.forgotPassword.label1,
+        placeholder1: ru.forgotPassword.placeholder1,
+        placeholder2: ru.forgotPassword.placeholder2,
+        button1: ru.forgotPassword.button1,
+        infoMsg1: ru.forgotPassword.infoMsg1,
+        infoMsg2: ru.forgotPassword.infoMsg2,
+        infoMsg3: ru.forgotPassword.infoMsg3,
+        infoMsg4: ru.forgotPassword.infoMsg4,
+        infoMsg5: ru.forgotPassword.infoMsg5
       }
     }
   }
