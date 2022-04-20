@@ -645,6 +645,14 @@ th > button {
   text-align: center;
 }
 
+.forgot-pass-header span#failure {
+  color: red;
+}
+
+.forgot-pass-header span#success {
+  color: green;
+}
+
 .forgot-pass-header button {
   float: right;
   border: none;
