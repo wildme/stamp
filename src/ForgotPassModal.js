@@ -6,6 +6,7 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [infoMsg, setInfoMsg] = useState('');
+  const [error, setError] = useState(false);
 
   const handleReqCreds = (e) => {
     e.preventDefault();
@@ -16,12 +17,15 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
     })
       .then(res => {
         if (res.status === 200) {
+          setError(false)
           setInfoMsg(t('forgotPassword.infoMsg4'));
         }
         if (res.status === 409) {
+          setError(true)
           return res.json();
         }
         if (res.status === 500) {
+          setError(true)
           return res.json();
         }
       })
@@ -34,7 +38,8 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
         }
         if (data.error === 'Cannot send email') {
           setInfoMsg(t('forgotPassword.infoMsg5'))
-        } else {
+        }
+        if (!data.error) {
           setInfoMsg(t('forgotPassword.infoMsg3'));
         }
       })
@@ -50,10 +55,10 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
         className="forgot-pass-input-container"
         onClick={(e) => e.stopPropagation()}>
         <div className="forgot-pass-header">
-          {infoMsg && <span>{infoMsg}</span>}
+          {infoMsg && <span id={error ? 'failure' : 'success'}>{infoMsg}</span>}
           <button onClick={() => closeModal(true)}><HiX /></button>
         </div>
-        <label htmlFor="username"><b>{t('forgotPassword.label1')}</b></label>
+        <label htmlFor="username">{t('forgotPassword.label1')}</label>
         <input
           type="text"
           name="username"
