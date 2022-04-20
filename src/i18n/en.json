@@ -3,7 +3,9 @@
     "placeholder1": "Username",
     "placeholder2": "Password",
     "button": "Login",
+    "button2": "password",
     "string": "Don't have an account?",
+    "string2": "Forgot",
     "link": "Signup",
     "infoMsg1": "Incorrect username or password",
     "infoMsg2": "Unable to login"
@@ -146,5 +148,16 @@
   },
   "passwordInputEye": {
     "tooltip": "Aa-Zz 0-9 ! @ # $ % ^ * _ +"
+  },
+"forgotPassword": {
+    "label1": "Reset password?",
+    "placeholder1": "Enter username",
+    "placeholder2": "Enter e-mail",
+    "button1": "Send",
+    "infoMsg1": "User not found",
+    "infoMsg2": "Email not found",
+    "infoMsg3": "Error",
+    "infoMsg4": "Check your mailbox",
+    "infoMsg5": "Error. Email was not sent"
   }
 }
