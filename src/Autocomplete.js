@@ -27,9 +27,9 @@ const Autocomplete = ({ value, setter, attrs, field, t }) => {
     setter(e.currentTarget.value);
       fetch(`/api/contacts/search/by-${field}?name=${value}`)
         .then(res => res.json())
-        .then(data => data.map(item => item.name + ', ' + item.location))
+        .then(data => data.map(item => [item.name, item.location].join(', ')))
         .then(setMatches)
-        .catch(err => console.error(err))
+        .catch((e) => console.error(e))
 
     setVisibility(true);
     setActiveItem(0);
@@ -53,7 +53,11 @@ const Autocomplete = ({ value, setter, attrs, field, t }) => {
               className = 'active-item';
             }
             return (
-              <li className={className} key={match} onClick={onClick}>
+              <li
+                className={className}
+                key={match}
+                onClick={onClick}
+              >
                 {match}
               </li>
             );
@@ -62,16 +66,14 @@ const Autocomplete = ({ value, setter, attrs, field, t }) => {
       );
     } else {
       optionList = (
-        <div className="no-options">
-          <em>No matches</em>
-        </div>
+        <div className="no-options"><em>{t('autocomplete.string1')}</em></div>
       );
     }
   }
   return (
     <Fragment>
       <label htmlFor={attrs.for}>
-        <b>{ t(attrs.text) }</b>
+        <b>{t(attrs.text)}</b>
       </label>
       <input
         type={attrs.type}
