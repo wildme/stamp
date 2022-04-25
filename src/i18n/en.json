@@ -159,5 +159,8 @@
     "infoMsg3": "Error",
     "infoMsg4": "Check your mailbox",
     "infoMsg5": "Error. Email was not sent"
+  },
+  "autocomplete": {
+    "string1": "No matches"
   }
 }
