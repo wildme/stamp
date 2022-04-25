@@ -162,5 +162,8 @@
   },
   "autocomplete": {
     "string1": "No matches"
+  },
+  "homepage": {
+    "string1": "Hello"
   }
 }
