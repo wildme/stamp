@@ -167,6 +167,9 @@ const resources = {
         infoMsg3: en.forgotPassword.infoMsg3,
         infoMsg4: en.forgotPassword.infoMsg4,
         infoMsg5: en.forgotPassword.infoMsg5
+      },
+      autocomplete: {
+        string1: en.autocomplete.string1
       }
     }
   },
@@ -334,6 +337,9 @@ const resources = {
         infoMsg3: ru.forgotPassword.infoMsg3,
         infoMsg4: ru.forgotPassword.infoMsg4,
         infoMsg5: ru.forgotPassword.infoMsg5
+      },
+      autocomplete: {
+        string1: ru.autocomplete.string1
       }
     }
   }
