@@ -170,6 +170,9 @@ const resources = {
       },
       autocomplete: {
         string1: en.autocomplete.string1
+      },
+      homepage: {
+        string1: en.homepage.string1
       }
     }
   },
@@ -340,6 +343,9 @@ const resources = {
       },
       autocomplete: {
         string1: ru.autocomplete.string1
+      },
+      homepage: {
+        string1: ru.homepage.string1
       }
     }
   }
