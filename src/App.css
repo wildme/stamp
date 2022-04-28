@@ -508,12 +508,12 @@ th > button {
   padding: 8px;
 }
 
-.user-profile-navbar a#active {
+.user-profile-navbar a.active {
   background-color: #000000;
   color: white;
 }
 
-.user-profile-navbar a:hover:not(#active) {
+.user-profile-navbar a:hover:not(.active) {
   background-color: #94b8b8;
   color: white;
 }
