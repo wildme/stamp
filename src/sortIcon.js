@@ -1,4 +1,6 @@
-const SortIcon = ({ direction = '' }) => {
+const SortIcon = (props) => {
+  const direction = props.direction;
+
   return (
     <section className={`sort-icon_${direction}`}>
       <span id="arrow-up">▲</span>
