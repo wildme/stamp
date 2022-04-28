@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PasswordInputEye from './PasswordInputEye.js';
 
-const Password = ({user, t, setter, setter2}) => {
+const UserPassword = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
@@ -85,4 +85,4 @@ const Password = ({user, t, setter, setter2}) => {
   );
 };
 
-export default Password;
+export default UserPassword;

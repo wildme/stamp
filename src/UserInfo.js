@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PersonalInfo = ({ user, name1, name2, t, setter }) => {
+const UserInfo = ({ user, name1, name2, t, setter }) => {
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
 
@@ -65,4 +65,4 @@ const PersonalInfo = ({ user, name1, name2, t, setter }) => {
     </div>
   );
 };
- export default PersonalInfo;
+ export default UserInfo;

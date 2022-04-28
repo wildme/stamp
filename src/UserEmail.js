@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Email = ({ user, t, setter }) => {
+const UserEmail = ({ user, t, setter }) => {
   const state = useSelector((state) => state.info);
   const [email, setEmail] = useState(state.email);
 
@@ -58,4 +58,4 @@ const Email = ({ user, t, setter }) => {
     </div>
   );
 };
- export default Email;
+ export default UserEmail;
