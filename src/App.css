@@ -439,7 +439,7 @@ th > button {
   justify-items: center;
   align-items: center;
   font-family: arial;
-  margin: 40px;
+  padding: 40px;
 }
 
 .error404-main-title {
@@ -467,17 +467,17 @@ th > button {
 /* User profile page */
 .user-profile-grid-container {
   display: grid;
-  margin: 10px;
+  padding: 10px;
   justify-items: center;
   align-items: center;
 }
 
 .user-profile-container {
   display: grid;
-  grid-template-columns: 200px 500px;
+  grid-template-columns: auto auto;
   grid-row-gap: 8px;
   grid-column-gap: 30px;
-  margin: 8px;
+  padding: 8px;
 }
 
 .user-profile-title {
@@ -494,6 +494,7 @@ th > button {
 }
 .user-profile-navbar {
   font-size: 22px;
+  width: 200px;
 }
 
 .user-profile-navbar ul {
