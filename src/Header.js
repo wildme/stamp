@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Logo from './Logo.js'
@@ -12,12 +12,12 @@ const HeaderLinks = () => {
         <Link to="/"><Logo /></Link>
       </div>
       <div className="navbar-left">
-        <Link to="/inbox">{t('navbar.inbox')}</Link>
-        <Link to="/outbox">{t('navbar.outbox')}</Link>
-        <Link to="/contacts">{t('navbar.contacts')}</Link>
+        <NavLink to="/inbox">{t('navbar.inbox')}</NavLink>
+        <NavLink to="/outbox">{t('navbar.outbox')}</NavLink>
+        <NavLink to="/contacts">{t('navbar.contacts')}</NavLink>
       </div>
       <div className="navbar-right">
-        <Link to="/my-profile">{t('navbar.profile')}</Link>
+        <NavLink to="/my-profile">{t('navbar.profile')}</NavLink>
         <Link to="/logout">{t('navbar.logout')}</Link>
       </div>
     </div>
@@ -27,6 +27,7 @@ const HeaderLinks = () => {
 const HeaderBlank = () => {
   return (
     <div className="navbar">
+      <div className="navbar-logo"></div>
       <div className="navbar-left"></div>
       <div className="navbar-right"></div>
     </div>
