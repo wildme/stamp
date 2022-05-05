@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
-import PageNotFound from './404.js';
+import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
 
 const RecordCard = () => {
@@ -103,7 +103,9 @@ const RecordCard = () => {
     return () => { abortController.abort(); };
   }, [box, id, t])
 
-  return noData ? <PageNotFound /> : (
+  if (noData) return <ErrorPage code={404} />
+
+  return (
     <div className="record-card-grid-container">
       { infoMsg.str && <FlashMessage msg={infoMsg} id={infoMsg.id} /> }
       <div className="record-card">
