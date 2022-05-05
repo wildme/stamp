@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
-import PageNotFound from './404.js';
+import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
 
 const EditRecord = () => {
@@ -12,6 +13,7 @@ const EditRecord = () => {
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
+  const [permitted, setPermitted] = useState(true);
   const [delFile, setDelFile] = useState(false);
   const [file, setFile] = useState(null);
   const [newFile, setNewFile] = useState(null);
@@ -19,6 +21,7 @@ const EditRecord = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const history = useHistory();
   const { t } = useTranslation();
+  const user = useSelector((state) => state.user.username);
 
   const handleDownload = (e) => {
     e.preventDefault();
@@ -97,14 +100,20 @@ const EditRecord = () => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
       })
-      .then(data => data.map((item) => {
-        return (
-          setSubject(item.subject),
-          setFromTo(item.from || item.to),
-          setNote(item.note),
-          setReplyTo(item.replyTo)
-        )}
-      ))
+      .then(data => {
+        if (data[0].addedBy === user || user === 'admin') {
+          setPermitted(true);
+          data.map((item) => {
+            return (
+              setSubject(item.subject),
+              setFromTo(item.from || item.to),
+              setNote(item.note),
+              setReplyTo(item.replyTo)
+            )})
+        } else {
+          setPermitted(false);
+        }
+        })
         .catch((e) => console.error(e))
 
     fetch(`/api/attachment/${box}/${id}`, { signal })
@@ -119,9 +128,11 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [box, id, t]);
+  }, [box, id, t, user]);
 
-    return noData ? <PageNotFound /> : (
+    if (noData) return <ErrorPage code={404} />;
+    if (!permitted) return <ErrorPage code={401} />;
+    return (
       <div className="edit-grid-container">
         { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id}/> }
         <div className="edit-container">
