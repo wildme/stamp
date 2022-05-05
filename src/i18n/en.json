@@ -165,5 +165,12 @@
   },
   "homepage": {
     "string1": "Hello"
+  },
+  "errorPage": {
+    "title1": "Oops! Page not found",
+    "title2": "Not permitted",
+    "title3": "The page you are looking for is not available",
+    "title4": "You aren't allowed to visit this page",
+    "link1": "Go back home"
   }
 }
