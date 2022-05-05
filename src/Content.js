@@ -10,7 +10,7 @@ import Logout from './Logout.js';
 import Login from './Login.js';
 import Contacts from './Contacts.js';
 import NewContact from './NewContact.js';
-import PageNotFound from './404.js';
+import ErrorPage from './ErrorPage.js';
 import UserProfile from './UserProfile.js';
 import { Route, Redirect,
   Switch, useHistory, useLocation } from 'react-router-dom';
@@ -104,7 +104,7 @@ const Content = () => {
         <PrivateRoute exact path="/:box/new" component={NewRecord} />
         <PrivateRoute exact path="/:box/view/:id" component={RecordCard} />
         <PrivateRoute exact path="/:box/edit/:id" component={EditRecord} />
-        <PrivateRoute path="*" component={PageNotFound} />
+        <PrivateRoute path="*" component={ErrorPage} />
       </Switch>
     </Fragment>
   );
