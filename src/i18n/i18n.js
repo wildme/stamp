@@ -173,6 +173,13 @@ const resources = {
       },
       homepage: {
         string1: en.homepage.string1
+      },
+      errorPage: {
+        title1: en.errorPage.title1,
+        title2: en.errorPage.title2,
+        title3: en.errorPage.title3,
+        title4: en.errorPage.title4,
+        link1: en.errorPage.link1
       }
     }
   },
@@ -346,6 +353,13 @@ const resources = {
       },
       homepage: {
         string1: ru.homepage.string1
+      },
+      errorPage: {
+        title1: ru.errorPage.title1,
+        title2: ru.errorPage.title2,
+        title3: ru.errorPage.title3,
+        title4: ru.errorPage.title4,
+        link1: ru.errorPage.link1
       }
     }
   }
