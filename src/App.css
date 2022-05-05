@@ -431,8 +431,8 @@ th > button {
   background-color: #00b300;
 }
 
-/* 404 error page */
-.error404-grid-container {
+/* Error page */
+.error-page-grid-container {
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: auto;
@@ -442,23 +442,23 @@ th > button {
   padding: 40px;
 }
 
-.error404-main-title {
+.error-page-reason-title {
   font-size: 26px;
 }
 
-.error404-bg-code {
+.error-page-code-title {
   font-size: 10vh;
 }
 
-.error404-description {
+.error-page-description {
   font-size: 14px;
 }
 
-.error404-home-link {
+.error-page-home-link {
   margin: 10px;
 }
 
-.error404-home-link a {
+.error-page-home-link a {
   padding: 10px;
   color: black;
   border: 2px solid black;
