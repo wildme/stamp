@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 const ErrorPage = (props) => {
   const { t } = useTranslation();
-  const code = props.code;
+  const code = props.code || 404;
 
   return (
     <div className="error-page-grid-container">
