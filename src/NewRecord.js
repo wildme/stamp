@@ -65,46 +65,50 @@ const NewRecord = () => {
   };
 
   return (
-    <div className="add-record-grid-container">
-      { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-      <div className="add-container">
-        <div className="add-input-container">
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
-            setter={setSubject}
-            value={subject}
-          />
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'from' ||
-              x.name === 'to')[0]}
-            setter={setFromTo}
-            value={fromTo}
-            auto={true}
-            field='name'
-          />
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
-            setter={setReplyTo}
-            value={replyTo}
-          />
-          <InputField
-            attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
-            setter={setNote}
-            value={note}
-          />
-        </div>
-        <div className="add-file-container">
-          <div>
-            <label htmlFor="file"><b>{t('newRecord.label6')}</b></label>
-          </div>
-          <input type="file" name="file" id="upload"
-            onChange={(e) => setFile(e.target.files[0])} />
-        </div>
-        <div className="add-btn-container">
-          <button type="submit" disabled={!subject || !fromTo || fileError}
-            onClick={(e) => handleAddRecord(e)}>{t('newRecord.button')}
-          </button>
-        </div>
+    <div className="add-record-grid">
+      {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
+      <div className="add-record">
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+          setter={setSubject}
+          value={subject}
+          className="add-record__input"
+        />
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'from' ||
+            x.name === 'to')[0]}
+          setter={setFromTo}
+          value={fromTo}
+          auto={true}
+          field='name'
+          className="add-record__input"
+        />
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+          setter={setReplyTo}
+          value={replyTo}
+          className="add-record__input"
+        />
+        <InputField
+          attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+          setter={setNote}
+          value={note}
+          className="add-record__input"
+        />
+        <label htmlFor="file"><b>{t('newRecord.label6')}</b></label>
+        <input
+          className="add-record__upload"
+          type="file"
+          name="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <button
+          className="add-record__submit"
+          type="submit"
+          disabled={!subject || !fromTo || fileError}
+          onClick={(e) => handleAddRecord(e)}>
+          {t('newRecord.button')}
+        </button>
       </div>
     </div>
   );

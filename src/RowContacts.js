@@ -53,26 +53,50 @@ const RowContacts = ({ entry }) => {
 
   return (
     <Fragment>
-      <tr className="contact-item" hidden={hidden}>
-        <td>{ editOn ? <input type="text" value={name}
-          onChange={(e) => setName(e.target.value)} /> : name }
+      <tr className="page-table__tr" hidden={hidden}>
+        <td className="page-table__td">
+          {editOn ?
+            <input type="text" value={name}
+              onChange={(e) => setName(e.target.value)}/> :
+              name
+          }
         </td>
-        <td>{ editOn ? <input type="text" value={location}
-          onChange={(e) => setLocation(e.target.value)}/> : location }
+        <td className="page-table__td">
+          {editOn ?
+            <input type="text" value={location}
+              onChange={(e) => setLocation(e.target.value)}/> :
+              location}
         </td>
-        <td>{ editOn ? <input type="text" value={region}
-          onChange={(e) => setRegion(e.target.value)}/> : region}
+        <td className="page-table__td">
+          {editOn ?
+            <input type="text" value={region}
+              onChange={(e) => setRegion(e.target.value)}/> :
+              region}
         </td>
-        <td>{ !editOn ?
+        <td className="page-table__td">{!editOn ?
             <>
-              <button onClick={() => handleEdit()}><HiPencil /></button>
-              <button onClick={() => handleDelete(entry._id)}><HiTrash /></button>
+              <button
+                className="page-table__button"
+                onClick={() => handleEdit()}>
+                <HiPencil />
+              </button>
+              <button
+                className="page-table__button"
+                onClick={() => handleDelete(entry._id)}>
+                <HiTrash />
+              </button>
             </> :
             <>
               <button
-                onClick={() => handleSubmit(entry._id)}><HiCheckCircle />
+                className="page-table__button"
+                onClick={() => handleSubmit(entry._id)}>
+                <HiCheckCircle />
               </button>
-              <button onClick={() => handleCancel()}><HiXCircle /></button>
+              <button
+                className="page-table__button"
+                onClick={() => handleCancel()}>
+                <HiXCircle />
+              </button>
             </>
           }
         </td>

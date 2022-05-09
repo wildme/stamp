@@ -20,12 +20,14 @@ const FlashMessage = (props) => {
 
   return (
     <div
-      className="flash-msg-container"
+      className="flash-msg"
       hidden={hidden}
       style={{...styles}}>{props.msg}
-      <span className="flash-msg-btn">
-        <button onClick={() => setHidden(true)}><HiX /></button>
-      </span>
+      <button
+        className="flash-msg__button"
+        onClick={() => setHidden(true)}>
+        <HiX />
+      </button>
     </div>
   );
 };

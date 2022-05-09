@@ -38,25 +38,29 @@ const NewContact = () => {
   };
 
   return (
-     <div className="add-contact-grid-container">
+     <div className="add-contact-grid">
        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-       <div className="contact-input">
+       <div className="add-contact">
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
            setter={setOrgName}
            value={orgName}
+           className="add-contact__input"
          />
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
            setter={setOrgLocation}
            value={orgLocation}
+           className="add-contact__input"
          />
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'region')[0]}
            setter={setOrgRegion}
            value={orgRegion}
+           className="add-contact__input"
          />
          <button
+           className="add-contact__submit"
            type="submit"
            disabled={!orgName || !orgLocation}
            onClick={(e) => handleAddContact(e)}>

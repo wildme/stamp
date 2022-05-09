@@ -56,11 +56,12 @@ const Signup = () => {
   };
 
   return (
-    <div className="login-grid-container">
+    <div className="signup">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <form onSubmit={(e) => handleSignup(e)}>
-        <div className="login-input-container">
+        <div className="signup-form">
           <input
+            className="signup-form__input"
             type="text"
             placeholder={t('signup.placeholder1')}
             name="username"
@@ -73,6 +74,7 @@ const Signup = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
+            className="signup-form__input"
             type="email"
             placeholder={t('signup.placeholder2')}
             name="email"
@@ -87,17 +89,18 @@ const Signup = () => {
             setter={setPassword}
             placeholder={t('signup.placeholder3')}
             title={t('passwordInputEye.tooltip')}
-            styles={{marginTop: "8px"}}
+            styles={{ marginTop: "8px", height: "40px" }}
           />
-          <em className="signup-password-hint">{t('signup.string')}</em>
+          <em className="signup-form__length-hint">{t('signup.string')}</em>
           <PasswordInputEye
             pass={confirmPassword}
             setter={setConfirmPassword}
             placeholder={t('signup.placeholder4')}
             title={t('passwordInputEye.tooltip')}
-            styles={{marginTop: "8px"}}
+            styles={{ marginTop: "8px", height: "40px" }}
           />
           <input
+            className="signup-form__input"
             type="text"
             placeholder={t('signup.placeholder5')}
             name="firstname"
@@ -107,6 +110,7 @@ const Signup = () => {
             onChange={(e) => setFirstname(e.target.value)}
           />
           <input
+            className="signup-form__input"
             type="text"
             placeholder={t('signup.placeholder6')}
             name="lastname"
@@ -114,7 +118,11 @@ const Signup = () => {
             maxLength="50"
             onChange={(e) => setLastname(e.target.value)}
           />
-          <input value={t('signup.button')} id="submit" type="submit" />
+          <input
+            className="signup-form__input signup-form__submit"
+            value={t('signup.button')}
+            type="submit"
+          />
         </div>
       </form>
     </div>

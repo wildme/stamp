@@ -13,10 +13,10 @@ const UserProfile = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="user-profile-grid-container">
+    <div className="user-profile-grid">
     {infoMsg.str &&
        <FlashMessage msg={infoMsg.str} id={infoMsg.id } type={infoMsg.type}/>}
-      <div className="user-profile-container">
+      <div className="user-profile">
         <UserProfileTitle t={t} fullname={fullname}/>
         <UserProfileMenu t={t} />
         <UserProfileContent

@@ -42,45 +42,43 @@ const UserPassword = ({user, t, setter, setter2}) => {
   };
 
   return (
-    <div className="user-info-grid-container">
-      <div className="user-info-title-container">
-        <h2>{t('password.title')}</h2>
+    <div className="user-info-grid">
+      <div className="user-info__title">
+        <h2 className="user-info__title_section">{t('password.title')}</h2>
       </div>
-      <form onSubmit={(e) => handlePassUpdate(e)}>
-        <div className="user-info-input-container">
-          <label htmlFor="old-pass"><b>{t('password.label1')}</b></label>
-          <input
-            type="password"
-            name="old-pass"
-            value={oldPass}
-            required
-            onChange={(e) => setOldPass(e.target.value)}
-          />
-          <label htmlFor="new-pass"><b>{t('password.label2')}</b></label>
-          <PasswordInputEye
-            pass={newPass}
-            setter={setNewPass}
-            title={t('passwordInputEye.tooltip')}
-            name="new-pass"
-          />
-          <em className="user-info-hint">{t('password.string')}</em>
-          <label htmlFor="confirm-pass"><b>{t('password.label3')}</b></label>
-          <PasswordInputEye
-            pass={confirmPass}
-            setter={setConfirmPass}
-            title={t('passwordInputEye.tooltip')}
-            name="confirm-pass"
-          />
-        </div>
-        <div className="user-info-update-btn-container">
-          <input
-            type="submit"
-            id="submit"
-            value={ t('password.button') }
-            disabled={!oldPass || !newPass || !confirmPass}
-          />
-        </div>
-      </form>
+      <label htmlFor="old-pass"><b>{t('password.label1')}</b></label>
+      <input
+        className="user-info__input"
+        type="password"
+        name="old-pass"
+        value={oldPass}
+        required
+        onChange={(e) => setOldPass(e.target.value)}
+      />
+      <label htmlFor="new-pass"><b>{t('password.label2')}</b></label>
+      <PasswordInputEye
+        pass={newPass}
+        setter={setNewPass}
+        title={t('passwordInputEye.tooltip')}
+        name="new-pass"
+        styles={{ height: "30px" }}
+      />
+      <em className="user-info__hint">{t('password.string')}</em>
+      <label htmlFor="confirm-pass"><b>{t('password.label3')}</b></label>
+      <PasswordInputEye
+        pass={confirmPass}
+        setter={setConfirmPass}
+        title={t('passwordInputEye.tooltip')}
+        name="confirm-pass"
+        styles={{ height: "30px" }}
+      />
+      <input
+        className="user-info__submit"
+        type="submit"
+        value={ t('password.button') }
+        disabled={!oldPass || !newPass || !confirmPass}
+        onClick={(e) => handlePassUpdate(e)}
+      />
     </div>
   );
 };

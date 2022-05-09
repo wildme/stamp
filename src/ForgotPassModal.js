@@ -49,17 +49,26 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
   if (!openModal) return null;
   return ReactDOM.createPortal(
     <div
-      className="forgot-pass-grid-container"
+      className="forgot-pass-grid"
       onClick={() => closeModal(true)}>
       <div
-        className="forgot-pass-input-container"
+        className="forgot-pass"
         onClick={(e) => e.stopPropagation()}>
-        <div className="forgot-pass-header">
-          {infoMsg && <span id={error ? 'failure' : 'success'}>{infoMsg}</span>}
-          <button onClick={() => closeModal(true)}><HiX /></button>
+        <div className="forgot-pass__header">
+          {infoMsg &&
+          <span
+            className={"forgot-pass__header_" + (error ? 'failure' : 'success')}>
+            {infoMsg}
+          </span>}
+          <button
+            className="forgot-pass__close"
+            onClick={() => closeModal(true)}>
+            <HiX />
+          </button>
         </div>
         <label htmlFor="username">{t('forgotPassword.label1')}</label>
         <input
+          className="forgot-pass__input"
           type="text"
           name="username"
           placeholder={t('forgotPassword.placeholder1')}
@@ -67,6 +76,7 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          className="forgot-pass__input"
           type="email"
           name="email"
           placeholder={t('forgotPassword.placeholder2')}
@@ -74,8 +84,8 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
+          className="forgot-pass__input forgot-pass__submit"
           type="submit"
-          id="submit"
           value={t('forgotPassword.button1')}
           disabled={!email || !username}
           onClick={(e) => handleReqCreds(e)}

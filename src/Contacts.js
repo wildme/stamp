@@ -36,30 +36,30 @@ const Contacts = () => {
       <div className="page-title">
         <h2>{ t('contacts.title') }</h2>
       </div>
-      { infoMsg.str &&
-        <div className="flash-msg-grid-container">
-          <FlashMessage msg={infoMsg.str} id={infoMsg.id} />
-        </div>
-      }
+      {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-actions">
-        <Link to="/contacts/new">{ t('contacts.link') }</Link>
+        <Link
+          className="page-actions__link"
+          to="/contacts/new">
+          {t('contacts.link')}
+        </Link>
       </div>
       <div className="page-table">
-        <table>
-          <thead>
-            <tr className="top-row">
+        <table className="page-table__table">
+          <thead className="page-table__thead">
+            <tr className="page-table__tr">
               <TableHead table="contacts" t={t}/>
             </tr>
           </thead>
           <tbody>
               <ContactsContext.Provider value={setInfoMsg}>
-          { tbContacts &&
+          {tbContacts &&
               <Rows rows={tbContacts} kind='contacts' />
           }
               </ContactsContext.Provider>
          </tbody>
         </table>
-      { noData &&
+      {noData &&
           <p><i>{ t('contacts.infoMsg2') }</i></p>
       }
       </div>

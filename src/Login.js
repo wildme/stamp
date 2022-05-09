@@ -60,11 +60,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-grid-container">
+    <div className="login">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <form onSubmit={(e) => handleLogin(e)}>
-        <div className="login-input-container">
+        <div className="login-form">
           <input
+            className="login-form__input"
             type="text"
             placeholder={t('login.placeholder1')}
             name="username"
@@ -73,6 +74,7 @@ const Login = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
+            className="login-form__input"
             type="password"
             placeholder={t('login.placeholder2')}
             name="password"
@@ -80,12 +82,17 @@ const Login = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input value={t('login.button')} id="submit" type="submit" />
-          <span className="login-bottom-msg">{t('login.string')}&nbsp;
+          <input
+            className="login-form__input login-form__submit"
+            value={t('login.button')}
+            type="submit"
+          />
+          <span className="login-form__bottom-msg">{t('login.string')}&nbsp;
             <Link to="/signup">{t('login.link')}</Link>
           </span>
-          <span className="login-bottom-msg">{t('login.string2')}&nbsp;
+          <span className="login-form__bottom-msg">{t('login.string2')}&nbsp;
             <button
+              className="login-form__bottom-msg login-form__button"
               type="button"
               onClick={() => setOpenModal(true)}>{t('login.button2')}
             </button>?

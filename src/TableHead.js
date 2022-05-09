@@ -8,10 +8,14 @@ const TableHead = ({ table, handleClick, sortOrder, column, t }) =>
     const direction = currentItem ? sortOrder : '';
 
     return (
-      <th key={id}>{ sortable ? 
-        <button type="button" onClick={ () => handleClick(id) }>
-          { t(label) } <SortIcon direction={ direction } />
-        </button> : t(label) }
+      <th key={id}>{sortable ?
+        <button
+          className="page-table__button"
+          type="button"
+          onClick={() => handleClick(id)}
+        >
+          {t(label)} <SortIcon direction={direction} />
+        </button> : t(label)}
       </th>
     )
    }) 

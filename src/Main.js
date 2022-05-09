@@ -50,23 +50,23 @@ const Main = (props) => {
 
   return (
     <div className="page-content">
+      {infoMsg && <FlashMessage msg={infoMsg} />}
       <div className="page-title">
         <h2>
-          { box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox') }
+          {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
         </h2>
       </div>
-      { infoMsg &&
-      <div className="flash-msg-grid-container">
-        <FlashMessage msg={infoMsg} />
-      </div>
-      }
       <div className="page-actions">
-        <Link to={`/${box}/new`}>{t('main.link')}</Link>
+        <Link
+          className="page-actions__link"
+          to={`/${box}/new`}>
+          {t('main.link')}
+        </Link>
       </div>
       <div className="page-table">
-        <table>
-          <thead>
-            <tr>
+        <table className="page-table__table">
+          <thead className="page-table__thead">
+            <tr className="page-table__tr">
               <TableHead table={box} handleClick={handleClick}
                 sortOrder={sortOrder} column={column} t={t}
               />

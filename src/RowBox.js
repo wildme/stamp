@@ -14,14 +14,18 @@ const RowBox = ({ entry }) => {
 
   return (
     <Fragment>
-      <tr className="box-item" id={entry.status}>
+      <tr className={"page-table__tr page-table__tr-" + entry.status}>
         <td><Link to={`/${box}/view/${entry.id}`}>{entry.id}</Link></td>
-        <td><div className="long-col-tbl">{entry.subject}</div></td>
-        <td><div className="long-col-tbl">{entry.from || entry.to}</div></td>
-        <td>{dateStr}</td>
-        <td>{entry.addedBy}</td>
-        <td>{entry.replyTo || '-'}</td>
-        <td>{accessToEdit &&
+        <td className="page-table__td">
+          <div className="long-col-tbl">{entry.subject}</div>
+        </td>
+        <td className="page-table__td">
+          <div className="long-col-tbl">{entry.from || entry.to}</div>
+        </td>
+        <td className="page-table__td">{dateStr}</td>
+        <td className="page-table__td">{entry.addedBy}</td>
+        <td className="page-table__td">{entry.replyTo || '-'}</td>
+        <td className="page-table__td">{accessToEdit &&
             <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link> }
         </td>
       </tr>

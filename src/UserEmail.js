@@ -34,27 +34,25 @@ const UserEmail = ({ user, t, setter }) => {
   };
 
   return (
-    <div className="user-info-grid-container">
-      <div className="user-info-title-container">
-        <h2>{t('email.title')}</h2>
+    <div className="user-info-grid">
+      <div className="user-info__title">
+        <h2 className="user-info__title_section">{t('email.title')}</h2>
       </div>
-      <div className="user-info-input-container">
-        <label htmlFor="email"><b>{t('email.label1')}</b></label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="user-info-update-btn-container">
-        <button
-          type="submit"
-          disabled={!email}
-          onClick={(e) => handleEmailUpdate(e)}>{t('email.button')}
-        </button>
-      </div>
+      <label htmlFor="email"><b>{t('email.label1')}</b></label>
+      <input
+        className="user-info__input"
+        type="email"
+        name="email"
+        value={email}
+        required
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button
+        className="user-info__submit"
+        type="submit"
+        disabled={!email}
+        onClick={(e) => handleEmailUpdate(e)}>{t('email.button')}
+      </button>
     </div>
   );
 };

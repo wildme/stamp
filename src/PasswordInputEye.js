@@ -11,8 +11,10 @@ const PasswordInputEye = (props) => {
   };
 
   return (
-    <div className="password-input-container" style={{...styles}}>
+    <div className="password-input-eye" style={{marginTop: styles.marginTop}}>
       <input
+        style={{height: styles.height}}
+        className="password-input-eye__input"
         type={showPass ? "text" : "password"}
         placeholder={props.placeholder || ""}
         name={props.name || "pass"}
@@ -25,9 +27,10 @@ const PasswordInputEye = (props) => {
         onChange={(e) => props.setter(e.target.value)}
       />
       <button
+        className="password-input-eye__button"
         type="button"
         onClick={(e) => handleShowPass(e)}>
-        { showPass ? <HiEye /> : <HiEyeOff /> }
+        {showPass ? <HiEye /> : <HiEyeOff />}
       </button>
     </div>
   );

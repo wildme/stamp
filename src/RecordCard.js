@@ -106,64 +106,62 @@ const RecordCard = () => {
   if (noData) return <ErrorPage code={404} />
 
   return (
-    <div className="record-card-grid-container">
-      { infoMsg.str && <FlashMessage msg={infoMsg} id={infoMsg.id} /> }
+    <div className="record-card-grid">
+      {infoMsg.str && <FlashMessage msg={infoMsg} id={infoMsg.id} />}
       <div className="record-card">
-        <div className="record-header">
-          { <h2>{ t(`recordCard.title${box}`) } #{idOfRec}</h2> }
+        <div className="record-card__title">
+          {<h2>{t(`recordCard.title${box}`)} #{idOfRec}</h2>}
           <hr/>
         </div>
-        <div className="record-fields">
-          <div className="record-attr"><b>{ t('recordCard.subject') }</b>:
-            <div className="long-field-card">{subject}</div>
+          <div className="record-card__field record-card__field_long">
+            <b>{t('recordCard.subject')}</b>: {subject}
           </div>
-        { box === 'inbox' ?
-          <div className="record-attr">
-            <b>{ t('recordCard.from') }</b>: {fromTo}
+        {box === 'inbox' ?
+          <div className="record-card__field">
+            <b>{t('recordCard.from')}</b>: {fromTo}
           </div> :
-          <div className="record-attr">
-            <b>{ t('recordCard.to') }</b>: {fromTo}
+          <div className="record-card__field">
+            <b>{t('recordCard.to')}</b>: {fromTo}
           </div>
         }
-        <div className="record-attr">
-          <b>{ t('recordCard.date') }</b>: {dateStr}
-        </div>
-        { updated &&
-        <div className="record-attr">
-          <b>{ t('recordCard.updated') }</b>: {updatedStr || '-'}
-        </div>
+          <div className="record-card__field">
+            <b>{t('recordCard.date')}</b>: {dateStr}
+          </div>
+        {updated &&
+          <div className="record-card__field">
+            <b>{t('recordCard.updated')}</b>: {updatedStr || '-'}
+          </div>
         }
-        <div className="record-attr">
-          <b>{ t('recordCard.replyTo') }</b>: {replyTo || '-'}
-        </div>
-        <div className="record-attr">
-          <b>{ t('recordCard.user') }</b>: {addedBy}
-        </div>
-        <div className="record-attr">
-          <b>{ t('recordCard.status') }</b>: {statusOfRecord}
-        </div>
-        <div className="record-attr">
-          <b>{ t('recordCard.note') }</b>:
-          <div className="record-break-line">{note || '-'}</div>
-        </div> 
-        </div>
-        { file && <div className="record-attr">
-          <div className="record-attachment">
-            <a href={`/attachment/${file._id}`}
-              onClick={(e) => handleDownload(e)}>
-              <div className="record-hidden-line">{file.filename}</div>
+          <div className="record-card__field">
+            <b>{t('recordCard.replyTo')}</b>: {replyTo || '-'}
+          </div>
+          <div className="record-card__field">
+            <b>{t('recordCard.user')}</b>: {addedBy}
+          </div>
+          <div className="record-card__field">
+            <b>{t('recordCard.status')}</b>: {statusOfRecord}
+          </div>
+          <div className="record-card__field record-card__field_long">
+            <b>{t('recordCard.note')}</b>: {note || '-'}
+          </div>
+        {file &&
+          <div className="record-card__file record-card__file_long">
+            <a
+              href={`/attachment/${file._id}`}
+              onClick={(e) => handleDownload(e)}>{file.filename}
             </a>
           </div>
-        </div>
         }
-        <div className="record-status-button">
-          <button type="submit" id={statusOfRecord}
-             onClick={() => handleStatus()} hidden={!accessToEdit}>
-             { statusOfRecord === 'active' ? t('recordCard.button2') :
+          <button
+            className={`record-card__button record-card__button_${statusOfRecord}`}
+            type="submit"
+            onClick={() => handleStatus()}
+            hidden={!accessToEdit}>
+             {statusOfRecord === 'active' ?
+                 t('recordCard.button2') :
                   t('recordCard.button1')
              }
           </button>
-        </div>
       </div>
     </div>
   );

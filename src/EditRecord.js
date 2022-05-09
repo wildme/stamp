@@ -133,57 +133,64 @@ const EditRecord = () => {
     if (noData) return <ErrorPage code={404} />;
     if (!permitted) return <ErrorPage code={401} />;
     return (
-      <div className="edit-grid-container">
-        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id}/> }
-        <div className="edit-container">
-          <div className="edit-input-container">
+      <div className="edit-record-grid">
+        {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id}/>}
+        <div className="edit-record">
             <InputField
               attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
               setter={setSubject}
               value={subject}
+              className="edit-record__input"
             />
             <InputField
-              attrs={
-                attrs[`${box}`].filter((x) => x.name === 'from' ||
-                  x.name === 'to')[0]
-              }
+              attrs={attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]}
               setter={setFromTo}
               value={fromTo}
               auto={true}
               field='name'
+              className="edit-record__input"
             />
             <InputField
               attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
               setter={setReplyTo}
               value={replyTo}
+              className="edit-record__input"
             />
             <InputField
               attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
               setter={setNote}
               value={note}
+              className="edit-record__input"
             />
-          </div>
-          <div className="edit-file-container">
-            <div>  
-              <input type="file" id="upload"
-                onChange={(e) => setNewFile(e.target.files[0])} />
-            </div>
-            { file &&
+           <input
+             className="edit-record__upload"
+             type="file"
+             onChange={(e) => setNewFile(e.target.files[0])}
+          />
+            {file &&
             <div>
-              <a href={`/attachment/${file._id}`}
-                onClick={(e) => handleDownload(e)}>{t('editRecord.link')}
+              <a
+                href={`/attachment/${file._id}`}
+                onClick={(e) => handleDownload(e)}>
+                {t('editRecord.link')}
               </a>
-              <input type="checkbox" name="del-file" id="del"
-                onChange={() => setDelFile(!delFile)} />
+              <input
+                className="edit-record__checkbox"
+                type="checkbox"
+                name="del-file"
+                id="del"
+                onChange={() => setDelFile(!delFile)}
+              />
               <label htmlFor="del-file">{t('editRecord.label1')}</label>
             </div>
             }
-          </div>
-          <div className="update-btn-container">
-            <button type="submit" disabled={!subject || !fromTo}
-              onClick={(e) => handleEditRecord(e)}>{t('editRecord.button')}
+            <button
+              className="edit-record__submit"
+              type="submit"
+              disabled={!subject || !fromTo}
+              onClick={(e) => handleEditRecord(e)}>
+              {t('editRecord.button')}
             </button>
-          </div>
         </div>
       </div>
   );

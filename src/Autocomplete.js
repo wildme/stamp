@@ -1,9 +1,15 @@
 import { useState, Fragment } from 'react';
 
-const Autocomplete = ({ value, setter, attrs, field, t }) => {
+const Autocomplete = (props) => {
   const [matches, setMatches] = useState([]);
   const [activeItem, setActiveItem] = useState(0);
   const [visibility, setVisibility] = useState(false);
+  const value = props.value;
+  const setter = props.setter;
+  const attrs = props.attrs;
+  const field = props.field;
+  const t = props.t;
+  const className = props.className;
 
   const onKeyDown = (e) => {
     if (e.keyCode === 13) {
@@ -76,6 +82,7 @@ const Autocomplete = ({ value, setter, attrs, field, t }) => {
         <b>{t(attrs.text)}</b>
       </label>
       <input
+        className={className}
         type={attrs.type}
         name={attrs.name}
         value={value}

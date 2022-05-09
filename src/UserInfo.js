@@ -34,34 +34,33 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
   };
 
   return (
-    <div className="user-info-grid-container">
-      <div className="user-info-title-container">
-        <h2>{t('personalInfo.title')}</h2>
+    <div className="user-info-grid">
+      <div className="user-info__title">
+        <h2 className="user-info__title_section">{t('personalInfo.title')}</h2>
       </div>
-      <div className="user-info-input-container">
-        <label htmlFor="firstname"><b>{t('personalInfo.label1')}</b></label>
-        <input
-          type="text"
-          name="firstname"
-          value={firstname}
-          required
-          onChange={(e) => setFirstname(e.target.value)}
-        />
-        <label htmlFor="lastname"><b>{t('personalInfo.label2')}</b></label>
-        <input
-          type="text"
-          name="lastname"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        />
-      </div>
-      <div className="user-info-update-btn-container">
-        <button
-          type="submit"
-          disabled={!firstname}
-          onClick={(e) => handleInfoUpdate(e)}>{t('personalInfo.button')}
-        </button>
-      </div>
+      <label htmlFor="firstname"><b>{t('personalInfo.label1')}</b></label>
+      <input
+        className="user-info__input"
+        type="text"
+        name="firstname"
+        value={firstname}
+        required
+        onChange={(e) => setFirstname(e.target.value)}
+      />
+      <label htmlFor="lastname"><b>{t('personalInfo.label2')}</b></label>
+      <input
+        className="user-info__input"
+        type="text"
+        name="lastname"
+        value={lastname}
+        onChange={(e) => setLastname(e.target.value)}
+      />
+      <button
+        className="user-info__submit"
+        type="submit"
+        disabled={!firstname}
+        onClick={(e) => handleInfoUpdate(e)}>{t('personalInfo.button')}
+      </button>
     </div>
   );
 };

@@ -3,9 +3,9 @@ const UserProfileTitle = (props) => {
   const fullname = props.fullname;
 
   return (
-    <div className="user-profile-title">
-      <h2>{fullname}</h2>
-      <p>{t('userProfile.subTitle')}</p>
+    <div className="user-profile__title">
+      <h2 className="user-profile__title_name">{fullname}</h2>
+      <p className="user-profile__subtitle">{t('userProfile.subTitle')}</p>
     </div>
   );
 };

@@ -1,29 +1,32 @@
-/* Navigation bar */
+/* Navbar */
 .navbar {
   display: grid;
   grid-template-columns: 120px auto auto;
   grid-auto-rows: 55px;
-  background-color: #000000;
   align-items: center;
 }
 
-.navbar a {
+.navbar_black {
+  background-color: #000000;
+}
+
+.menu__item {
   color: grey;
   text-decoration: none;
   font-size: 19px;
   padding: 5px;
 }
 
-.navbar a.active, .navbar a:hover {
+.menu__item:hover , .menu__item.active {
   color: white;
   text-decoration: none;
 }
 
-.navbar-right {
+.navbar_right {
   text-align: right;
 }
 
-.navbar-left {
+.navbar_left {
   text-align: left;
 }
 
@@ -31,18 +34,22 @@
 .footer {
   display: grid;
   grid-template-columns: 100%;
+}
+
+.footer__text {
   text-align: center;
   font-size: 12px;
 }
 
-/* Login page */
-.login-grid-container {
+/* Login and Signup pages */
+.login, .signup {
   display: grid;
   justify-items: center;
   align-items: center;
 }
 
-.login-input-container {
+.login-form,
+.signup-form {
   display: grid;
   width: 300px;
   border: 1px solid;
@@ -51,30 +58,34 @@
   margin: 100px 0 100px 0;
 }
 
-.login-input-container input {
+.login-form__input,
+.signup-form__input {
   display: grid;
   height: 40px;
   margin-top: 8px;
 }
 
-.login-input-container input#submit {
+.login-form__submit,
+.signup-form__submit,
+.forgot-pass__submit {
   background-color: #2eb82e;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.login-input-container input#submit:hover {
+.login-form__submit:hover,
+.signup-form__submit:hover {
   opacity: 0.8;
 }
 
-.login-bottom-msg {
+.login-form__bottom-msg {
   padding-top: 8px;
   font-size: 12px;
   color: #57565d;
 }
 
-.login-bottom-msg button {
+.login-form__button {
   border: none;
   color: blue;
   text-decoration: underline;
@@ -83,56 +94,108 @@
   padding: 0;
 }
 
-.signup-password-hint {
+.signup-form__length-hint {
   font-size: 12px;
   color: #57565d;
+}
+
+/* Forgot Password modal dialog */
+.forgot-pass-grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.forgot-pass {
+  display: grid;
+  border: 1px solid;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px;
+}
+
+.forgot-pass__input {
+  height: 40px;
+  margin-top: 8px;
+}
+
+.forgot-pass__header {
+  text-align: center;
+}
+
+.forgot-pass__header_failure {
+  color: red;
+}
+
+.forgot-pass__header_success {
+  color: green;
+}
+
+.forgot-pass__close {
+  float: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 /* Content component */
 .page-content {
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: auto;
+  justify-items: center;
+  align-items: center;
 }
 
 .page-title {
   margin-left: 15px;
   text-align: left;
+  width: 100%;
 }
 
 .page-actions {
   text-align: center;
+  width: 100%;
   margin: 10px;
 }
 
-.page-actions a {
+.page-actions__link {
   padding: 10px;
   color: black;
   border: 2px solid black;
 }
 
 .page-table {
-  margin: 15px 15px 30px 15px;
+  display: grid;
+  width: 100%;
+
 }
 
 /* Tables: Inbox, Outbox, Contacts */
-table {
+.page-table__table {
   font-family: arial;
   font-size: 17px;
-  width: 100%;
   border-collapse: collapse;
   text-align: left;
+  margin: 15px 15px 30px 15px;
 }
 
-tr {
+.page-table__tr, .page-table__tr-active {
   border: none;
   border-bottom: 1px solid #0099ff;
 }
 
-tr#canceled {
+.page-table__tr-canceled {
   background-color: #ffe6e6;
 }
 
-th, td {
+.page-table__th, .page-table__td {
   padding: 8px;
 }
 
@@ -142,7 +205,7 @@ th, td {
   text-overflow: ellipsis;
 }
 
-th > button {
+.page-table__button {
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -151,15 +214,313 @@ th > button {
   font-weight: bold;
 }
 
-/* Contacts page */
-.contact-item button {
+/* New/Edit Record, New Contact */
+.add-record-grid,
+.edit-record-grid,
+.add-contact-grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.add-record,
+.edit-record,
+.add-contact {
+  display: grid;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 100px 0 100px 0;
+}
+
+.add-record__input,
+.edit-record__input,
+.add-contact__input {
+  width: 300px;
+  height: 30px;
+}
+
+.edit-record__checkbox {
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+.add-record__upload,
+.edit-record__upload {
+  margin-top: 8px;
+  width: 300px;
+}
+
+.add-record__submit,
+.edit-record__submit,
+.add-contact__submit,
+.user-info__submit {
+  margin-top: 8px;
+  height: 40px;
+  background-color: #2eb82e;
   border: none;
-  background-color: transparent;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+.add-record__submit:disabled,
+.edit-record__submit:disabled,
+.add-contact__submit:disabled,
+.forgot-pass__submit:disabled,
+.user-info__submit:disabled {
+  background-color: #e6e6e6;
+  cursor: default;
+}
+
+.add-record__submit:hover:enabled,
+.edit-record__submit:hover:enabled,
+.add-contact__submit:hover:enabled,
+.forgot-pass__submit:hover:enabled,
+.user-info__submit:hover:enabled {
+  background-color: #00b300;
+}
+
+/* Record card page */
+.record-card-grid {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.record-card {
+  display: grid;
+  padding: 15px;
+  background-color: #ffe6b3;
+  border-radius: 6px;
+  box-shadow: 4px 3px 8px 1px;
+  margin: 100px 0 100px 0;
+} 
+
+.record-card__title {
+  text-align: center;
+  color: #0066cc;
+}
+
+.record-card__field {
+  padding: 5px;
+}
+
+.record-card__field_long {
+  width: 300px;
+  overflow-wrap: break-word;
+}
+
+.record-card__file_long {
+  width: 300px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.record-card__file {
+  border: 3px solid;
+  border-style: double;
+  border-color: grey;
+  display: grid;
+  justify-items: center;
+  padding: 3px;
+  margin: 8px 0 8px 0;
+}
+
+.record-card__button {
+  padding: 7px;
+  border: 1px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.record-card__button_active {
+  background-color: #ff4d4d;
+}
+
+.record-card__button_canceled {
+  background-color: #33cc33;
+}
+
+/* Error page */
+.error-page-grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  justify-items: center;
+  align-items: center;
+  font-family: arial;
+  padding: 40px;
+}
+
+.error-page__top-title {
+  font-size: 26px;
+}
+
+.error-page__mid-title {
+  font-size: 10vh;
+}
+
+.error-page__bottom_title {
+  font-size: 14px;
+}
+
+.error-page__home-link {
+  padding: 10px;
+  color: black;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+/* User profile page */
+.user-profile-grid {
+  display: grid;
+  padding: 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+.user-profile {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-row-gap: 8px;
+  grid-column-gap: 30px;
+  padding: 8px;
+}
+/* User profile: title */
+.user-profile__title {
+  grid-column: 1 / span 2;
+  padding: 8px;
+}
+
+.user-profile__title_name {
+  margin: 0;
+}
+.user-profile__subtitle {
+  margin: 0;
+  color: #0066ff;
+}
+
+/* User profile: navbar */
+.user-profile__navbar {
+  font-size: 22px;
+  width: 200px;
+}
+
+.user-profile__navbar_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-profile__navbar_link {
+  display: grid;
+  border-radius: 4px;
+  text-decoration: none;
+  color: grey;
+  padding: 8px;
+}
+
+.user-profile__navbar_link.active {
+  background-color: #000000;
+  color: white;
+}
+
+.user-profile__navbar_link:hover:not(.active) {
+  background-color: #94b8b8;
+  color: white;
+}
+
+/* User profile: email, pass, info */
+.user-info-grid {
+  display: grid;
+  width: 300px;
+}
+
+.user-info__title {
+  border-bottom: 1px solid grey;
+}
+
+.user-info__title_section {
+  margin: 0;
+}
+
+.user-info__input {
+  height: 30px;
+}
+
+.user-info__hint {
+  font-size: 12px;
+  color: #57565d;
+}
+
+/* PasswordInputEye component */
+.password-input-eye {
+  display: grid;
+  grid-template-columns: 90% auto;
+  border: 1px solid;
+  padding: 4px;
+}
+
+.password-input-eye__button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
   font-size: 17px;
 }
 
-/* Sort icon */
+.password-input-eye__input {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.password-input-eye__input:focus {
+  outline: none;
+}
+
+/* Flash Message */
+.flash-msg {
+  padding: 10px;
+  border: 2px #4d4d4d;
+  border-radius: 6px;
+  width: 70%;
+  margin: 10px;
+  text-align: center;
+}
+
+.flash-msg__button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  float: right;
+}
+
+/* Add/edit record: autocomplete menu */
+.options {
+  width: 300px;
+  background-color: white;
+  border: 1px solid;
+  list-style-type: none;
+  overflow: auto;
+  max-height: 200px;
+  margin: auto;
+  padding: 3px;
+  z-index: 1;
+}
+
+.active-item,
+.options li:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.options li:not(:last-of-type) {
+  border-bottom: 1px solid grey;
+}
+
+/* Table: sort icon */
 .sort-icon_ {
   display: inline;
   font-size: 14px;
@@ -184,481 +545,4 @@ th > button {
 
 .sort-icon_desc span#arrow-down {
   color: black;
-}
-
-/* New contact page */
-.add-contact-grid-container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-.contact-input {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 100px 0 100px 0;
-}
-.contact-input input {
-  display: grid;
-  width: 300px;
-  height: 30px;
-}
-
-.contact-input {
-  display: grid;
-}
-
-.contact-input button {
-  margin-top: 8px;
-  height: 40px;
-  background-color: #2eb82e;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.contact-input button:disabled {
-  background-color: #e6e6e6;
-  cursor: default;
-}
-
-.contact-input button:hover:enabled {
-  background-color: #00b300;
-}
-
-/* New record page */
-.add-record-grid-container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-.add-container {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 100px 0 100px 0;
-}
-
-.add-input-container input {
-  display: grid;
-  width: 300px;
-  height: 30px;
-}
-
-.add-file-container input#upload {
-  margin-top: 8px;
-  width: 300px;
-}
-
-.add-btn-container {
-  display: grid;
-}
-.add-btn-container button {
-  margin-top: 8px;
-  height: 40px;
-  background-color: #2eb82e;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.add-btn-container button:disabled {
-  background-color: #e6e6e6;
-  cursor: default;
-}
-
-.add-btn-container button:hover:enabled {
-  background-color: #00b300;
-}
-
-/* Autocomplete menu */
-.options {
-  position: absolute;
-  width: 300px;
-  background-color: white;
-  border: 1px solid;
-  list-style-type: none;
-  overflow: auto;
-  max-height: 200px;
-  margin: auto;
-  padding: 3px;
-  z-index: 1;
-}
-
-.active-item,
-.options li:hover {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-
-.options li:not(:last-of-type) {
-  border-bottom: 1px solid grey;
-}
-
-/* Record card page */
-.record-card-grid-container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-}
-
-.record-card {
-  padding: 15px;
-  background-color: #ffe6b3;
-  border-radius: 6px;
-  box-shadow: 4px 3px 8px 1px;
-  margin: 100px 0 100px 0;
-} 
-
-.record-card h2 {
-  color: #0066cc;
-}
-
-.record-card p {
-  font-family: arial;
-}
-
-.record-header {
-  text-align: center;
-}
-.record-fields {
-  text-align: left;
-}
-
-.record-status-button {
-  display: grid;
-  margin: auto;
-}
-
-.record-status-button button {
-  padding: 7px;
-  border: 1px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.record-status-button button#active {
-  background-color: #ff4d4d;
-}
-
-.record-status-button button#canceled {
-  background-color: #33cc33;
-}
-
-.record-break-line {
-  width: 300px;
-  overflow-wrap: break-word;
-}
-
-.record-hidden-line {
-  width: 300px;
-  text-align: center;
-  overflow: hidden;
-}
-
-.record-attr {
-  padding: 5px;
-}
-
-.record-attachment {
-  border: 3px solid;
-  border-style: double;
-  border-color: grey;
-  display: grid;
-  justify-items: center;
-  padding: 3px;
-  margin-bottom: 5px;
-}
-
-/* Edit record page */
-.edit-grid-container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-row-gap: 50px;
-}
-
-.edit-container {
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 100px 0 100px 0;
-}
-
-.edit-input-container input {
-  display: grid;
-  width: 300px;
-  height: 30px;
-}
-
-.edit-file-container input#del {
-  margin-top: 8px;
-  margin-left: 15px;
-}
-
-.edit-file-container input#upload {
-  margin-top: 8px;
-  width: 300px;
-}
-
-.update-btn-container {
-  display: grid;
-}
-
-.update-btn-container button {
-  margin-top: 8px;
-  height: 40px;
-  background-color: #2eb82e;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.update-btn-container button:hover {
-  background-color: #00b300;
-}
-
-.update-btn-container button:disabled {
-  background-color: #e6e6e6;
-  cursor: default;
-}
-
-.update-btn-container button:hover:enabled {
-  background-color: #00b300;
-}
-
-/* Error page */
-.error-page-grid-container {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: auto;
-  justify-items: center;
-  align-items: center;
-  font-family: arial;
-  padding: 40px;
-}
-
-.error-page-reason-title {
-  font-size: 26px;
-}
-
-.error-page-code-title {
-  font-size: 10vh;
-}
-
-.error-page-description {
-  font-size: 14px;
-}
-
-.error-page-home-link {
-  margin: 10px;
-}
-
-.error-page-home-link a {
-  padding: 10px;
-  color: black;
-  border: 2px solid black;
-}
-
-/* User profile page */
-.user-profile-grid-container {
-  display: grid;
-  padding: 10px;
-  justify-items: center;
-  align-items: center;
-}
-
-.user-profile-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-row-gap: 8px;
-  grid-column-gap: 30px;
-  padding: 8px;
-}
-
-.user-profile-title {
-  grid-column: 1 / span 2;
-  padding: 8px;
-}
-
-.user-profile-title h2 {
-  margin: 0;
-}
-.user-profile-title p {
-  margin: 0;
-  color: #0066ff;
-}
-.user-profile-navbar {
-  font-size: 22px;
-  width: 200px;
-}
-
-.user-profile-navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.user-profile-navbar a {
-  display: grid;
-  border-radius: 4px;
-  text-decoration: none;
-  color: grey;
-  padding: 8px;
-}
-
-.user-profile-navbar a.active {
-  background-color: #000000;
-  color: white;
-}
-
-.user-profile-navbar a:hover:not(.active) {
-  background-color: #94b8b8;
-  color: white;
-}
-
-.user-info-grid-container {
-  display: grid;
-  width: 300px;
-}
-
-.user-info-title-container {
-  border-bottom: 1px solid grey;
-}
-
-.user-info-title-container h2 {
-  margin: 0;
-}
-
-.user-info-input-container {
-  display: grid;
-  padding-top: 8px;
-}
-
-.user-info-input-container input {
-  height: 30px;
-}
-
-.user-info-update-btn-container {
-  display: grid;
-}
-
-.user-info-update-btn-container button, input#submit {
-  margin-top: 8px;
-  height: 40px;
-  background-color: #2eb82e;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.user-info-update-btn-container button:enabled, input#submit:enabled {
-  background-color: #00b300;
-}
-
-.user-info-update-btn-container button:disabled, input#submit:disabled {
-  background-color: #e6e6e6;
-  cursor: default;
-}
-
-.user-info-hint {
-  font-size: 12px;
-  color: #57565d;
-}
-
-/* PasswordInputEye component */
-.password-input-container {
-  display: grid;
-  grid-template-columns: 90% auto;
-  border: 1px solid;
-  padding: 4px;
-}
-
-.password-input-container button {
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  font-size: 17px;
-}
-
-.password-input-container input {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.password-input-container input:focus {
-  outline: none;
-}
-
-/* Flash Message */
-.flash-msg-grid-container {
-  display: grid;
-  justify-items: center;
-}
-
-.flash-msg-container {
-  padding: 10px;
-  border: 2px #4d4d4d;
-  border-radius: 6px;
-  width: 70%;
-  margin: 10px;
-  text-align: center;
-}
-
-.flash-msg-btn button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  float: right;
-}
-
-/* Forgot Password modal dialog */
-.forgot-pass-grid-container {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.forgot-pass-input-container {
-  display: grid;
-  border: 1px solid;
-  background-color: white;
-  border-radius: 5px;
-  padding: 20px;
-  width: 300px;
-}
-
-.forgot-pass-input-container input {
-  height: 40px;
-  margin-top: 8px;
-}
-
-.forgot-pass-header {
-  text-align: center;
-}
-
-.forgot-pass-header span#failure {
-  color: red;
-}
-
-.forgot-pass-header span#success {
-  color: green;
-}
-
-.forgot-pass-header button {
-  float: right;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
 }
