@@ -52,23 +52,25 @@ const Autocomplete = (props) => {
   if (visibility && value) {
     if (matches.length) {
       optionList = (
-        <ul className="options">
-          {matches.map((match, index) => {
-            let className;
-            if (index === activeItem) {
-              className = 'active-item';
-            }
-            return (
-              <li
-                className={className}
-                key={match}
-                onClick={onClick}
-              >
-                {match}
-              </li>
-            );
-          })}
-        </ul>
+        <div>
+          <ul className="options">
+            {matches.map((match, index) => {
+              let className;
+              if (index === activeItem) {
+                className = 'active-item';
+              }
+              return (
+                <li
+                  className={className}
+                  key={match}
+                  onClick={onClick}
+                >
+                  {match}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       );
     } else {
       optionList = (
@@ -78,9 +80,7 @@ const Autocomplete = (props) => {
   }
   return (
     <Fragment>
-      <label htmlFor={attrs.for}>
-        <b>{t(attrs.text)}</b>
-      </label>
+      <label htmlFor={attrs.for}><b>{t(attrs.text)}</b></label>
       <input
         className={className}
         type={attrs.type}
