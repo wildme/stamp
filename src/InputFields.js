@@ -25,9 +25,7 @@ import Autocomplete from './Autocomplete.js';
     />
   ) : (
     <Fragment>
-      <label htmlFor={attrs.for}>
-        <b>{ t(attrs.text) }</b>
-      </label>
+      <label htmlFor={attrs.for}><b>{t(attrs.text)}</b></label>
       <input
         className={className}
         type={attrs.type}
