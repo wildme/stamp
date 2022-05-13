@@ -15,7 +15,7 @@ const UserProfile = () => {
   return (
     <div className="user-profile-grid">
     {infoMsg.str &&
-       <FlashMessage msg={infoMsg.str} id={infoMsg.id } type={infoMsg.type}/>}
+       <FlashMessage msg={infoMsg.str} id={infoMsg.id } type={infoMsg.type} />}
       <div className="user-profile">
         <UserProfileTitle t={t} fullname={fullname}/>
         <UserProfileMenu t={t} />
