@@ -100,7 +100,8 @@ const resources = {
         infoMsg2: en.editRecord.infoMsg2,
         infoMsg3: en.editRecord.infoMsg3,
         infoMsg4: en.editRecord.infoMsg4,
-        infoMsg5: en.editRecord.infoMsg5
+        infoMsg5: en.editRecord.infoMsg5,
+        infoMsg6: en.editRecord.infoMsg6
       },
       editContact: {
         infoMsg1: en.editContact.infoMsg1,
@@ -280,7 +281,8 @@ const resources = {
         infoMsg2: ru.editRecord.infoMsg2,
         infoMsg3: ru.editRecord.infoMsg3,
         infoMsg4: ru.editRecord.infoMsg4,
-        infoMsg5: ru.editRecord.infoMsg5
+        infoMsg5: ru.editRecord.infoMsg5,
+        infoMsg6: ru.editRecord.infoMsg6
       },
       editContact: {
         infoMsg1: ru.editContact.infoMsg1,
