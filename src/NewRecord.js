@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useParams, useHistory  } from 'react-router-dom';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
@@ -13,55 +13,61 @@ const NewRecord = () => {
   const addedBy = useSelector((state) => state.user.username);
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [fileError, setFileError] = useState(false);
   const history = useHistory();
   const { t } = useTranslation();
+  const ref = useRef(null);
+  let uploadedFile = null;
 
-  const handleAddRecord = async (e) => {
-    e.preventDefault();
-    const id = await fetch(`/api/${box}/new`, {
+  function uploadFile() {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return fetch(`/api/${box}/upload`, {
       method: 'POST',
-      body: JSON.stringify({ subject, fromTo, addedBy, replyTo, note}),
+      body: formData,
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return res.json();
+       }
+        if (res.status === 413) {
+          setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
+          setFile(null);
+          ref.current.value='';
+          return 'error';
+       }
+        if (res.status === 500) {
+          setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
+          return 'error';
+        }
+      })
+      .then(data => data)
+      .catch((e) => console.error(e))
+  }
+
+  function saveRecord() {
+    fetch(`/api/${box}/new`, {
+      method: 'POST',
+      body: JSON.stringify({subject, fromTo, addedBy, replyTo, note, uploadedFile}),
       headers: {'Content-Type': 'application/json'}
       })
       .then(res => {
-        if ((res.status === 200) && !file) {
+        if (res.status === 200) {
           history.push(`/${box}`);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg1'), id: Math.random()});
         }
-        if (file) {
-          return res.json();
-        }
       })
-      .then(data => data)
       .catch((e) => console.error(e))
+    return;
+  }
 
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-      await fetch(`/api/${box}/upload/${id}`, {
-        method: 'POST',
-        body: formData,
-        })
-        .then(res => {
-          if (res.status === 200) {
-            history.push(`/${box}`);
-         }
-          if (res.status === 413) {
-            setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
-            setFileError(true);
-         }
-          if (res.status === 500) {
-            setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
-            setFileError(true);
-          }
-        })
-        .catch((e) => console.error(e))
-    }
+  const handleAddRecord = async () => {
+    if (file) uploadedFile = await uploadFile();
+    if (uploadedFile !== 'error') saveRecord();
   };
 
   return (
@@ -100,13 +106,14 @@ const NewRecord = () => {
           className="add-record__upload"
           type="file"
           name="file"
+          ref={ref}
           onChange={(e) => setFile(e.target.files[0])}
         />
         <button
           className="add-record__submit"
           type="submit"
-          disabled={!subject || !fromTo || fileError}
-          onClick={(e) => handleAddRecord(e)}>
+          disabled={!subject || !fromTo}
+          onClick={() => handleAddRecord()}>
           {t('newRecord.button')}
         </button>
       </div>
