@@ -117,10 +117,10 @@ const RecordCard = () => {
             <b>{t('recordCard.subject')}</b>: {subject}
           </div>
         {box === 'inbox' ?
-          <div className="record-card__field">
+          <div className="record-card__field record-card__field_long">
             <b>{t('recordCard.from')}</b>: {fromTo}
           </div> :
-          <div className="record-card__field">
+          <div className="record-card__field record-card__field_long">
             <b>{t('recordCard.to')}</b>: {fromTo}
           </div>
         }
