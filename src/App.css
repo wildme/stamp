@@ -189,7 +189,7 @@
 /* Tables: Inbox, Outbox, Contacts */
 .page-table__table {
   font-family: Ubuntu, Roboto, Arial;
-  font-size: 15px;
+  font-size: 17px;
   border-collapse: collapse;
   text-align: left;
   margin: 15px 15px 30px 15px;
@@ -204,8 +204,13 @@
   background-color: #ffe6e6;
 }
 
-.page-table__th, .page-table__td {
+.page-table__th, {
   padding: 5px;
+}
+
+.page-table__td {
+  padding: 5px;
+  font-size: 15px;
 }
 
 .page-table__td_long {
