@@ -56,7 +56,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup">
+    <div className="signup-grid">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <form onSubmit={(e) => handleSignup(e)}>
         <div className="signup-form">

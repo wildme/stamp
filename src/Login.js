@@ -60,7 +60,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login-grid">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <form onSubmit={(e) => handleLogin(e)}>
         <div className="login-form">
