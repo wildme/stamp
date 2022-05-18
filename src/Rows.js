@@ -3,15 +3,23 @@ import RowContacts from './RowContacts.js';
 
 const Rows = ({ rows, kind }) => {
   if (kind === 'box') {
-    return rows.map((row, index) => {
-      return <RowBox entry={row} key={index} />;
-    });
+    return (
+      <tbody>
+        {rows.map((row, index) => {
+          return <RowBox entry={row} key={index} />;
+        })}
+      </tbody>
+    )
   }
 
   if (kind === 'contacts') {
-    return rows.map((row, index) => {
-      return <RowContacts entry={row} key={index} />;
-    });
+    return (
+      <tbody>
+        {rows.map((row, index) => {
+          return <RowContacts entry={row} key={index} />;
+        })}
+      </tbody>
+    )
   }
 };
 
