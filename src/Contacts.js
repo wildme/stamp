@@ -17,7 +17,7 @@ const Contacts = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    fetch("/api/contacts", { signal })
+    fetch("/api/contacts", {signal})
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 500) {
@@ -32,9 +32,9 @@ const Contacts = () => {
   }, [t])
 
   return (
-    <div className="page-content">
+    <div className="page-content-grid">
       <div className="page-title">
-        <h2>{ t('contacts.title') }</h2>
+        <h2>{t('contacts.title')}</h2>
       </div>
       {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-actions">
@@ -46,22 +46,12 @@ const Contacts = () => {
       </div>
       <div className="page-table">
         <table className="page-table__table">
-          <thead className="page-table__thead">
-            <tr className="page-table__tr">
-              <TableHead table="contacts" t={t}/>
-            </tr>
-          </thead>
-          <tbody>
-              <ContactsContext.Provider value={setInfoMsg}>
-          {tbContacts &&
-              <Rows rows={tbContacts} kind='contacts' />
-          }
-              </ContactsContext.Provider>
-         </tbody>
+          <TableHead table="contacts" t={t}/>
+            <ContactsContext.Provider value={setInfoMsg}>
+              {tbContacts && <Rows rows={tbContacts} kind='contacts' />}
+            </ContactsContext.Provider>
         </table>
-      {noData &&
-          <p><i>{ t('contacts.infoMsg2') }</i></p>
-      }
+        {noData && <p><i>{t('contacts.infoMsg2')}</i></p>}
       </div>
     </div>
   )

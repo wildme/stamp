@@ -32,13 +32,13 @@ const Main = (props) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    fetch(`/api/${box}?field=${column}&order=${sortOrder}`, { signal })
+    fetch(`/api/${box}?field=${column}&order=${sortOrder}`, {signal})
       .then(res => {
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
         if (res.status === 500) {
           setError(true);
-          setInfoMsg(t('main.infoMsg1'));
+          setInfoMsg({str: t('main.infoMsg1'), id: Math.random()});
         }
        })
       .then(setTbContent)
@@ -49,8 +49,8 @@ const Main = (props) => {
   }, [sortOrder, column, box, t])
 
   return (
-    <div className="page-content">
-      {infoMsg && <FlashMessage msg={infoMsg} />}
+    <div className="page-content-grid">
+      {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-title">
         <h2>
           {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
@@ -65,20 +65,18 @@ const Main = (props) => {
       </div>
       <div className="page-table">
         <table className="page-table__table">
-          <thead className="page-table__thead">
-            <tr className="page-table__tr">
-              <TableHead table={box} handleClick={handleClick}
-                sortOrder={sortOrder} column={column} t={t}
-              />
-            </tr>
-          </thead>
-          <tbody>
-            <BoxContext.Provider value={box}>
-              { tbContent && <Rows rows={tbContent} kind='box' /> }
-            </BoxContext.Provider>
-          </tbody>
+          <TableHead
+            table={box}
+            handleClick={handleClick}
+            sortOrder={sortOrder}
+            column={column}
+            t={t}
+          />
+          <BoxContext.Provider value={box}>
+            {tbContent && <Rows rows={tbContent} kind='box' />}
+          </BoxContext.Provider>
         </table>
-        { noData && <p><i>{t('main.infoMsg2')}</i></p> }
+        {noData && <p><i>{t('main.infoMsg2')}</i></p>}
       </div>
     </div>
   )
