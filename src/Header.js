@@ -9,7 +9,7 @@ const HeaderLinks = () => {
   return (
     <div className="navbar navbar_black">
       <div className="navbar_logo">
-        <Link to="/"><Logo /></Link>
+        <Link className="navbar_logo__link" to="/"><Logo /></Link>
       </div>
       <div className="navbar_left">
         <NavLink className="menu__item" to="/inbox">
