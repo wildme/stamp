@@ -1,13 +1,21 @@
 /* Navbar */
 .navbar {
   display: grid;
-  grid-template-columns: 120px auto auto;
-  grid-auto-rows: 55px;
+  grid-template-columns: 125px auto auto;
+  grid-auto-rows: auto;
   align-items: center;
 }
 
 .navbar_black {
   background-color: #000000;
+}
+
+.navbar_logo {
+  width: 100%;
+}
+
+.navbar_logo__link {
+  padding-left: 10px;
 }
 
 .menu__item {
@@ -154,9 +162,10 @@
 }
 
 .page-title {
-  margin-left: 15px;
-  text-align: left;
   width: 100%;
+}
+.page-title__h2 {
+  padding-left: 10px;
 }
 
 .page-actions {
@@ -180,7 +189,7 @@
 /* Tables: Inbox, Outbox, Contacts */
 .page-table__table {
   font-family: Ubuntu, Roboto, Arial;
-  font-size: 17px;
+  font-size: 15px;
   border-collapse: collapse;
   text-align: left;
   margin: 15px 15px 30px 15px;
