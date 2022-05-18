@@ -42,7 +42,7 @@
 }
 
 /* Login and Signup pages */
-.login, .signup {
+.login-grid, .signup-grid {
   display: grid;
   justify-items: center;
   align-items: center;
@@ -146,7 +146,7 @@
 }
 
 /* Content component */
-.page-content {
+.page-content-grid {
   display: grid;
   grid-template-columns: auto;
   justify-items: center;
@@ -179,28 +179,28 @@
 
 /* Tables: Inbox, Outbox, Contacts */
 .page-table__table {
-  font-family: arial;
+  font-family: Ubuntu, Roboto, Arial;
   font-size: 17px;
   border-collapse: collapse;
   text-align: left;
   margin: 15px 15px 30px 15px;
 }
 
-.page-table__tr, .page-table__tr-active {
+.page-table__tr, .page-table__tr_active {
   border: none;
   border-bottom: 1px solid #0099ff;
 }
 
-.page-table__tr-canceled {
+.page-table__tr_canceled {
   background-color: #ffe6e6;
 }
 
 .page-table__th, .page-table__td {
-  padding: 8px;
+  padding: 5px;
 }
 
-.long-col-tbl {
-  width: 200px;
+.page-table__td_long {
+  width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
