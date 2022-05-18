@@ -13,7 +13,7 @@ const Main = (props) => {
   const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState('asc');
   const [error, setError] = useState(false);
-  const [infoMsg, setInfoMsg] = useState('');
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [noData, setNoData] = useState(false);
   const { t } = useTranslation();
 
@@ -52,7 +52,7 @@ const Main = (props) => {
     <div className="page-content-grid">
       {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-title">
-        <h2>
+        <h2 className="page-title__h2">
           {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
         </h2>
       </div>

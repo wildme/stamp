@@ -34,7 +34,7 @@ const Contacts = () => {
   return (
     <div className="page-content-grid">
       <div className="page-title">
-        <h2>{t('contacts.title')}</h2>
+        <h2 className="page-title__h2">{t('contacts.title')}</h2>
       </div>
       {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-actions">
