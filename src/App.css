@@ -2,7 +2,7 @@
 .navbar {
   display: grid;
   grid-template-columns: 125px auto auto;
-  grid-auto-rows: auto;
+  grid-auto-rows: 50px;
   align-items: center;
 }
 
