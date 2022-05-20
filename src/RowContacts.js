@@ -102,7 +102,7 @@ const RowContacts = ({ entry }) => {
         </td>
       </tr>
     </Fragment>
-  )
+  );
 };
 
 export default RowContacts;

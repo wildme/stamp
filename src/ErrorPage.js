@@ -22,6 +22,6 @@ const ErrorPage = (props) => {
         <Link to={"/"}>{t('errorPage.link1')}</Link>
       </div>
     </div>
-  )
+  );
 };
 export default ErrorPage;

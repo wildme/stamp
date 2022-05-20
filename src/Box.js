@@ -74,7 +74,7 @@ const Box = (props) => {
         t={t}
       />
     </div>
-  )
+  );
 };
 
 export default Box;

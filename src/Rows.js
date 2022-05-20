@@ -9,7 +9,7 @@ const Rows = ({ rows, kind }) => {
           return <RowBox entry={row} key={index} />;
         })}
       </tbody>
-    )
+    );
   }
 
   if (kind === 'contacts') {
@@ -19,7 +19,7 @@ const Rows = ({ rows, kind }) => {
           return <RowContacts entry={row} key={index} />;
         })}
       </tbody>
-    )
+    );
   }
 };
 

@@ -46,4 +46,5 @@ const UserProfileContent = (props) => {
     </div>
   );
 };
+
 export default UserProfileContent;

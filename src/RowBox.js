@@ -30,7 +30,7 @@ const RowBox = ({ entry }) => {
         </td>
       </tr>
     </Fragment>
-  )
+  );
 };
 
 export default RowBox;

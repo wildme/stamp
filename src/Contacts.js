@@ -52,7 +52,7 @@ const Contacts = () => {
         t={t}
       />
     </div>
-  )
+  );
 };
 
 export default Contacts;
