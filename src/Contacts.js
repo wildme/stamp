@@ -1,16 +1,13 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import TableHead from './TableHead.js';
-import Rows from './Rows.js';
-import FlashMessage from './FlashMessage.js'
-
-export const ContactsContext = createContext();
+import TableContacts from './TableContacts.js';
+import FlashMessage from './FlashMessage.js';
 
 const Contacts = () => {
-  const [tbContacts, setTbContacts] = useState([]);
-  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
+  const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -19,14 +16,18 @@ const Contacts = () => {
 
     fetch("/api/contacts", {signal})
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 204) {
+          setNoData(true);
+        }
         if (res.status === 500) {
           setInfoMsg({str: t('contacts.infoMsg1'), id: Math.random()});
         }
-        if (res.status === 204) setNoData(true);
       })
-      .then(data => setTbContacts(data))
-      .catch((e) => console.error(e));
+      .then(data => setTableData(data))
+      .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
   }, [t])
@@ -36,7 +37,7 @@ const Contacts = () => {
       <div className="page-title">
         <h2 className="page-title__h2">{t('contacts.title')}</h2>
       </div>
-      {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
+        {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <div className="page-actions">
         <Link
           className="page-actions__link"
@@ -44,15 +45,12 @@ const Contacts = () => {
           {t('contacts.link')}
         </Link>
       </div>
-      <div className="page-table">
-        <table className="page-table__table">
-          <TableHead table="contacts" t={t}/>
-            <ContactsContext.Provider value={setInfoMsg}>
-              {tbContacts && <Rows rows={tbContacts} kind='contacts' />}
-            </ContactsContext.Provider>
-        </table>
-        {noData && <p><i>{t('contacts.infoMsg2')}</i></p>}
-      </div>
+      <TableContacts
+        content={tableData}
+        noData={noData}
+        setInfoMsg={setInfoMsg}
+        t={t}
+      />
     </div>
   )
 };
