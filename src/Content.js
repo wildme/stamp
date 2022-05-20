@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Fragment } from 'react';
-import Main from './Main.js';
+import Box from './Box.js';
 import Hello from './Hello.js';
 import NewRecord from './NewRecord.js';
 import Signup from './Signup.js';
@@ -98,8 +98,8 @@ const Content = () => {
         <PrivateRoute exact path="/" component={Hello} />
         <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
-        <PrivateRoute exact path="/inbox" component={Main} />
-        <PrivateRoute exact path="/outbox" component={Main} />
+        <PrivateRoute exact path="/inbox" component={Box} />
+        <PrivateRoute exact path="/outbox" component={Box} />
         <PrivateRoute path="/my-profile" component={UserProfile} />
         <PrivateRoute exact path="/:box/new" component={NewRecord} />
         <PrivateRoute exact path="/:box/view/:id" component={RecordCard} />
