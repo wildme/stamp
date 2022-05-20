@@ -1,20 +1,17 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import TableHead from './TableHead.js';
-import Rows from './Rows.js';
-import FlashMessage from './FlashMessage.js'
+import TableBox from './TableBox.js';
+import FlashMessage from './FlashMessage.js';
 
-export const BoxContext = createContext();
-
-const Main = (props) => {
+const Box = (props) => {
   const box = props.location.pathname.slice(1);
-  const [tbContent, setTbContent] = useState([]);
+  const [tableData, setTableData] = useState(null);
+  const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState('asc');
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [noData, setNoData] = useState(false);
   const { t } = useTranslation();
 
   const handleClick = (id) => {
@@ -34,14 +31,18 @@ const Main = (props) => {
 
     fetch(`/api/${box}?field=${column}&order=${sortOrder}`, {signal})
       .then(res => {
-        if (res.status === 200) return res.json();
-        if (res.status === 204) setNoData(true);
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 204) {
+          setNoData(true);
+        }
         if (res.status === 500) {
           setError(true);
           setInfoMsg({str: t('main.infoMsg1'), id: Math.random()});
         }
        })
-      .then(setTbContent)
+      .then(data => setTableData(data))
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
@@ -63,23 +64,17 @@ const Main = (props) => {
           {t('main.link')}
         </Link>
       </div>
-      <div className="page-table">
-        <table className="page-table__table">
-          <TableHead
-            table={box}
-            handleClick={handleClick}
-            sortOrder={sortOrder}
-            column={column}
-            t={t}
-          />
-          <BoxContext.Provider value={box}>
-            {tbContent && <Rows rows={tbContent} kind='box' />}
-          </BoxContext.Provider>
-        </table>
-        {noData && <p><i>{t('main.infoMsg2')}</i></p>}
-      </div>
+      <TableBox
+        table={box}
+        sortOrder={sortOrder}
+        column={column}
+        setter={handleClick}
+        content={tableData}
+        noData={noData}
+        t={t}
+      />
     </div>
   )
 };
 
-export default Main;
+export default Box;
