@@ -1,7 +1,7 @@
 import { useState, Fragment, useContext } from 'react';
 import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
-import { ContactsContext } from './Contacts.js';
+import { ContactsContext } from './TableContacts.js';
 
 const RowContacts = ({ entry }) => {
   const [editOn, setEditOn] = useState(false);

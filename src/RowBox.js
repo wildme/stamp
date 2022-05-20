@@ -3,7 +3,7 @@ import { Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { HiPencil } from 'react-icons/hi';
 import i18n from 'i18next';
-import { BoxContext } from './Main.js';
+import { BoxContext } from './TableBox.js';
 
 const RowBox = ({ entry }) => {
   const box = useContext(BoxContext);
