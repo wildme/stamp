@@ -97,14 +97,15 @@ const Box = (props) => {
         pageCount={pageCount}
         renderOnZeroPageCount={null}
         containerClassName="pagination-grid"
-        pageClassName="pagination__page"
-        pageLinkClassName="pagination__page_link"
-        nextClassName="pagination__next"
-        nextLinkClassName="pagination__next_link"
-        previousClassName="pagination__prev"
-        previousLinkClassName="pagination__prev_link"
-        disabledClassName="pagination__link_disabled"
-        enabledClassName="pagination__link_enabled"
+        pageClassName="pagination-page"
+        pageLinkClassName="pagination-page__link"
+        nextClassName="pagination-prev-next"
+        previousClassName="pagination-prev-next"
+        nextLinkClassName="pagination-prev-next__link"
+        previousLinkClassName="pagination-prev-next__link"
+        disabledClassName="pagination-prev-next_disabled"
+        disabledLinkClassName="pagination-prev-next__link_disabled"
+        activeClassName="pagination-page_active"
       />
     </div>
   );
