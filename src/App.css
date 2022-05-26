@@ -571,24 +571,28 @@
   padding: 10px;
 }
 
-.pagination__prev,
-.pagination__page,
-.pagination__next {
+.pagination-prev-next,
+.pagination-page {
   list-style: none;
-}
-
-.pagination__page_link,
-.pagination__next_link,
-.pagination__prev_link {
   padding: 10px;
   border: 2px solid black;
+}
+
+.pagination-page_active {
+  background-color: #80dfff;
+}
+
+.pagination-page__link,
+.pagination-prev-next__link {
   cursor: pointer;
+  padding: 10px;
 }
 
-.pagination__link_disabled {
+.pagination-prev-next_disabled {
   color: grey;
+  border-color: grey;
 }
 
-.pagination__link_enabled {
-  color: blue;
+.pagination-prev-next__link_disabled {
+  cursor: default;
 }
