@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
 import FlashMessage from './FlashMessage.js';
 
@@ -12,7 +13,15 @@ const Box = (props) => {
   const [sortOrder, setSortOrder] = useState('asc');
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [dataForPage, setDataForPage] = useState(null);
+  const [pageCount, setPageCount] = useState(0);
   const { t } = useTranslation();
+  const recordsPerPage = 20;
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * recordsPerPage) % tableData.length;
+    setDataForPage(tableData.slice(newOffset, newOffset + recordsPerPage));
+  };
 
   const handleClick = (id) => {
     let direction = 'asc';
@@ -28,6 +37,7 @@ const Box = (props) => {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+    const recordOffset = 0;
 
     fetch(`/api/${box}?field=${column}&order=${sortOrder}`, {signal})
       .then(res => {
@@ -42,13 +52,19 @@ const Box = (props) => {
           setInfoMsg({str: t('main.infoMsg1'), id: Math.random()});
         }
        })
-      .then(data => setTableData(data))
+      .then(data => {
+        setTableData(data);
+        setDataForPage(data.slice(recordOffset, recordOffset + recordsPerPage));
+        setPageCount(Math.ceil(data.length / recordsPerPage));
+      }
+      )
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
 
   }, [sortOrder, column, box, t])
 
+  
   return (
     <div className="page-content-grid">
       {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
@@ -69,9 +85,26 @@ const Box = (props) => {
         sortOrder={sortOrder}
         column={column}
         setter={handleClick}
-        content={tableData}
+        content={dataForPage}
         noData={noData}
         t={t}
+      />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel=">"
+        previousLabel="<"
+        onPageChange={handlePageClick}
+        pageCount={pageCount}
+        renderOnZeroPageCount={null}
+        containerClassName="pagination-grid"
+        pageClassName="pagination__page"
+        pageLinkClassName="pagination__page_link"
+        nextClassName="pagination__next"
+        nextLinkClassName="pagination__next_link"
+        previousClassName="pagination__prev"
+        previousLinkClassName="pagination__prev_link"
+        disabledClassName="pagination__link_disabled"
+        enabledClassName="pagination__link_enabled"
       />
     </div>
   );
