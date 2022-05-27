@@ -568,13 +568,12 @@
   grid-auto-flow: column;
   grid-template-rows: auto;
   grid-column-gap: 5px;
-  padding: 10px;
 }
 
 .pagination-prev-next,
 .pagination-page {
   list-style: none;
-  padding: 10px;
+  padding: 8px;
   border: 2px solid black;
 }
 
@@ -585,7 +584,7 @@
 .pagination-page__link,
 .pagination-prev-next__link {
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
 }
 
 .pagination-prev-next_disabled {
