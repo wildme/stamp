@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Fragment } from 'react';
 import Box from './Box.js';
-import Hello from './Hello.js';
+import HomePage from './HomePage.js';
 import NewRecord from './NewRecord.js';
 import Signup from './Signup.js';
 import EditRecord from './EditRecord.js';
@@ -95,7 +95,7 @@ const Content = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={Signup} />
-        <PrivateRoute exact path="/" component={Hello} />
+        <PrivateRoute exact path="/" component={HomePage} />
         <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
         <PrivateRoute exact path="/inbox" component={Box} />
