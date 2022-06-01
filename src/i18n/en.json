@@ -165,7 +165,10 @@
     "string1": "No matches"
   },
   "homepage": {
-    "string1": "Hello"
+    "string1": "Hello",
+    "action1": "Incoming",
+    "action2": "Outcoming",
+    "action3": "Contact"
   },
   "errorPage": {
     "title1": "Oops! Page not found",
