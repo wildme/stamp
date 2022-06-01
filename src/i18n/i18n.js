@@ -173,7 +173,10 @@ const resources = {
         string1: en.autocomplete.string1
       },
       homepage: {
-        string1: en.homepage.string1
+        string1: en.homepage.string1,
+        action1: en.homepage.action1,
+        action2: en.homepage.action2,
+        action3: en.homepage.action3
       },
       errorPage: {
         title1: en.errorPage.title1,
@@ -354,7 +357,10 @@ const resources = {
         string1: ru.autocomplete.string1
       },
       homepage: {
-        string1: ru.homepage.string1
+        string1: ru.homepage.string1,
+        action1: ru.homepage.action1,
+        action2: ru.homepage.action2,
+        action3: ru.homepage.action3
       },
       errorPage: {
         title1: ru.errorPage.title1,
