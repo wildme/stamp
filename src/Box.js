@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
@@ -73,13 +72,6 @@ const Box = (props) => {
         <h2 className="page-title__h2">
           {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
         </h2>
-      </div>
-      <div className="page-actions">
-        <Link
-          className="page-actions__link"
-          to={`/${box}/new`}>
-          {t('main.link')}
-        </Link>
       </div>
       <TableBox
         table={box}

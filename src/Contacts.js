@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import TableContacts from './TableContacts.js';
 import FlashMessage from './FlashMessage.js';
@@ -38,13 +37,6 @@ const Contacts = () => {
         <h2 className="page-title__h2">{t('contacts.title')}</h2>
       </div>
         {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
-      <div className="page-actions">
-        <Link
-          className="page-actions__link"
-          to="/contacts/new">
-          {t('contacts.link')}
-        </Link>
-      </div>
       <TableContacts
         content={tableData}
         noData={noData}
