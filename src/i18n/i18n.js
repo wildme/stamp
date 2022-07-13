@@ -50,7 +50,8 @@ const resources = {
         subTitle: en.userProfile.subTitle,
         item1: en.userProfile.item1,
         item2: en.userProfile.item2,
-        item3: en.userProfile.item3
+        item3: en.userProfile.item3,
+        item4: en.userProfile.item4
       },
       personalInfo: {
         title: en.personalInfo.title,
@@ -80,6 +81,14 @@ const resources = {
         infoMsg2: en.password.infoMsg2,
         infoMsg3: en.password.infoMsg3,
         infoMsg4: en.password.infoMsg4
+      },
+      userSettings: {
+        title: en.userSettings.title,
+        label1: en.userSettings.label1,
+        optSort1: en.userSettings.optSort1,
+        optSort2: en.userSettings.optSort2,
+        infoMsg1: en.userSettings.infoMsg1,
+        infoMsg2: en.userSettings.infoMsg2
       },
       newRecord: {
         label1: en.newRecord.label1,
@@ -234,7 +243,8 @@ const resources = {
         subTitle: ru.userProfile.subTitle,
         item1: ru.userProfile.item1,
         item2: ru.userProfile.item2,
-        item3: ru.userProfile.item3
+        item3: ru.userProfile.item3,
+        item4: ru.userProfile.item4
       },
       personalInfo: {
         title: ru.personalInfo.title,
@@ -264,6 +274,14 @@ const resources = {
         infoMsg2: ru.password.infoMsg2,
         infoMsg3: ru.password.infoMsg3,
         infoMsg4: ru.password.infoMsg4
+      },
+      userSettings: {
+        title: ru.userSettings.title,
+        label1: ru.userSettings.label1,
+        optSort1: ru.userSettings.optSort1,
+        optSort2: ru.userSettings.optSort2,
+        infoMsg1: ru.userSettings.infoMsg1,
+        infoMsg2: ru.userSettings.infoMsg2
       },
       newRecord: {
         label1: ru.newRecord.label1,
