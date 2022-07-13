@@ -30,6 +30,14 @@ const UserProfileMenu = (props) => {
             {t('userProfile.item3')}
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            className="user-profile__navbar_link"
+            exact
+            to="/my-profile/settings">
+            {t('userProfile.item4')}
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
