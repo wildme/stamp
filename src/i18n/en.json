@@ -43,7 +43,8 @@
     "subTitle": "Your profile",
     "item1": "Personal info",
     "item2": "E-mail",
-    "item3": "Password"
+    "item3": "Password",
+    "item4": "Settings"
   },
    "personalInfo": {
     "title": "Change user info",
@@ -72,6 +73,14 @@
     "infoMsg2": "Error. Failed to change password",
     "infoMsg3": "Wrong password",
     "infoMsg4": "Password has been successfully changed"
+  },
+  "userSettings": {
+    "title": "Settings",
+    "label1": "Records sort order",
+    "optSort1": "In chronological order",
+    "optSort2": "In reverse order",
+    "infoMsg1": "Settings has been successfully changed",
+    "infoMsg2": "Error. Failed to change settings"
   },
   "newRecord": {
     "label1": "Subject",
