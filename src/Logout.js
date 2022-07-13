@@ -10,7 +10,13 @@ const Logout = () => {
       if (res.ok) {
         history.push("/login");
         dispatch({ type: 'LOGOUT',
-          payload: { user: { loggedIn: false }, token: null, info: null }});
+          payload: {
+            user: { loggedIn: false },
+            token: null,
+            info: null,
+            settings: null
+          }
+        });
       }
     })
     .catch((e) => console.error(e))
