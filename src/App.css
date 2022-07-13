@@ -447,7 +447,15 @@
   margin: 0;
 }
 
+.user-info__label {
+  margin: 7px 0 7px 0;
+}
+
 .user-info__input {
+  height: 30px;
+}
+
+.user-info__select {
   height: 30px;
 }
 
