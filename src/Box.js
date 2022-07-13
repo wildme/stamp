@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
@@ -6,10 +7,11 @@ import FlashMessage from './FlashMessage.js';
 
 const Box = (props) => {
   const box = props.location.pathname.slice(1);
+  const state = useSelector((state) => state.settings.records.sortOrder);
   const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState(state || 'asc');
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [dataForPage, setDataForPage] = useState(null);
