@@ -53,6 +53,9 @@ const Login = () => {
             { info: { fullname:  data.user.fullname,
               email: data.user.email }}
           });
+          dispatch({ type: 'SETTINGS', payload:
+            { settings: data.settings }
+          });
         if (!error) history.replace(from);
         }
       })
