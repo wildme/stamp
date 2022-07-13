@@ -32,6 +32,7 @@ const Content = () => {
           dispatch({ type: 'LOGIN', payload:
             { user: { username: null, admin: null, loggedIn: false } }});
           dispatch({ type: 'INFO', payload: { info: null } });
+          dispatch({ type: 'SETTINGS', payload: { settings: null } });
         }
       })
       .then(data => {
@@ -45,6 +46,7 @@ const Content = () => {
             { info: { fullname: data.user.fullname,
               email: data.user.email }}
           });
+          dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
           history.replace(location.pathname);
         }
   })
