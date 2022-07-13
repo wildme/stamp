@@ -38,7 +38,11 @@ const UserEmail = ({ user, t, setter }) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('email.title')}</h2>
       </div>
-      <label htmlFor="email"><b>{t('email.label1')}</b></label>
+      <label
+        htmlFor="email"
+        className="user-info__label"
+      ><b>{t('email.label1')}</b>
+      </label>
       <input
         className="user-info__input"
         type="email"

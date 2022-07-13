@@ -46,7 +46,11 @@ const UserPassword = ({user, t, setter, setter2}) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('password.title')}</h2>
       </div>
-      <label htmlFor="old-pass"><b>{t('password.label1')}</b></label>
+      <label
+        htmlFor="old-pass"
+        className="user-info__label"
+      ><b>{t('password.label1')}</b>
+      </label>
       <input
         className="user-info__input"
         type="password"
@@ -55,7 +59,11 @@ const UserPassword = ({user, t, setter, setter2}) => {
         required
         onChange={(e) => setOldPass(e.target.value)}
       />
-      <label htmlFor="new-pass"><b>{t('password.label2')}</b></label>
+      <label
+        htmlFor="new-pass"
+        className="user-info__label"
+      ><b>{t('password.label2')}</b>
+      </label>
       <PasswordInputEye
         pass={newPass}
         setter={setNewPass}
@@ -64,7 +72,11 @@ const UserPassword = ({user, t, setter, setter2}) => {
         styles={{ height: "30px" }}
       />
       <em className="user-info__hint">{t('password.string')}</em>
-      <label htmlFor="confirm-pass"><b>{t('password.label3')}</b></label>
+      <label
+        htmlFor="confirm-pass"
+        className="user-info__label"
+      ><b>{t('password.label3')}</b>
+      </label>
       <PasswordInputEye
         pass={confirmPass}
         setter={setConfirmPass}

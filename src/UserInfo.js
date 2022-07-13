@@ -38,7 +38,11 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('personalInfo.title')}</h2>
       </div>
-      <label htmlFor="firstname"><b>{t('personalInfo.label1')}</b></label>
+      <label
+        htmlFor="firstname"
+        className="user-info__label"
+      ><b>{t('personalInfo.label1')}</b>
+      </label>
       <input
         className="user-info__input"
         type="text"
@@ -47,7 +51,11 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
         required
         onChange={(e) => setFirstname(e.target.value)}
       />
-      <label htmlFor="lastname"><b>{t('personalInfo.label2')}</b></label>
+      <label
+        htmlFor="lastname"
+        className="user-info__label"
+      ><b>{t('personalInfo.label2')}</b>
+      </label>
       <input
         className="user-info__input"
         type="text"
