@@ -48,7 +48,7 @@ const EditRecord = () => {
          }
        })
       .then(data => data)
-      .catch((e) => console.error(e))
+      .catch((e) => console.error(e));
   }
 
   function deleteFile() {
@@ -56,12 +56,14 @@ const EditRecord = () => {
 
     fetch(`/api/attachment/delete/${fileId}`)
       .then(res => {
+        if (res.status === 200) {
+          if (!newFile) setFile(null);
+        }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg2'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
-    return;
   }
 
   function saveRecord() {
@@ -72,17 +74,21 @@ const EditRecord = () => {
       })
       .then(res => {
         if (res.status === 200) {
+          const contentType = res.headers.get('content-type');
           ref.current.value = '';
+          setNewFile(null);
           setInfoMsg(
             {str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'}
           );
+          if (contentType.includes('application/json')) {
+            res.json().then(file => { setFile(file) });
+          }
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
-    return;
   }
 
   const handleDownload = (e) => {
@@ -93,7 +99,7 @@ const EditRecord = () => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = objectURL;
-        a.download=file.filename;
+        a.download = file.filename;
         a.click();
         URL.revokeObjectURL(a.href);
       })
@@ -102,7 +108,7 @@ const EditRecord = () => {
 
   const handleEditRecord = async () => {
     if (newFile) uploadedFile = await uploadFile();
-    if (delFile || (newFile && file)) deleteFile();
+    if (delFile || (newFile && file)) await deleteFile();
     if (uploadedFile !== 'error') saveRecord();
   };
 
