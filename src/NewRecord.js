@@ -44,7 +44,7 @@ const NewRecord = () => {
         }
       })
       .then(data => data)
-      .catch((e) => console.error(e))
+      .catch((e) => console.error(e));
   }
 
   function saveRecord() {
@@ -62,7 +62,6 @@ const NewRecord = () => {
         }
       })
       .catch((e) => console.error(e))
-    return;
   }
 
   const handleAddRecord = async () => {
