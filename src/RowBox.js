@@ -17,14 +17,14 @@ const RowBox = ({ entry }) => {
       <tr className={"page-table__tr page-table__tr_" + entry.status}>
         <td><Link to={`/${box}/view/${entry.id}`}>{entry.id}</Link></td>
         <td className="page-table__td">
-          <div className="page-table__td_long">{entry.subject}</div>
+          <div className="page-table__td_long">{entry.subj}</div>
         </td>
         <td className="page-table__td">
-          <div className="page-table__td_long">{entry.from || entry.to}</div>
+          <div className="page-table__td_long">{entry.addr}</div>
         </td>
         <td className="page-table__td">{dateStr}</td>
-        <td className="page-table__td">{entry.addedBy}</td>
-        <td className="page-table__td">{entry.replyTo || '-'}</td>
+        <td className="page-table__td">{entry.user}</td>
+        <td className="page-table__td">{entry.reply || '-'}</td>
         <td className="page-table__td">{accessToEdit &&
             <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link>}
         </td>
