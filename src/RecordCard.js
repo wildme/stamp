@@ -50,13 +50,13 @@ const RecordCard = () => {
 
   const handleDownload = (e) => {
     e.preventDefault(e);
-    fetch(`/api/download/${file._id}`)
+    fetch(`/api/download/${file.fsName}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = objectURL;
-        a.download=file.filename;
+        a.download=file.name;
         a.click();
         URL.revokeObjectURL(a.href);
       })
@@ -75,29 +75,20 @@ const RecordCard = () => {
           setInfoMsg({str: t('recordCard.infoMsg2'), id: Math.random()});
         }
       })
-      .then(data => data.map((item) => {
+      .then(item => {
         return (
           setIdOfRec(item.id),
-          setSubject(item.subject),
-          setFromTo(item.from || item.to),
-          setReplyTo(item.replyTo),
+          setSubject(item.subj),
+          setFromTo(item.addr),
+          setReplyTo(item.reply),
           setUpdated(item.updated),
           setStatus(item.status),
           setDate(item.date),
-          setAddedBy(item.addedBy),
-          setNote(item.note)
+          setAddedBy(item.user),
+          setNote(item.note),
+          setFile(item.file)
         )}
-      ))
-      .catch((e) => console.error(e))
-
-    fetch(`/api/attachment/${box}/${id}`, { signal })
-      .then(res => {
-        if (res.status === 200) return res.json();
-        if (!res.ok) {
-          setInfoMsg({str: t('recordCard.infoMsg3'), id: Math.random()});
-        }
-    })
-      .then(data => setFile(data))
+      )
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
@@ -147,8 +138,8 @@ const RecordCard = () => {
         {file &&
           <div className="record-card__file record-card__file_long">
             <a
-              href={`/attachment/${file._id}`}
-              onClick={(e) => handleDownload(e)}>{file.filename}
+              href={`/attachment/${file.fsName}`}
+              onClick={(e) => handleDownload(e)}>{file.name}
             </a>
           </div>
         }

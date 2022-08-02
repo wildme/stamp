@@ -52,7 +52,7 @@ const EditRecord = () => {
   }
 
   function deleteFile() {
-    const fileId = file._id;
+    const fileId = file.fsName;
 
     fetch(`/api/attachment/delete/${fileId}`)
       .then(res => {
@@ -93,13 +93,13 @@ const EditRecord = () => {
 
   const handleDownload = (e) => {
     e.preventDefault();
-    fetch(`/api/download/${file._id}`)
+    fetch(`/api/download/${file.fsName}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = objectURL;
-        a.download = file.filename;
+        a.download = file.name;
         a.click();
         URL.revokeObjectURL(a.href);
       })
@@ -116,37 +116,26 @@ const EditRecord = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    fetch(`/api/${box}/${id}`, {signal})
+    fetch(`/api/${box}/${id}`, { signal })
       .then(res =>  {
         if (res.status === 200) return res.json();
         if (res.status === 204) setNoData(true);
       })
-      .then(data => {
-        if (data[0].addedBy === user || user === 'admin') {
+      .then(item => {
+        if (item.user === user || user === 'admin') {
           setPermitted(true);
-          data.map((item) => {
-            return (
-              setSubject(item.subject),
-              setFromTo(item.from || item.to),
-              setNote(item.note),
-              setReplyTo(item.replyTo)
-            )})
+          return (
+            setSubject(item.subj),
+            setFromTo(item.addr),
+            setNote(item.note),
+            setReplyTo(item.reply),
+            setFile(item.file)
+          )
         } else {
           setPermitted(false);
         }
         })
         .catch((e) => console.error(e))
-
-    fetch(`/api/attachment/${box}/${id}`, {signal})
-      .then(res => {
-        if (res.status === 200) return res.json();
-        if (res.status === 204) setFile(null);
-        if (!res.ok) {
-          setInfoMsg({str: t('editRecord.infoMsg4'), id: Math.random()});
-        }
-    })
-      .then(data => setFile(data))
-      .catch((e) => console.error(e))
 
     return () => {abortController.abort();};
   }, [box, id, t, user]);
@@ -195,7 +184,7 @@ const EditRecord = () => {
             {file &&
             <div>
               <a
-                href={`/attachment/${file._id}`}
+                href={`/attachment/${file.fsName}`}
                 onClick={(e) => handleDownload(e)}>
                 {t('editRecord.link')}
               </a>
