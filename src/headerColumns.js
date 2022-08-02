@@ -11,7 +11,7 @@ export const headerColumns = {
       sortable: false,
     },
     {
-      id: 'from',
+      id: 'addr',
       label: 'headerCellBox.label2',
       sortable: true,
     },
@@ -51,7 +51,7 @@ export const headerColumns = {
       sortable: false,
     },
     {
-      id: 'to',
+      id: 'addr',
       label: 'headerCellBox.label3',
       sortable: true,
     },
