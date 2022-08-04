@@ -395,7 +395,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en-En',
+    supportedLngs: ['en', 'ru'],
+    fallbackLng: 'en',
     interpolation: { escapeValue: false }
   });
 
