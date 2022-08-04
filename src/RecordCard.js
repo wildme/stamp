@@ -48,15 +48,15 @@ const RecordCard = () => {
       .catch((e) => console.error(e))
   };
 
-  const handleDownload = (e) => {
+  const handleDownload = (e, hash, name) => {
     e.preventDefault(e);
-    fetch(`/api/download/${file.fsName}`)
+    fetch(`/api/download/${hash}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = objectURL;
-        a.download=file.name;
+        a.download=name;
         a.click();
         URL.revokeObjectURL(a.href);
       })
@@ -139,20 +139,22 @@ const RecordCard = () => {
           <div className="record-card__file record-card__file_long">
             <a
               href={`/attachment/${file.fsName}`}
-              onClick={(e) => handleDownload(e)}>{file.name}
+              onClick={(e) => handleDownload(e, file.fsName, file.name)}>
+              {file.name}
             </a>
           </div>
         }
+        {accessToEdit &&
           <button
             className={`record-card__button record-card__button_${statusOfRecord}`}
             type="submit"
-            onClick={() => handleStatus()}
-            hidden={!accessToEdit}>
+            onClick={() => handleStatus()}>
              {statusOfRecord === 'active' ?
                  t('recordCard.button2') :
                   t('recordCard.button1')
              }
           </button>
+        }
       </div>
     </div>
   );
