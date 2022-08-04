@@ -19,14 +19,15 @@ const EditRecord = () => {
   const [newFile, setNewFile] = useState(null);
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [disableBtn, setDisableBtn] = useState(false);
   const { t } = useTranslation();
   const user = useSelector((state) => state.user.username);
   const ref = useRef(null);
   let uploadedFile = null;
 
-  function uploadFile() {
+  function uploadFile(file) {
     const formData = new FormData();
-    formData.append('file', newFile);
+    formData.append('file', file);
 
     return fetch(`/api/${box}/upload`, {
       method: 'POST',
@@ -51,13 +52,12 @@ const EditRecord = () => {
       .catch((e) => console.error(e));
   }
 
-  function deleteFile() {
-    const fileId = file.fsName;
-
-    fetch(`/api/attachment/delete/${fileId}`)
+  function deleteFile(file) {
+    return fetch(`/api/attachment/delete/${file}`)
       .then(res => {
         if (res.status === 200) {
-          if (!newFile) setFile(null);
+          setDelFile(false);
+          if (!newFile) setFile(false);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg2'), id: Math.random()});
@@ -67,6 +67,7 @@ const EditRecord = () => {
   }
 
   function saveRecord() {
+    setDisableBtn(true);
     fetch(`/api/${box}/update/${id}`, {
       method: 'POST',
       body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile}),
@@ -83,6 +84,7 @@ const EditRecord = () => {
           if (contentType.includes('application/json')) {
             res.json().then(file => { setFile(file) });
           }
+          setDisableBtn(false);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
@@ -91,15 +93,15 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
   }
 
-  const handleDownload = (e) => {
+  const handleDownload = (e, hash, name) => {
     e.preventDefault();
-    fetch(`/api/download/${file.fsName}`)
+    fetch(`/api/download/${hash}`)
       .then(res => res.blob())
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = objectURL;
-        a.download = file.name;
+        a.download = name;
         a.click();
         URL.revokeObjectURL(a.href);
       })
@@ -107,8 +109,8 @@ const EditRecord = () => {
   };
 
   const handleEditRecord = async () => {
-    if (newFile) uploadedFile = await uploadFile();
-    if (delFile || (newFile && file)) await deleteFile();
+    if (newFile) uploadedFile = await uploadFile(newFile);
+    if (delFile || (newFile && file)) await deleteFile(file.fsName);
     if (uploadedFile !== 'error') saveRecord();
   };
 
@@ -182,26 +184,27 @@ const EditRecord = () => {
              onChange={(e) => setNewFile(e.target.files[0])}
             />
             {file &&
-            <div>
-              <a
-                href={`/attachment/${file.fsName}`}
-                onClick={(e) => handleDownload(e)}>
-                {t('editRecord.link')}
-              </a>
-              <input
-                className="edit-record__checkbox"
-                type="checkbox"
-                name="del-file"
-                id="del"
-                onChange={() => setDelFile(!delFile)}
-              />
-              <label htmlFor="del-file">{t('editRecord.label1')}</label>
-            </div>
+              <div>
+                <a
+                  href={`/attachment/${file.fsName}`}
+                  onClick={(e) => handleDownload(e, file.fsName, file.name)}>
+                  {t('editRecord.link')}
+                </a>
+                <input
+                  className="edit-record__checkbox"
+                  type="checkbox"
+                  name="del-file"
+                  checked={delFile}
+                  id="del"
+                  onChange={() => setDelFile(!delFile)}
+                />
+                <label htmlFor="del-file">{t('editRecord.label1')}</label>
+              </div>
            }
             <button
               className="edit-record__submit"
               type="submit"
-              disabled={!subject || !fromTo}
+              disabled={!subject || !fromTo || disableBtn}
               onClick={() => handleEditRecord()}>
               {t('editRecord.button')}
             </button>
