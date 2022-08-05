@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { HiPencil } from 'react-icons/hi';
+import { HiPencil, HiDownload } from 'react-icons/hi';
 import { BoxContext } from './TableBox.js';
 
-const RowBox = ({ entry }) => {
+const RowBox = ({ entry, getFile }) => {
   const box = useContext(BoxContext);
   const dateStr = new Date(entry.date).toLocaleString();
   const admin = useSelector((state) => state.user.admin);
@@ -22,10 +22,20 @@ const RowBox = ({ entry }) => {
           <div className="page-table__td_long">{entry.addr}</div>
         </td>
         <td className="page-table__td">{dateStr}</td>
-        <td className="page-table__td">{entry.user}</td>
+        <td className="page-table__td">
+          {entry.file ?
+            <a
+              href={`/attachment/${entry.file.fsName}`}
+              onClick={(e) => getFile(e, entry.file.fsName, entry.file.name)}>
+              <HiDownload />
+            </a> : '-'
+          }
+        </td>
         <td className="page-table__td">{entry.reply || '-'}</td>
-        <td className="page-table__td">{accessToEdit &&
-            <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link>}
+        <td className="page-table__td">
+          {accessToEdit &&
+            <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link>
+          }
         </td>
       </tr>
     </Fragment>
