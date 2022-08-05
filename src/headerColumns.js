@@ -23,7 +23,7 @@ export const headerColumns = {
     },
 
     {
-      id: 'user',
+      id: 'file',
       label: 'headerCellBox.label5',
       sortable: false,
     },
@@ -63,7 +63,7 @@ export const headerColumns = {
     },
 
     {
-      id: 'user',
+      id: 'file',
       label: 'headerCellBox.label5',
       sortable: false,
     },
