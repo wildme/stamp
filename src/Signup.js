@@ -115,6 +115,7 @@ const Signup = () => {
             placeholder={t('signup.placeholder6')}
             name="lastname"
             value={lastname}
+            required
             maxLength="50"
             onChange={(e) => setLastname(e.target.value)}
           />
