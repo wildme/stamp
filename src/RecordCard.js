@@ -35,7 +35,7 @@ const RecordCard = () => {
       newStatus = 'canceled'; 
 
     fetch(`/api/${box}/status/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify({ newStatus }),
       headers: {'Content-Type': 'application/json'}
     })
