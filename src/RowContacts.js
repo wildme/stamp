@@ -17,7 +17,7 @@ const RowContacts = ({ entry }) => {
 
   const handleDelete = (id) => {
     if (window.confirm(t('editContact.confirm'))) {
-      fetch(`/api/contact/delete/${id}`)
+      fetch(`/api/contact/delete/${id}`, {method: 'DELETE'})
         .then(res => {
           if (res.ok) setDeleted(true);
           if (res.status === 500) {
@@ -30,9 +30,9 @@ const RowContacts = ({ entry }) => {
 
   const handleSubmit = (id) => {
     setter('');
-    fetch("/api/contact/update", {
-      method: 'POST',
-      body: JSON.stringify({ id, name, location, region }),
+    fetch(`/api/contact/update/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({name, location, region}),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
