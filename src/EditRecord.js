@@ -53,7 +53,7 @@ const EditRecord = () => {
   }
 
   function deleteFile(file) {
-    return fetch(`/api/attachment/delete/${file}`)
+    return fetch(`/api/attachment/delete/${file}`, {method: 'DELETE'})
       .then(res => {
         if (res.status === 200) {
           setDelFile(false);
@@ -69,7 +69,7 @@ const EditRecord = () => {
   function saveRecord() {
     setDisableBtn(true);
     fetch(`/api/${box}/update/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile}),
       headers: {'Content-Type': 'application/json'}
       })
