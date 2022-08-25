@@ -57,7 +57,7 @@ const Content = () => {
     fetch("/api/verify/token", {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': accessToken
+        'Authorization': `Bearer ${accessToken}`
       }
     })
       .then(res => {
