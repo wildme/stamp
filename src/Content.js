@@ -55,9 +55,10 @@ const Content = () => {
 
   const verifyToken = (accessToken) => {
     fetch("/api/verify/token", {
-      method: 'POST', 
-      body: JSON.stringify({ token: accessToken }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': accessToken
+      }
     })
       .then(res => {
         if (res.status === 401) {
