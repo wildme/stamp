@@ -20,13 +20,14 @@ const RecordCard = () => {
   const [file, setFile] = useState(null);
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [owner, setOwner] = useState(undefined);
   const { t } = useTranslation();
   const dateStr = date ?
     new Date(date).toLocaleString(i18n.language) : 'None';
   const updatedStr = updated ?
     new Date(updated).toLocaleString(i18n.language) : 'None';
   const user = useSelector((state) => state.user);
-  const accessToEdit = user.admin || (user.username === addedBy);
+  const accessToEdit = user.admin || (user.username === owner);
 
   const handleStatus = () => {
     let newStatus = 'canceled';
@@ -84,9 +85,10 @@ const RecordCard = () => {
           setUpdated(item.updated),
           setStatus(item.status),
           setDate(item.date),
-          setAddedBy(item.user),
+          setAddedBy(item.fullname),
           setNote(item.note),
-          setFile(item.file)
+          setFile(item.file),
+          setOwner(item.user)
         )}
       )
       .catch((e) => console.error(e))
