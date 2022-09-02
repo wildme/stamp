@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
@@ -8,6 +8,8 @@ import FlashMessage from './FlashMessage.js';
 const Box = (props) => {
   const box = props.location.pathname.slice(1);
   const state = useSelector((state) => state.settings.records.sortOrder);
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
@@ -41,11 +43,15 @@ const Box = (props) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const recordOffset = 0;
+    const url = `/api/${box}?field=${column}&order=${sortOrder}`;
 
-    fetch(`/api/${box}?field=${column}&order=${sortOrder}`, {signal})
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => {
         if (res.status === 200) {
           return res.json();
+        }
+        if (res.status === 401) {
+          dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 204) {
           setNoData(true);
@@ -56,16 +62,19 @@ const Box = (props) => {
         }
        })
       .then(data => {
-        setTableData(data);
+        if (data.token) {
+          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        setTableData(data.records);
         setPage(0);
-        setDataForPage(data.slice(recordOffset, recordOffset + recordsPerPage));
-        setPageCount(Math.ceil(data.length / recordsPerPage));
+        setDataForPage(data.records.slice(recordOffset, recordOffset + recordsPerPage));
+        setPageCount(Math.ceil(data.records.length / recordsPerPage));
       })
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
 
-  }, [sortOrder, column, box, t])
+  }, [sortOrder, column, box, t, token, dispatch])
   
   return (
     <div className="page-content-grid">
