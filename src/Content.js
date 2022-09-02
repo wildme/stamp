@@ -53,25 +53,7 @@ const Content = () => {
       .catch((e) => console.error(e));
   };
 
-  const verifyToken = (accessToken) => {
-    fetch("/api/verify/token", {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    })
-      .then(res => {
-        if (res.status === 401) {
-          tryToRefreshToken();
-        }
-      })
-      .catch((e) => console.error(e))
-  };
-
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (user.loggedIn) {
-      verifyToken(token.string);
-    }
     if (!user.loggedIn && !token) {
       tryToRefreshToken();
       return <p></p>;
