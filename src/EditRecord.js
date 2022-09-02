@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
@@ -9,6 +9,8 @@ import FlashMessage from './FlashMessage.js'
 
 const EditRecord = () => {
   const { id, box } = useParams();
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
@@ -42,11 +44,11 @@ const EditRecord = () => {
           setNewFile(null);
           ref.current.value = '';
           return 'error';
-         }
+        }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
           return 'error';
-         }
+        }
        })
       .then(data => data)
       .catch((e) => console.error(e));
@@ -96,7 +98,16 @@ const EditRecord = () => {
   const handleDownload = (e, hash, name) => {
     e.preventDefault();
     fetch(`/api/download/${hash}`)
-      .then(res => res.blob())
+      .then(res => {
+        if (res.status === 200) {
+          //check this code
+          if (res.headers.get('Token')) {
+            const newToken = res.headers.get('Token');
+            dispatch({type: 'TOKEN', payload: { token: { string: newToken } }});
+          }
+          return res.blob();
+        }
+      })
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -117,33 +128,38 @@ const EditRecord = () => {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+    const url = `/api/edit/${box}/${id}`;
 
-    fetch(`/api/${box}/${id}`, { signal })
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res =>  {
-        if (res.status === 200) return res.json();
-        if (res.status === 204) setNoData(true);
-      })
-      .then(item => {
-        if (item.user === user || user === 'admin') {
-          setPermitted(true);
-          return (
-            setSubject(item.subj),
-            setFromTo(item.addr),
-            setNote(item.note),
-            setReplyTo(item.reply),
-            setFile(item.file)
-          )
-        } else {
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 403) {
           setPermitted(false);
         }
-        })
+        if (res.status === 401) {
+          dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+        if (res.status === 204) setNoData(true);
+      })
+      .then(data => {
+        if (data.token) {
+          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        setSubject(data.record.subj);
+        setFromTo(data.record.addr);
+        setNote(data.record.note);
+        setReplyTo(data.record.reply);
+        setFile(data.record.file);
+      })
         .catch((e) => console.error(e))
 
     return () => {abortController.abort();};
-  }, [box, id, t, user]);
+  }, [box, id, t, user, token, dispatch]);
 
     if (noData) return <ErrorPage code={404} />;
-    if (!permitted) return <ErrorPage code={401} />;
+    if (!permitted) return <ErrorPage code={403} />;
 
     return (
       <div className="edit-record-grid">
