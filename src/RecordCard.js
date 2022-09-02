@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ErrorPage from './ErrorPage.js';
@@ -8,6 +8,8 @@ import FlashMessage from './FlashMessage.js'
 
 const RecordCard = () => {
   const { id, box } = useParams();
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const [idOfRec, setIdOfRec] = useState(id);
   const [subject, setSubject] = useState('Loading...');
   const [fromTo, setFromTo] = useState('Loading...');
@@ -67,34 +69,44 @@ const RecordCard = () => {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
+    const url = `/api/view/${box}/${id}`;
 
-    fetch(`/api/${box}/${id}`, { signal })
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => { 
-        if (res.status === 200) return res.json();
-        if (res.status === 204) setNoData(true);
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 401) {
+          dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+        if (res.status === 204) {
+          setNoData(true);
+        }
         if (!res.ok) {
           setInfoMsg({str: t('recordCard.infoMsg2'), id: Math.random()});
         }
       })
-      .then(item => {
-        return (
-          setIdOfRec(item.id),
-          setSubject(item.subj),
-          setFromTo(item.addr),
-          setReplyTo(item.reply),
-          setUpdated(item.updated),
-          setStatus(item.status),
-          setDate(item.date),
-          setAddedBy(item.fullname),
-          setNote(item.note),
-          setFile(item.file),
-          setOwner(item.user)
-        )}
+      .then(data => {
+        if (data.token) {
+          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        setIdOfRec(data.record.id);
+        setSubject(data.record.subj);
+        setFromTo(data.record.addr);
+        setReplyTo(data.record.reply);
+        setUpdated(data.record.updated);
+        setStatus(data.record.status);
+        setDate(data.record.date);
+        setAddedBy(data.record.fullname);
+        setNote(data.record.note);
+        setFile(data.record.file);
+        setOwner(data.record.user);
+        }
       )
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [box, id, t])
+  }, [box, id, t, token, dispatch])
 
   if (noData) return <ErrorPage code={404} />
 
