@@ -15,6 +15,7 @@ const EditRecord = () => {
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
+  const [owner, setOwner] = useState(undefined);
   const [permitted, setPermitted] = useState(true);
   const [delFile, setDelFile] = useState(false);
   const [file, setFile] = useState(null);
@@ -72,11 +73,18 @@ const EditRecord = () => {
     setDisableBtn(true);
     fetch(`/api/${box}/update/${id}`, {
       method: 'PUT',
-      body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile}),
-      headers: {'Content-Type': 'application/json'}
-      })
+      body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile, owner}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then(res => {
         if (res.status === 200) {
+          if (res.headers.get('Token')) {
+            const newToken = res.headers.get('Token');
+            dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+          }
           const contentType = res.headers.get('content-type');
           ref.current.value = '';
           setNewFile(null);
@@ -84,10 +92,19 @@ const EditRecord = () => {
             {str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'}
           );
           if (contentType.includes('application/json')) {
-            res.json().then(file => { setFile(file) });
+            res.json().then(data => {
+              setFile(data.Newfile);
+              if (data.token) {
+                dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+              }
+            });
           }
           setDisableBtn(false);
         }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
         }
@@ -97,15 +114,18 @@ const EditRecord = () => {
 
   const handleDownload = (e, hash, name) => {
     e.preventDefault();
-    fetch(`/api/download/${hash}`)
+    fetch(`/api/download/${hash}`, { headers: { 'Authorization': `Bearer ${token}` }})
       .then(res => {
         if (res.status === 200) {
           //check this code
           if (res.headers.get('Token')) {
             const newToken = res.headers.get('Token');
-            dispatch({type: 'TOKEN', payload: { token: { string: newToken } }});
+            dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
           }
           return res.blob();
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
       })
       .then(blob => {
@@ -145,13 +165,14 @@ const EditRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
         }
         setSubject(data.record.subj);
         setFromTo(data.record.addr);
         setNote(data.record.note);
         setReplyTo(data.record.reply);
         setFile(data.record.file);
+        setOwner(data.record.user);
       })
         .catch((e) => console.error(e))
 
