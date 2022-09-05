@@ -29,12 +29,14 @@ const EditRecord = () => {
   let uploadedFile = null;
 
   function uploadFile(file) {
+    const url = `/api/${box}/upload`;
     const formData = new FormData();
     formData.append('file', file);
 
-    return fetch(`/api/${box}/upload`, {
+    return fetch(url, {
       method: 'POST',
-      body: formData,
+      headers: {'Authorization': `Bearer ${token}`},
+      body: formData
       })
       .then(res => {
         if (res.status === 200) {
@@ -46,21 +48,39 @@ const EditRecord = () => {
           ref.current.value = '';
           return 'error';
         }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
           return 'error';
         }
        })
-      .then(data => data)
+      .then(data => {
+        if (data.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        return data.file;
+      })
       .catch((e) => console.error(e));
   }
 
   function deleteFile(file) {
-    return fetch(`/api/attachment/delete/${file}`, {method: 'DELETE'})
+    const url = `/api/attachment/delete/${file}`;
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {'Authorization': `Bearer ${token}`}
+    })
       .then(res => {
         if (res.status === 200) {
           setDelFile(false);
           if (!newFile) setFile(false);
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg2'), id: Math.random()});
@@ -70,8 +90,9 @@ const EditRecord = () => {
   }
 
   function saveRecord() {
+    const url = `/api/${box}/update/${id}`;
     setDisableBtn(true);
-    fetch(`/api/${box}/update/${id}`, {
+    fetch(url, {
       method: 'PUT',
       body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile, owner}),
       headers: {
@@ -81,32 +102,24 @@ const EditRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          if (res.headers.get('Token')) {
-            const newToken = res.headers.get('Token');
-            dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
-          }
-          const contentType = res.headers.get('content-type');
           ref.current.value = '';
           setNewFile(null);
-          setInfoMsg(
-            {str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'}
-          );
-          if (contentType.includes('application/json')) {
-            res.json().then(data => {
-              setFile(data.Newfile);
-              if (data.token) {
-                dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
-              }
-            });
-          }
+          setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
           setDisableBtn(false);
+          const contentType = res.headers.get('Content-Type');
+          if (contentType.includes('application/json')) return res.json();
         }
         if (res.status === 401) {
           dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
-
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
+        }
+      })
+      .then(data => {
+        if (data.newFile) setFile(data.newFile);
+        if (data.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
         }
       })
       .catch((e) => console.error(e))
@@ -114,13 +127,12 @@ const EditRecord = () => {
 
   const handleDownload = (e, hash, name) => {
     e.preventDefault();
-    fetch(`/api/download/${hash}`, { headers: { 'Authorization': `Bearer ${token}` }})
+    const url = `/api/download/${hash}`;
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
       .then(res => {
         if (res.status === 200) {
-          //check this code
-          if (res.headers.get('Token')) {
-            const newToken = res.headers.get('Token');
-            dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
           }
           return res.blob();
         }
