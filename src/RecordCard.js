@@ -34,16 +34,27 @@ const RecordCard = () => {
   const handleStatus = () => {
     let newStatus = 'canceled';
     statusOfRecord === newStatus ?
-      newStatus = 'active' :
-      newStatus = 'canceled'; 
+      newStatus = 'active' : newStatus = 'canceled';
+    const url = `/api/${box}/status/${id}`;
 
-    fetch(`/api/${box}/status/${id}`, {
+    fetch(url, {
       method: 'PUT',
-      body: JSON.stringify({ newStatus }),
-      headers: {'Content-Type': 'application/json'}
+      body: JSON.stringify({newStatus, owner}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
     })
       .then(res => {
-        if (res.ok) setStatus(newStatus);
+        if (res.status === 200) {
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+          setStatus(newStatus);
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
         if (res.status === 500) {
           setInfoMsg({str: t('recordCard.infoMsg1'), id: Math.random()});
         }
@@ -53,8 +64,19 @@ const RecordCard = () => {
 
   const handleDownload = (e, hash, name) => {
     e.preventDefault(e);
-    fetch(`/api/download/${hash}`)
-      .then(res => res.blob())
+    const url = `/api/download/${hash}`;
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
+      .then(res => {
+        if (res.status === 200) {
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+          return res.blob();
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+      })
       .then(blob => {
         const objectURL = URL.createObjectURL(blob);
         const a = document.createElement('a');
