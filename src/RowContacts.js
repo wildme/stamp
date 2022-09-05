@@ -1,9 +1,12 @@
 import { useState, Fragment, useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
 import { ContactsContext } from './TableContacts.js';
 
 const RowContacts = ({ entry }) => {
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const [editOn, setEditOn] = useState(false);
   const [name, setName] = useState(entry.name);
   const [location, setLocation] = useState(entry.location);
@@ -17,9 +20,15 @@ const RowContacts = ({ entry }) => {
 
   const handleDelete = (id) => {
     if (window.confirm(t('editContact.confirm'))) {
-      fetch(`/api/contact/delete/${id}`, {method: 'DELETE'})
+      const url = `/api/contact/delete/${id}`;
+      fetch(url, {
+        method: 'DELETE',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
         .then(res => {
-          if (res.ok) setDeleted(true);
+          if (res.status === 200) {
+            setDeleted(true);
+          }
           if (res.status === 500) {
             setter({str: t('editContact.infoMsg2'), id: Math.random()});
           }
@@ -30,10 +39,14 @@ const RowContacts = ({ entry }) => {
 
   const handleSubmit = (id) => {
     setter('');
-    fetch(`/api/contact/update/${id}`, {
+    const url = `/api/contact/update/${id}`;
+    fetch(url, {
       method: 'PUT',
-      body: JSON.stringify({name, location, region}),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({name, location, region})
     })
       .then(res => {
         if (res.ok) setEditOn(false);
