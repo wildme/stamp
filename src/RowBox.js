@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Fragment, useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { HiPencil, HiDownload } from 'react-icons/hi';
 import { BoxContext } from './TableBox.js';
 
 const RowBox = ({ entry, getFile }) => {
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const box = useContext(BoxContext);
   const dateStr = new Date(entry.date).toLocaleString();
   const admin = useSelector((state) => state.user.admin);
@@ -26,7 +28,9 @@ const RowBox = ({ entry, getFile }) => {
           {entry.file ?
             <a
               href={`/attachment/${entry.file.fsName}`}
-              onClick={(e) => getFile(e, entry.file.fsName, entry.file.name)}>
+              onClick={(e) =>
+                  getFile(e, entry.file.fsName, entry.file.name, token, dispatch)
+              }>
               <HiDownload />
             </a> : '-'
           }

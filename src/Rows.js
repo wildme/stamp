@@ -1,10 +1,21 @@
 import RowBox from './RowBox.js';
 import RowContacts from './RowContacts.js';
 
-function handleDownload(e, hash, name) {
+function handleDownload(e, hash, name, token, dispatch) {
   e.preventDefault();
-  fetch(`/api/download/${hash}`)
-    .then(res => res.blob())
+  const url = `/api/download/${hash}`;
+  fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
+    .then(res => {
+      if (res.status === 200) {
+        if (res.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+        }
+      return res.blob();
+    }
+      if (res.status === 401) {
+        dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+    })
     .then(blob => {
       const objectURL = URL.createObjectURL(blob);
       const a = document.createElement('a');
