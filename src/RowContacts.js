@@ -4,6 +4,14 @@ import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
 import { ContactsContext } from './TableContacts.js';
 
+function logout(dispatch) {
+  dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+}
+
+function updateToken(newToken, dispatch) {
+  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+}
+
 const RowContacts = ({ entry }) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
@@ -28,6 +36,12 @@ const RowContacts = ({ entry }) => {
         .then(res => {
           if (res.status === 200) {
             setDeleted(true);
+            if (res.token) {
+              updateToken(res.token, dispatch);
+            }
+          }
+          if (res.status === 401) {
+            logout(dispatch);
           }
           if (res.status === 500) {
             setter({str: t('editContact.infoMsg2'), id: Math.random()});
@@ -49,7 +63,15 @@ const RowContacts = ({ entry }) => {
       body: JSON.stringify({name, location, region})
     })
       .then(res => {
-        if (res.ok) setEditOn(false);
+        if (res.ok) {
+          setEditOn(false);
+          if (res.token) {
+            updateToken(res.token, dispatch);
+          }
+        }
+        if (res.status === 401) {
+            logout(dispatch);
+        }
         if (res.status === 500) {
           setter({str: t('editContact.infoMsg1'), id: Math.random()});
         }
