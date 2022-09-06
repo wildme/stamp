@@ -1,6 +1,9 @@
 import { useState, Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Autocomplete = (props) => {
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
   const [matches, setMatches] = useState([]);
   const [activeItem, setActiveItem] = useState(0);
   const [visibility, setVisibility] = useState(false);
@@ -31,11 +34,19 @@ const Autocomplete = (props) => {
 
   const onChange = (e) => {
     setter(e.currentTarget.value);
-      fetch(`/api/contacts/search/by-${field}?name=${value}`)
-        .then(res => res.json())
-        .then(data => data.map(item => [item.name, item.location].join(', ')))
-        .then(setMatches)
-        .catch((e) => console.error(e))
+    const url = `/api/contacts/search/by-${field}?name=${value}`;
+    fetch(url, {
+      headers: {'Authorization': `Bearer ${token}`}
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        return data.contacts.map(item => [item.name, item.location].join(', '));
+      })
+      .then(matches => setMatches(matches))
+      .catch((e) => console.error(e))
 
     setVisibility(true);
     setActiveItem(0);
