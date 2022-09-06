@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory  } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
@@ -11,17 +11,30 @@ const NewContact = () => {
   const [orgName, setOrgName] = useState('');
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const history = useHistory();
   const { t } = useTranslation();
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
 
   const handleAddContact = (e) => {
     e.preventDefault();
-    fetch('/api/contacts/new', {
+    const url = '/api/contacts/new';
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ orgLocation, orgRegion, orgName }),
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ orgLocation, orgRegion, orgName })
     })
     .then(res => {
+      if (res.status === 200) {
+        if (res.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+        }
+      }
+      if (res.status === 401) {
+        dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+      }
       if (res.status === 500) {
         setError(true);
         setInfoMsg({str: t('newContact.infoMsg'), id: Math.random()});
@@ -33,7 +46,6 @@ const NewContact = () => {
       setOrgLocation('');
       setOrgRegion('');
       setOrgName('');
-      history.replace('/contacts');
     }
   };
 
