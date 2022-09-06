@@ -4,7 +4,33 @@ import { useSelector, useDispatch} from 'react-redux';
 import { HiPencil, HiDownload } from 'react-icons/hi';
 import { BoxContext } from './TableBox.js';
 
-const RowBox = ({ entry, getFile }) => {
+function getFile(e, hash, name, token, dispatch) {
+  e.preventDefault();
+  const url = `/api/download/${hash}`;
+  fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
+    .then(res => {
+      if (res.status === 200) {
+        if (res.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+        }
+      return res.blob();
+    }
+      if (res.status === 401) {
+        dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
+    })
+    .then(blob => {
+      const objectURL = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = objectURL;
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    })
+    .catch((e) => console.error(e))
+}
+
+const RowBox = ({ entry }) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const box = useContext(BoxContext);
