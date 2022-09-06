@@ -74,7 +74,9 @@ const EditRecord = () => {
       .then(res => {
         if (res.status === 200) {
           setDelFile(false);
-          if (!newFile) setFile(false);
+          if (!newFile) {
+            setFile(false);
+          }
           if (res.token) {
             dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
           }
