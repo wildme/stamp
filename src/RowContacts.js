@@ -52,8 +52,8 @@ const RowContacts = ({ entry }) => {
   }
 
   const handleSubmit = (id) => {
-    setter('');
     const url = `/api/contact/update/${id}`;
+    setter('');
     fetch(url, {
       method: 'PUT',
       headers: {

@@ -37,10 +37,13 @@ const EditRecord = () => {
       method: 'POST',
       headers: {'Authorization': `Bearer ${token}`},
       body: formData
-      })
+    })
       .then(res => {
         if (res.status === 200) {
           return res.json();
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
@@ -48,14 +51,11 @@ const EditRecord = () => {
           ref.current.value = '';
           return 'error';
         }
-        if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
-        }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
           return 'error';
         }
-       })
+      })
       .then(data => {
         if (data.token) {
           dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
@@ -73,12 +73,12 @@ const EditRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
           setDelFile(false);
           if (!newFile) {
             setFile(false);
-          }
-          if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
           }
         }
         if (res.status === 401) {
@@ -96,11 +96,11 @@ const EditRecord = () => {
     setDisableBtn(true);
     fetch(url, {
       method: 'PUT',
-      body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile, owner}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile, owner})
     })
       .then(res => {
         if (res.status === 200) {
@@ -109,7 +109,9 @@ const EditRecord = () => {
           setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
           setDisableBtn(false);
           const contentType = res.headers.get('Content-Type');
-          if (contentType.includes('application/json')) return res.json();
+          if (contentType.includes('application/json')) {
+            return res.json();
+          }
         }
         if (res.status === 401) {
           dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
@@ -119,9 +121,11 @@ const EditRecord = () => {
         }
       })
       .then(data => {
-        if (data.newFile) setFile(data.newFile);
         if (data.token) {
           dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        if (data.newFile) {
+          setFile(data.newFile);
         }
       })
       .catch((e) => console.error(e))
@@ -130,7 +134,7 @@ const EditRecord = () => {
   const handleDownload = (e, hash, name) => {
     e.preventDefault();
     const url = `/api/download/${hash}`;
-    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
@@ -169,13 +173,15 @@ const EditRecord = () => {
         if (res.status === 200) {
           return res.json();
         }
-        if (res.status === 403) {
-          setPermitted(false);
-        }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
-        if (res.status === 204) setNoData(true);
+        if (res.status === 403) {
+          setPermitted(false);
+        }
+        if (res.status === 204) {
+          setNoData(true);
+        }
       })
       .then(data => {
         if (data.token) {
@@ -188,7 +194,7 @@ const EditRecord = () => {
         setFile(data.record.file);
         setOwner(data.record.user);
       })
-        .catch((e) => console.error(e))
+      .catch((e) => console.error(e))
 
     return () => {abortController.abort();};
   }, [box, id, t, user, token, dispatch]);

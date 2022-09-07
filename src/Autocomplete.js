@@ -33,8 +33,8 @@ const Autocomplete = (props) => {
   };
 
   const onChange = (e) => {
-    setter(e.currentTarget.value);
     const url = `/api/contacts/search/by-${field}?name=${value}`;
+    setter(e.currentTarget.value);
     fetch(url, {
       headers: {'Authorization': `Bearer ${token}`}
     })

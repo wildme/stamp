@@ -21,12 +21,13 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const url = "/api/login";
     if (error) setError(false);
 
-    fetch("/api/login", {
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
     })
       .then(res => {
         if (res.status === 200) {

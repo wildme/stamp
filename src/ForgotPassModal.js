@@ -10,10 +10,11 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
 
   const handleReqCreds = (e) => {
     e.preventDefault();
-    fetch("/api/reset/password", {
+    const url = "/api/reset/password";
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ username, email }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email })
     })
       .then(res => {
         if (res.status === 200) {

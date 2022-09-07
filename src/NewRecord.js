@@ -30,19 +30,19 @@ const NewRecord = () => {
       method: 'POST',
       headers: {'Authorization': `Bearer ${token}`},
       body: formData
-      })
+    })
       .then(res => {
         if (res.status === 200) {
           return res.json();
-       }
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setFile(null);
           ref.current.value='';
           return 'error';
-       }
-        if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
