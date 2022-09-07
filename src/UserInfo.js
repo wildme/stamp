@@ -4,27 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 const UserInfo = ({ user, name1, name2, t, setter }) => {
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
-
-  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.string);
   const state = useSelector((state) => state.info);
+  const dispatch = useDispatch();
 
   const handleInfoUpdate = (e) => {
     e.preventDefault();
-    fetch("/api/user/update/info", {
+    const url = "/api/user/update/info";
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({user, firstname, lastname}),
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({user, firstname, lastname})
     })
       .then(res => {
         if (res.status === 200) {
-          dispatch({ type: 'INFO', payload:
-            { info: {...state,  fullname: [firstname, lastname].join(' ') } }
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+          dispatch({ type: 'INFO',
+            payload: { info: {...state,  fullname: [firstname, lastname].join(' ') }}
           });
-          setter({
-            str: t('personalInfo.infoMsg2'),
-            id: Math.random(),
-            type: 'success'
-          });
+          setter({str: t('personalInfo.infoMsg2'), id: Math.random(), type: 'success'});
+        }
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 500) {
           setter({str: t('personalInfo.infoMsg1'), id: Math.random()});

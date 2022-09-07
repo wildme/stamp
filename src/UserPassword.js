@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PasswordInputEye from './PasswordInputEye.js';
 
 const UserPassword = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const token = useSelector((state) => state.token.string);
+  const dispatch = useDispatch();
 
   function cmpPass(pass1, pass2) {
     if (pass1 === pass2) return true;
@@ -13,26 +16,32 @@ const UserPassword = ({user, t, setter, setter2}) => {
 
   const handlePassUpdate = (e) => {
     e.preventDefault()
+    const url = "/api/user/update/password";
     let match = cmpPass(newPass, confirmPass);
     if (match) {
-      fetch("/api/user/update/password", {
+      fetch(url, {
         method: 'POST',
-        body: JSON.stringify({user, oldPass, newPass}),
-        headers: {'Content-Type': 'application/json'}
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({user, oldPass, newPass})
       })
         .then(res => {
           if (res.status === 200) {
-            setter({
-              str: t('password.infoMsg4'),
-              id: Math.random(),
-              type: 'success'
-            });
+            if (res.token) {
+              dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            }
+            setter({str: t('password.infoMsg4'), id: Math.random(), type: 'success'});
           }
-          if (res.status === 500) {
-            setter({str: t('password.infoMsg2'), id: Math.random()});
+          if (res.status === 401) {
+            dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
           }
           if (res.status === 409) {
             setter({str: t('password.infoMsg3'), id: Math.random()});
+          }
+          if (res.status === 500) {
+            setter({str: t('password.infoMsg2'), id: Math.random()});
           }
         })
         .catch((e) => console.error(e))

@@ -5,26 +5,28 @@ const UserSettings = ({ user, t, setter, settings }) => {
   const [sortOrder, setSortOrder] = useState({
     records: { sortOrder: settings.records.sortOrder }
   });
-  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.string);
   const state = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
 
   const handleSettingsUpdate = (e) => {
     e.preventDefault();
-    fetch("/api/user/update/settings", {
+    const url = "/api/user/update/settings";
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({user, settings: {...sortOrder}}),
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({user, settings: {...sortOrder}})
     })
       .then(res => {
         if (res.status === 200) {
-          dispatch({ type: 'SETTINGS', payload:
-            { settings: {...state, ...sortOrder } }
-          });
-          setter({
-            str: t('userSettings.infoMsg1'),
-            id: Math.random(),
-            type: 'success'
-          });
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+          dispatch({ type: 'SETTINGS', payload: { settings: {...state, ...sortOrder } }});
+          setter({str: t('userSettings.infoMsg1'), id: Math.random(), type: 'success'});
         }
         if (res.status === 500) {
           setter({str: t('userSettings.infoMsg2'), id: Math.random()});

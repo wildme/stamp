@@ -4,30 +4,38 @@ import { useDispatch, useSelector } from 'react-redux';
 const UserEmail = ({ user, t, setter }) => {
   const state = useSelector((state) => state.info);
   const [email, setEmail] = useState(state.email);
-
+  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
 
   const handleEmailUpdate = (e) => {
     e.preventDefault();
     if (email === state.email) return;
+    const url = "/api/user/update/email";
 
-    fetch("/api/user/update/email", {
+    fetch(url, {
       method: 'POST',
-      body: JSON.stringify({user, email}),
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({user, email})
     })
       .then(res => {
         if (res.status === 200) {
-          dispatch({ type: 'INFO', payload:
-            { info: {...state,  email: email } }
-          });
+          if (res.token) {
+            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          }
+          dispatch({ type: 'INFO', payload: { info: {...state,  email: email } }});
           setter({str: t('email.infoMsg3'), id: Math.random(), type: 'success'});
         }
-        if (res.status === 500) {
-          setter({str: t('email.infoMsg1'), id: Math.random()});
+        if (res.status === 401) {
+          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
         }
         if (res.status === 409) {
           setter({str: t('email.infoMsg2'), id: Math.random()});
+        }
+        if (res.status === 500) {
+          setter({str: t('email.infoMsg1'), id: Math.random()});
         }
       })
       .catch((e) => console.error(e))
