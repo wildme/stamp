@@ -22,15 +22,17 @@ const Content = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const tryToRefreshToken = () => {
-    fetch("/api/refresh/token")
+  const onPageReload = () => {
+    const url = "/api/page-reload";
+    fetch(url)
       .then(res => {
-        if (res.status === 200) return res.json();
+        if (res.status === 200) {
+          return res.json();
+        }
         if (res.status === 401) {
-          dispatch({ type: 'TOKEN', payload:
-            { token: { string: null } }});
-          dispatch({ type: 'LOGIN', payload:
-            { user: { username: null, admin: null, loggedIn: false } }});
+          dispatch({ type: 'TOKEN', payload: { token: { string: null } }});
+          dispatch({ type: 'LOGIN', payload: { user:
+            { username: null, admin: null, loggedIn: false } }});
           dispatch({ type: 'INFO', payload: { info: null } });
           dispatch({ type: 'SETTINGS', payload: { settings: null } });
         }
@@ -55,7 +57,7 @@ const Content = () => {
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
     if (!user.loggedIn && !token) {
-      tryToRefreshToken();
+      onPageReload();
       return <p></p>;
     }
   
