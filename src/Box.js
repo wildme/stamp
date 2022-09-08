@@ -43,7 +43,7 @@ const Box = (props) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const recordOffset = 0;
-    const url = `/api/${box}?field=${column}&order=${sortOrder}`;
+    const url = `/api/${box}?column=${column}&order=${sortOrder}`;
 
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => {
