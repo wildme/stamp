@@ -1,6 +1,14 @@
 import { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+function logout(dispatch) {
+  dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+}
+
+function updateToken(newToken, dispatch) {
+  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+}
+
 const Autocomplete = (props) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
@@ -38,10 +46,17 @@ const Autocomplete = (props) => {
     fetch(url, {
       headers: {'Authorization': `Bearer ${token}`}
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 401) {
+          logout(dispatch);
+        }
+      })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          updateToken(data.token, dispatch);
         }
         return data.contacts.map(item => [item.name, item.location].join(', '));
       })
