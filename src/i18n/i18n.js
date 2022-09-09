@@ -99,7 +99,8 @@ const resources = {
         label6: en.newRecord.label6,
         button: en.newRecord.button,
         infoMsg1: en.newRecord.infoMsg1,
-        infoMsg2: en.newRecord.infoMsg2
+        infoMsg2: en.newRecord.infoMsg2,
+        infoMsg3: en.newRecord.infoMsg3
       },
       editRecord: {
         link: en.editRecord.link,
@@ -292,7 +293,8 @@ const resources = {
         label6: ru.newRecord.label6,
         button: ru.newRecord.button,
         infoMsg1: ru.newRecord.infoMsg1,
-        infoMsg2: ru.newRecord.infoMsg2
+        infoMsg2: ru.newRecord.infoMsg2,
+        infoMsg3: ru.newRecord.infoMsg3
       },
       editRecord: {
         link: ru.editRecord.link,
