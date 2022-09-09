@@ -7,6 +7,14 @@ import InputField from './InputFields.js';
 import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
 
+function logout(dispatch) {
+  dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+}
+
+function updateToken(newToken, dispatch) {
+  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+}
+
 const EditRecord = () => {
   const { id, box } = useParams();
   const token = useSelector((state) => state.token.string);
@@ -23,10 +31,10 @@ const EditRecord = () => {
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [disableBtn, setDisableBtn] = useState(false);
+  const [error, setError] = useState(false);
   const { t } = useTranslation();
-  const user = useSelector((state) => state.user.username);
   const ref = useRef(null);
-  let uploadedFile = null;
+  let fileProps = undefined;
 
   function uploadFile(file) {
     const url = `/api/${box}/upload`;
@@ -43,22 +51,22 @@ const EditRecord = () => {
           return res.json();
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setNewFile(null);
           ref.current.value = '';
-          return 'error';
+          setError(true);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
-          return 'error';
+          setError(true);
         }
       })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          updateToken(data.token, dispatch);
         }
         return data.file;
       })
@@ -74,7 +82,7 @@ const EditRecord = () => {
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            updateToken(res.token, dispatch);
           }
           setDelFile(false);
           if (!newFile) {
@@ -82,7 +90,7 @@ const EditRecord = () => {
           }
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg2'), id: Math.random()});
@@ -100,7 +108,7 @@ const EditRecord = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({subject, fromTo, replyTo, note, uploadedFile, owner})
+      body: JSON.stringify({subject, fromTo, replyTo, note, fileProps, owner})
     })
       .then(res => {
         if (res.status === 200) {
@@ -114,7 +122,7 @@ const EditRecord = () => {
           }
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
@@ -122,7 +130,7 @@ const EditRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+            updateToken(data.token, dispatch);
         }
         if (data.newFile) {
           setFile(data.newFile);
@@ -138,12 +146,12 @@ const EditRecord = () => {
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            updateToken(res.token, dispatch);
           }
           return res.blob();
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
       })
       .then(blob => {
@@ -158,9 +166,9 @@ const EditRecord = () => {
   };
 
   const handleEditRecord = async () => {
-    if (newFile) uploadedFile = await uploadFile(newFile);
+    if (newFile) fileProps = await uploadFile(newFile);
     if (delFile || (newFile && file)) await deleteFile(file.fsName);
-    if (uploadedFile !== 'error') saveRecord();
+    if (!error) saveRecord();
   };
 
   useEffect(() => {
@@ -197,7 +205,7 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
 
     return () => {abortController.abort();};
-  }, [box, id, t, user, token, dispatch]);
+  }, [box, id, t, token, dispatch]);
 
     if (noData) return <ErrorPage code={404} />;
     if (!permitted) return <ErrorPage code={403} />;
