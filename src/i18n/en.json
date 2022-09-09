@@ -91,7 +91,8 @@
     "label6": "File",
     "button": "Add",
     "infoMsg1": "Error. Failed to add record",
-    "infoMsg2": "Error. Failed to upload file"
+    "infoMsg2": "Error. Failed to upload file",
+    "infoMsg3": "Record has been successfully added"
   },
   "editRecord": {
     "link": "Download",
