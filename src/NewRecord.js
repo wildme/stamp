@@ -6,20 +6,29 @@ import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import FlashMessage from './FlashMessage.js'
 
+function logout(dispatch) {
+  dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+}
+
+function updateToken(newToken, dispatch) {
+  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
+}
+
 const NewRecord = () => {
   const { box } = useParams();
+  const user = useSelector((state) => state.user.username);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
-  const addedBy = useSelector((state) => state.user.username);
   const [note, setNote] = useState('');
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [error, setError] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
-  let uploadedFile = null;
+  let fileProps = undefined;
 
   function uploadFile() {
     const url = `/api/${box}/upload`;
@@ -36,22 +45,22 @@ const NewRecord = () => {
           return res.json();
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setFile(null);
           ref.current.value='';
-          return 'error';
+          setError(true);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
-          return 'error';
+          setError(true);
         }
       })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          updateToken(data.token, dispatch);
         }
         return data.file;
       })
@@ -66,32 +75,37 @@ const NewRecord = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({subject, fromTo, addedBy, replyTo, note, uploadedFile})
+      body: JSON.stringify({subject, fromTo, user, replyTo, note, fileProps})
     })
       .then(res => {
         if (res.status === 200) {
-          if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
-          }
+          return res.json();
         }
         if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          logout(dispatch);
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg1'), id: Math.random()});
         }
       })
+      .then(data => {
+        if (data.token) {
+          updateToken(data.token, dispatch);
+        }
+        setInfoMsg({str: t('newRecord.infoMsg3'), id: Math.random(), type: 'success'});
+      })
       .catch((e) => console.error(e))
   }
 
   const handleAddRecord = async () => {
-    if (file) uploadedFile = await uploadFile();
-    if (uploadedFile !== 'error') saveRecord();
+    if (file) fileProps = await uploadFile();
+    if (!error) saveRecord();
   };
 
   return (
     <div className="add-record-grid">
-      {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
+      {infoMsg.str &&
+          <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
       <div className="add-record">
         <InputField
           attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
