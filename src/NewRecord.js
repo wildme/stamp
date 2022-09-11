@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
@@ -19,6 +19,7 @@ const NewRecord = () => {
   const user = useSelector((state) => state.user.username);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
   const [note, setNote] = useState('');
@@ -92,7 +93,8 @@ const NewRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        setInfoMsg({str: t('newRecord.infoMsg3'), id: Math.random(), type: 'success'});
+        //setInfoMsg({str: t('newRecord.infoMsg3'), id: Math.random(), type: 'success'});
+        history.replace(`/${box}/view/${data.id}`);
       })
       .catch((e) => console.error(e))
   }
@@ -101,6 +103,7 @@ const NewRecord = () => {
     if (file) fileProps = await uploadFile();
     if (!error) saveRecord();
   };
+
 
   return (
     <div className="add-record-grid">
