@@ -10,9 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const { t } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
