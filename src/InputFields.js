@@ -11,9 +11,6 @@ import Autocomplete from './Autocomplete.js';
   const field = props.field;
   const className = props.className;
 
-  const handleInputChange = (e) => {
-    setter(e.target.value);
-  };
   return auto ? (
     <Autocomplete
       className={className}
@@ -31,7 +28,7 @@ import Autocomplete from './Autocomplete.js';
         type={attrs.type}
         name={attrs.name}
         value={value}
-        onChange={(e) => handleInputChange(e)}
+        onChange={(e) => setter(e.target.value)}
       />
     </Fragment>
   )
