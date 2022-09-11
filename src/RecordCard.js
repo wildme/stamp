@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
 import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
 
 const RecordCard = () => {
   const { id, box } = useParams();
+  const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [idOfRec, setIdOfRec] = useState(id);
@@ -24,11 +24,8 @@ const RecordCard = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [owner, setOwner] = useState(undefined);
   const { t } = useTranslation();
-  const dateStr = date ?
-    new Date(date).toLocaleString(i18n.language) : 'None';
-  const updatedStr = updated ?
-    new Date(updated).toLocaleString(i18n.language) : 'None';
-  const user = useSelector((state) => state.user);
+  const dateStr = date ? new Date(date).toLocaleString() : null;
+  const updatedStr = updated ? new Date(updated).toLocaleString() : null;
   const accessToEdit = user.admin || (user.username === owner);
 
   const handleStatus = () => {
