@@ -36,8 +36,8 @@ const RowBox = ({ entry }) => {
   const box = useContext(BoxContext);
   const dateStr = new Date(entry.date).toLocaleString();
   const admin = useSelector((state) => state.user.admin);
-  const username = useSelector((state) => state.user.username);
-  const accessToEdit = admin || (username === entry.user);
+  const user = useSelector((state) => state.user.username);
+  const accessToEdit = admin || (user === entry.user);
 
   return (
     <Fragment>
