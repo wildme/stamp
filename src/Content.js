@@ -15,6 +15,37 @@ import UserProfile from './UserProfile.js';
 import { Route, Redirect,
   Switch, useHistory, useLocation } from 'react-router-dom';
 
+const onPageReload = (dispatch, history, location) => {
+  const url = "/api/page-reload";
+  fetch(url)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      if (res.status === 401) {
+        dispatch({ type: 'TOKEN', payload: { token: { string: null } }});
+        dispatch({ type: 'LOGIN', payload: { user:
+          { username: null, admin: null, loggedIn: false } }});
+        dispatch({ type: 'INFO', payload: { info: null } });
+        dispatch({ type: 'SETTINGS', payload: { settings: null } });
+      }
+    })
+    .then(data => {
+      dispatch({ type: 'TOKEN', payload:
+        { token: { string: data.token } }});
+      dispatch({ type: 'LOGIN', payload:
+        { user: { username: data.user.username,
+          admin: data.user.admin, loggedIn: true } }});
+      dispatch({ type: 'INFO', payload:
+        { info: { fullname: data.user.fullname,
+          email: data.user.email }}
+      });
+      dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
+      history.replace(location.pathname);
+    })
+    .catch((e) => console.error(e));
+};
+
 const Content = () => {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
@@ -22,49 +53,14 @@ const Content = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const onPageReload = () => {
-    const url = "/api/page-reload";
-    fetch(url)
-      .then(res => {
-        if (res.status === 200) {
-          return res.json();
-        }
-        if (res.status === 401) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: null } }});
-          dispatch({ type: 'LOGIN', payload: { user:
-            { username: null, admin: null, loggedIn: false } }});
-          dispatch({ type: 'INFO', payload: { info: null } });
-          dispatch({ type: 'SETTINGS', payload: { settings: null } });
-        }
-      })
-      .then(data => {
-        if (data) {
-          dispatch({ type: 'TOKEN', payload:
-            { token: { string: data.token } }});
-          dispatch({ type: 'LOGIN', payload:
-            { user: { username: data.user.username,
-              admin: data.user.admin, loggedIn: true } }});
-          dispatch({ type: 'INFO', payload:
-            { info: { fullname: data.user.fullname,
-              email: data.user.email }}
-          });
-          dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
-          history.replace(location.pathname);
-        }
-  })
-      .catch((e) => console.error(e));
-  };
-
   const PrivateRoute = ({ component: Component, ...rest }) => {
     if (!user.loggedIn && !token) {
-      onPageReload();
+      onPageReload(dispatch, history, location);
       return <p></p>;
     }
   
     return (
-      <Route
-        {...rest}
-      render={(props) => 
+      <Route {...rest} render={(props) => 
         user.loggedIn ? <Component {...props} /> : (
             <Redirect to={{
               pathname: "/login", state: { from: props.location }
@@ -74,7 +70,7 @@ const Content = () => {
       }
       />
     );
-  }
+  };
 
   return (
     <Fragment>
