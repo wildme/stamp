@@ -28,7 +28,10 @@ import Autocomplete from './Autocomplete.js';
         type={attrs.type}
         name={attrs.name}
         value={value}
-        onChange={(e) => setter(e.target.value)}
+        onChange={(e) => {
+          setter(e.target.value);
+          localStorage.setItem(attrs.name, e.target.value)
+        }}
       />
     </Fragment>
   )
