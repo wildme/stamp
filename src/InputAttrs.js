@@ -1,9 +1,9 @@
 export const InputAttrs = {
   inbox: [
     {
-      for: 'subj',
+      for: 'inbox-subj',
       text: 'newRecord.label1',
-      name: 'subj',
+      name: 'inbox-subj',
       type: 'text'
     },
 
@@ -15,23 +15,23 @@ export const InputAttrs = {
     },
 
     {
-      for: 'note',
+      for: 'inbox-note',
       text: 'newRecord.label5',
-      name: 'note',
+      name: 'inbox-note',
       type: 'text'
     },
     {
-      for: 'replyTo',
+      for: 'inbox-replyTo',
       text: 'newRecord.label4',
-      name: 'replyTo',
+      name: 'inbox-replyTo',
       type: 'text'
     }
   ],
   outbox: [
     {
-      for: 'subj',
+      for: 'outbox-subj',
       text: 'newRecord.label1',
-      name: 'subj',
+      name: 'outbox-subj',
       type: 'text'
     },
 
@@ -43,15 +43,15 @@ export const InputAttrs = {
     },
 
     {
-      for: 'note',
+      for: 'outbox-note',
       text: 'newRecord.label5',
-      name: 'note',
+      name: 'outbox-note',
       type: 'text'
     },
     {
-      for: 'replyTo',
+      for: 'outbox-replyTo',
       text: 'newRecord.label4',
-      name: 'replyTo',
+      name: 'outbox-replyTo',
       type: 'text'
     }
   ],
