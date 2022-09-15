@@ -19,10 +19,10 @@ const EditRecord = () => {
   const { id, box } = useParams();
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
-  const [subject, setSubject] = useState(localStorage.getItem('subj') || '');
+  const [subject, setSubject] = useState(localStorage.getItem(`${box}-subj`) || '');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState(localStorage.getItem('note') || '');
-  const [replyTo, setReplyTo] = useState(localStorage.getItem('replyTo') || '');
+  const [note, setNote] = useState(localStorage.getItem(`${box}-note`) || '');
+  const [replyTo, setReplyTo] = useState(localStorage.getItem(`${box}-replyTo`) || '');
   const [owner, setOwner] = useState(undefined);
   const [permitted, setPermitted] = useState(true);
   const [delFile, setDelFile] = useState(false);
@@ -217,7 +217,7 @@ const EditRecord = () => {
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
         <div className="edit-record">
             <InputField
-              attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+              attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
               setter={setSubject}
               value={subject}
               className="edit-record__input"
@@ -231,13 +231,13 @@ const EditRecord = () => {
               className="edit-record__input"
             />
             <InputField
-              attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
               setter={setReplyTo}
               value={replyTo}
               className="edit-record__input"
             />
             <InputField
-              attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
               setter={setNote}
               value={note}
               className="edit-record__input"

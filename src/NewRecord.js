@@ -20,10 +20,10 @@ const NewRecord = () => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [subject, setSubject] = useState(localStorage.getItem('subj') || '');
+  const [subject, setSubject] = useState(localStorage.getItem(`${box}-subj`) || '');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState(localStorage.getItem('note') || '');
-  const [replyTo, setReplyTo] = useState(localStorage.getItem('replyTo') || '');
+  const [note, setNote] = useState(localStorage.getItem(`${box}-note`) || '');
+  const [replyTo, setReplyTo] = useState(localStorage.getItem(`${box}-replyTo`) || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [error, setError] = useState(false);
@@ -112,7 +112,7 @@ const NewRecord = () => {
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
       <div className="add-record">
         <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'subj')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-subj`)[0]}
           setter={setSubject}
           value={subject}
           className="add-record__input"
@@ -127,13 +127,13 @@ const NewRecord = () => {
           className="add-record__input"
         />
         <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'replyTo')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
           setter={setReplyTo}
           value={replyTo}
           className="add-record__input"
         />
         <InputField
-          attrs={attrs[`${box}`].filter((x) => x.name === 'note')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
           setter={setNote}
           value={note}
           className="add-record__input"
