@@ -19,10 +19,10 @@ const EditRecord = () => {
   const { id, box } = useParams();
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
-  const [subject, setSubject] = useState('');
+  const [subject, setSubject] = useState(localStorage.getItem('subj') || '');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState('');
-  const [replyTo, setReplyTo] = useState('');
+  const [note, setNote] = useState(localStorage.getItem('note') || '');
+  const [replyTo, setReplyTo] = useState(localStorage.getItem('replyTo') || '');
   const [owner, setOwner] = useState(undefined);
   const [permitted, setPermitted] = useState(true);
   const [delFile, setDelFile] = useState(false);
@@ -114,6 +114,7 @@ const EditRecord = () => {
         if (res.status === 200) {
           ref.current.value = '';
           setNewFile(null);
+          localStorage.clear();
           setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
           setDisableBtn(false);
           const contentType = res.headers.get('Content-Type');

@@ -20,10 +20,10 @@ const NewRecord = () => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [subject, setSubject] = useState('');
+  const [subject, setSubject] = useState(localStorage.getItem('subj') || '');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState('');
-  const [replyTo, setReplyTo] = useState('');
+  const [note, setNote] = useState(localStorage.getItem('note') || '');
+  const [replyTo, setReplyTo] = useState(localStorage.getItem('replyTo') || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [error, setError] = useState(false);
@@ -80,6 +80,7 @@ const NewRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
+          localStorage.clear();
           return res.json();
         }
         if (res.status === 401) {
