@@ -41,11 +41,12 @@ const Autocomplete = (props) => {
   };
 
   const onChange = (e) => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     const url = `/api/contacts/search/by-${field}?name=${value}`;
     setter(e.currentTarget.value);
-    fetch(url, {
-      headers: {'Authorization': `Bearer ${token}`}
-    })
+
+    fetch(url, { headers: {'Authorization': `Bearer ${token}`}, signal })
       .then(res => {
         if (res.status === 200) {
           return res.json();
@@ -65,6 +66,8 @@ const Autocomplete = (props) => {
 
     setVisibility(true);
     setActiveItem(0);
+
+    return () => {abortController.abort();};
   };
 
   const onClick = (e) => {
