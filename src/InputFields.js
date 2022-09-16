@@ -4,6 +4,7 @@ import Autocomplete from './Autocomplete.js';
 
  const InputField = (props) => {
   const { t } = useTranslation();
+  const id = props.id;
   const attrs = props.attrs;
   const setter = props.setter;
   const value = props.value;
@@ -30,7 +31,7 @@ import Autocomplete from './Autocomplete.js';
         value={value}
         onChange={(e) => {
           setter(e.target.value);
-          localStorage.setItem(attrs.name, e.target.value)
+          localStorage.setItem(`${attrs.name}-${id}`, e.target.value)
         }}
       />
     </Fragment>
