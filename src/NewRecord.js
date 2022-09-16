@@ -20,10 +20,13 @@ const NewRecord = () => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [subject, setSubject] = useState(localStorage.getItem(`${box}-subj`) || '');
+  const storeSubj = localStorage.getItem(`${box}-subj-new`);
+  const storeNote = localStorage.getItem(`${box}-note-new`);
+  const storeReplyTo = localStorage.getItem(`${box}-replyTo-new`);
+  const [subject, setSubject] = useState(storeSubj || '');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState(localStorage.getItem(`${box}-note`) || '');
-  const [replyTo, setReplyTo] = useState(localStorage.getItem(`${box}-replyTo`) || '');
+  const [note, setNote] = useState(storeNote || '');
+  const [replyTo, setReplyTo] = useState(storeReplyTo || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [error, setError] = useState(false);
@@ -112,12 +115,14 @@ const NewRecord = () => {
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
       <div className="add-record">
         <InputField
+          id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-subj`)[0]}
           setter={setSubject}
           value={subject}
           className="add-record__input"
         />
         <InputField
+          id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === 'from' ||
             x.name === 'to')[0]}
           setter={setFromTo}
@@ -127,12 +132,14 @@ const NewRecord = () => {
           className="add-record__input"
         />
         <InputField
+          id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
           setter={setReplyTo}
           value={replyTo}
           className="add-record__input"
         />
         <InputField
+          id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
           setter={setNote}
           value={note}
