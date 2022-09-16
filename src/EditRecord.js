@@ -19,10 +19,10 @@ const EditRecord = () => {
   const { id, box } = useParams();
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
-  const [subject, setSubject] = useState(localStorage.getItem(`${box}-subj`) || '');
+  const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
-  const [note, setNote] = useState(localStorage.getItem(`${box}-note`) || '');
-  const [replyTo, setReplyTo] = useState(localStorage.getItem(`${box}-replyTo`) || '');
+  const [note, setNote] = useState('');
+  const [replyTo, setReplyTo] = useState('');
   const [owner, setOwner] = useState(undefined);
   const [permitted, setPermitted] = useState(true);
   const [delFile, setDelFile] = useState(false);
@@ -177,6 +177,10 @@ const EditRecord = () => {
     const signal = abortController.signal;
     const url = `/api/edit/${box}/${id}`;
 
+    const storeSubj = localStorage.getItem(`${box}-subj-${id}`);
+    const storeNote = localStorage.getItem(`${box}-note-${id}`);
+    const storeReplyTo = localStorage.getItem(`${box}-replyTo-${id}`);
+
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res =>  {
         if (res.status === 200) {
@@ -196,10 +200,10 @@ const EditRecord = () => {
         if (data.token) {
           dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        setSubject(data.record.subj);
+        setSubject(storeSubj || data.record.subj);
         setFromTo(data.record.addr);
-        setNote(data.record.note);
-        setReplyTo(data.record.reply);
+        setNote(storeNote || data.record.note);
+        setReplyTo(storeReplyTo || data.record.reply);
         setFile(data.record.file);
         setOwner(data.record.user);
       })
@@ -217,12 +221,14 @@ const EditRecord = () => {
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
         <div className="edit-record">
             <InputField
+              id={id}
               attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
               setter={setSubject}
               value={subject}
               className="edit-record__input"
             />
             <InputField
+              id={id}
               attrs={attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]}
               setter={setFromTo}
               value={fromTo}
@@ -231,12 +237,14 @@ const EditRecord = () => {
               className="edit-record__input"
             />
             <InputField
+              id={id}
               attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
               setter={setReplyTo}
               value={replyTo}
               className="edit-record__input"
             />
             <InputField
+              id={id}
               attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
               setter={setNote}
               value={note}
