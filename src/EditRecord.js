@@ -71,7 +71,9 @@ const EditRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        return data.file;
+        if (data !== 'bad') {
+          return data.file;
+        }
       })
       .catch((e) => console.error(e));
   }
