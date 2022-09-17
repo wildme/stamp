@@ -50,23 +50,28 @@ const NewRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
+          return 'bad';
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setFile(null);
           ref.current.value='';
           setError(true);
+          return 'bad';
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
           setError(true);
+          return 'bad';
         }
       })
       .then(data => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        return data.file;
+        if (data !== 'bad') {
+          return data.file;
+        }
       })
       .catch((e) => console.error(e));
   }
