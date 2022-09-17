@@ -52,16 +52,19 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
+          return 'bad';
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setNewFile(null);
           ref.current.value = '';
           setError(true);
+          return 'bad';
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
           setError(true);
+          return 'bad';
         }
       })
       .then(data => {
@@ -125,9 +128,11 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
+          return 'bad';
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
+          return 'bad';
         }
       })
       .then(data => {
@@ -154,15 +159,18 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
+          return 'bad';
         }
       })
       .then(blob => {
-        const objectURL = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = objectURL;
-        a.download = name;
-        a.click();
-        URL.revokeObjectURL(a.href);
+        if (blob !== 'bad') {
+          const objectURL = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = objectURL;
+          a.download = name;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }
       })
       .catch((e) => console.error(e))
   };
@@ -189,24 +197,29 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 'bad';
         }
         if (res.status === 403) {
           setPermitted(false);
+          return 'bad';
         }
         if (res.status === 204) {
           setNoData(true);
+          return 'bad';
         }
       })
       .then(data => {
         if (data.token) {
           dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        setSubject(storeSubj || data.record.subj);
-        setFromTo(data.record.addr);
-        setNote(storeNote || data.record.note);
-        setReplyTo(storeReplyTo || data.record.reply);
-        setFile(data.record.file);
-        setOwner(data.record.user);
+        if (data !== 'bad') {
+          setSubject(storeSubj || data.record.subj);
+          setFromTo(data.record.addr);
+          setNote(storeNote || data.record.note);
+          setReplyTo(storeReplyTo || data.record.reply);
+          setFile(data.record.file);
+          setOwner(data.record.user);
+        }
       })
       .catch((e) => console.error(e))
 

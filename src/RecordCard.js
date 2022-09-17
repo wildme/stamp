@@ -72,15 +72,18 @@ const RecordCard = () => {
         }
         if (res.status === 401) {
           dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 'bad';
         }
       })
       .then(blob => {
-        const objectURL = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = objectURL;
-        a.download=name;
-        a.click();
-        URL.revokeObjectURL(a.href);
+        if (blob !== 'bad') {
+          const objectURL = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = objectURL;
+          a.download=name;
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }
       })
       .catch((e) => console.error(e))
   };
@@ -97,31 +100,35 @@ const RecordCard = () => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 'bad';
         }
         if (res.status === 204) {
           setNoData(true);
+          return 'bad';
         }
-        if (!res.ok) {
+        if (res.status === 500) {
           setInfoMsg({str: t('recordCard.infoMsg2'), id: Math.random()});
+          return 'bad';
         }
       })
       .then(data => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        setIdOfRec(data.record.id);
-        setSubject(data.record.subj);
-        setFromTo(data.record.addr);
-        setReplyTo(data.record.reply);
-        setUpdated(data.record.updated);
-        setStatus(data.record.status);
-        setDate(data.record.date);
-        setAddedBy(data.record.fullname);
-        setNote(data.record.note);
-        setFile(data.record.file);
-        setOwner(data.record.user);
+        if (data !== 'bad') {
+          setIdOfRec(data.record.id);
+          setSubject(data.record.subj);
+          setFromTo(data.record.addr);
+          setReplyTo(data.record.reply);
+          setUpdated(data.record.updated);
+          setStatus(data.record.status);
+          setDate(data.record.date);
+          setAddedBy(data.record.fullname);
+          setNote(data.record.note);
+          setFile(data.record.file);
+          setOwner(data.record.user);
         }
-      )
+      })
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
