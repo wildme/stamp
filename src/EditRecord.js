@@ -121,6 +121,7 @@ const EditRecord = () => {
           if (contentType.includes('application/json')) {
             return res.json();
           }
+          return 'ok';
         }
         if (res.status === 401) {
           logout(dispatch);
