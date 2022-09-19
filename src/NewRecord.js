@@ -50,26 +50,26 @@ const NewRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
-          return 'bad';
+          return 1;
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setFile(null);
           ref.current.value='';
           setError(true);
-          return 'bad';
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
           setError(true);
-          return 'bad';
+          return 1;
         }
       })
       .then(data => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        if (data !== 'bad') {
+        if (data !== 1) {
           return data.file;
         }
       })
@@ -88,14 +88,18 @@ const NewRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          localStorage.clear();
+          localStorage.removeItem(`${box}-subj-new`);
+          localStorage.removeItem(`${box}-note-new`);
+          localStorage.removeItem(`${box}-replyTo-new`);
           return res.json();
         }
         if (res.status === 401) {
           logout(dispatch);
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg1'), id: Math.random()});
+          return 1;
         }
       })
       .then(data => {

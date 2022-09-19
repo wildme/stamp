@@ -52,26 +52,26 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
-          return 'bad';
+          return 1;
         }
         if (res.status === 413) {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setNewFile(null);
           ref.current.value = '';
           setError(true);
-          return 'bad';
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
           setError(true);
-          return 'bad';
+          return 1;
         }
       })
       .then(data => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        if (data !== 'bad') {
+        if (data !== 1) {
           return data.file;
         }
       })
@@ -119,22 +119,24 @@ const EditRecord = () => {
         if (res.status === 200) {
           ref.current.value = '';
           setNewFile(null);
-          localStorage.clear();
+          localStorage.removeItem(`${box}-subj-${id}`);
+          localStorage.removeItem(`${box}-note-${id}`);
+          localStorage.removeItem(`${box}-replyTo-${id}`);
           setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
           setDisableBtn(false);
           const contentType = res.headers.get('Content-Type');
           if (contentType.includes('application/json')) {
             return res.json();
           }
-          return 'ok';
+          return 0;
         }
         if (res.status === 401) {
           logout(dispatch);
-          return 'bad';
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg1'), id: Math.random()});
-          return 'bad';
+          return 1;
         }
       })
       .then(data => {
@@ -161,11 +163,11 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
-          return 'bad';
+          return 1;
         }
       })
       .then(blob => {
-        if (blob !== 'bad') {
+        if (blob !== 1) {
           const objectURL = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = objectURL;
@@ -199,22 +201,22 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
-          return 'bad';
+          return 1;
         }
         if (res.status === 403) {
           setPermitted(false);
-          return 'bad';
+          return 1;
         }
         if (res.status === 204) {
           setNoData(true);
-          return 'bad';
+          return 1;
         }
       })
       .then(data => {
         if (data.token) {
           dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        if (data !== 'bad') {
+        if (data !== 1) {
           setSubject(storeSubj || data.record.subj);
           setFromTo(data.record.addr);
           setNote(storeNote || data.record.note);
