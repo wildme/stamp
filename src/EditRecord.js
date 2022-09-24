@@ -31,7 +31,6 @@ const EditRecord = () => {
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [disableBtn, setDisableBtn] = useState(false);
-  const [error, setError] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
   let fileProps = undefined;
@@ -58,12 +57,10 @@ const EditRecord = () => {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setNewFile(null);
           ref.current.value = '';
-          setError(true);
           return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('editRecord.infoMsg3'), id: Math.random()});
-          setError(true);
           return 1;
         }
       })
@@ -71,9 +68,10 @@ const EditRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        if (data !== 1) {
-          return data.file;
+        if (data === 1 ) {
+          return 'error';
         }
+        return data.file;
       })
       .catch((e) => console.error(e));
   }
@@ -90,9 +88,7 @@ const EditRecord = () => {
             updateToken(res.token, dispatch);
           }
           setDelFile(false);
-          if (!newFile) {
-            setFile(false);
-          }
+          setFile(null);
         }
         if (res.status === 401) {
           logout(dispatch);
@@ -180,9 +176,15 @@ const EditRecord = () => {
   };
 
   const handleEditRecord = async () => {
-    if (newFile) fileProps = await uploadFile(newFile);
-    if (delFile || (newFile && file)) await deleteFile(file.fsName);
-    if (!error) saveRecord();
+    if (newFile) {
+      fileProps = await uploadFile(newFile);
+    }
+    if (delFile || (file && fileProps.filename)) {
+      deleteFile(file.fsName);
+    }
+    if (fileProps !== 'error') {
+      saveRecord();
+    }
   };
 
   useEffect(() => {

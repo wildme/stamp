@@ -29,7 +29,6 @@ const NewRecord = () => {
   const [replyTo, setReplyTo] = useState(storeReplyTo || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [error, setError] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
   let fileProps = undefined;
@@ -56,12 +55,10 @@ const NewRecord = () => {
           setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
           setFile(null);
           ref.current.value='';
-          setError(true);
           return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
-          setError(true);
           return 1;
         }
       })
@@ -69,9 +66,10 @@ const NewRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        if (data !== 1) {
-          return data.file;
+        if (data === 1) {
+          return 'error';
         }
+        return data.file;
       })
       .catch((e) => console.error(e));
   }
@@ -106,15 +104,18 @@ const NewRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        //setInfoMsg({str: t('newRecord.infoMsg3'), id: Math.random(), type: 'success'});
         history.replace(`/${box}/view/${data.id}`);
       })
       .catch((e) => console.error(e))
   }
 
   const handleAddRecord = async () => {
-    if (file) fileProps = await uploadFile();
-    if (!error) saveRecord();
+    if (file) {
+      fileProps = await uploadFile();
+    }
+    if (fileProps !== 'error') {
+      saveRecord();
+    }
   };
 
 
