@@ -100,22 +100,22 @@ const RecordCard = () => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
-          return 'bad';
+          return 1;
         }
         if (res.status === 204) {
           setNoData(true);
-          return 'bad';
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('recordCard.infoMsg2'), id: Math.random()});
-          return 'bad';
+          return 1;
         }
       })
       .then(data => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        if (data !== 'bad') {
+        if (data !== 1) {
           setIdOfRec(data.record.id);
           setSubject(data.record.subj);
           setFromTo(data.record.addr);
