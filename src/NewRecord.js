@@ -31,7 +31,6 @@ const NewRecord = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
   const ref = useRef(null);
-  let fileProps = undefined;
 
   function uploadFile() {
     const url = `/api/${box}/upload`;
@@ -74,7 +73,7 @@ const NewRecord = () => {
       .catch((e) => console.error(e));
   }
 
-  function saveRecord() {
+  function saveRecord(fileProps) {
     const url = `/api/${box}/new`;
     fetch(url, {
       method: 'POST',
@@ -110,11 +109,12 @@ const NewRecord = () => {
   }
 
   const handleAddRecord = async () => {
+    let fileProps = undefined;
     if (file) {
       fileProps = await uploadFile();
     }
     if (fileProps !== 'error') {
-      saveRecord();
+      saveRecord(fileProps);
     }
   };
 
@@ -137,7 +137,6 @@ const NewRecord = () => {
             x.name === 'to')[0]}
           setter={setFromTo}
           value={fromTo}
-          auto={true}
           field='name'
           className="add-record__input"
         />

@@ -33,7 +33,6 @@ const EditRecord = () => {
   const [disableBtn, setDisableBtn] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
-  let fileProps = undefined;
 
   function uploadFile(file) {
     const url = `/api/${box}/upload`;
@@ -100,7 +99,7 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
   }
 
-  function saveRecord() {
+  function saveRecord(fileProps) {
     const url = `/api/${box}/update/${id}`;
     setDisableBtn(true);
     fetch(url, {
@@ -176,6 +175,7 @@ const EditRecord = () => {
   };
 
   const handleEditRecord = async () => {
+    let fileProps = undefined;
     if (newFile) {
       fileProps = await uploadFile(newFile);
     }
@@ -183,7 +183,7 @@ const EditRecord = () => {
       deleteFile(file.fsName);
     }
     if (fileProps !== 'error') {
-      saveRecord();
+      saveRecord(fileProps);
     }
   };
 
@@ -252,7 +252,6 @@ const EditRecord = () => {
               attrs={attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]}
               setter={setFromTo}
               value={fromTo}
-              auto={true}
               field='name'
               className="edit-record__input"
             />
