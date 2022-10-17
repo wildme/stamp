@@ -8,9 +8,9 @@ export const InputAttrs = {
     },
 
     {
-      for: 'from',
+      for: 'inbox-addr',
       text: 'newRecord.label2',
-      name: 'from',
+      name: 'inbox-addr',
       type: 'text'
     },
 
@@ -36,9 +36,9 @@ export const InputAttrs = {
     },
 
     {
-      for: 'to',
+      for: 'outbox-addr',
       text: 'newRecord.label3',
-      name: 'to',
+      name: 'outbox-addr',
       type: 'text'
     },
 
