@@ -115,6 +115,7 @@ const EditRecord = () => {
           ref.current.value = '';
           setNewFile(null);
           localStorage.removeItem(`${box}-subj-${id}`);
+          localStorage.removeItem(`${box}-addr-${id}`);
           localStorage.removeItem(`${box}-note-${id}`);
           localStorage.removeItem(`${box}-replyTo-${id}`);
           setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
@@ -193,6 +194,7 @@ const EditRecord = () => {
     const url = `/api/edit/${box}/${id}`;
 
     const storeSubj = localStorage.getItem(`${box}-subj-${id}`);
+    const storeFromTo = localStorage.getItem(`${box}-addr-${id}`);
     const storeNote = localStorage.getItem(`${box}-note-${id}`);
     const storeReplyTo = localStorage.getItem(`${box}-replyTo-${id}`);
 
@@ -220,7 +222,7 @@ const EditRecord = () => {
         }
         if (data !== 1) {
           setSubject(storeSubj || data.record.subj);
-          setFromTo(data.record.addr);
+          setFromTo(storeFromTo || data.record.addr);
           setNote(storeNote || data.record.note);
           setReplyTo(storeReplyTo || data.record.reply);
           setFile(data.record.file);
@@ -249,7 +251,7 @@ const EditRecord = () => {
             />
             <InputField
               id={id}
-              attrs={attrs[`${box}`].filter((x) => x.name === 'from' || x.name === 'to')[0]}
+              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
               setter={setFromTo}
               value={fromTo}
               field='name'

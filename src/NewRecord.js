@@ -21,10 +21,11 @@ const NewRecord = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const storeSubj = localStorage.getItem(`${box}-subj-new`);
+  const storeFromTo = localStorage.getItem(`${box}-addr-new`);
   const storeNote = localStorage.getItem(`${box}-note-new`);
   const storeReplyTo = localStorage.getItem(`${box}-replyTo-new`);
   const [subject, setSubject] = useState(storeSubj || '');
-  const [fromTo, setFromTo] = useState('');
+  const [fromTo, setFromTo] = useState(storeFromTo || '');
   const [note, setNote] = useState(storeNote || '');
   const [replyTo, setReplyTo] = useState(storeReplyTo || '');
   const [file, setFile] = useState(null);
@@ -86,6 +87,7 @@ const NewRecord = () => {
       .then(res => {
         if (res.status === 200) {
           localStorage.removeItem(`${box}-subj-new`);
+          localStorage.removeItem(`${box}-addr-new`);
           localStorage.removeItem(`${box}-note-new`);
           localStorage.removeItem(`${box}-replyTo-new`);
           return res.json();
@@ -133,8 +135,7 @@ const NewRecord = () => {
         />
         <InputField
           id="new"
-          attrs={attrs[`${box}`].filter((x) => x.name === 'from' ||
-            x.name === 'to')[0]}
+          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
           setter={setFromTo}
           value={fromTo}
           field='name'
