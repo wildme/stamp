@@ -14,6 +14,8 @@ const Box = (props) => {
   const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState(state || 'asc');
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [yearsOfActivity, setYearsOfActivity] = useState([]);
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [dataForPage, setDataForPage] = useState(null);
@@ -43,7 +45,7 @@ const Box = (props) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const recordOffset = 0;
-    const url = `/api/${box}?column=${column}&order=${sortOrder}`;
+    const url = `/api/${box}?column=${column}&order=${sortOrder}&year=${year}`;
 
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => {
@@ -55,6 +57,8 @@ const Box = (props) => {
         }
         if (res.status === 204) {
           setNoData(true);
+          setDataForPage(null);
+          setPageCount(0);
         }
         if (res.status === 500) {
           setError(true);
@@ -65,7 +69,10 @@ const Box = (props) => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        setTableData(data.records);
+        if (data.records) {
+          setTableData(data.records);
+        }
+        setYearsOfActivity(data.years);
         setPage(0);
         setDataForPage(data.records.slice(recordOffset, recordOffset + recordsPerPage));
         setPageCount(Math.ceil(data.records.length / recordsPerPage));
@@ -74,7 +81,7 @@ const Box = (props) => {
 
     return () => { abortController.abort(); };
 
-  }, [sortOrder, column, box, t, token, dispatch])
+  }, [sortOrder, year, column, box, t, token, dispatch])
   
   return (
     <div className="page-content-grid">
@@ -83,6 +90,18 @@ const Box = (props) => {
         <h2 className="page-title__h2">
           {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
         </h2>
+      </div>
+      <div className="page-filter">
+        <select
+          className="page-filter__select-by-year"
+          name="select-by-year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+        >
+        {yearsOfActivity.map((item, i) => (
+          <option value={item} key={i}>{item}</option>
+        ))}
+        </select>
       </div>
       <TableBox
         table={box}
