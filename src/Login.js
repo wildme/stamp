@@ -8,7 +8,6 @@ import ForgotPassModal from './ForgotPassModal.js';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [openModal, setOpenModal] = useState(false);
   const { t } = useTranslation();
@@ -21,7 +20,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const url = "/api/login";
-    if (error) setError(false);
 
     fetch(url, {
       method: 'POST',
@@ -33,15 +31,16 @@ const Login = () => {
           return res.json();
         }
         if (res.status === 500) {
-          setError(true);
           setInfoMsg({str: t('login.infoMsg2'), id: Math.random()});
+          return 1;
         }
         if (res.status === 401) {
           setInfoMsg({str: t('login.infoMsg1'), id: Math.random()});
+          return 1;
         }
       })
       .then(data => {
-        if (data) {
+        if (data !== 1) {
           dispatch({ type: 'TOKEN', payload:
             { token: { string: data.token } }
           });
@@ -56,7 +55,7 @@ const Login = () => {
           dispatch({ type: 'SETTINGS', payload:
             { settings: data.settings }
           });
-        if (!error) history.replace(from);
+          history.replace(from);
         }
       })
       .catch((e) => console.error(e))
