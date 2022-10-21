@@ -24,32 +24,41 @@ const Signup = () => {
     const match = cmpPass(password, confirmPassword);
 
     if (match) {
-      fetch("/api/signup", {
+      const url = "/api/signup";
+      fetch(url, {
         method: 'POST',
-        body: JSON.stringify({ username, password,
-          firstname, lastname, email }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, firstname, lastname, email })
       })
-      .then(res => {
-        if (res.status === 409) return res.json();
-        if (res.status === 201) {
-          setInfoMsg({str: t('signup.infoMsg5'), id: Math.random()});
-          history.replace('/login');
-        }
-        if (res.status === 500) {
-          setInfoMsg({str: t('signup.infoMsg4'), id: Math.random()});
-        }
-      })
-      .then(data => {
-        if (data && data.error === 'user exists') {
-          setInfoMsg({str: t('signup.infoMsg2'), id: Math.random()});
-        }
-
-        if (data && data.error === 'email exists') {
-          setInfoMsg({str: t('signup.infoMsg3'), id: Math.random()});
-        }
-      })
-      .catch((e) => console.error(e))
+        .then(res => {
+          if (res.status === 409) {
+            return res.json();
+          }
+          if (res.status === 201) {
+            return 0;
+          }
+          if (res.status === 500) {
+            return 1;
+          }
+        })
+        .then(data => {
+          if (data === 1) {
+            setInfoMsg({str: t('signup.infoMsg4'), id: Math.random()});
+          }
+          if (data === 0) {
+            setInfoMsg({str: t('signup.infoMsg5'), id: Math.random(), type: 'success'});
+            setTimeout(() => { history.replace('/login'); }, 3000);
+          }
+          if (data.error) {
+            if (data.error === 'user exists') {
+              setInfoMsg({str: t('signup.infoMsg2'), id: Math.random()});
+            }
+            if (data.error === 'email exists') {
+              setInfoMsg({str: t('signup.infoMsg3'), id: Math.random()});
+            }
+          }
+        })
+        .catch((e) => console.error(e))
     } else {
       setInfoMsg({str: t('signup.infoMsg1'), id: Math.random()});
     }
@@ -57,7 +66,8 @@ const Signup = () => {
 
   return (
     <div className="signup-grid">
-      { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
+      {infoMsg.str &&
+          <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
       <form onSubmit={(e) => handleSignup(e)}>
         <div className="signup-form">
           <input
