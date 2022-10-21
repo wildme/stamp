@@ -21,6 +21,7 @@ const TableBox = (props) => {
           handleClick={setter}
           sortOrder={sortOrder}
           column={column}
+          noData={noData}
           t={t}
         />
         <BoxContext.Provider value={table}>

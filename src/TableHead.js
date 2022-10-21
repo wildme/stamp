@@ -6,6 +6,7 @@ const TableHead = (props) => {
   const handleClick = props.handleClick;
   const sortOrder = props.sortOrder;
   const column = props.column;
+  const noData = props.noData;
   const t = props.t;
 
   return (
@@ -20,6 +21,7 @@ const TableHead = (props) => {
             <th key={id}>{sortable ?
               <button
                 className="page-table__button"
+                disabled={noData}
                 type="button"
                 onClick={() => handleClick(id)}
               >
