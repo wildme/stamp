@@ -24,9 +24,9 @@ const Box = (props) => {
   const { t } = useTranslation();
   const recordsPerPage = 20;
 
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * recordsPerPage) % tableData.length;
-    setPage(event.selected);
+  const handlePageClick = (e) => {
+    const newOffset = (e.selected * recordsPerPage) % tableData.length;
+    setPage(e.selected);
     setDataForPage(tableData.slice(newOffset, newOffset + recordsPerPage));
   };
 
@@ -54,28 +54,32 @@ const Box = (props) => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 1;
         }
         if (res.status === 204) {
           setNoData(true);
           setDataForPage(null);
           setPageCount(0);
+          return 1;
         }
         if (res.status === 500) {
           setError(true);
           setInfoMsg({str: t('main.infoMsg1'), id: Math.random()});
+          return 1;
         }
        })
       .then(data => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        if (data.records) {
+        if (data !== 1) {
+          setNoData(false);
           setTableData(data.records);
+          setYearsOfActivity(data.years);
+          setPage(0);
+          setDataForPage(data.records.slice(recordOffset, recordOffset + recordsPerPage));
+          setPageCount(Math.ceil(data.records.length / recordsPerPage));
         }
-        setYearsOfActivity(data.years);
-        setPage(0);
-        setDataForPage(data.records.slice(recordOffset, recordOffset + recordsPerPage));
-        setPageCount(Math.ceil(data.records.length / recordsPerPage));
       })
       .catch((e) => console.error(e))
 
@@ -100,7 +104,8 @@ const Box = (props) => {
         >
         {yearsOfActivity.map((item, i) => (
           <option value={item} key={i}>{item}</option>
-        ))}
+        ))
+        }
         </select>
       </div>
       <TableBox
