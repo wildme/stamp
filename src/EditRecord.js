@@ -31,6 +31,7 @@ const EditRecord = () => {
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [disableBtn, setDisableBtn] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
 
@@ -201,6 +202,7 @@ const EditRecord = () => {
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res =>  {
         if (res.status === 200) {
+          setLoading(true);
           return res.json();
         }
         if (res.status === 401) {
@@ -234,75 +236,73 @@ const EditRecord = () => {
     return () => {abortController.abort();};
   }, [box, id, t, token, dispatch]);
 
-    if (noData) return <ErrorPage code={404} />;
-    if (!permitted) return <ErrorPage code={403} />;
-
-    return (
+  if (noData) return <ErrorPage code={404} />;
+  if (!permitted) return <ErrorPage code={403} />;
+  return !loading ? (<p></p>) : (
       <div className="edit-record-grid">
         {infoMsg.str &&
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
         <div className="edit-record">
-            <InputField
-              id={id}
-              attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
-              setter={setSubject}
-              value={subject}
-              className="edit-record__input"
-            />
-            <InputField
-              id={id}
-              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
-              setter={setFromTo}
-              value={fromTo}
-              field='name'
-              className="edit-record__input"
-            />
-            <InputField
-              id={id}
-              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
-              setter={setReplyTo}
-              value={replyTo}
-              className="edit-record__input"
-            />
-            <InputField
-              id={id}
-              attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
-              setter={setNote}
-              value={note}
-              className="edit-record__input"
-            />
+          <InputField
+            id={id}
+            attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
+            setter={setSubject}
+            value={subject}
+            className="edit-record__input"
+          />
+          <InputField
+            id={id}
+            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
+            setter={setFromTo}
+            value={fromTo}
+            field='name'
+            className="edit-record__input"
+          />
+          <InputField
+            id={id}
+            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
+            setter={setReplyTo}
+            value={replyTo}
+            className="edit-record__input"
+          />
+          <InputField
+            id={id}
+            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
+            setter={setNote}
+            value={note}
+            className="edit-record__input"
+          />
+          <input
+           className="edit-record__upload"
+           type="file"
+           name="file"
+           ref={ref}
+           onChange={(e) => setNewFile(e.target.files[0])}
+          />
+          {file &&
+          <div>
+            <a
+              href={`/attachment/${file.fsName}`}
+              onClick={(e) => handleDownload(e, file.fsName, file.name)}>
+              {t('editRecord.link')}
+            </a>
             <input
-             className="edit-record__upload"
-             type="file"
-             name="file"
-             ref={ref}
-             onChange={(e) => setNewFile(e.target.files[0])}
+              className="edit-record__checkbox"
+              type="checkbox"
+              name="del-file"
+              checked={delFile}
+              id="del"
+              onChange={() => setDelFile(!delFile)}
             />
-            {file &&
-              <div>
-                <a
-                  href={`/attachment/${file.fsName}`}
-                  onClick={(e) => handleDownload(e, file.fsName, file.name)}>
-                  {t('editRecord.link')}
-                </a>
-                <input
-                  className="edit-record__checkbox"
-                  type="checkbox"
-                  name="del-file"
-                  checked={delFile}
-                  id="del"
-                  onChange={() => setDelFile(!delFile)}
-                />
-                <label htmlFor="del-file">{t('editRecord.label1')}</label>
-              </div>
-           }
-            <button
-              className="edit-record__submit"
-              type="submit"
-              disabled={!subject || !fromTo || disableBtn}
-              onClick={() => handleEditRecord()}>
-              {t('editRecord.button')}
-            </button>
+            <label htmlFor="del-file">{t('editRecord.label1')}</label>
+          </div>}
+          <button
+            className="edit-record__submit"
+            type="submit"
+            disabled={!subject || !fromTo || disableBtn}
+            onClick={() => handleEditRecord()}>
+            {t('editRecord.button')}
+          </button>
         </div>
       </div>
   );
