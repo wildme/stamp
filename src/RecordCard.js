@@ -23,6 +23,7 @@ const RecordCard = () => {
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [owner, setOwner] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const dateStr = date ? new Date(date).toLocaleString() : null;
   const updatedStr = updated ? new Date(updated).toLocaleString() : null;
@@ -30,17 +31,16 @@ const RecordCard = () => {
 
   const handleStatus = () => {
     let newStatus = 'canceled';
-    statusOfRecord === newStatus ?
-      newStatus = 'active' : newStatus = 'canceled';
+    statusOfRecord === newStatus ? newStatus = 'active' : newStatus = 'canceled';
     const url = `/api/${box}/status/${id}`;
 
     fetch(url, {
       method: 'PUT',
-      body: JSON.stringify({newStatus, owner}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({newStatus, owner})
     })
       .then(res => {
         if (res.status === 200) {
@@ -72,11 +72,11 @@ const RecordCard = () => {
         }
         if (res.status === 401) {
           dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
-          return 'bad';
+          return 1;
         }
       })
       .then(blob => {
-        if (blob !== 'bad') {
+        if (blob !== 1) {
           const objectURL = URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = objectURL;
@@ -96,6 +96,7 @@ const RecordCard = () => {
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => { 
         if (res.status === 200) {
+          setLoading(true);
           return res.json();
         }
         if (res.status === 401) {
@@ -135,8 +136,7 @@ const RecordCard = () => {
   }, [box, id, t, token, dispatch])
 
   if (noData) return <ErrorPage code={404} />
-
-  return (
+  return !loading ? (<p></p>) : (
     <div className="record-card-grid">
       {infoMsg.str && <FlashMessage msg={infoMsg} id={infoMsg.id} />}
       <div className="record-card">
