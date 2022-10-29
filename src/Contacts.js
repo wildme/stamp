@@ -24,19 +24,24 @@ const Contacts = () => {
         }
         if (res.status === 401) {
           dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 1;
         }
         if (res.status === 204) {
           setNoData(true);
+          return 1;
         }
         if (res.status === 500) {
           setInfoMsg({str: t('contacts.infoMsg1'), id: Math.random()});
+          return 1;
         }
       })
       .then(data => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        setTableData(data.contacts)
+        if (data !== 1) {
+          setTableData(data.contacts);
+        }
       })
       .catch((e) => console.error(e))
 
