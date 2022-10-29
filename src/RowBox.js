@@ -17,15 +17,18 @@ function getFile(e, hash, name, token, dispatch) {
       }
       if (res.status === 401) {
         dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
+        return 1;
       }
     })
     .then(blob => {
-      const objectURL = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = objectURL;
-      a.download = name;
-      a.click();
-      URL.revokeObjectURL(a.href);
+      if (blob !== 1) {
+        const objectURL = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = objectURL;
+        a.download = name;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }
     })
     .catch((e) => console.error(e))
 }
