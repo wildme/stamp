@@ -28,20 +28,26 @@ const onPageReload = (dispatch, history, location) => {
           { username: null, admin: null, loggedIn: false } }});
         dispatch({ type: 'INFO', payload: { info: null } });
         dispatch({ type: 'SETTINGS', payload: { settings: null } });
+        return 1;
+      }
+      if (res.status === 500) {
+        return 1;
       }
     })
     .then(data => {
-      dispatch({ type: 'TOKEN', payload:
-        { token: { string: data.token } }});
-      dispatch({ type: 'LOGIN', payload:
-        { user: { username: data.user.username,
-          admin: data.user.admin, loggedIn: true } }});
-      dispatch({ type: 'INFO', payload:
-        { info: { fullname: data.user.fullname,
-          email: data.user.email }}
-      });
-      dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
-      history.replace(location.pathname);
+      if (data !== 1) {
+        dispatch({ type: 'TOKEN', payload:
+          { token: { string: data.token } }});
+        dispatch({ type: 'LOGIN', payload:
+          { user: { username: data.user.username,
+            admin: data.user.admin, loggedIn: true } }});
+        dispatch({ type: 'INFO', payload:
+          { info: { fullname: data.user.fullname,
+            email: data.user.email }}
+        });
+        dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
+        history.replace(location.pathname);
+      }
     })
     .catch((e) => console.error(e));
 };
