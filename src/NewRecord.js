@@ -111,7 +111,7 @@ const NewRecord = () => {
   }
 
   const handleAddRecord = async () => {
-    let fileProps = undefined;
+    let fileProps = {};
     if (file) {
       fileProps = await uploadFile();
     }
