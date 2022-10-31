@@ -177,7 +177,7 @@ const EditRecord = () => {
   };
 
   const handleEditRecord = async () => {
-    let fileProps = undefined;
+    let fileProps = {};
     if (newFile) {
       fileProps = await uploadFile(newFile);
     }
