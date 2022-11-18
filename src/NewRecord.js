@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
+import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
 
 function logout(dispatch) {
@@ -162,6 +163,11 @@ const NewRecord = () => {
           name="file"
           ref={ref}
           onChange={(e) => setFile(e.target.files[0])}
+        />
+        <DropZoneFileUpload
+          t={t}
+          setter={setFile}
+          className="drop-zone-file"
         />
         <button
           className="add-record__submit"
