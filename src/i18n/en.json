@@ -186,5 +186,9 @@
     "title3": "The page you are looking for is not available",
     "title4": "You aren't allowed to visit this page",
     "link1": "Go back home"
+  },
+  "dropZoneFile": {
+    "title1": "Or Drop File here",
+    "infoMsg1": "File too large"
   }
 }
