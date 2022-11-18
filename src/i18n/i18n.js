@@ -194,6 +194,10 @@ const resources = {
         title3: en.errorPage.title3,
         title4: en.errorPage.title4,
         link1: en.errorPage.link1
+      },
+      dropZoneFile: {
+        title1: en.dropZoneFile.title1,
+        infoMsg1: en.dropZoneFile.infoMsg1
       }
     }
   },
@@ -388,6 +392,10 @@ const resources = {
         title3: ru.errorPage.title3,
         title4: ru.errorPage.title4,
         link1: ru.errorPage.link1
+      },
+      dropZoneFile: {
+        title1: ru.dropZoneFile.title1,
+        infoMsg1: ru.dropZoneFile.infoMsg1
       }
     }
   }
