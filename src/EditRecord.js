@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
 import ErrorPage from './ErrorPage.js';
+import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
+import DownloadLink from './DownloadLink.js'
 
 function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
@@ -34,6 +36,7 @@ const EditRecord = () => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
+  const MAX_FILE_SIZE = 5000000;
 
   function uploadFile(file) {
     const url = `/api/${box}/upload`;
@@ -84,11 +87,11 @@ const EditRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
+          setDelFile(false);
+          setFile(null);
           if (res.token) {
             updateToken(res.token, dispatch);
           }
-          setDelFile(false);
-          setFile(null);
         }
         if (res.status === 401) {
           logout(dispatch);
@@ -147,41 +150,12 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
   }
 
-  const handleDownload = (e, hash, name) => {
-    e.preventDefault();
-    const url = `/api/download/${hash}`;
-    fetch(url, { headers: { 'Authorization': `Bearer ${token}` } })
-      .then(res => {
-        if (res.status === 200) {
-          if (res.token) {
-            updateToken(res.token, dispatch);
-          }
-          return res.blob();
-        }
-        if (res.status === 401) {
-          logout(dispatch);
-          return 1;
-        }
-      })
-      .then(blob => {
-        if (blob !== 1) {
-          const objectURL = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = objectURL;
-          a.download = name;
-          a.click();
-          URL.revokeObjectURL(a.href);
-        }
-      })
-      .catch((e) => console.error(e))
-  };
-
   const handleEditRecord = async () => {
     let fileProps = {};
     if (newFile) {
       fileProps = await uploadFile(newFile);
     }
-    if (delFile || (file && fileProps.filename)) {
+    if (delFile || (file?.fsName && fileProps.filename)) {
       deleteFile(file.fsName);
     }
     if (fileProps !== 'error') {
@@ -225,9 +199,9 @@ const EditRecord = () => {
         if (data !== 1) {
           setSubject(storeSubj || data.record.subj);
           setFromTo(storeFromTo || data.record.addr);
-          setNote(storeNote || data.record.note);
-          setReplyTo(storeReplyTo || data.record.reply);
-          setFile(data.record.file);
+          setNote(storeNote || data.record?.note);
+          setReplyTo(storeReplyTo || data.record?.reply);
+          setFile(data.record?.file);
           setOwner(data.record.user);
         }
       })
@@ -279,13 +253,13 @@ const EditRecord = () => {
            ref={ref}
            onChange={(e) => setNewFile(e.target.files[0])}
           />
-          {file &&
+          {file?.fsName &&
           <div>
-            <a
-              href={`/attachment/${file.fsName}`}
-              onClick={(e) => handleDownload(e, file.fsName, file.name)}>
-              {t('editRecord.link')}
-            </a>
+            <DownloadLink
+              linkname={t('editRecord.link')}
+              hash={file.fsName}
+              filename={file.name}
+            />
             <input
               className="edit-record__checkbox"
               type="checkbox"
@@ -296,6 +270,11 @@ const EditRecord = () => {
             />
             <label htmlFor="del-file">{t('editRecord.label1')}</label>
           </div>}
+          <DropZoneFileUpload
+            t={t}
+            setter={setNewFile}
+            className="drop-zone-file"
+          />
           <button
             className="edit-record__submit"
             type="submit"
