@@ -287,8 +287,12 @@
   height: 40px;
   width: 300px;
   text-align: center;
-  border: dashed #b3b3b3 2px;
+  border: dashed #8c8c8c 2px;
   padding: 5px 0 5px 0;
+}
+
+.drop-zone-file_added {
+  background: #ffe680;
 }
 
 .drop-zone-file_active {
@@ -297,12 +301,20 @@
 }
 
 .drop-zone-file__error {
+  font-size: 18px;
+  color: #ff3300;
 }
 
 .drop-zone-file__title {
   font-size: 18px;
-  color: #999999;
+  color: #8c8c8c;
 }
+.drop-zone-file__filename {
+  font-size: 18px;
+  overflow: hidden;
+  color: #4d4dff;
+}
+
 /* Record card page */
 .record-card-grid {
   display: grid;
