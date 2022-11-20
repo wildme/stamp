@@ -8,6 +8,7 @@ import ErrorPage from './ErrorPage.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
 import DownloadLink from './DownloadLink.js'
+import CheckBox from './CheckBox.js'
 
 function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
@@ -34,6 +35,7 @@ const EditRecord = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [disableBtn, setDisableBtn] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [clearDropZone, setClearDropZone] = useState(false);
   const { t } = useTranslation();
   const ref = useRef(null);
   const MAX_FILE_SIZE = 5000000;
@@ -118,6 +120,7 @@ const EditRecord = () => {
         if (res.status === 200) {
           ref.current.value = '';
           setNewFile(null);
+          setClearDropZone(!clearDropZone);
           localStorage.removeItem(`${box}-subj-${id}`);
           localStorage.removeItem(`${box}-addr-${id}`);
           localStorage.removeItem(`${box}-note-${id}`);
@@ -260,20 +263,22 @@ const EditRecord = () => {
               hash={file.fsName}
               filename={file.name}
             />
-            <input
-              className="edit-record__checkbox"
-              type="checkbox"
-              name="del-file"
-              checked={delFile}
-              id="del"
-              onChange={() => setDelFile(!delFile)}
+            <CheckBox
+              setter={setDelFile}
+              value={delFile}
+              className={"edit-record__checkbox"}
+              label={t('editRecord.label1')}
+              name={"del-file"}
+              id={"del"}
             />
-            <label htmlFor="del-file">{t('editRecord.label1')}</label>
           </div>}
           <DropZoneFileUpload
-            t={t}
             setter={setNewFile}
             className="drop-zone-file"
+            clearOnSuccess={clearDropZone}
+            title={t('dropZoneFile.title1')}
+            maxFileSize={MAX_FILE_SIZE}
+            maxFileSizeExceededMsg={t('dropZoneFile.infoMsg1')}
           />
           <button
             className="edit-record__submit"
