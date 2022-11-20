@@ -33,6 +33,7 @@ const NewRecord = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
   const ref = useRef(null);
+  const MAX_FILE_SIZE = 5000000;
 
   function uploadFile() {
     const url = `/api/${box}/upload`;
@@ -165,9 +166,11 @@ const NewRecord = () => {
           onChange={(e) => setFile(e.target.files[0])}
         />
         <DropZoneFileUpload
-          t={t}
           setter={setFile}
           className="drop-zone-file"
+          title={t('dropZoneFile.title1')}
+          maxFileSize={MAX_FILE_SIZE}
+          maxFileSizeExceededMsg={t('dropZoneFile.infoMsg1')}
         />
         <button
           className="add-record__submit"
