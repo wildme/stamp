@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
+import DownloadLink from './DownloadLink.js'
 
 const RecordCard = () => {
   const { id, box } = useParams();
@@ -54,35 +55,6 @@ const RecordCard = () => {
         }
         if (res.status === 500) {
           setInfoMsg({str: t('recordCard.infoMsg1'), id: Math.random()});
-        }
-      })
-      .catch((e) => console.error(e))
-  };
-
-  const handleDownload = (e, hash, name) => {
-    e.preventDefault(e);
-    const url = `/api/download/${hash}`;
-    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }})
-      .then(res => {
-        if (res.status === 200) {
-          if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
-          }
-          return res.blob();
-        }
-        if (res.status === 401) {
-          dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
-          return 1;
-        }
-      })
-      .then(blob => {
-        if (blob !== 1) {
-          const objectURL = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = objectURL;
-          a.download=name;
-          a.click();
-          URL.revokeObjectURL(a.href);
         }
       })
       .catch((e) => console.error(e))
@@ -153,16 +125,14 @@ const RecordCard = () => {
           </div> :
           <div className="record-card__field record-card__field_long">
             <b>{t('recordCard.to')}</b>: {fromTo}
-          </div>
-        }
+          </div>}
           <div className="record-card__field">
             <b>{t('recordCard.date')}</b>: {dateStr}
           </div>
         {updated &&
           <div className="record-card__field">
             <b>{t('recordCard.updated')}</b>: {updatedStr || '-'}
-          </div>
-        }
+          </div>}
           <div className="record-card__field">
             <b>{t('recordCard.replyTo')}</b>: {replyTo || '-'}
           </div>
@@ -175,15 +145,14 @@ const RecordCard = () => {
           <div className="record-card__field record-card__field_long">
             <b>{t('recordCard.note')}</b>: {note || '-'}
           </div>
-        {file &&
+        {file?.fsName &&
           <div className="record-card__file record-card__file_long">
-            <a
-              href={`/attachment/${file.fsName}`}
-              onClick={(e) => handleDownload(e, file.fsName, file.name)}>
-              {file.name}
-            </a>
-          </div>
-        }
+            <DownloadLink
+              linkname={file.name}
+              hash={file.fsName}
+              filename={file.name}
+            />
+          </div>}
         {accessToEdit &&
           <button
             className={`record-card__button record-card__button_${statusOfRecord}`}
@@ -193,8 +162,7 @@ const RecordCard = () => {
                  t('recordCard.button2') :
                   t('recordCard.button1')
              }
-          </button>
-        }
+          </button>}
       </div>
     </div>
   );
