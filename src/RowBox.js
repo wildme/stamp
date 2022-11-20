@@ -1,41 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Fragment, useContext } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { HiPencil, HiDownload } from 'react-icons/hi';
 import { BoxContext } from './TableBox.js';
-
-function getFile(e, hash, name, token, dispatch) {
-  e.preventDefault();
-  const url = `/api/download/${hash}`;
-  fetch(url, { headers: { 'Authorization': `Bearer ${token}` } })
-    .then(res => {
-      if (res.status === 200) {
-        if (res.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
-        }
-      return res.blob();
-      }
-      if (res.status === 401) {
-        dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
-        return 1;
-      }
-    })
-    .then(blob => {
-      if (blob !== 1) {
-        const objectURL = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = objectURL;
-        a.download = name;
-        a.click();
-        URL.revokeObjectURL(a.href);
-      }
-    })
-    .catch((e) => console.error(e))
-}
+import DownloadLink from './DownloadLink.js';
 
 const RowBox = ({ entry }) => {
-  const token = useSelector((state) => state.token.string);
-  const dispatch = useDispatch();
   const box = useContext(BoxContext);
   const dateStr = new Date(entry.date).toLocaleString();
   const admin = useSelector((state) => state.user.admin);
@@ -55,14 +25,12 @@ const RowBox = ({ entry }) => {
         <td className="page-table__td">{dateStr}</td>
         <td className="page-table__td">
           {entry.file ?
-            <a
-              href={`/attachment/${entry.file.fsName}`}
-              onClick={(e) =>
-                  getFile(e, entry.file.fsName, entry.file.name, token, dispatch)
-              }>
-              <HiDownload />
-            </a> : '-'
-          }
+            <DownloadLink
+              linkname={<HiDownload />}
+              hash={entry.file.fsName}
+              filename={entry.file.name}
+            />
+             : '-'}
         </td>
         <td className="page-table__td">{entry.reply || '-'}</td>
         <td className="page-table__td">
