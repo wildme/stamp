@@ -1,10 +1,14 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 
 const DropZoneFileUpload = (props) => {
-  const t = props.t;
+  const title = props.title;
+  const maxFileSizeExceededMsg = props.maxFileSizeExceededMsg;
+  const clearOnSuccess = props?.clearOnSuccess;
   const setter = props.setter;
   const className = props.className;
   const [filename, setFilename] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const MAX_FILE_SIZE = props.maxFileSize;
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -16,14 +20,31 @@ const DropZoneFileUpload = (props) => {
     e.preventDefault();
     const doc = document.querySelector(`.${className}`);
     doc.classList.remove(`${className}_active`);
-  }
+  };
 
   const onDrop = (e) => {
     e.preventDefault();
-    e.stopPropagation();
+    const doc = document.querySelector(`.${className}`);
     const { files } = e.dataTransfer;
-    setFilename(files[0].name);
+
+    if (Number(files[0].size) > MAX_FILE_SIZE) {
+      setErrorMsg(maxFileSizeExceededMsg);
+      setter(null);
+      setFilename(null);
+    } else {
+      doc.classList.remove(`${className}_active`);
+      doc.classList.add(`${className}_added`);
+      setErrorMsg(null);
+      setFilename(files[0].name);
+      setter(files[0]);
+    }
   };
+
+  useEffect(() => {
+    setFilename(null);
+    const doc = document.querySelector(`.${className}`);
+    doc.classList.remove(`${className}_added`);
+  }, [clearOnSuccess, className])
   
   return (
     <Fragment>
@@ -33,13 +54,17 @@ const DropZoneFileUpload = (props) => {
         onDragOver={(e) => onDragOver(e)}
         onDragLeave={(e) => onDragLeave(e)}
       >
-      {!filename &&
+      {(!filename && !errorMsg) &&
         <section className={`${className}__title`}>
-          {t('dropZoneFile.title1')}
+          {title}
         </section>}
       {filename &&
         <section className={`${className}__filename`}>
           {filename}
+        </section>}
+      {errorMsg &&
+        <section className={`${className}__error`}>
+          {errorMsg}
         </section>}
       </div>
     </Fragment>
