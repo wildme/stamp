@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
+import InputFile from './InputFile.js';
+import SubmitButton from './SubmitButton.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
 
@@ -32,7 +34,6 @@ const NewRecord = () => {
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
-  const ref = useRef(null);
   const MAX_FILE_SIZE = 5000000;
 
   function uploadFile() {
@@ -53,12 +54,6 @@ const NewRecord = () => {
           logout(dispatch);
           return 1;
         }
-        if (res.status === 413) {
-          setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
-          setFile(null);
-          ref.current.value='';
-          return 1;
-        }
         if (res.status === 500) {
           setInfoMsg({str: t('newRecord.infoMsg2'), id: Math.random()});
           return 1;
@@ -77,6 +72,7 @@ const NewRecord = () => {
   }
 
   function saveRecord(fileProps) {
+    const fileData = fileProps.hasOwnProperty("filename") ? fileProps : null;
     const url = `/api/${box}/new`;
     fetch(url, {
       method: 'POST',
@@ -84,7 +80,7 @@ const NewRecord = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({subject, fromTo, user, replyTo, note, fileProps})
+      body: JSON.stringify({subject, fromTo, user, replyTo, note, fileData})
     })
       .then(res => {
         if (res.status === 200) {
@@ -122,7 +118,6 @@ const NewRecord = () => {
     }
   };
 
-
   return (
     <div className="add-record-grid">
       {infoMsg.str &&
@@ -157,13 +152,14 @@ const NewRecord = () => {
           value={note}
           className="add-record__input"
         />
-        <label htmlFor="file"><b>{t('newRecord.label6')}</b></label>
-        <input
-          className="add-record__upload"
-          type="file"
-          name="file"
-          ref={ref}
-          onChange={(e) => setFile(e.target.files[0])}
+        <InputFile
+          label={t('newRecord.label6')}
+          name={"file"}
+          className={"add-record__upload"}
+          setter={setFile}
+          setInfoMsg={setInfoMsg}
+          maxFileSize={MAX_FILE_SIZE}
+          maxFileSizeExceededMsg={t('editRecord.infoMsg5')}
         />
         <DropZoneFileUpload
           setter={setFile}
@@ -172,13 +168,12 @@ const NewRecord = () => {
           maxFileSize={MAX_FILE_SIZE}
           maxFileSizeExceededMsg={t('dropZoneFile.infoMsg1')}
         />
-        <button
-          className="add-record__submit"
-          type="submit"
+        <SubmitButton
+          name={t('newRecord.button')}
+          className={"add-record__submit"}
           disabled={!subject || !fromTo}
-          onClick={() => handleAddRecord()}>
-          {t('newRecord.button')}
-        </button>
+          setter={handleAddRecord}
+        />
       </div>
     </div>
   );
