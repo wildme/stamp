@@ -1,9 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputFields.js';
+import InputFile from './InputFile.js';
+import SubmitButton from './SubmitButton.js';
 import ErrorPage from './ErrorPage.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
@@ -36,8 +38,8 @@ const EditRecord = () => {
   const [disableBtn, setDisableBtn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [clearDropZone, setClearDropZone] = useState(false);
+  const [clearInputFile, setClearInputFile] = useState(false);
   const { t } = useTranslation();
-  const ref = useRef(null);
   const MAX_FILE_SIZE = 5000000;
 
   function uploadFile(file) {
@@ -56,12 +58,6 @@ const EditRecord = () => {
         }
         if (res.status === 401) {
           logout(dispatch);
-          return 1;
-        }
-        if (res.status === 413) {
-          setInfoMsg({str: t('editRecord.infoMsg5'), id: Math.random()});
-          setNewFile(null);
-          ref.current.value = '';
           return 1;
         }
         if (res.status === 500) {
@@ -106,6 +102,7 @@ const EditRecord = () => {
   }
 
   function saveRecord(fileProps) {
+    const fileData = fileProps.hasOwnProperty("filename") ? fileProps : null;
     const url = `/api/${box}/update/${id}`;
     setDisableBtn(true);
     fetch(url, {
@@ -114,13 +111,13 @@ const EditRecord = () => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({subject, fromTo, replyTo, note, fileProps, owner})
+      body: JSON.stringify({subject, fromTo, replyTo, note, fileData, owner})
     })
       .then(res => {
         if (res.status === 200) {
-          ref.current.value = '';
-          setNewFile(null);
           setClearDropZone(!clearDropZone);
+          setClearInputFile(!clearInputFile);
+          setNewFile(null);
           localStorage.removeItem(`${box}-subj-${id}`);
           localStorage.removeItem(`${box}-addr-${id}`);
           localStorage.removeItem(`${box}-note-${id}`);
@@ -249,12 +246,15 @@ const EditRecord = () => {
             value={note}
             className="edit-record__input"
           />
-          <input
-           className="edit-record__upload"
-           type="file"
-           name="file"
-           ref={ref}
-           onChange={(e) => setNewFile(e.target.files[0])}
+          <InputFile
+            label={t('editRecord.label2')}
+            name={"file"}
+            className={"edit-record__upload"}
+            clearOnSuccess={clearInputFile}
+            setter={setNewFile}
+            setInfoMsg={setInfoMsg}
+            maxFileSize={MAX_FILE_SIZE}
+            maxFileSizeExceededMsg={t('editRecord.infoMsg5')}
           />
           {file?.fsName &&
           <div>
@@ -280,13 +280,12 @@ const EditRecord = () => {
             maxFileSize={MAX_FILE_SIZE}
             maxFileSizeExceededMsg={t('dropZoneFile.infoMsg1')}
           />
-          <button
-            className="edit-record__submit"
-            type="submit"
+          <SubmitButton
+            name={t('editRecord.button')}
+            className={"edit-record__submit"}
             disabled={!subject || !fromTo || disableBtn}
-            onClick={() => handleEditRecord()}>
-            {t('editRecord.button')}
-          </button>
+            setter={handleEditRecord}
+          />
         </div>
       </div>
   );
