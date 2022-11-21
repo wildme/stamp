@@ -97,6 +97,7 @@
   "editRecord": {
     "link": "Download",
     "label1": "Delete file",
+    "label2": "File",
     "button": "Update",
     "infoMsg1": "Error. Failed to update record",
     "infoMsg2": "Error. Failed to delete file",

@@ -105,6 +105,7 @@ const resources = {
       editRecord: {
         link: en.editRecord.link,
         label1: en.editRecord.label1,
+        label2: en.editRecord.label2,
         button: en.editRecord.button,
         infoMsg1: en.editRecord.infoMsg1,
         infoMsg2: en.editRecord.infoMsg2,
@@ -303,6 +304,7 @@ const resources = {
       editRecord: {
         link: ru.editRecord.link,
         label1: ru.editRecord.label1,
+        label2: ru.editRecord.label2,
         button: ru.editRecord.button,
         infoMsg1: ru.editRecord.infoMsg1,
         infoMsg2: ru.editRecord.infoMsg2,
