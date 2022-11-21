@@ -43,12 +43,13 @@ const DownloadLink = (props) => {
       })
       .catch((e) => console.error(e))
   };
+
   return (
-       <a
-         href={`/attachment/${hash}`}
-         onClick={(e) => handleDownload(e)}>
-         {linkname}
-       </a>
+    <a
+      href={`/attachment/${hash}`}
+      onClick={(e) => handleDownload(e)}>
+      {linkname}
+    </a>
   );
 };
 export default DownloadLink;
