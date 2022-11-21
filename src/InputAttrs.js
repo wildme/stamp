@@ -20,6 +20,7 @@ export const InputAttrs = {
       name: 'inbox-note',
       type: 'text'
     },
+
     {
       for: 'inbox-replyTo',
       text: 'newRecord.label4',
@@ -48,6 +49,7 @@ export const InputAttrs = {
       name: 'outbox-note',
       type: 'text'
     },
+
     {
       for: 'outbox-replyTo',
       text: 'newRecord.label4',
