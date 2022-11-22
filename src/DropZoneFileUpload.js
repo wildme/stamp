@@ -1,4 +1,4 @@
-import { useState, Fragment, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const DropZoneFileUpload = (props) => {
   const title = props.title;
@@ -47,28 +47,26 @@ const DropZoneFileUpload = (props) => {
   }, [clearOnSuccess, className])
   
   return (
-    <Fragment>
-      <div
-        className={className}
-        onDrop={(e) => onDrop(e)}
-        onDragOver={(e) => onDragOver(e)}
-        onDragLeave={(e) => onDragLeave(e)}
-      >
-      {(!filename && !errorMsg) &&
-        <section className={`${className}__title`}>
-          {title}
-        </section>}
-      {filename &&
-        <section className={`${className}__filename`}>
-          {filename}
-        </section>}
-      {errorMsg &&
-        <section className={`${className}__error`}>
-          {errorMsg}
-        </section>}
-      </div>
-    </Fragment>
-  )
+    <div
+      className={className}
+      onDrop={(e) => onDrop(e)}
+      onDragOver={(e) => onDragOver(e)}
+      onDragLeave={(e) => onDragLeave(e)}
+    >
+    {(!filename && !errorMsg) &&
+      <section className={`${className}__title`}>
+        {title}
+      </section>}
+    {filename &&
+      <section className={`${className}__filename`}>
+        {filename}
+      </section>}
+    {errorMsg &&
+      <section className={`${className}__error`}>
+        {errorMsg}
+      </section>}
+    </div>
+  );
 };
 
 export default DropZoneFileUpload;
