@@ -7,28 +7,28 @@ export const BoxContext = createContext();
 const TableBox = (props) => {
   const content = props.content;
   const noData = props.noData;
+  const noDataMsg = props.noDataMsg;
   const table = props.table;
   const sortOrder = props.sortOrder;
   const column = props.column;
   const setter = props.setter;
-  const t = props.t;
+  const className = props.className;
 
   return (
-    <div className="page-table">
-      <table className="page-table__table">
+    <div className={className}>
+      <table className={`${className}__table`}>
         <TableHead
           table={table}
           handleClick={setter}
           sortOrder={sortOrder}
           column={column}
           noData={noData}
-          t={t}
         />
         <BoxContext.Provider value={table}>
           {content && <Rows rows={content} kind='box' />}
         </BoxContext.Provider>
       </table>
-        {noData && <p><i>{t('main.infoMsg2')}</i></p>}
+        {noData && <p><i>{noDataMsg}</i></p>}
     </div>
   )
 };

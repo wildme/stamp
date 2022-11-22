@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
 
@@ -7,8 +8,9 @@ export const ContactsContext = createContext();
 const TableContacts = (props) => {
   const content = props.content;
   const noData = props.noData;
-  const t = props.t;
+  const noDataMsg = props.noDataMsg;
   const setter = props.setInfoMsg;
+  const { t } = useTranslation();
 
   return (
     <div className="page-table">
@@ -18,7 +20,7 @@ const TableContacts = (props) => {
             {content && <Rows rows={content} kind='contacts' />}
           </ContactsContext.Provider>
       </table>
-        {noData && <p><i>{t('contacts.infoMsg2')}</i></p>}
+        {noData && <p><i>{noDataMsg}</i></p>}
     </div>
   )
 };
