@@ -222,7 +222,8 @@ const EditRecord = () => {
             attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
             setter={setSubject}
             value={subject}
-            className="edit-record__input"
+            inputClassName="edit-record__input"
+            labelClassName="edit-record__label"
           />
           <InputField
             id={id}
@@ -230,26 +231,30 @@ const EditRecord = () => {
             setter={setFromTo}
             value={fromTo}
             field='name'
-            className="edit-record__input"
+            inputClassName="edit-record__input"
+            labelClassName="edit-record__label"
           />
           <InputField
             id={id}
             attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
             setter={setReplyTo}
             value={replyTo}
-            className="edit-record__input"
+            inputClassName="edit-record__input"
+            labelClassName="edit-record__label"
           />
           <InputField
             id={id}
             attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
             setter={setNote}
             value={note}
-            className="edit-record__input"
+            inputClassName="edit-record__input"
+            labelClassName="edit-record__label"
           />
           <InputFile
             label={t('editRecord.label2')}
             name={"file"}
-            className={"edit-record__upload"}
+            inputClassName="edit-record__upload"
+            labelClassName="edit-record__label"
             clearOnSuccess={clearInputFile}
             setter={setNewFile}
             setInfoMsg={setInfoMsg}

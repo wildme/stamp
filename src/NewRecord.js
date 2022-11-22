@@ -128,34 +128,38 @@ const NewRecord = () => {
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-subj`)[0]}
           setter={setSubject}
           value={subject}
-          className="add-record__input"
+          inputClassName="add-record__input"
+          labelClassName="add-record__label"
         />
         <InputField
           id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
           setter={setFromTo}
           value={fromTo}
-          field='name'
-          className="add-record__input"
+          inputClassName="add-record__input"
+          labelClassName="add-record__label"
         />
         <InputField
           id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
           setter={setReplyTo}
           value={replyTo}
-          className="add-record__input"
+          inputClassName="add-record__input"
+          labelClassName="add-record__label"
         />
         <InputField
           id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
           setter={setNote}
           value={note}
-          className="add-record__input"
+          inputClassName="add-record__input"
+          labelClassName="add-record__label"
         />
         <InputFile
           label={t('newRecord.label6')}
           name={"file"}
-          className={"add-record__upload"}
+          inputClassName="add-record__upload"
+          labelClassName="add-record__label"
           setter={setFile}
           setInfoMsg={setInfoMsg}
           maxFileSize={MAX_FILE_SIZE}
