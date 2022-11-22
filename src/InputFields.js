@@ -7,13 +7,16 @@ import { useTranslation } from 'react-i18next';
   const attrs = props.attrs;
   const setter = props.setter;
   const value = props.value;
-  const className = props.className;
+  const inputClassName = props.inputClassName;
+  const labelClassName = props.labelClassName;
 
   return (
     <Fragment>
-      <label htmlFor={attrs.for}><b>{t(attrs.text)}</b></label>
+      <label htmlFor={attrs.for} className={labelClassName}>
+        {t(attrs.text)}
+      </label>
       <input
-        className={className}
+        className={inputClassName}
         type={attrs.type}
         name={attrs.name}
         value={value}

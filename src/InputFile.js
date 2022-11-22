@@ -4,7 +4,8 @@ const InputFile = (props) => {
   const label = props.label;
   const name = props.name;
   const clearOnSuccess = props?.clearOnSuccess;
-  const className = props.className;
+  const inputClassName = props.inputClassName;
+  const labelClassName = props.labelClassName;
   const setter = props.setter;
   const setInfoMsg = props.setInfoMsg;
   const maxFileSizeExceededMsg = props.maxFileSizeExceededMsg;
@@ -27,9 +28,11 @@ const InputFile = (props) => {
 
   return (
     <Fragment>
-      <label htmlFor={name}><b>{label}</b></label>
+      <label htmlFor={name} className={labelClassName}>
+        {label}
+      </label>
         <input
-          className={className}
+          className={inputClassName}
           type="file"
           name={name}
           ref={ref}

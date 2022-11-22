@@ -57,8 +57,8 @@ const Contacts = () => {
       <TableContacts
         content={tableData}
         noData={noData}
+        noDataMsg={t('contacts.infoMsg2')}
         setInfoMsg={setInfoMsg}
-        t={t}
       />
     </div>
   );

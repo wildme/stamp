@@ -19,7 +19,7 @@ const Box = (props) => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [dataForPage, setDataForPage] = useState(null);
-  const [pageCount, setPageCount] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(null);
   const { t } = useTranslation();
   const recordsPerPage = 20;
@@ -109,13 +109,14 @@ const Box = (props) => {
         </select>
       </div>
       <TableBox
+        className="page-table"
         table={box}
         sortOrder={sortOrder}
         column={column}
         setter={handleClick}
         content={dataForPage}
         noData={noData}
-        t={t}
+        noDataMsg={t('main.infoMsg2')}
       />
       <ReactPaginate
         breakLabel="..."
