@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { headerColumns } from './headerColumns.js';
 import SortIcon from './sortIcon.js';
 
@@ -7,7 +8,7 @@ const TableHead = (props) => {
   const sortOrder = props.sortOrder;
   const column = props.column;
   const noData = props.noData;
-  const t = props.t;
+  const { t } = useTranslation();
 
   return (
     <thead className="page-table__thead">
