@@ -65,7 +65,7 @@ const Login = () => {
     <div className="login-grid">
       { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
       <form onSubmit={(e) => handleLogin(e)}>
-        <div className="login-form">
+        <div className="login-form login-grid__login-form">
           <input
             className="login-form__input"
             type="text"

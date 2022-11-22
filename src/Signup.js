@@ -69,7 +69,7 @@ const Signup = () => {
       {infoMsg.str &&
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
       <form onSubmit={(e) => handleSignup(e)}>
-        <div className="signup-form">
+        <div className="signup-form signup-grid__signup-form">
           <input
             className="signup-form__input"
             type="text"
