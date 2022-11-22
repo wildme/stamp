@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
-import InputField from './InputFields.js';
+import InputField from './InputField.js';
 import InputFile from './InputFile.js';
 import SubmitButton from './SubmitButton.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';

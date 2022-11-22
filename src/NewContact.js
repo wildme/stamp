@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
-import InputField from './InputFields.js';
+import InputField from './InputField.js';
 import FlashMessage from './FlashMessage.js'
 
 const NewContact = () => {
