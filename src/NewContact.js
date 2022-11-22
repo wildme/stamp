@@ -57,19 +57,22 @@ const NewContact = () => {
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
            setter={setOrgName}
            value={orgName}
-           className="add-contact__input"
+           inputClassName="add-contact__input"
+           labelClassName="add-contact__label"
          />
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
            setter={setOrgLocation}
            value={orgLocation}
-           className="add-contact__input"
+           inputClassName="add-contact__input"
+           labelClassName="add-contact__label"
          />
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'region')[0]}
            setter={setOrgRegion}
            value={orgRegion}
-           className="add-contact__input"
+           inputClassName="add-contact__input"
+           labelClassName="add-contact__label"
          />
          <button
            className="add-contact__submit"
