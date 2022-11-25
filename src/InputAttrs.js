@@ -6,21 +6,18 @@ export const InputAttrs = {
       name: 'inbox-subj',
       type: 'text'
     },
-
     {
       for: 'inbox-addr',
       text: 'newRecord.label2',
       name: 'inbox-addr',
       type: 'text'
     },
-
     {
       for: 'inbox-note',
       text: 'newRecord.label5',
       name: 'inbox-note',
       type: 'text'
     },
-
     {
       for: 'inbox-replyTo',
       text: 'newRecord.label4',
@@ -35,21 +32,18 @@ export const InputAttrs = {
       name: 'outbox-subj',
       type: 'text'
     },
-
     {
       for: 'outbox-addr',
       text: 'newRecord.label3',
       name: 'outbox-addr',
       type: 'text'
     },
-
     {
       for: 'outbox-note',
       text: 'newRecord.label5',
       name: 'outbox-note',
       type: 'text'
     },
-
     {
       for: 'outbox-replyTo',
       text: 'newRecord.label4',
@@ -75,6 +69,26 @@ export const InputAttrs = {
       text: 'newContact.label3',
       name: 'region',
       type: 'text'
+    }
+  ],
+  userProfile: [
+    {
+      for: 'firstname',
+      text: 'personalInfo.label1',
+      name: 'firstname',
+      type: 'text'
+    },
+    {
+      for: 'lastname',
+      text: 'personalInfo.label2',
+      name: 'lastname',
+      type: 'text'
+    },
+    {
+      for: 'email',
+      text: 'email.label1',
+      name: 'email',
+      type: 'email'
     }
   ]
 };
