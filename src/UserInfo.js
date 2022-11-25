@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InputField from './InputField.js';
+import SubmitButton from './SubmitButton.js';
+import { InputAttrs as attrs } from './InputAttrs.js';
 
 const UserInfo = ({ user, name1, name2, t, setter }) => {
   const [firstname, setFirstname] = useState(name1);
@@ -8,8 +11,7 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
   const state = useSelector((state) => state.info);
   const dispatch = useDispatch();
 
-  const handleInfoUpdate = (e) => {
-    e.preventDefault();
+  const handleInfoUpdate = () => {
     const url = "/api/user/update/info";
     fetch(url, {
       method: 'POST',
@@ -44,38 +46,30 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('personalInfo.title')}</h2>
       </div>
-      <label
-        htmlFor="firstname"
-        className="user-info__label"
-      ><b>{t('personalInfo.label1')}</b>
-      </label>
-      <input
-        className="user-info__input"
-        type="text"
-        name="firstname"
+      <InputField
+        id="user-profile"
+        attrs={attrs['userProfile'].filter((x) => x.name === "firstname")[0]}
+        setter={setFirstname}
         value={firstname}
-        required
-        onChange={(e) => setFirstname(e.target.value)}
+        inputClassName="user-info__input"
+        labelClassName="user-info__label"
       />
-      <label
-        htmlFor="lastname"
-        className="user-info__label"
-      ><b>{t('personalInfo.label2')}</b>
-      </label>
-      <input
-        className="user-info__input"
-        type="text"
-        name="lastname"
+      <InputField
+        id="user-profile"
+        attrs={attrs['userProfile'].filter((x) => x.name === "lastname")[0]}
+        setter={setLastname}
         value={lastname}
-        onChange={(e) => setLastname(e.target.value)}
+        inputClassName="user-info__input"
+        labelClassName="user-info__label"
       />
-      <button
-        className="user-info__submit"
-        type="submit"
+      <SubmitButton
+        name={t('personalInfo.button')}
+        className={"user-info__submit"}
         disabled={!firstname}
-        onClick={(e) => handleInfoUpdate(e)}>{t('personalInfo.button')}
-      </button>
+        setter={handleInfoUpdate}
+      />
     </div>
   );
 };
- export default UserInfo;
+
+export default UserInfo;

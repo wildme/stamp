@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InputField from './InputField.js';
+import SubmitButton from './SubmitButton.js';
+import { InputAttrs as attrs } from './InputAttrs.js';
 
 const UserEmail = ({ user, t, setter }) => {
   const state = useSelector((state) => state.info);
@@ -7,8 +10,7 @@ const UserEmail = ({ user, t, setter }) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
 
-  const handleEmailUpdate = (e) => {
-    e.preventDefault();
+  const handleEmailUpdate = () => {
     if (email === state.email) return;
     const url = "/api/user/update/email";
 
@@ -46,26 +48,22 @@ const UserEmail = ({ user, t, setter }) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('email.title')}</h2>
       </div>
-      <label
-        htmlFor="email"
-        className="user-info__label"
-      ><b>{t('email.label1')}</b>
-      </label>
-      <input
-        className="user-info__input"
-        type="email"
-        name="email"
+      <InputField
+        id="user-profile"
+        attrs={attrs['userProfile'].filter((x) => x.name === "email")[0]}
+        setter={setEmail}
         value={email}
-        required
-        onChange={(e) => setEmail(e.target.value)}
+        inputClassName="user-info__input"
+        labelClassName="user-info__label"
       />
-      <button
-        className="user-info__submit"
-        type="submit"
+      <SubmitButton
+        name={t('email.button')}
+        className={"user-info__submit"}
         disabled={!email}
-        onClick={(e) => handleEmailUpdate(e)}>{t('email.button')}
-      </button>
+        setter={handleEmailUpdate}
+      />
     </div>
   );
 };
- export default UserEmail;
+
+export default UserEmail;
