@@ -15,15 +15,9 @@ const Signup = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  function cmpPass(pass1, pass2) {
-    if (pass1 === pass2) return true;
-    else return false;
-  }
   const handleSignup = (e) => {
     e.preventDefault();
-    const match = cmpPass(password, confirmPassword);
-
-    if (match) {
+    if (password === confirmPassword) {
       const url = "/api/signup";
       fetch(url, {
         method: 'POST',

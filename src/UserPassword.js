@@ -10,15 +10,9 @@ const UserPassword = ({user, t, setter, setter2}) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
 
-  function cmpPass(pass1, pass2) {
-    if (pass1 === pass2) return true;
-    return false;
-  }
-
   const handlePassUpdate = () => {
     const url = "/api/user/update/password";
-    const match = cmpPass(newPass, confirmPass);
-    if (match) {
+    if (newPass === confirmPass) {
       fetch(url, {
         method: 'POST',
         headers: {
