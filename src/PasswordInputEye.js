@@ -3,35 +3,62 @@ import { HiEyeOff, HiEye } from 'react-icons/hi';
 
 const PasswordInputEye = (props) => {
   const [showPass, setShowPass] = useState(false);
-  const styles = props.styles || {};
+  const className = props.className;
+  const placeHolder = props.placeHolder || '';
+  const value = props.value;
+  const name = props.name || "pass";
+  const title = props.title;
+  const labelText = props.labelText || '';
 
-  const handleShowPass = (e) => {
-    e.preventDefault();
-    setShowPass(!showPass);
+  const divStyle = {
+    display: "grid",
+    gridTemplateColumns: "90% auto",
+    border: "1px solid",
+    padding: "4px"
+  };
+  const inputStyle = {
+    border: "none",
+    margin: 0,
+    padding: 0,
+    outline: "none"
+  };
+  const buttonStyle = {
+    border: "none",
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    fontSize: "17px"
   };
 
   return (
-    <div className="password-input-eye" style={{marginTop: styles.marginTop}}>
-      <input
-        style={{height: styles.height}}
-        className="password-input-eye__input"
-        type={showPass ? "text" : "password"}
-        placeholder={props.placeholder || ""}
-        name={props.name || "pass"}
-        value={props.pass}
-        required
-        pattern="^[A-Za-z0-9!@#$%+^*_]+$"
-        title={props.title}
-        minLength="8"
-        maxLength="255"
-        onChange={(e) => props.setter(e.target.value)}
-      />
-      <button
-        className="password-input-eye__button"
-        type="button"
-        onClick={(e) => handleShowPass(e)}>
-        {showPass ? <HiEye /> : <HiEyeOff />}
-      </button>
+    <div className={className}>
+      {labelText ?
+        <section className={`${className}__label`}>{labelText}</section> : null
+      }
+      <div
+        className={`${className}__input`}
+        style={divStyle}
+      >
+        <input
+          id={name}
+          style={inputStyle}
+          type={showPass ? "text" : "password"}
+          placeholder={placeHolder}
+          name={name}
+          value={value}
+          required
+          pattern="^[A-Za-z0-9!@#$%+^*_]+$"
+          title={title}
+          minLength="8"
+          maxLength="255"
+          onChange={(e) => props.setter(e.target.value)}
+        />
+        <button
+          style={buttonStyle}
+          type="button"
+          onClick={() => setShowPass(!showPass)}>
+          {showPass ? <HiEye /> : <HiEyeOff />}
+        </button>
+      </div>
     </div>
   );
 };
