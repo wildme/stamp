@@ -77,6 +77,11 @@
   margin-top: 8px;
 }
 
+.signup-form-password__input {
+  height: 40px;
+  margin-top: 8px;
+}
+
 .login-form__submit,
 .signup-form__submit,
 .forgot-pass__submit {
@@ -168,6 +173,7 @@
 .page-title {
   width: 100%;
 }
+
 .page-title__h2 {
   padding-left: 10px;
 }
@@ -175,7 +181,6 @@
 .page-table {
   display: grid;
   width: 100%;
-
 }
 
 /* Tables: Inbox, Outbox, Contacts */
@@ -318,6 +323,7 @@
   font-size: 18px;
   color: #8c8c8c;
 }
+
 .drop-zone-file__filename {
   font-size: 18px;
   overflow: hidden;
@@ -431,6 +437,7 @@
   grid-column-gap: 30px;
   padding: 8px;
 }
+
 /* User profile: title */
 .user-profile__title {
   grid-column: 1 / span 2;
@@ -440,6 +447,7 @@
 .user-profile__title_name {
   margin: 0;
 }
+
 .user-profile__subtitle {
   margin: 0;
   color: #0066ff;
@@ -507,29 +515,16 @@
   color: #57565d;
 }
 
-/* PasswordInputEye component */
-.password-input-eye {
-  display: grid;
-  grid-template-columns: 90% auto;
-  border: 1px solid;
-  padding: 4px;
+.user-info-password {
 }
 
-.password-input-eye__button {
-  border: none;
-  cursor: pointer;
-  background-color: transparent;
-  font-size: 17px;
+.user-info-password__label {
+  margin: 7px 0 7px 0;
+  font-weight: bold;
 }
 
-.password-input-eye__input {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.password-input-eye__input:focus {
-  outline: none;
+.user-info-password__input {
+  height: 30px;
 }
 
 /* Flash Message */
@@ -587,7 +582,6 @@
   color: grey;
 }
 
-
 .sort-icon_desc {
   display: inline;
   font-size: 14px;
@@ -635,6 +629,7 @@
 .pagination-prev-next__link_disabled {
   cursor: default;
 }
+
 /* Home page */
 .home-page-grid {
   display: grid;
