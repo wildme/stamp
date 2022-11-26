@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PasswordInputEye from './PasswordInputEye.js';
+import SubmitButton from './SubmitButton.js';
 
 const UserPassword = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
@@ -11,13 +12,12 @@ const UserPassword = ({user, t, setter, setter2}) => {
 
   function cmpPass(pass1, pass2) {
     if (pass1 === pass2) return true;
-    else return false;
+    return false;
   }
 
-  const handlePassUpdate = (e) => {
-    e.preventDefault()
+  const handlePassUpdate = () => {
     const url = "/api/user/update/password";
-    let match = cmpPass(newPass, confirmPass);
+    const match = cmpPass(newPass, confirmPass);
     if (match) {
       fetch(url, {
         method: 'POST',
@@ -68,37 +68,28 @@ const UserPassword = ({user, t, setter, setter2}) => {
         required
         onChange={(e) => setOldPass(e.target.value)}
       />
-      <label
-        htmlFor="new-pass"
-        className="user-info__label"
-      ><b>{t('password.label2')}</b>
-      </label>
       <PasswordInputEye
-        pass={newPass}
+        className="user-info-password"
+        labelText={t('password.label2')}
+        value={newPass}
         setter={setNewPass}
         title={t('passwordInputEye.tooltip')}
         name="new-pass"
-        styles={{ height: "30px" }}
       />
       <em className="user-info__hint">{t('password.string')}</em>
-      <label
-        htmlFor="confirm-pass"
-        className="user-info__label"
-      ><b>{t('password.label3')}</b>
-      </label>
       <PasswordInputEye
-        pass={confirmPass}
+        className="user-info-password"
+        labelText={t('password.label3')}
+        value={confirmPass}
         setter={setConfirmPass}
         title={t('passwordInputEye.tooltip')}
         name="confirm-pass"
-        styles={{ height: "30px" }}
       />
-      <input
-        className="user-info__submit"
-        type="submit"
-        value={ t('password.button') }
+      <SubmitButton
+        name={t('password.button')}
+        className={"user-info__submit"}
         disabled={!oldPass || !newPass || !confirmPass}
-        onClick={(e) => handlePassUpdate(e)}
+        setter={handlePassUpdate}
       />
     </div>
   );
