@@ -95,19 +95,19 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <PasswordInputEye
-            pass={password}
+            className="signup-form-password"
+            value={password}
             setter={setPassword}
-            placeholder={t('signup.placeholder3')}
+            placeHolder={t('signup.placeholder3')}
             title={t('passwordInputEye.tooltip')}
-            styles={{ marginTop: "8px", height: "40px" }}
           />
           <em className="signup-form__length-hint">{t('signup.string')}</em>
           <PasswordInputEye
-            pass={confirmPassword}
+            className="signup-form-password"
+            value={confirmPassword}
             setter={setConfirmPassword}
-            placeholder={t('signup.placeholder4')}
+            placeHolder={t('signup.placeholder4')}
             title={t('passwordInputEye.tooltip')}
-            styles={{ marginTop: "8px", height: "40px" }}
           />
           <input
             className="signup-form__input"
