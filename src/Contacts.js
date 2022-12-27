@@ -55,6 +55,7 @@ const Contacts = () => {
       </div>
         {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <TableContacts
+        className="page-table"
         content={tableData}
         noData={noData}
         noDataMsg={t('contacts.infoMsg2')}

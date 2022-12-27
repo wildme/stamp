@@ -10,11 +10,12 @@ const TableContacts = (props) => {
   const noData = props.noData;
   const noDataMsg = props.noDataMsg;
   const setter = props.setInfoMsg;
+  const className = props.className;
   const { t } = useTranslation();
 
   return (
-    <div className="page-table">
-      <table className="page-table__table">
+    <div className={className}>
+      <table className={`${className}__table`}>
         <TableHead table="contacts" t={t} />
           <ContactsContext.Provider value={setter}>
             {content && <Rows rows={content} kind='contacts' />}
