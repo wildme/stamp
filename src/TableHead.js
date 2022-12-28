@@ -11,7 +11,7 @@ const TableHead = (props) => {
   const { t } = useTranslation();
 
   return (
-    <thead className="page-table__thead">
+    <thead>
       <tr className="page-table__tr">
         {headerColumns[`${table}`].map((item) => {
           const { id = '', label = '', sortable } = item;
@@ -19,7 +19,7 @@ const TableHead = (props) => {
           const direction = currentItem ? sortOrder : '';
 
           return (
-            <th key={id}>{sortable ?
+            <th key={id} className="page-table__th">{sortable ?
               <button
                 className="page-table__button"
                 disabled={noData}
