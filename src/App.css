@@ -189,7 +189,7 @@
   font-size: 17px;
   border-collapse: collapse;
   text-align: left;
-  margin: 15px;
+  margin: 0 15px 0 15px;
 }
 
 .page-table__tr, .page-table__tr_active {
@@ -201,7 +201,8 @@
   background-color: #ffe6e6;
 }
 
-.page-table__th, {
+.page-table__th {
+  border-top: 1px solid #0099ff;
   padding: 5px;
 }
 
@@ -660,7 +661,7 @@
   height: 70px;
   margin: 10px;
   text-align: center;
-  cursor:pointer;
+  cursor: pointer;
   box-shadow: 1px 0.8px 9px -1px;
   transition: top ease 0.5s;
 }
@@ -684,4 +685,18 @@
   z-index: 1;
   text-decoration: none;
   color: black;
+}
+.box-table-tabs {
+  width: 200px;
+  margin: 0 0 6px 15px;
+}
+
+.box-table-tabs_link {
+  border: 1px solid #0099ff;
+  border-radius: 6px;
+  font-size: 22px;
+  padding: 5px;
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
 }
