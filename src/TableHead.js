@@ -3,6 +3,7 @@ import { headerColumns } from './headerColumns.js';
 import SortIcon from './sortIcon.js';
 
 const TableHead = (props) => {
+  const className = props.className;
   const table = props.table;
   const handleClick = props.handleClick;
   const sortOrder = props.sortOrder;
@@ -12,16 +13,16 @@ const TableHead = (props) => {
 
   return (
     <thead>
-      <tr className="page-table__tr">
+      <tr className={`${className}__tr`}>
         {headerColumns[`${table}`].map((item) => {
           const { id = '', label = '', sortable } = item;
           const currentItem = column === id;
           const direction = currentItem ? sortOrder : '';
 
           return (
-            <th key={id} className="page-table__th">{sortable ?
+            <th key={id} className={`${className}__th`}>{sortable ?
               <button
-                className="page-table__button"
+                className={`${className}__button`}
                 disabled={noData}
                 type="button"
                 onClick={() => handleClick(id)}
