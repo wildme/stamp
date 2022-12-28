@@ -87,6 +87,7 @@ const Content = () => {
         <PrivateRoute exact path="/" component={HomePage} />
         <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
+        <PrivateRoute exact path="/letters" component={Box} />
         <PrivateRoute exact path="/inbox" component={Box} />
         <PrivateRoute exact path="/outbox" component={Box} />
         <PrivateRoute path="/my-profile" component={UserProfile} />
