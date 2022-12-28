@@ -16,14 +16,18 @@ const TableContacts = (props) => {
   return (
     <div className={className}>
       <table className={`${className}__table`}>
-        <TableHead table="contacts" t={t} />
-          <ContactsContext.Provider value={setter}>
-            {content && <Rows rows={content} kind='contacts' />}
-          </ContactsContext.Provider>
+        <TableHead
+          table="contacts"
+          className={className}
+          t={t}
+        />
+        <ContactsContext.Provider value={setter}>
+          {content && <Rows rows={content} kind='contacts' />}
+        </ContactsContext.Provider>
       </table>
         {noData && <p><i>{noDataMsg}</i></p>}
     </div>
-  )
+  );
 };
 
 export default TableContacts;
