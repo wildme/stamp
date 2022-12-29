@@ -29,6 +29,7 @@
   "navbar": {
     "inbox": "Входящие",
     "outbox": "Исходящие",
+    "letters": "Письма",
     "contacts": "Контакты",
     "profile": "Профиль",
     "logout": "Выйти"

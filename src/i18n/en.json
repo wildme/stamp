@@ -28,6 +28,7 @@
   },
   "navbar": {
     "inbox": "Inbox",
+    "letters": "Letters",
     "outbox": "Outbox",
     "contacts": "Contacts",
     "profile": "Profile",

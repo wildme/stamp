@@ -36,6 +36,7 @@ const resources = {
       navbar: {
         inbox: en.navbar.inbox,
         outbox: en.navbar.outbox,
+        letters: en.navbar.letters,
         contacts: en.navbar.contacts,
         profile: en.navbar.profile,
         logout: en.navbar.logout
@@ -235,6 +236,7 @@ const resources = {
       navbar: {
         inbox: ru.navbar.inbox,
         outbox: ru.navbar.outbox,
+        letters: ru.navbar.letters,
         contacts: ru.navbar.contacts,
         profile: ru.navbar.profile,
         logout: ru.navbar.logout
