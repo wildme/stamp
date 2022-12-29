@@ -12,7 +12,7 @@ function updateToken(newToken, dispatch) {
   dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
 }
 
-const RowContacts = ({ entry }) => {
+const RowContacts = ({ entry, className }) => {
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [editOn, setEditOn] = useState(false);
@@ -88,8 +88,8 @@ const RowContacts = ({ entry }) => {
 
   return deleted ? null : (
     <Fragment>
-      <tr className="page-table__tr">
-        <td className="page-table__td">
+      <tr className={`${className}__tr`}>
+        <td className={`${className}__td`}>
           {editOn ?
             <input
               type="text"
@@ -97,7 +97,7 @@ const RowContacts = ({ entry }) => {
               onChange={(e) => setName(e.target.value)}
             /> : name}
         </td>
-        <td className="page-table__td">
+        <td className={`${className}__td`}>
           {editOn ?
             <input
               type="text"
@@ -105,7 +105,7 @@ const RowContacts = ({ entry }) => {
               onChange={(e) => setLocation(e.target.value)}
             /> : location}
         </td>
-        <td className="page-table__td">
+        <td className={`${className}__td`}>
           {editOn ?
             <input
               type="text"
@@ -113,24 +113,24 @@ const RowContacts = ({ entry }) => {
               onChange={(e) => setRegion(e.target.value)}
             /> : region}
         </td>
-        <td className="page-table__td">{!editOn ?
+        <td className={`${className}__td`}>{!editOn ?
             <>
               <button
-                className="page-table__button"
+                className={`${className}__button`}
                 onClick={() => handleEdit()}><HiPencil />
               </button>
               <button
-                className="page-table__button"
+                className={`${className}__button`}
                 onClick={() => handleDelete(entry._id)}><HiTrash />
               </button>
             </> :
             <>
               <button
-                className="page-table__button"
+                className={`${className}__button`}
                 onClick={() => handleSubmit(entry._id)}><HiCheckCircle />
               </button>
               <button
-                className="page-table__button"
+                className={`${className}__button`}
                 onClick={() => handleCancel()}><HiXCircle />
               </button>
             </>

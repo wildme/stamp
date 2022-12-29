@@ -5,7 +5,7 @@ import { HiPencil, HiDownload } from 'react-icons/hi';
 import { BoxContext } from './TableBox.js';
 import DownloadLink from './DownloadLink.js';
 
-const RowBox = ({ entry }) => {
+const RowBox = ({ entry, className }) => {
   const box = useContext(BoxContext);
   const dateStr = new Date(entry.date).toLocaleString();
   const admin = useSelector((state) => state.user.admin);
@@ -14,16 +14,16 @@ const RowBox = ({ entry }) => {
 
   return (
     <Fragment>
-      <tr className={"page-table__tr page-table__tr_" + entry.status}>
+      <tr className={`${className}__tr ${className}__tr_` + entry.status}>
         <td><Link to={`/${box}/view/${entry.id}`}>{entry.id}</Link></td>
-        <td className="page-table__td">
-          <div className="page-table__td_long">{entry.subj}</div>
+        <td className={`${className}__td`}>
+          <div className={`${className}__td_long`}>{entry.subj}</div>
         </td>
-        <td className="page-table__td">
-          <div className="page-table__td_long">{entry.addr}</div>
+        <td className={`${className}__td`}>
+          <div className={`${className}__td_long`}>{entry.addr}</div>
         </td>
-        <td className="page-table__td">{dateStr}</td>
-        <td className="page-table__td">
+        <td className={`${className}__td`}>{dateStr}</td>
+        <td className={`${className}__td`}>
           {entry.file ?
             <DownloadLink
               linkname={<HiDownload />}
@@ -32,8 +32,8 @@ const RowBox = ({ entry }) => {
             />
              : '-'}
         </td>
-        <td className="page-table__td">{entry.reply || '-'}</td>
-        <td className="page-table__td">
+        <td className={`${className}__td`}>{entry.reply || '-'}</td>
+        <td className={`${className}__td`}>
           {accessToEdit &&
             <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link>
           }
