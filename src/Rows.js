@@ -1,12 +1,12 @@
 import RowBox from './RowBox.js';
 import RowContacts from './RowContacts.js';
 
-const Rows = ({ rows, kind }) => {
+const Rows = ({ rows, kind, className }) => {
   if (kind === 'box') {
     return (
       <tbody>
         {rows.map((row, index) => {
-          return <RowBox entry={row} key={index} />;
+          return <RowBox entry={row} key={index} className={className} />;
         })}
       </tbody>
     );
@@ -16,7 +16,7 @@ const Rows = ({ rows, kind }) => {
     return (
       <tbody>
         {rows.map((row, index) => {
-          return <RowContacts entry={row} key={index} />;
+          return <RowContacts entry={row} key={index} className={className} />;
         })}
       </tbody>
     );
