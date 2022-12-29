@@ -109,7 +109,7 @@ const Box = (props) => {
         </select>
       </div>
       <TableBox
-        className="page-table"
+        className="box-table"
         table={box}
         sortOrder={sortOrder}
         column={column}
