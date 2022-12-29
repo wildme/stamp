@@ -178,13 +178,16 @@
   padding-left: 10px;
 }
 
-.page-table {
+.page-table,
+.box-table,
+.contacts-table {
   display: grid;
   width: 100%;
 }
 
 /* Tables: Inbox, Outbox, Contacts */
-.page-table__table {
+.box-table__table,
+.contacts-table__table {
   font-family: Ubuntu, Roboto, Arial;
   font-size: 17px;
   border-collapse: collapse;
@@ -192,32 +195,36 @@
   margin: 0 15px 0 15px;
 }
 
-.page-table__tr, .page-table__tr_active {
+.contacts-table__tr,
+.box-table__tr,
+.box-table__tr_active {
   border: none;
   border-bottom: 1px solid #0099ff;
 }
 
-.page-table__tr_canceled {
+.box-table__tr_canceled {
   background-color: #ffe6e6;
 }
 
-.page-table__th {
+.box-table__th {
   border-top: 1px solid #0099ff;
   padding: 5px;
 }
 
-.page-table__td {
+.box-table__td,
+.contacts-table__td {
   padding: 5px;
   font-size: 15px;
 }
 
-.page-table__td_long {
+.box-table__td_long {
   width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.page-table__button {
+.box-table__button,
+.contacts-table__button {
   border: none;
   background-color: transparent;
   cursor: pointer;
