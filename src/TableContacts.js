@@ -22,7 +22,13 @@ const TableContacts = (props) => {
           t={t}
         />
         <ContactsContext.Provider value={setter}>
-          {content && <Rows rows={content} kind='contacts' />}
+          {content &&
+              <Rows
+                rows={content}
+                kind='contacts'
+                className={className}
+              />
+          }
         </ContactsContext.Provider>
       </table>
         {noData && <p><i>{noDataMsg}</i></p>}

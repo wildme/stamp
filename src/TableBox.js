@@ -17,7 +17,7 @@ const TableBox = (props) => {
 
   return (
     <div className={className}>
-      <TableTabs className="box-table-tabs" />
+      <TableTabs className={`${className}-tabs`} />
       <table className={`${className}__table`}>
         <TableHead
           className={className}
@@ -28,7 +28,13 @@ const TableBox = (props) => {
           noData={noData}
         />
         <BoxContext.Provider value={table}>
-          {content && <Rows rows={content} kind='box' />}
+          {content &&
+              <Rows
+                rows={content}
+                kind='box'
+                className={className}
+              />
+          }
         </BoxContext.Provider>
       </table>
         {noData && <p><i>{noDataMsg}</i></p>}
