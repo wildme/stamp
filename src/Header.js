@@ -12,11 +12,8 @@ const HeaderLinks = () => {
         <Link className="navbar_logo__link" to="/"><Logo /></Link>
       </div>
       <div className="navbar_left">
-        <NavLink className="menu__item" to="/inbox">
-          {t('navbar.inbox')}
-        </NavLink>
-        <NavLink className="menu__item" to="/outbox">
-          {t('navbar.outbox')}
+        <NavLink className="menu__item" to="/letters">
+          {t('navbar.letters')}
         </NavLink>
         <NavLink className="menu__item" to="/contacts">
           {t('navbar.contacts')}
