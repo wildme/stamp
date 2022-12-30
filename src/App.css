@@ -695,9 +695,9 @@
 }
 /* Table tabs */
 .box-table-tabs {
-  width: 200px;
+  width: 100%;
   height: 38px;
-  margin: 0 0 0 15px;
+  margin: 0 0 0 30px;
   z-index: 1;
 }
 
