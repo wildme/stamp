@@ -138,6 +138,8 @@
   "main": {
     "titleInbox": "Inbox",
     "titleOutbox": "Outbox",
+    "tabInbox": "Inbox",
+    "tabOutbox": "Outbox",
     "infoMsg1": "Error. Failed to retrieve data",
     "infoMsg2": "No records"
   },

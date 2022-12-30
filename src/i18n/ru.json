@@ -138,6 +138,8 @@
   "main": {
     "titleInbox": "Входящие",
     "titleOutbox": "Исходящие",
+    "tabInbox": "Входящие",
+    "tabOutbox": "Исходящие",
     "infoMsg1": "Не удалось получить данные",
     "infoMsg2": "Нет записей"
   },

@@ -146,6 +146,8 @@ const resources = {
       main: {
         titleInbox: en.main.titleInbox,
         titleOutbox: en.main.titleOutbox,
+        tabInbox: en.main.tabInbox,
+        tabOutbox: en.main.tabOutbox,
         infoMsg1: en.main.infoMsg1,
         infoMsg2: en.main.infoMsg2
       },
@@ -343,6 +345,8 @@ const resources = {
       main: {
         titleInbox: ru.main.titleInbox,
         titleOutbox: ru.main.titleOutbox,
+        tabInbox: ru.main.tabInbox,
+        tabOutbox: ru.main.tabOutbox,
         infoMsg1: ru.main.infoMsg1,
         infoMsg2: ru.main.infoMsg2
       },
