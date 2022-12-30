@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
+import TableTabs from './TableTabs.js';
 import FlashMessage from './FlashMessage.js';
 
 const Box = (props) => {
@@ -108,6 +109,7 @@ const Box = (props) => {
         }
         </select>
       </div>
+      <TableTabs className="box-table-tabs" />
       <TableBox
         className="box-table"
         table={box}
