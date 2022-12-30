@@ -7,10 +7,10 @@ import TableTabs from './TableTabs.js';
 import FlashMessage from './FlashMessage.js';
 
 const Box = (props) => {
-  const box = props.location.pathname.slice(1);
   const state = useSelector((state) => state.settings.records.sortOrder);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
+  const [box, setBox] = useState('outbox');
   const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
@@ -109,7 +109,13 @@ const Box = (props) => {
         }
         </select>
       </div>
-      <TableTabs className="box-table-tabs" />
+      <TableTabs
+        tabs={['inbox', 'outbox']}
+        tabTitles={[t('main.tabInbox'), t('main.tabOutbox')]}
+        selectedTab="outbox"
+        className="box-table-tabs"
+        setter={setBox}
+      />
       <TableBox
         className="box-table"
         table={box}
