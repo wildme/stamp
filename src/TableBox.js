@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
-import TableTabs from './TableTabs.js';
 
 export const BoxContext = createContext();
 
@@ -17,7 +16,6 @@ const TableBox = (props) => {
 
   return (
     <div className={className}>
-      <TableTabs className={`${className}-tabs`} />
       <table className={`${className}__table`}>
         <TableHead
           className={className}
