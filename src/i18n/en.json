@@ -27,9 +27,7 @@
     "infoMsg5": "Account has been created"
   },
   "navbar": {
-    "inbox": "Inbox",
     "letters": "Letters",
-    "outbox": "Outbox",
     "contacts": "Contacts",
     "profile": "Profile",
     "logout": "Logout"
@@ -140,7 +138,6 @@
   "main": {
     "titleInbox": "Inbox",
     "titleOutbox": "Outbox",
-    "link": "New",
     "infoMsg1": "Error. Failed to retrieve data",
     "infoMsg2": "No records"
   },

@@ -34,8 +34,6 @@ const resources = {
         infoMsg5: en.signup.infoMsg5
       },
       navbar: {
-        inbox: en.navbar.inbox,
-        outbox: en.navbar.outbox,
         letters: en.navbar.letters,
         contacts: en.navbar.contacts,
         profile: en.navbar.profile,
@@ -148,7 +146,6 @@ const resources = {
       main: {
         titleInbox: en.main.titleInbox,
         titleOutbox: en.main.titleOutbox,
-        link: en.main.link,
         infoMsg1: en.main.infoMsg1,
         infoMsg2: en.main.infoMsg2
       },
@@ -234,8 +231,6 @@ const resources = {
         infoMsg5: ru.signup.infoMsg5
       },
       navbar: {
-        inbox: ru.navbar.inbox,
-        outbox: ru.navbar.outbox,
         letters: ru.navbar.letters,
         contacts: ru.navbar.contacts,
         profile: ru.navbar.profile,
@@ -348,7 +343,6 @@ const resources = {
       main: {
         titleInbox: ru.main.titleInbox,
         titleOutbox: ru.main.titleOutbox,
-        link: ru.main.link,
         infoMsg1: ru.main.infoMsg1,
         infoMsg2: ru.main.infoMsg2
       },
