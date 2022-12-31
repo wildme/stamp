@@ -105,15 +105,15 @@ const Box = (props) => {
         >
         {yearsOfActivity.map((item, i) => (
           <option value={item} key={i}>{item}</option>
-        ))
-        }
+        ))}
         </select>
       </div>
       <TableTabs
+        containerClassName="table-tabs table-tabs_padding"
+        tabClassName="table-tabs__button"
         tabs={['inbox', 'outbox']}
         tabTitles={[t('main.tabInbox'), t('main.tabOutbox')]}
         selectedTab="outbox"
-        className="box-table-tabs"
         setter={setBox}
       />
       <TableBox
