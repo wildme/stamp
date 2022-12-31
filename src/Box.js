@@ -109,7 +109,7 @@ const Box = (props) => {
         </select>
       </div>
       <TableTabs
-        containerClassName="table-tabs table-tabs_padding"
+        containerClassName="table-tabs table-tabs_padding-gap"
         tabClassName="table-tabs__button"
         tabs={['inbox', 'outbox']}
         tabTitles={[t('main.tabInbox'), t('main.tabOutbox')]}
