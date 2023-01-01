@@ -108,13 +108,13 @@ const Box = (props) => {
         containerClassName="filter-by-year"
         buttonClassName="filter-by-year__button"
         activeButtonClassName="filter-by-year__button_active"
-        currentYear={thisYear}
         years={yearsOfActivity}
         setter={setYear}
       />
       <TableTabs
         containerClassName="table-tabs table-tabs_padding-gap"
         tabClassName="table-tabs__button"
+        activeTabClassName="table-tabs__button_active"
         tabs={['inbox', 'outbox']}
         tabTitles={[t('main.tabInbox'), t('main.tabOutbox')]}
         selectedTab="outbox"
