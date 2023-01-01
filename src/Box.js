@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ReactPaginate from 'react-paginate';
 import TableBox from './TableBox.js';
+import YearButtons from './YearButtons.js';
 import TableTabs from './TableTabs.js';
 import FlashMessage from './FlashMessage.js';
 
@@ -10,12 +11,13 @@ const Box = (props) => {
   const state = useSelector((state) => state.settings.records.sortOrder);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
+  const thisYear = new Date().getFullYear();
   const [box, setBox] = useState('outbox');
   const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
   const [sortOrder, setSortOrder] = useState(state || 'asc');
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [year, setYear] = useState(thisYear);
   const [yearsOfActivity, setYearsOfActivity] = useState([]);
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
@@ -73,7 +75,13 @@ const Box = (props) => {
         if (data.token) {
           dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
         }
-        if (data !== 1) {
+        if (!data.records && data.years) {
+          setNoData(true);
+          setDataForPage(null);
+          setPageCount(0);
+          setYearsOfActivity(data.years);
+        }
+        if (data.records) {
           setNoData(false);
           setTableData(data.records);
           setYearsOfActivity(data.years);
@@ -96,18 +104,14 @@ const Box = (props) => {
           {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
         </h2>
       </div>
-      <div className="page-filter">
-        <select
-          className="page-filter__select-by-year"
-          name="select-by-year"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-        >
-        {yearsOfActivity.map((item, i) => (
-          <option value={item} key={i}>{item}</option>
-        ))}
-        </select>
-      </div>
+      <YearButtons
+        containerClassName="filter-by-year"
+        buttonClassName="filter-by-year__button"
+        activeButtonClassName="filter-by-year__button_active"
+        currentYear={thisYear}
+        years={yearsOfActivity}
+        setter={setYear}
+      />
       <TableTabs
         containerClassName="table-tabs table-tabs_padding-gap"
         tabClassName="table-tabs__button"
