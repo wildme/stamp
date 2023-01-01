@@ -2,7 +2,6 @@ const YearButtons = (props) => {
   const containerClassName = props.containerClassName;
   const buttonClassName = props.buttonClassName;
   const activeButtonClassName = props.activeButtonClassName;
-  const currentYear = Number(props.currentYear);
   const years = props.years;
   const setter = props.setter;
 
