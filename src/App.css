@@ -719,11 +719,12 @@
   cursor: pointer;
 }
 
-.table-tabs__button.active {
+.table-tabs__button_active {
   background-color: #FFFFFF;
   height: 39px;
 }
 
+/* YearButtons */
 .filter-by-year {
   display: grid;
   justify-content: center;
