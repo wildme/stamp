@@ -1,6 +1,7 @@
 const TableTabs = (props) => {
   const containerClassName = props.containerClassName;
   const tabClassName = props.tabClassName;
+  const activeTabClassName = props.activeTabClassName;
   const tabs = props.tabs;
   const tabTitles = props.tabTitles;
   const selectedTab = props.selectedTab;
@@ -9,9 +10,9 @@ const TableTabs = (props) => {
   const handleClick = (e) => {
     let tabs = document.getElementsByClassName(tabClassName);
     for (let i = 0; i < tabs.length; i++) {
-      tabs[i].className = tabs[i].className.replace(" active", "");
+      tabs[i].className = tabs[i].className.replace(activeTabClassName, "");
     }
-    e.currentTarget.className += " active";
+    e.currentTarget.className += ` ${activeTabClassName}`;
     setter(e.target.value);
   }
 
@@ -20,7 +21,7 @@ const TableTabs = (props) => {
       {tabs.map((tab, i) => (
         <button
           className={tabClassName +
-            (tab === selectedTab ? " active" : "")}
+            (tab === selectedTab ? ` ${activeTabClassName}` : "")}
           type="button"
           value={tab}
           key={i}
