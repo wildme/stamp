@@ -722,6 +722,7 @@
 .table-tabs__button_active {
   background-color: #FFFFFF;
   height: 39px;
+  font-weight: bold;
 }
 
 /* YearButtons */
