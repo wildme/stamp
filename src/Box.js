@@ -112,7 +112,8 @@ const Box = (props) => {
         setter={setYear}
       />
       <TableTabs
-        containerClassName="table-tabs table-tabs_padding-gap"
+        containerClassName="table-tabs"
+        tabsClassName="table-tabs-wrapper"
         tabClassName="table-tabs__button"
         activeTabClassName="table-tabs__button_active"
         tabs={['inbox', 'outbox']}
