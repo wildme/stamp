@@ -1,5 +1,6 @@
 const TableTabs = (props) => {
   const containerClassName = props.containerClassName;
+  const tabsClassName = props.tabsClassName;
   const tabClassName = props.tabClassName;
   const activeTabClassName = props.activeTabClassName;
   const tabs = props.tabs;
@@ -18,16 +19,18 @@ const TableTabs = (props) => {
 
   return (
     <div className={containerClassName}>
-      {tabs.map((tab, i) => (
-        <button
-          className={tabClassName +
-            (tab === selectedTab ? ` ${activeTabClassName}` : "")}
-          type="button"
-          value={tab}
-          key={i}
-          onClick={(e) => handleClick(e)}>{tabTitles[i]}
-        </button>
-      ))}
+      <div className={tabsClassName}>
+        {tabs.map((tab, i) => (
+          <button
+            className={tabClassName +
+              (tab === selectedTab ? ` ${activeTabClassName}` : "")}
+            type="button"
+            value={tab}
+            key={i}
+            onClick={(e) => handleClick(e)}>{tabTitles[i]}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
