@@ -6,6 +6,7 @@ import TableBox from './TableBox.js';
 import YearButtons from './YearButtons.js';
 import TableTabs from './TableTabs.js';
 import FlashMessage from './FlashMessage.js';
+import SimpleHeading2 from './SimpleHeading2.js';
 
 const Box = (props) => {
   const state = useSelector((state) => state.settings.records.sortOrder);
@@ -99,11 +100,11 @@ const Box = (props) => {
   return (
     <div className="page-content-grid">
       {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
-      <div className="page-title">
-        <h2 className="page-title__h2">
-          {box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
-        </h2>
-      </div>
+      <SimpleHeading2
+        containerClassName="page-title"
+        h2ClassName="page-title__h2"
+        text={box === 'inbox' ? t('main.titleInbox') : t('main.titleOutbox')}
+      />
       <YearButtons
         containerClassName="filter-by-year"
         buttonClassName="filter-by-year__button"

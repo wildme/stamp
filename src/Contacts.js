@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import TableContacts from './TableContacts.js';
 import FlashMessage from './FlashMessage.js';
+import SimpleHeading2 from './SimpleHeading2.js';
 
 const Contacts = () => {
   const [tableData, setTableData] = useState(null);
@@ -50,9 +51,11 @@ const Contacts = () => {
 
   return (
     <div className="page-content-grid">
-      <div className="page-title">
-        <h2 className="page-title__h2">{t('contacts.title')}</h2>
-      </div>
+      <SimpleHeading2
+        containerClassName="page-title"
+        h2ClassName="page-title__h2"
+        text={t('contacts.title')}
+      />
         {infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} />}
       <TableContacts
         className="contacts-table"
