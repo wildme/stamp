@@ -18,7 +18,9 @@ const TableBox = (props) => {
     <div className={className}>
       <table className={`${className}__table`}>
         <TableHead
-          className={className}
+          trClassName={`${className}__tr`}
+          thClassName={`${className}__th`}
+          sortButtonClassName={`${className}__button`}
           table={table}
           handleClick={setter}
           sortOrder={sortOrder}
