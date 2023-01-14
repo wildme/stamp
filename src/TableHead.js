@@ -16,7 +16,7 @@ const TableHead = (props) => {
   return (
     <thead>
       <tr className={trClassName}>
-        {headerColumns[`${table}`].map((item) => {
+        {headerColumns[table].map((item) => {
           const currentItem = column === item.id;
           const direction = currentItem ? sortOrder : '';
 
