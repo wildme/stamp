@@ -3,7 +3,9 @@ import { headerColumns } from './headerColumns.js';
 import SortIcon from './sortIcon.js';
 
 const TableHead = (props) => {
-  const className = props.className;
+  const trClassName = props.trClassName;
+  const thClassName = props.thClassName;
+  const sortButtonClassName = props.sortButtonClassName
   const table = props.table;
   const handleClick = props.handleClick;
   const sortOrder = props.sortOrder;
@@ -13,22 +15,21 @@ const TableHead = (props) => {
 
   return (
     <thead>
-      <tr className={`${className}__tr`}>
+      <tr className={trClassName}>
         {headerColumns[`${table}`].map((item) => {
-          const { id = '', label = '', sortable } = item;
-          const currentItem = column === id;
+          const currentItem = column === item.id;
           const direction = currentItem ? sortOrder : '';
 
           return (
-            <th key={id} className={`${className}__th`}>{sortable ?
+            <th key={item.id} className={thClassName}>{item.sortable ?
               <button
-                className={`${className}__button`}
+                className={sortButtonClassName}
                 disabled={noData}
                 type="button"
-                onClick={() => handleClick(id)}
+                onClick={() => handleClick(item.id)}
               >
-                {t(label)} <SortIcon direction={direction} />
-              </button> : t(label)}
+                {t(item.label)} <SortIcon direction={direction} />
+              </button> : t(item.label)}
             </th>
           )
         })}
