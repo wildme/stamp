@@ -1,5 +1,4 @@
 import { createContext } from 'react';
-import { useTranslation } from 'react-i18next';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
 
@@ -11,21 +10,20 @@ const TableContacts = (props) => {
   const noDataMsg = props.noDataMsg;
   const setter = props.setInfoMsg;
   const className = props.className;
-  const { t } = useTranslation();
 
   return (
     <div className={className}>
       <table className={`${className}__table`}>
         <TableHead
+          trClassName={`${className}__tr`}
+          thClassName={`${className}__th`}
           table="contacts"
-          className={className}
-          t={t}
         />
         <ContactsContext.Provider value={setter}>
           {content &&
               <Rows
                 rows={content}
-                kind='contacts'
+                kind="contacts"
                 className={className}
               />
           }
