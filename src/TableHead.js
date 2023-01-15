@@ -5,7 +5,7 @@ import SortIcon from './sortIcon.js';
 const TableHead = (props) => {
   const trClassName = props.trClassName;
   const thClassName = props.thClassName;
-  const sortButtonClassName = props.sortButtonClassName
+  const sortButtonClassName = props.sortButtonClassName;
   const table = props.table;
   const handleClick = props.handleClick;
   const sortOrder = props.sortOrder;
@@ -26,12 +26,11 @@ const TableHead = (props) => {
                 className={sortButtonClassName}
                 disabled={noData}
                 type="button"
-                onClick={() => handleClick(item.id)}
-              >
+                onClick={() => handleClick(item.id)}>
                 {t(item.label)} <SortIcon direction={direction} />
               </button> : t(item.label)}
             </th>
-          )
+          );
         })}
       </tr>
     </thead>
