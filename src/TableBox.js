@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import TableHead from './TableHead.js';
 import Rows from './Rows.js';
+import BoxTableColumnLabels  from './BoxTableColumnLabels.js';
 
 export const BoxContext = createContext();
 
@@ -13,15 +14,16 @@ const TableBox = (props) => {
   const column = props.column;
   const setter = props.setter;
   const className = props.className;
+  const labels = BoxTableColumnLabels();
 
   return (
     <div className={className}>
       <table className={`${className}__table`}>
         <TableHead
+          labels={labels[table]}
           trClassName={`${className}__tr`}
           thClassName={`${className}__th`}
           sortButtonClassName={`${className}__button`}
-          table={table}
           handleClick={setter}
           sortOrder={sortOrder}
           column={column}
