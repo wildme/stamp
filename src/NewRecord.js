@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -33,6 +33,7 @@ const NewRecord = () => {
   const [replyTo, setReplyTo] = useState(storeReplyTo || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
+  const [currentId, setCurrentId] = useState('Loading...');
   const { t } = useTranslation();
   const MAX_FILE_SIZE = 5000000;
 
@@ -117,6 +118,12 @@ const NewRecord = () => {
       saveRecord(fileProps);
     }
   };
+  useEffect(() => {
+    const ws = new WebSocket(`ws://localhost/${box}:8080`);
+    ws.addEventListener('message', (e) => {
+      setCurrentId(e.data);
+    });
+  },[]);
 
   return (
     <div className="add-record-grid">
