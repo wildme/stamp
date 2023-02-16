@@ -246,10 +246,10 @@
 .edit-record,
 .add-contact {
   display: grid;
-  border: 1px solid;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 10px;
   margin: 100px 0 100px 0;
+  box-shadow: 1px 0.8px 9px -1px;
 }
 
 .add-record__input,
@@ -539,7 +539,7 @@
 .flash-msg {
   padding: 10px;
   border: 2px #4d4d4d;
-  border-radius: 6px;
+  border-radius: 4px;
   width: 70%;
   margin: 10px;
   text-align: center;
@@ -550,6 +550,29 @@
   background-color: transparent;
   cursor: pointer;
   float: right;
+}
+
+/* InfoBanner */
+.banner-nextid {
+  border-radius: 4px;
+  width: 50%;
+  text-align: center;
+  padding: 8px;
+  box-shadow: 1px 0.8px 9px -1px;
+  }
+
+.banner-nextid__title {
+  font-size: 18px;
+}
+
+.banner-nextid__value {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.add-record-grid_banner_nextid {
+  margin: 15px;
 }
 
 /* Add/edit record: autocomplete menu */
