@@ -8,6 +8,7 @@ import InputFile from './InputFile.js';
 import SubmitButton from './SubmitButton.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
+import InfoBanner from './InfoBanner.js'
 
 function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
@@ -33,7 +34,7 @@ const NewRecord = () => {
   const [replyTo, setReplyTo] = useState(storeReplyTo || '');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [currentId, setCurrentId] = useState('Loading...');
+  const [nextId, setNextId] = useState(undefined);
   const { t } = useTranslation();
   const MAX_FILE_SIZE = 5000000;
 
@@ -118,17 +119,49 @@ const NewRecord = () => {
       saveRecord(fileProps);
     }
   };
+
+
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost/${box}:8080`);
-    ws.addEventListener('message', (e) => {
-      setCurrentId(e.data);
-    });
-  },[]);
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    const url = `/api/${box}/nextid`;
+    const ws = new WebSocket(`ws://localhost:8080/${box}`);
+    ws.addEventListener('message', (e) => { setNextId(e.data); });
+
+    fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
+      .then(res =>  {
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 401) {
+          dispatch({type: 'LOGIN', payload: { user: { loggedIn: false } }});
+          return 1;
+        }
+      })
+      .then(data => {
+        if (data.token) {
+          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+        }
+        if (data !== 1) {
+          setNextId(data.nextid)
+        }
+      })
+      .catch((e) => console.error(e))
+
+    return () => {abortController.abort();};
+  }, [box, dispatch, token]);
 
   return (
     <div className="add-record-grid">
       {infoMsg.str &&
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
+      <InfoBanner
+        className="banner-nextid add-record-grid_banner_nextid"
+        titleClassName="banner-nextid__title"
+        valueClassName="banner-nextid__value"
+        title="You'll be assigned: "
+        value={nextId}
+      />
       <div className="add-record">
         <InputField
           id="new"
