@@ -159,7 +159,7 @@ const NewRecord = () => {
         className="banner-nextid add-record-grid_banner_nextid"
         titleClassName="banner-nextid__title"
         valueClassName="banner-nextid__value"
-        title="You'll be assigned: "
+        title={t('newRecord.infoMsg4')}
         value={nextId}
       />
       <div className="add-record">
