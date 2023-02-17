@@ -52,7 +52,7 @@ const NewContact = () => {
   return (
      <div className="add-contact-grid">
        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
-       <div className="add-contact">
+       <div className="add-contact add-contact-grid_add-contact">
          <InputField
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
            setter={setOrgName}
