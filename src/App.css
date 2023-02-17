@@ -186,6 +186,7 @@ body {
 .contacts-table {
   display: grid;
   width: 100%;
+  background-color: #ffffff;
 }
 
 .box-table__table,
@@ -751,7 +752,7 @@ body {
 }
 
 .table-tabs__button_active {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   height: 39px;
   font-weight: bold;
 }
