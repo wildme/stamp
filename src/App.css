@@ -1,3 +1,6 @@
+body {
+  background-color: #f9fbff;
+}
 /* Navbar */
 .navbar {
   display: grid;
@@ -248,8 +251,14 @@
   display: grid;
   border-radius: 4px;
   padding: 10px;
-  margin: 100px 0 100px 0;
   box-shadow: 1px 0.8px 9px -1px;
+  background-color: #ffffff;
+}
+
+.add-record-grid_add-record,
+.edit-record-grid_edit-record,
+.add-contact-grid_add-contact {
+  margin: 100px 0 100px 0;
 }
 
 .add-record__input,
@@ -559,6 +568,7 @@
   text-align: center;
   padding: 8px;
   box-shadow: 1px 0.8px 9px -1px;
+  background-color: #ffffff;
   }
 
 .banner-nextid__title {
