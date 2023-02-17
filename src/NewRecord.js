@@ -162,7 +162,7 @@ const NewRecord = () => {
         title={t('newRecord.infoMsg4')}
         value={nextId}
       />
-      <div className="add-record add-record-grid_add-record">
+      <div className="add-record add-record-grid__add-record">
         <InputField
           id="new"
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-subj`)[0]}

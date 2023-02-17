@@ -216,7 +216,7 @@ const EditRecord = () => {
       <div className="edit-record-grid">
         {infoMsg.str &&
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
-        <div className="edit-record edit-record-grid_edit-record">
+        <div className="edit-record edit-record-grid__edit-record">
           <InputField
             id={id}
             attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}

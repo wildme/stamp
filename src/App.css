@@ -255,9 +255,9 @@ body {
   background-color: #ffffff;
 }
 
-.add-record-grid_add-record,
-.edit-record-grid_edit-record,
-.add-contact-grid_add-contact {
+.add-record-grid__add-record,
+.edit-record-grid__edit-record,
+.add-contact-grid__add-contact {
   margin: 100px 0 100px 0;
 }
 
