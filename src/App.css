@@ -702,6 +702,7 @@ body {
   margin: 10px;
   text-align: center;
   cursor: pointer;
+  background-color: #ffffff;
   box-shadow: 1px 0.8px 9px -1px;
   transition: top ease 0.5s;
 }
