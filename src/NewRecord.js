@@ -148,7 +148,7 @@ const NewRecord = () => {
       })
       .catch((e) => console.error(e))
 
-    return () => {abortController.abort();};
+    return () => {abortController.abort(); ws.close();};
   }, [box, dispatch, token]);
 
   return (
