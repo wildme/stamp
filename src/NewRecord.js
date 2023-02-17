@@ -125,7 +125,7 @@ const NewRecord = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const url = `/api/${box}/nextid`;
-    const ws = new WebSocket(`ws://${window.location.hostname}:8080/${box}`);
+    const ws = new WebSocket(`ws://${window.location.hostname}:3080/${box}`);
     ws.addEventListener('message', (e) => { setNextId(e.data); });
 
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
