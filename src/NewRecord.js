@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
@@ -9,6 +9,7 @@ import SubmitButton from './SubmitButton.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
 import FlashMessage from './FlashMessage.js'
 import InfoBanner from './InfoBanner.js'
+import SuccessPage from './SuccessPage.js'
 
 function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
@@ -23,7 +24,6 @@ const NewRecord = () => {
   const user = useSelector((state) => state.user.username);
   const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
-  const history = useHistory();
   const storeSubj = localStorage.getItem(`${box}-subj-new`);
   const storeFromTo = localStorage.getItem(`${box}-addr-new`);
   const storeNote = localStorage.getItem(`${box}-note-new`);
@@ -35,6 +35,7 @@ const NewRecord = () => {
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [nextId, setNextId] = useState(undefined);
+  const [success, setSuccess] = useState(false);
   const { t } = useTranslation();
   const MAX_FILE_SIZE = 5000000;
 
@@ -90,6 +91,7 @@ const NewRecord = () => {
           localStorage.removeItem(`${box}-addr-new`);
           localStorage.removeItem(`${box}-note-new`);
           localStorage.removeItem(`${box}-replyTo-new`);
+          setSuccess(true);
           return res.json();
         }
         if (res.status === 401) {
@@ -105,7 +107,6 @@ const NewRecord = () => {
         if (data.token) {
           updateToken(data.token, dispatch);
         }
-        history.replace(`/${box}/view/${data.id}`);
       })
       .catch((e) => console.error(e))
   }
@@ -150,6 +151,21 @@ const NewRecord = () => {
 
     return () => {abortController.abort(); ws.close();};
   }, [box, dispatch, token]);
+
+  if (success) {
+    return (
+      <SuccessPage
+        title={t('successPage.title1')}
+        linkPath="/letters"
+        linkName={t('successPage.link1')}
+        className="success-page-grid"
+        wrapperClassName="success-page-wrapper success-page-grid__success-page-wrapper"
+        logoClassName="success-page__logo"
+        titleClassName="success-page__title"
+        linkClassName="success-page__link"
+      />
+    );
+  }
 
   return (
     <div className="add-record-grid">
