@@ -410,6 +410,40 @@ body {
   background-color: #33cc33;
 }
 
+/* Success page */
+.success-page-grid {
+  display: grid;
+  justify-content: center;
+}
+
+.success-page-wrapper {
+  display: grid;
+  background-color: #e6ffff;
+  padding: 20px;
+  height: 500px;
+  border-radius: 4px;
+  box-shadow: 1px 0.8px 9px -1px;
+}
+
+.success-page-grid__success-page-wrapper {
+  margin: 30px;
+}
+
+.success-page__logo {
+  text-align: center;
+}
+
+.success-page__title {
+}
+
+.success-page__text {
+  text-align: center;
+}
+
+.success-page__text_link {
+  font-size: 21px;
+}
+
 /* Error page */
 .error-page-grid {
   display: grid;
