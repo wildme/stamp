@@ -189,6 +189,10 @@
     "title4": "You aren't allowed to visit this page",
     "link1": "Go back home"
   },
+  "successPage": {
+    "title1": "Yay! It's done successfully!",
+    "link1": "Go to Letters"
+  },
   "dropZoneFile": {
     "title1": "Or Drop File here",
     "infoMsg1": "File too large"
