@@ -40,6 +40,6 @@ const HeaderBlank = () => {
 };
 
 export const Header = () => {
-  const loggedIn = useSelector((state) => state.user.loggedIn);
+  const loggedIn = useSelector((state) => state.user?.loggedIn);
   return loggedIn ? <HeaderLinks /> : <HeaderBlank />;
 };

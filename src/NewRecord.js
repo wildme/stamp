@@ -15,14 +15,9 @@ function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
 }
 
-function updateToken(newToken, dispatch) {
-  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
-}
-
 const NewRecord = () => {
   const { box } = useParams();
   const user = useSelector((state) => state.user.username);
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const storeSubj = localStorage.getItem(`${box}-subj-new`);
   const storeFromTo = localStorage.getItem(`${box}-addr-new`);
@@ -42,6 +37,7 @@ const NewRecord = () => {
   function uploadFile() {
     const url = `/api/${box}/upload`;
     const formData = new FormData();
+    const token = localStorage.getItem('at');
     formData.append('file', file);
 
     return fetch(url, {
@@ -64,7 +60,7 @@ const NewRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          updateToken(data.token, dispatch);
+          localStorage.setItem('at', data.token);
         }
         if (data === 1) {
           return 'error';
@@ -77,6 +73,7 @@ const NewRecord = () => {
   function saveRecord(fileProps) {
     const fileData = fileProps.hasOwnProperty("filename") ? fileProps : null;
     const url = `/api/${box}/new`;
+    const token = localStorage.getItem('at');
     fetch(url, {
       method: 'POST',
       headers: {
@@ -105,7 +102,7 @@ const NewRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          updateToken(data.token, dispatch);
+          localStorage.setItem('at', data.token);
         }
       })
       .catch((e) => console.error(e))
@@ -123,6 +120,7 @@ const NewRecord = () => {
 
 
   useEffect(() => {
+    const token = localStorage.getItem('at');
     const abortController = new AbortController();
     const signal = abortController.signal;
     const url = `/api/${box}/nextid`;
@@ -141,7 +139,7 @@ const NewRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          localStorage.setItem('at', data.token);
         }
         if (data !== 1) {
           setNextId(data.nextid)
@@ -150,7 +148,7 @@ const NewRecord = () => {
       .catch((e) => console.error(e))
 
     return () => {abortController.abort(); ws.close();};
-  }, [box, dispatch, token]);
+  }, [box, dispatch]);
 
   if (success) {
     return (

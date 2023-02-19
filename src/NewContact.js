@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputField.js';
@@ -12,11 +12,11 @@ const NewContact = () => {
   const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
 
   const handleAddContact = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('at');
     const url = '/api/contacts/new';
     fetch(url, {
       method: 'POST',
@@ -29,7 +29,7 @@ const NewContact = () => {
     .then(res => {
       if (res.status === 200) {
         if (res.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+          localStorage.setItem('at', res.token);
         }
       }
       if (res.status === 401) {

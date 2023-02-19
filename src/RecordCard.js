@@ -6,10 +6,14 @@ import ErrorPage from './ErrorPage.js';
 import FlashMessage from './FlashMessage.js'
 import DownloadLink from './DownloadLink.js'
 
+function getTokenFromLocalStorage() {
+  const token = localStorage.getItem('at');
+  return token;
+}
+
 const RecordCard = () => {
   const { id, box } = useParams();
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [idOfRec, setIdOfRec] = useState(id);
   const [subject, setSubject] = useState('Loading...');
@@ -34,6 +38,7 @@ const RecordCard = () => {
     let newStatus = 'canceled';
     statusOfRecord === newStatus ? newStatus = 'active' : newStatus = 'canceled';
     const url = `/api/${box}/status/${id}`;
+    const token = getTokenFromLocalStorage();
 
     fetch(url, {
       method: 'PUT',
@@ -46,7 +51,7 @@ const RecordCard = () => {
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            localStorage.setItem('at', res.token);
           }
           setStatus(newStatus);
         }
@@ -64,6 +69,7 @@ const RecordCard = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const url = `/api/view/${box}/${id}`;
+    const token = getTokenFromLocalStorage();
 
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res => { 
@@ -86,7 +92,7 @@ const RecordCard = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+          localStorage.setItem('at', data.token);
         }
         if (data !== 1) {
           setIdOfRec(data.record.id);
@@ -105,7 +111,7 @@ const RecordCard = () => {
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [box, id, t, token, dispatch])
+  }, [box, id, t, dispatch])
 
   if (noData) return <ErrorPage code={404} />
   return !loading ? (<p></p>) : (

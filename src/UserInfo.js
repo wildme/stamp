@@ -7,12 +7,12 @@ import { InputAttrs as attrs } from './InputAttrs.js';
 const UserInfo = ({ user, name1, name2, t, setter }) => {
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
-  const token = useSelector((state) => state.token.string);
   const state = useSelector((state) => state.info);
   const dispatch = useDispatch();
 
   const handleInfoUpdate = () => {
     const url = "/api/user/update/info";
+    const token = localStorage.getItem('at');
     fetch(url, {
       method: 'POST',
       headers: {
@@ -24,7 +24,7 @@ const UserInfo = ({ user, name1, name2, t, setter }) => {
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            localStorage.setItem('at', res.token);
           }
           dispatch({ type: 'INFO',
             payload: { info: {...state,  fullname: [firstname, lastname].join(' ') }}

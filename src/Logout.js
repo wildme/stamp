@@ -9,8 +9,9 @@ const Logout = () => {
     .then(res => {
       if (res.ok) {
         history.push("/login");
+        localStorage.removeItem('at');
         dispatch({ type: 'LOGOUT', payload: { user: { loggedIn: false },
-          token: null, info: null, settings: null } });
+          info: null, settings: null } });
       }
     })
     .catch((e) => console.error(e))

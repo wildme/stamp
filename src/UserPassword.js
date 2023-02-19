@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PasswordInputEye from './PasswordInputEye.js';
 import SubmitButton from './SubmitButton.js';
 
@@ -7,11 +7,11 @@ const UserPassword = ({user, t, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
 
   const handlePassUpdate = () => {
     const url = "/api/user/update/password";
+    const token = localStorage.getItem('at');
     if (newPass === confirmPass) {
       fetch(url, {
         method: 'POST',
@@ -24,7 +24,7 @@ const UserPassword = ({user, t, setter, setter2}) => {
         .then(res => {
           if (res.status === 200) {
             if (res.token) {
-              dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+              localStorage.setItem('at', res.token);
             }
             setter({str: t('password.infoMsg4'), id: Math.random(), type: 'success'});
           }

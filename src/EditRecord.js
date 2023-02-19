@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputField.js';
@@ -16,13 +16,8 @@ function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
 }
 
-function updateToken(newToken, dispatch) {
-  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
-}
-
 const EditRecord = () => {
   const { id, box } = useParams();
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [subject, setSubject] = useState('');
   const [fromTo, setFromTo] = useState('');
@@ -45,6 +40,7 @@ const EditRecord = () => {
   function uploadFile(file) {
     const url = `/api/${box}/upload`;
     const formData = new FormData();
+    const token = localStorage.getItem('at');
     formData.append('file', file);
 
     return fetch(url, {
@@ -67,7 +63,7 @@ const EditRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          updateToken(data.token, dispatch);
+          localStorage.setItem('at', data.token);
         }
         if (data === 1 ) {
           return 'error';
@@ -79,6 +75,7 @@ const EditRecord = () => {
 
   function deleteFile(file) {
     const url = `/api/attachment/delete/${file}`;
+    const token = localStorage.getItem('at');
     return fetch(url, {
       method: 'DELETE',
       headers: {'Authorization': `Bearer ${token}`}
@@ -88,7 +85,7 @@ const EditRecord = () => {
           setDelFile(false);
           setFile(null);
           if (res.token) {
-            updateToken(res.token, dispatch);
+            localStorage.setItem('at', res.token);
           }
         }
         if (res.status === 401) {
@@ -104,6 +101,7 @@ const EditRecord = () => {
   function saveRecord(fileProps) {
     const fileData = fileProps.hasOwnProperty("filename") ? fileProps : null;
     const url = `/api/${box}/update/${id}`;
+    const token = localStorage.getItem('at');
     setDisableBtn(true);
     fetch(url, {
       method: 'PUT',
@@ -141,7 +139,7 @@ const EditRecord = () => {
       })
       .then(data => {
         if (data.token) {
-            updateToken(data.token, dispatch);
+            localStorage.setItem('at', data.token);
         }
         if (data.newFile) {
           setFile(data.newFile);
@@ -167,6 +165,7 @@ const EditRecord = () => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const url = `/api/edit/${box}/${id}`;
+    const token = localStorage.getItem('at');
 
     const storeSubj = localStorage.getItem(`${box}-subj-${id}`);
     const storeFromTo = localStorage.getItem(`${box}-addr-${id}`);
@@ -194,7 +193,7 @@ const EditRecord = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({ type: 'TOKEN', payload: { token: { string: data.token } }});
+          localStorage.setItem('at', data.token);
         }
         if (data !== 1) {
           setSubject(storeSubj || data.record.subj);
@@ -208,7 +207,7 @@ const EditRecord = () => {
       .catch((e) => console.error(e))
 
     return () => {abortController.abort();};
-  }, [box, id, t, token, dispatch]);
+  }, [box, id, t, dispatch]);
 
   if (noData) return <ErrorPage code={404} />;
   if (!permitted) return <ErrorPage code={403} />;

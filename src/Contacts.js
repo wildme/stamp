@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import TableContacts from './TableContacts.js';
 import FlashMessage from './FlashMessage.js';
@@ -9,11 +9,11 @@ const Contacts = () => {
   const [tableData, setTableData] = useState(null);
   const [noData, setNoData] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   useEffect(() => {
+    const token = localStorage.getItem('at');
     const abortController = new AbortController();
     const signal = abortController.signal;
     const url = "/api/contacts";
@@ -38,7 +38,7 @@ const Contacts = () => {
       })
       .then(data => {
         if (data.token) {
-          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+          localStorage.setItem('at', data.token);
         }
         if (data !== 1) {
           setTableData(data.contacts);
@@ -47,7 +47,7 @@ const Contacts = () => {
       .catch((e) => console.error(e))
 
     return () => { abortController.abort(); };
-  }, [t, dispatch, token])
+  }, [t, dispatch])
 
   return (
     <div className="page-content-grid">

@@ -23,7 +23,7 @@ const onPageReload = (dispatch, history, location) => {
         return res.json();
       }
       if (res.status === 401) {
-        dispatch({ type: 'TOKEN', payload: { token: { string: null } }});
+        localStorage.removeItem('at');
         dispatch({ type: 'LOGIN', payload: { user:
           { username: null, admin: null, loggedIn: false } }});
         dispatch({ type: 'INFO', payload: { info: null } });
@@ -36,31 +36,27 @@ const onPageReload = (dispatch, history, location) => {
     })
     .then(data => {
       if (data !== 1) {
-        dispatch({ type: 'TOKEN', payload:
-          { token: { string: data.token } }});
+        localStorage.setItem('at', data.token);
+        dispatch({ type: 'INFO', payload:
+          { info: { fullname: data.user.fullname, email: data.user.email }} });
+        dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
         dispatch({ type: 'LOGIN', payload:
           { user: { username: data.user.username,
             admin: data.user.admin, loggedIn: true } }});
-        dispatch({ type: 'INFO', payload:
-          { info: { fullname: data.user.fullname,
-            email: data.user.email }}
-        });
-        dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
-        history.replace(location.pathname);
       }
+      history.replace(location.pathname);
     })
     .catch((e) => console.error(e));
 };
 
 const Content = () => {
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
 
   const PrivateRoute = ({ component: Component, ...rest }) => {
-    if (!user.loggedIn && !token) {
+    if (!user) {
       onPageReload(dispatch, history, location);
       return <p></p>;
     }

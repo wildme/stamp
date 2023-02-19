@@ -1,5 +1,5 @@
 import { useState, Fragment, useContext } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
 import { ContactsContext } from './TableContacts.js';
@@ -8,12 +8,7 @@ function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
 }
 
-function updateToken(newToken, dispatch) {
-  dispatch({ type: 'TOKEN', payload: { token: { string: newToken } }});
-}
-
 const RowContacts = ({ entry, className }) => {
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const [editOn, setEditOn] = useState(false);
   const [name, setName] = useState(entry.name);
@@ -29,6 +24,7 @@ const RowContacts = ({ entry, className }) => {
   const handleDelete = (id) => {
     if (window.confirm(t('editContact.confirm'))) {
       const url = `/api/contact/delete/${id}`;
+      const token = localStorage.getItem('at');
       fetch(url, {
         method: 'DELETE',
         headers: {'Authorization': `Bearer ${token}`}
@@ -37,7 +33,7 @@ const RowContacts = ({ entry, className }) => {
           if (res.status === 200) {
             setDeleted(true);
             if (res.token) {
-              updateToken(res.token, dispatch);
+              localStorage.setItem('at', res.token);
             }
           }
           if (res.status === 401) {
@@ -53,6 +49,7 @@ const RowContacts = ({ entry, className }) => {
 
   const handleSubmit = (id) => {
     const url = `/api/contact/update/${id}`;
+    const token = localStorage.getItem('at');
     setter('');
     fetch(url, {
       method: 'PUT',
@@ -66,7 +63,7 @@ const RowContacts = ({ entry, className }) => {
         if (res.ok) {
           setEditOn(false);
           if (res.token) {
-            updateToken(res.token, dispatch);
+            localStorage.setItem('at', res.token);
           }
         }
         if (res.status === 401) {

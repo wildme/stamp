@@ -10,7 +10,6 @@ import SimpleHeading2 from './SimpleHeading2.js';
 
 const Box = (props) => {
   const state = useSelector((state) => state.settings.records.sortOrder);
-  const token = useSelector((state) => state.token.string);
   const dispatch = useDispatch();
   const thisYear = new Date().getFullYear();
   const [box, setBox] = useState('outbox');
@@ -46,6 +45,7 @@ const Box = (props) => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('at');
     const abortController = new AbortController();
     const signal = abortController.signal;
     const recordOffset = 0;
@@ -74,7 +74,7 @@ const Box = (props) => {
        })
       .then(data => {
         if (data.token) {
-          dispatch({type: 'TOKEN', payload: { token: { string: data.token } }});
+          localStorage.setItem('at', data.token);
         }
         if (!data.records && data.years) {
           setNoData(true);
@@ -95,7 +95,7 @@ const Box = (props) => {
 
     return () => { abortController.abort(); };
 
-  }, [sortOrder, year, column, box, t, token, dispatch])
+  }, [sortOrder, year, column, box, t, dispatch])
   
   return (
     <div className="page-content-grid">

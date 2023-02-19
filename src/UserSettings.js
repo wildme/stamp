@@ -5,13 +5,13 @@ const UserSettings = ({ user, t, setter, settings }) => {
   const [sortOrder, setSortOrder] = useState({
     records: { sortOrder: settings.records.sortOrder }
   });
-  const token = useSelector((state) => state.token.string);
   const state = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
   const handleSettingsUpdate = (e) => {
     e.preventDefault();
     const url = "/api/user/update/settings";
+    const token = localStorage.getItem('at');
     fetch(url, {
       method: 'POST',
       headers: {
@@ -23,7 +23,7 @@ const UserSettings = ({ user, t, setter, settings }) => {
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
-            dispatch({ type: 'TOKEN', payload: { token: { string: res.token } }});
+            localStorage.setItem('at', res.token);
           }
           dispatch({ type: 'SETTINGS', payload: { settings: {...state, ...sortOrder } }});
           setter({str: t('userSettings.infoMsg1'), id: Math.random(), type: 'success'});

@@ -41,9 +41,7 @@ const Login = () => {
       })
       .then(data => {
         if (data !== 1) {
-          dispatch({ type: 'TOKEN', payload:
-            { token: { string: data.token } }
-          });
+          localStorage.setItem('at', data.token);
           dispatch({ type: 'LOGIN', payload:
             { user: { username: data.user.username,
               admin: data.user.admin, loggedIn: true }}
