@@ -436,12 +436,9 @@ body {
 .success-page__title {
 }
 
-.success-page__text {
-  text-align: center;
-}
-
-.success-page__text_link {
+.success-page__link {
   font-size: 21px;
+  text-align: center;
 }
 
 /* Error page */
