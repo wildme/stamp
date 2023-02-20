@@ -24,11 +24,10 @@ const onPageReload = (dispatch, history, location) => {
       }
       if (res.status === 401) {
         localStorage.removeItem('at');
-        dispatch({ type: 'LOGIN', payload: { user:
-          { username: null, admin: null, loggedIn: false } }});
         dispatch({ type: 'INFO', payload: { info: null } });
         dispatch({ type: 'SETTINGS', payload: { settings: null } });
-        return 1;
+        dispatch({ type: 'LOGIN', payload: { user:
+          { username: null, admin: null, loggedIn: false } }});return 1;
       }
       if (res.status === 500) {
         return 1;
@@ -43,8 +42,8 @@ const onPageReload = (dispatch, history, location) => {
         dispatch({ type: 'LOGIN', payload:
           { user: { username: data.user.username,
             admin: data.user.admin, loggedIn: true } }});
+        history.replace(location.pathname);
       }
-      history.replace(location.pathname);
     })
     .catch((e) => console.error(e));
 };
