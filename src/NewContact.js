@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputField.js';
 import FlashMessage from './FlashMessage.js'
+import SuccessPage from './SuccessPage.js'
 
 const NewContact = () => {
   const [orgLocation, setOrgLocation] = useState('');
   const [orgRegion, setOrgRegion] = useState('');
   const [orgName, setOrgName] = useState('');
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ const NewContact = () => {
     })
     .then(res => {
       if (res.status === 200) {
+        localStorage.removeItem('name-new');
+        localStorage.removeItem('location-new');
+        localStorage.removeItem('region-new');
+        setSuccess(true);
         if (res.token) {
           localStorage.setItem('at', res.token);
         }
@@ -48,12 +54,27 @@ const NewContact = () => {
       setOrgName('');
     }
   };
+  if (success) {
+    return (
+      <SuccessPage
+        title={t('successPage.title1')}
+        linkPath="/contacts"
+        linkName={t('successPage.link2')}
+        className="success-page-grid"
+        wrapperClassName="success-page-wrapper success-page-grid__success-page-wrapper"
+        logoClassName="success-page__logo"
+        titleClassName="success-page__title"
+        linkClassName="success-page__link"
+      />
+    );
+  }
 
   return (
      <div className="add-contact-grid">
        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
        <div className="add-contact add-contact-grid__add-contact">
          <InputField
+           id="new"
            attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
            setter={setOrgName}
            value={orgName}
@@ -61,6 +82,7 @@ const NewContact = () => {
            labelClassName="add-contact__label"
          />
          <InputField
+           id="new"
            attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
            setter={setOrgLocation}
            value={orgLocation}
@@ -68,6 +90,7 @@ const NewContact = () => {
            labelClassName="add-contact__label"
          />
          <InputField
+           id="new"
            attrs={attrs['contact'].filter((x) => x.name === 'region')[0]}
            setter={setOrgRegion}
            value={orgRegion}
