@@ -199,7 +199,8 @@ const resources = {
       },
       successPage: {
         title1: en.successPage.title1,
-        link1: en.successPage.link1
+        link1: en.successPage.link1,
+        link2: en.successPage.link2
       },
       dropZoneFile: {
         title1: en.dropZoneFile.title1,
@@ -403,7 +404,8 @@ const resources = {
       },
       successPage: {
         title1: ru.successPage.title1,
-        link1: ru.successPage.link1
+        link1: ru.successPage.link1,
+        link2: ru.successPage.link2
       },
       dropZoneFile: {
         title1: ru.dropZoneFile.title1,
