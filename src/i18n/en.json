@@ -191,7 +191,8 @@
   },
   "successPage": {
     "title1": "Yay! It's done successfully!",
-    "link1": "Go to Letters"
+    "link1": "Go to Letters",
+    "link2": "Go to Contacts"
   },
   "dropZoneFile": {
     "title1": "Or Drop File here",
