@@ -4,13 +4,16 @@ import { HiOutlinePlus } from 'react-icons/hi';
 const ActionCard = (props) => {
   const path = props.path;
   const title = props.title;
+  const className = props.className;
+  const linkClassName = props.linkClassName;
+  const iconClassName = props.iconClassName;
 
   return (
-    <div className="home-page-actions-add">
+    <div className={className}>
       <Link
-        className="home-page-actions-add__link"
+        className={linkClassName}
         to={path}>
-        <div className="home-page-actions-add__img">
+        <div className={iconClassName}>
           <HiOutlinePlus />
         </div>
         {title}
