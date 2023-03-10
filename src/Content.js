@@ -77,8 +77,8 @@ const Content = () => {
     <Fragment>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={Signup} />
+        <PrivateRoute exact path="/logout" component={Logout} />
         <PrivateRoute exact path="/" component={HomePage} />
         <PrivateRoute exact path="/contacts" component={Contacts} />
         <PrivateRoute exact path="/contacts/new" component={NewContact} />
