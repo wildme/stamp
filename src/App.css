@@ -1,6 +1,7 @@
 body {
   background-color: #f9fbff;
 }
+
 /* Navbar */
 .navbar {
   display: grid;
@@ -13,23 +14,19 @@ body {
   background-color: #000000;
 }
 
-.navbar_logo {
-  width: 100%;
-}
-
 .navbar_logo__link {
   padding-left: 10px;
 }
 
 .menu__item {
-  color: grey;
+  color: #a5a4a8;
   text-decoration: none;
   font-size: 19px;
   padding: 5px;
 }
 
 .menu__item:hover , .menu__item.active {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
 }
 
