@@ -18,23 +18,23 @@ const HomePage = () => {
         <ActionCard
           path="/inbox/new"
           title={t('homepage.action1')}
-          className="home-page-actions-add"
-          linkClassName="home-page-actions-add__link"
-          iconClassName="home-page-actions-add__icon"
+          className="action-open-page"
+          linkClassName="action-open-page__link"
+          iconClassName="action-open-page__icon"
         />
         <ActionCard
           path="/outbox/new"
           title={t('homepage.action2')}
-          className="home-page-actions-add"
-          linkClassName="home-page-actions-add__link"
-          iconClassName="home-page-actions-add__icon"
+          className="action-open-page"
+          linkClassName="action-open-page__link"
+          iconClassName="action-open-page__icon"
         />
         <ActionCard
           path="/contacts/new"
           title={t('homepage.action3')}
-          className="home-page-actions-add"
-          linkClassName="home-page-actions-add__link"
-          iconClassName="home-page-actions-add__icon"
+          className="action-open-page"
+          linkClassName="action-open-page__link"
+          iconClassName="action-open-page__icon"
         />
       </div>
     </div>
