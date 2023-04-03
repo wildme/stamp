@@ -167,7 +167,6 @@ body {
   display: grid;
   grid-template-columns: auto;
   justify-items: center;
-  align-items: center;
 }
 
 .page-title {
@@ -441,12 +440,11 @@ body {
 /* Error page */
 .error-page-grid {
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: auto;
   justify-items: center;
   align-items: center;
   font-family: arial;
   padding: 40px;
+  height: 80vh;
 }
 
 .error-page__top-title {
@@ -465,7 +463,6 @@ body {
   padding: 10px;
   color: black;
   border: 2px solid black;
-  margin: 10px;
 }
 
 /* User profile page */
@@ -473,7 +470,6 @@ body {
   display: grid;
   padding: 10px;
   justify-items: center;
-  align-items: center;
 }
 
 .user-profile {
@@ -718,17 +714,18 @@ body {
 .home-page-actions-grid {
   display: grid;
   grid-auto-flow: column;
-  grid-column-gap: 5px;
+  grid-column-gap: 20px;
   justify-items: center;
+  height: 80vh;
 }
 
-.home-page-actions-add {
+/* Action Card*/
+.action-open-page {
   position: relative;
   border: 1px solid;
   border-radius: 4px;
   width: 150px;
   height: 70px;
-  margin: 10px;
   text-align: center;
   cursor: pointer;
   background-color: #ffffff;
@@ -736,17 +733,17 @@ body {
   transition: top ease 0.5s;
 }
 
-.home-page-actions-add:hover {
+.action-open-page:hover {
   top: -2px;
   box-shadow: 0.5px 0.5px 10px 0.8px;
 }
 
-.home-page-actions-add__icon {
+.action-open-page__icon {
   font-size: 25px;
   padding: 5px;
 }
 
-.home-page-actions-add__link {
+.action-open-page__link {
   position: absolute;
   top: 0;
   left: 0;
