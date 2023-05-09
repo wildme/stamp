@@ -269,11 +269,23 @@ body {
 .add-record__label,
 .edit-record__label,
 .add-contact__label {
+  display: inline-block;
   font-weight: bold;
   margin: 2px 0 2px 0;
 }
-.edit-record__checkbox {
+
+.edit-record-file {
+  width: 100%;
+}
+
+.edit-record__edit-record-file {
   margin-top: 8px;
+}
+
+.edit-record-file-checkbox {
+}
+
+.edit-record__edit-record-file-checkbox {
   margin-left: 15px;
 }
 
