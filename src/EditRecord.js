@@ -261,7 +261,7 @@ const EditRecord = () => {
             maxFileSizeExceededMsg={t('editRecord.infoMsg5')}
           />
           {file?.fsName &&
-          <div>
+          <div className="edit-record-file edit-record__edit-record-file">
             <DownloadLink
               linkname={t('editRecord.link')}
               hash={file.fsName}
@@ -270,7 +270,8 @@ const EditRecord = () => {
             <CheckBox
               setter={setDelFile}
               value={delFile}
-              className={"edit-record__checkbox"}
+              className={"edit-record-file-checkbox \
+                edit-record__edit-record-file-checkbox"}
               label={t('editRecord.label1')}
               name={"del-file"}
               id={"del"}
