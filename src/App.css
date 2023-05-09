@@ -245,9 +245,9 @@ body {
 .add-record,
 .edit-record,
 .add-contact {
-  display: grid;
+  width: 300px;
+  padding: 15px;
   border-radius: 4px;
-  padding: 10px;
   box-shadow: 1px 0.8px 9px -1px;
   background-color: #ffffff;
 }
@@ -261,8 +261,9 @@ body {
 .add-record__input,
 .edit-record__input,
 .add-contact__input {
-  width: 300px;
-  height: 30px;
+  width: 100%;
+  height: 35px;
+  box-sizing: border-box;
 }
 
 .add-record__label,
@@ -278,13 +279,14 @@ body {
 
 .add-record__upload,
 .edit-record__upload {
-  width: 300px;
+  width: 100%;
 }
 
 .add-record__submit,
 .edit-record__submit,
 .add-contact__submit,
 .user-info__submit {
+  width: 100%;
   margin-top: 8px;
   height: 40px;
   background-color: #2eb82e;
@@ -312,11 +314,12 @@ body {
 /* Dropzone file */
 .drop-zone-file {
   margin-top: 8px;
-  height: 40px;
-  width: 300px;
+  height: 50px;
+  width: 100%;
   text-align: center;
   border: dashed #8c8c8c 2px;
   padding: 5px 0 5px 0;
+  box-sizing: border-box;
 }
 
 .drop-zone-file_added {
