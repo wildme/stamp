@@ -87,16 +87,16 @@ const Login = () => {
             value={t('login.button')}
             type="submit"
           />
-          <span className="login-form__bottom-msg">{t('login.string')}&nbsp;
+          <div className="login-form__bottom-msg">{t('login.string')}&nbsp;
             <Link to="/signup">{t('login.link')}</Link>
-          </span>
-          <span className="login-form__bottom-msg">{t('login.string2')}&nbsp;
+          </div>
+          <div className="login-form__bottom-msg">{t('login.string2')}&nbsp;
             <button
               className="login-form__bottom-msg login-form__button"
               type="button"
               onClick={() => setOpenModal(true)}>{t('login.button2')}
             </button>?
-          </span>
+          </div>
         </div>
       </form>
       <ForgotPassModal
