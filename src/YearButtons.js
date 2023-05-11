@@ -15,10 +15,12 @@ const YearButtons = (props) => {
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].className = buttons[i].className.replace(activeButtonClassName, "");
     }
-    e.currentTarget.className += ` ${activeButtonClassName}`;
+    e.target.className += ` ${activeButtonClassName}`;
     setter(e.target.value);
-    if (ref.current !== e.target.value) {
-      ref.current = e.target.value;
+    if (Number(e.target.value) !== curY) {
+      ref.current = 1;
+    } else {
+      ref.current = 0;
     }
   };
 
