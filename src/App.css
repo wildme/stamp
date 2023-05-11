@@ -188,12 +188,12 @@ body {
   display: grid;
   width: 100%;
   background-color: #ffffff;
+  overflow-x: auto;
 }
 
 .box-table__table,
 .contacts-table__table {
-  font-family: Ubuntu, Roboto, Arial;
-  font-size: 17px;
+  font-size: 16px;
   border-collapse: collapse;
   text-align: left;
 }
