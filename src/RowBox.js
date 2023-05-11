@@ -7,7 +7,7 @@ import DownloadLink from './DownloadLink.js';
 
 const RowBox = ({ entry, className }) => {
   const box = useContext(BoxContext);
-  const dateStr = new Date(entry.date).toLocaleString();
+  const dateStr = new Date(entry.date).toLocaleDateString();
   const admin = useSelector((state) => state.user.admin);
   const user = useSelector((state) => state.user.username);
   const accessToEdit = admin || (user === entry.user);
