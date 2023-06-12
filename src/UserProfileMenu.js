@@ -9,7 +9,7 @@ const UserProfileMenu = (props) => {
         <li>
           <NavLink
             className="user-profile__navbar_link"
-            exact
+            end
             to="/my-profile">
             {t('userProfile.item1')}
           </NavLink>
@@ -17,7 +17,7 @@ const UserProfileMenu = (props) => {
         <li>
           <NavLink
             className="user-profile__navbar_link"
-            exact
+            end
             to="/my-profile/e-mail">
             {t('userProfile.item2')}
           </NavLink>
@@ -25,7 +25,7 @@ const UserProfileMenu = (props) => {
         <li>
           <NavLink
             className="user-profile__navbar_link"
-            exact
+            end
             to="/my-profile/password">
             {t('userProfile.item3')}
           </NavLink>
@@ -33,7 +33,7 @@ const UserProfileMenu = (props) => {
         <li>
           <NavLink
             className="user-profile__navbar_link"
-            exact
+            end
             to="/my-profile/settings">
             {t('userProfile.item4')}
           </NavLink>

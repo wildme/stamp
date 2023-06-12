@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FlashMessage from './FlashMessage.js';
 import PasswordInputEye from './PasswordInputEye.js';
@@ -13,7 +13,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const Signup = () => {
           }
           if (data === 0) {
             setInfoMsg({str: t('signup.infoMsg5'), id: Math.random(), type: 'success'});
-            setTimeout(() => { history.replace('/login'); }, 3000);
+            setTimeout(() => { navigate('/login', { replace: true }); }, 3000);
           }
           if (data.error) {
             if (data.error === 'user exists') {

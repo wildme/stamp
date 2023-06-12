@@ -13,7 +13,8 @@ const onPageReload = (dispatch, navigate, location) => {
         dispatch({ type: 'INFO', payload: { info: null } });
         dispatch({ type: 'SETTINGS', payload: { settings: null } });
         dispatch({ type: 'LOGIN', payload: { user:
-          { username: null, admin: null, loggedIn: false } }});return 1;
+          { username: null, admin: null, loggedIn: false } }});
+        return 1;
       }
       if (res.status === 500) {
         return 1;

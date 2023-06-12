@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import FlashMessage from './FlashMessage.js';
@@ -13,7 +13,7 @@ const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { from } = location.state || { from: { pathname: "/" } }; ;
 
@@ -53,7 +53,7 @@ const Login = () => {
           dispatch({ type: 'SETTINGS', payload:
             { settings: data.settings }
           });
-          history.replace(from);
+          navigate(from, { replace: true });
         }
       })
       .catch((e) => console.error(e))

@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import UserInfo from './UserInfo.js';
 import UserEmail from './UserEmail.js';
 import UserPassword from './UserPassword.js';
@@ -14,9 +14,9 @@ const UserProfileContent = (props) => {
 
   return (
     <div className="user-profile-info">
-      <Switch>
-        <Route path="/my-profile/e-mail"
-          render={() =>
+      <Routes>
+        <Route path="e-mail"
+          element={
             <UserEmail
               user={username}
               t={t}
@@ -24,8 +24,8 @@ const UserProfileContent = (props) => {
             />
           }
         />
-        <Route path="/my-profile/password"
-          render={() =>
+        <Route path="password"
+          element={
               <UserPassword
                 user={username}
                 t={t}
@@ -33,8 +33,8 @@ const UserProfileContent = (props) => {
               />
           }
         />
-        <Route path="/my-profile/settings"
-          render={() =>
+        <Route path="settings"
+          element={
               <UserSettings
                 user={username}
                 settings={settings}
@@ -44,7 +44,7 @@ const UserProfileContent = (props) => {
           }
         />
         <Route path="*"
-          render={() =>
+          element={
               <UserInfo
                 user={username}
                 name1={name1}
@@ -54,7 +54,7 @@ const UserProfileContent = (props) => {
               />
           }
         />
-      </Switch>
+      </Routes>
     </div>
   );
 };
