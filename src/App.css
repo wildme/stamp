@@ -820,3 +820,19 @@ body {
 .filter-by-year__button_active {
   background-color: #80dfff;
 }
+/* Blank page with logo*/
+.logo-blank-page {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo-wrapper {
+  width: 90px;
+  height: 90px;
+  background-color: #000000;
+  border-radius: 5px;
+}
+.logo-blank-page__logo-wrapper {
+  margin: 300px
+}
