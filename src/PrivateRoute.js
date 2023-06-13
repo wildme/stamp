@@ -1,5 +1,6 @@
 import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import LogoBlankPage from './LogoBlankPage.js';
 
 const onPageReload = (dispatch, navigate, location) => {
   const url = "/api/page-reload";
@@ -43,7 +44,7 @@ const PrivateRoute = ({ children }) => {
 
   if (!user) {
     onPageReload(dispatch, navigate, location);
-    return <p></p>;
+    return <LogoBlankPage />;
   }
   return (user.loggedIn ?
     children :
