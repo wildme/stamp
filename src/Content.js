@@ -13,7 +13,6 @@ import NewContact from './NewContact.js';
 import ErrorPage from './ErrorPage.js';
 import UserProfile from './UserProfile.js';
 import PrivateRoute from './PrivateRoute.js';
-import LogoBlankPage from './LogoBlankPage.js';
 
 const Content = () => {
   return (
