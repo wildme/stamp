@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import InputField from './InputField.js';
 import SubmitButton from './SubmitButton.js';
 import { InputAttrs as attrs } from './InputAttrs.js';
 
-const UserEmail = ({ user, t, setter }) => {
+const UserEmail = ({ user, setter }) => {
   const state = useSelector((state) => state.info);
   const [email, setEmail] = useState(state.email);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleEmailUpdate = () => {
     if (email === state.email) return;

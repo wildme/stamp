@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import InputField from './InputField.js';
 import SubmitButton from './SubmitButton.js';
 import { InputAttrs as attrs } from './InputAttrs.js';
 
-const UserInfo = ({ user, name1, name2, t, setter }) => {
+const UserInfo = ({ user, name1, name2, setter }) => {
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
   const state = useSelector((state) => state.info);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleInfoUpdate = () => {
     const url = "/api/user/update/info";

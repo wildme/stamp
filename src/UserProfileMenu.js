@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const UserProfileMenu = (props) => {
-  const t = props.t;
-    
+const UserProfileMenu = () => {
+  const { t } = useTranslation();
   return (
     <div className="user-profile__navbar">
       <ul className="user-profile__navbar_list">

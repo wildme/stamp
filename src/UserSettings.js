@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-const UserSettings = ({ user, t, setter, settings }) => {
+const UserSettings = ({ user, setter, settings }) => {
   const [sortOrder, setSortOrder] = useState({
     records: { sortOrder: settings.records.sortOrder }
   });
   const state = useSelector((state) => state.settings);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleSettingsUpdate = (e) => {
     e.preventDefault();

@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import PasswordInputEye from './PasswordInputEye.js';
 import SubmitButton from './SubmitButton.js';
 
-const UserPassword = ({user, t, setter, setter2}) => {
+const UserPassword = ({user, setter, setter2}) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handlePassUpdate = () => {
     const url = "/api/user/update/password";
