@@ -1,8 +1,6 @@
 import { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
 
  const InputField = (props) => {
-  const { t } = useTranslation();
   const id = props.id;
   const attrs = props.attrs;
   const setter = props.setter;
@@ -13,7 +11,7 @@ import { useTranslation } from 'react-i18next';
   return (
     <Fragment>
       <label htmlFor={attrs.for} className={labelClassName}>
-        {t(attrs.text)}
+        {attrs.text}
       </label>
       <input
         className={inputClassName}
