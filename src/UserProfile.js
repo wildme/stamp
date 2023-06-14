@@ -18,10 +18,12 @@ const UserProfile = () => {
     {infoMsg.str &&
        <FlashMessage msg={infoMsg.str} id={infoMsg.id } type={infoMsg.type} />}
       <div className="user-profile">
-        <UserProfileTitle t={t} fullname={fullname}/>
-        <UserProfileMenu t={t} />
+        <UserProfileTitle
+          subtitle={t('userProfile.subTitle')}
+          fullname={fullname}
+        />
+        <UserProfileMenu />
         <UserProfileContent
-          t={t}
           username={username}
           fullname={fullname}
           setInfoMsg={setInfoMsg}
