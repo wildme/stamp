@@ -55,7 +55,7 @@
   },
   "email": {
     "title": "Change e-mail",
-    "label1": "e-mail",
+    "label1": "E-mail",
     "button": "Change",
     "infoMsg1": "Error. Failed to change e-mail",
     "infoMsg2": "E-mail is taken",
