@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputField.js';
+import InputSearchField from './InputSearchField.js'
 import InputFile from './InputFile.js';
 import SubmitButton from './SubmitButton.js';
 import DropZoneFileUpload from './DropZoneFileUpload.js';
@@ -31,6 +32,7 @@ const NewRecord = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [nextId, setNextId] = useState(undefined);
   const [success, setSuccess] = useState(false);
+  const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
   const { t } = useTranslation();
   const MAX_FILE_SIZE = 5000000;
 
@@ -193,13 +195,17 @@ const NewRecord = () => {
           inputClassName="add-record__input"
           labelClassName="add-record__label"
         />
-        <InputField
-          id="new"
-          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
+        <InputSearchField
           setter={setReplyTo}
-          value={replyTo}
+          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
+          url={`/api/${replyToBox}/search-by-id`}
           inputClassName="add-record__input"
           labelClassName="add-record__label"
+          listClassName="search-input-list"
+          itemClassName="search-input-list__item"
+          activeItemClassName="search-input-list__item_active"
+          noMatchesClassName="search-input-no-matches"
+          noMatchesMsg={t('newRecord.string1')}
         />
         <InputField
           id="new"
