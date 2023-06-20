@@ -628,6 +628,47 @@ body {
 .add-record-grid_banner_nextid {
   margin: 15px;
 }
+/* InputSearchField */
+.search-input-list {
+  position: absolute;
+  width: inherit;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 4px;
+  background-color: #ffffff;
+  list-style-type: none;
+  overflow: auto;
+  max-height: 200px;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.search-input-list__item {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 5px 0  5px 0;
+  font-size: 18px;
+}
+
+.search-input-list__item:not(:last-of-type) {
+  border-bottom: 1px solid grey;
+}
+.search-input-list__item:hover {
+  cursor: pointer;
+  background-color: #94b8b8;
+  color: #ffffff;
+}
+
+.search-input-list__item_active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.search-input-no-matches {
+  font-style: italic;
+  color: #0099ff;
+}
 
 /* Add/edit record: autocomplete menu */
 .options {
