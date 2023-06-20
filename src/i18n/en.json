@@ -92,7 +92,8 @@
     "infoMsg1": "Error. Failed to add record",
     "infoMsg2": "Error. Failed to upload file",
     "infoMsg3": "Record has been successfully added",
-    "infoMsg4": "This number will be assigned: "
+    "infoMsg4": "This number will be assigned: ",
+    "string1": "No matches"
   },
   "editRecord": {
     "link": "Download",
