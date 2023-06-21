@@ -1,14 +1,13 @@
-import { useState, Fragment, useContext } from 'react';
+import { useState, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { HiPencil, HiCheckCircle, HiXCircle, HiTrash } from 'react-icons/hi';
 import { useTranslation } from 'react-i18next';
-import { ContactsContext } from './TableContacts.js';
 
 function logout(dispatch) {
   dispatch({ type: 'LOGIN', payload: { user: { loggedIn: false } }});
 }
 
-const RowContacts = ({ entry, className }) => {
+const RowContacts = ({ entry, className, setter }) => {
   const dispatch = useDispatch();
   const [editOn, setEditOn] = useState(false);
   const [name, setName] = useState(entry.name);
@@ -16,8 +15,6 @@ const RowContacts = ({ entry, className }) => {
   const [region, setRegion] = useState(entry.region);
   const [deleted, setDeleted] = useState(false);
   const { t } = useTranslation();
-
-  const setter = useContext(ContactsContext);
 
   const handleEdit = () => { setEditOn(true); };
 
