@@ -1,9 +1,6 @@
-import { createContext } from 'react';
+import RowContacts from './RowContacts.js';
 import TableHead from './TableHead.js';
 import ContactsTableColumnLabels  from './ContactsTableColumnLabels.js';
-import Rows from './Rows.js';
-
-export const ContactsContext = createContext();
 
 const TableContacts = (props) => {
   const content = props.content;
@@ -21,15 +18,18 @@ const TableContacts = (props) => {
           trClassName={`${className}__tr`}
           thClassName={`${className}__th`}
         />
-        <ContactsContext.Provider value={setter}>
-          {content &&
-              <Rows
-                rows={content}
-                kind="contacts"
-                className={className}
-              />
-          }
-        </ContactsContext.Provider>
+        {content && (
+          <tbody>
+            {content.map((row, index) => {
+              return (<RowContacts
+                        entry={row}
+                        key={index}
+                        className={className}
+                        setter={setter}
+                     />);
+            })}
+          </tbody>)
+        }
       </table>
         {noData && <p><i>{noDataMsg}</i></p>}
     </div>

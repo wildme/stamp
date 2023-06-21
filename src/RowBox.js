@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { HiPencil, HiDownload } from 'react-icons/hi';
-import { BoxContext } from './TableBox.js';
 import DownloadLink from './DownloadLink.js';
 
-const RowBox = ({ entry, className }) => {
-  const box = useContext(BoxContext);
+const RowBox = ({ entry, className, box }) => {
   const dateStr = new Date(entry.date).toLocaleDateString();
   const admin = useSelector((state) => state.user.admin);
   const user = useSelector((state) => state.user.username);
   const accessToEdit = admin || (user === entry.user);
+  const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
 
   return (
     <Fragment>
@@ -32,7 +31,11 @@ const RowBox = ({ entry, className }) => {
             />
              : '-'}
         </td>
-        <td className={`${className}__td`}>{entry.reply || '-'}</td>
+        <td className={`${className}__td`}>
+          {entry.reply ?
+              <Link to={`/${replyToBox}/view/${entry.reply}`}>{entry.reply}</Link>
+              : '-'}
+        </td>
         <td className={`${className}__td`}>
           {accessToEdit &&
             <Link to={`/${box}/edit/${entry.id}`}><HiPencil /></Link>

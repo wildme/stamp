@@ -1,9 +1,6 @@
-import { createContext } from 'react';
 import TableHead from './TableHead.js';
-import Rows from './Rows.js';
+import RowBox from './RowBox.js';
 import BoxTableColumnLabels  from './BoxTableColumnLabels.js';
-
-export const BoxContext = createContext();
 
 const TableBox = (props) => {
   const content = props.content;
@@ -29,15 +26,18 @@ const TableBox = (props) => {
           column={column}
           noData={noData}
         />
-        <BoxContext.Provider value={table}>
-          {content &&
-              <Rows
-                rows={content}
-                kind='box'
-                className={className}
-              />
+          {content && (
+            <tbody>
+              {content.map((row, index) => {
+                return (<RowBox
+                          entry={row}
+                          key={index}
+                          className={className}
+                          box={table}
+                       />);
+              })}
+            </tbody>)
           }
-        </BoxContext.Provider>
       </table>
         {noData && <p><i>{noDataMsg}</i></p>}
     </div>
