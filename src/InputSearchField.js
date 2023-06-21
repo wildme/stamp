@@ -35,8 +35,8 @@ const InputSearchField = (props) => {
     if (e.key === 'Enter') {
       setActiveItem(0);
       setVisibility(false);
-      setter(results[activeItem].id);
-      setInputValue(results[activeItem].id);
+      setter(results[activeItem]);
+      setInputValue(results[activeItem]);
       return;
     }
     if (e.key === 'ArrowUp') {
@@ -57,7 +57,7 @@ const InputSearchField = (props) => {
     if (results.length) {
       optionList = (
         <ul className={listClassName}>
-          {results.map((key, i) => {
+          {results.map((match, i) => {
             return (
               <li
                 className={(i === activeItem) ?
@@ -65,7 +65,7 @@ const InputSearchField = (props) => {
                   itemClassName}
                   key={i}
                   onClick={(e) => onClick(e)}
-                >{key.id}
+                >{match}
               </li>
               );
             })}
@@ -79,7 +79,10 @@ const InputSearchField = (props) => {
   useEffect(() => {
     const token = localStorage.getItem('at');
     const abortController = new AbortController();
-    if (pattern === '') return;
+    if (pattern === '') {
+      setActiveItem(0);
+      return;
+    }
   
     fetch(url, {
       method: 'POST',
