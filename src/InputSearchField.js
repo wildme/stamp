@@ -22,11 +22,12 @@ const InputSearchField = (props) => {
   const activeItemClassName = props.activeItemClassName;
   const noMatchesClassName = props.noMatchesClassName;
   const noMatchesMsg = props.noMatchesMsg;
+  const prefix = props.prefix;
   let optionList;
 
   const onClick = (e) => {
-    setter(e.currentTarget.innerText);
-    setInputValue(e.currentTarget.innerText);
+    setter(e.currentTarget.innerText.replace(prefix, ''));
+    setInputValue(e.currentTarget.innerText.replace(prefix, ''));
     setVisibility(false);
     setActiveItem(0);
   };
@@ -35,8 +36,8 @@ const InputSearchField = (props) => {
     if (e.key === 'Enter') {
       setActiveItem(0);
       setVisibility(false);
-      setter(results[activeItem]);
-      setInputValue(results[activeItem]);
+      setter(results[activeItem].replace(prefix, ''));
+      setInputValue(results[activeItem]).replace(prefix, '');
       return;
     }
     if (e.key === 'ArrowUp') {
@@ -60,12 +61,10 @@ const InputSearchField = (props) => {
           {results.map((match, i) => {
             return (
               <li
-                className={(i === activeItem) ?
-                  itemClassName + " " + activeItemClassName :
-                  itemClassName}
-                  key={i}
-                  onClick={(e) => onClick(e)}
-                >{match}
+                className={(i === activeItem) ? activeItemClassName : itemClassName}
+                key={i}
+                onClick={(e) => onClick(e)}
+              >{prefix}{match}
               </li>
               );
             })}
