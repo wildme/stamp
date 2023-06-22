@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
+import { stampI18n } from './stampI18n.js';
 import InputField from './InputField.js';
 import InputSearchField from './InputSearchField.js'
 import InputFile from './InputFile.js';
@@ -33,6 +34,7 @@ const NewRecord = () => {
   const [nextId, setNextId] = useState(undefined);
   const [success, setSuccess] = useState(false);
   const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
+  const replyToPrefix = stampI18n[replyToBox].map(x => x.prefix);
   const { t } = useTranslation();
   const MAX_FILE_SIZE = 5000000;
 
@@ -199,6 +201,7 @@ const NewRecord = () => {
           setter={setReplyTo}
           attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
           url={`/api/${replyToBox}/search-by-id`}
+          prefix={replyToPrefix}
           inputClassName="add-record__input"
           labelClassName="add-record__label"
           listClassName="search-input-list"
