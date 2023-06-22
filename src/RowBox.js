@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { HiPencil, HiDownload } from 'react-icons/hi';
+import { stampI18n } from './stampI18n.js';
 import DownloadLink from './DownloadLink.js';
 
 const RowBox = ({ entry, className, box }) => {
@@ -10,6 +11,7 @@ const RowBox = ({ entry, className, box }) => {
   const user = useSelector((state) => state.user.username);
   const accessToEdit = admin || (user === entry.user);
   const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
+  const prefix = stampI18n[replyToBox].map(x => x.prefix);
 
   return (
     <Fragment>
@@ -33,7 +35,9 @@ const RowBox = ({ entry, className, box }) => {
         </td>
         <td className={`${className}__td`}>
           {entry.reply ?
-              <Link to={`/${replyToBox}/view/${entry.reply}`}>{entry.reply}</Link>
+              <>{prefix}<Link to={`/${replyToBox}/view/${entry.reply}`}>
+              {entry.reply}
+              </Link></>
               : '-'}
         </td>
         <td className={`${className}__td`}>
