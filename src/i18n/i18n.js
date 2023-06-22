@@ -151,7 +151,9 @@ const resources = {
         tabInbox: en.main.tabInbox,
         tabOutbox: en.main.tabOutbox,
         infoMsg1: en.main.infoMsg1,
-        infoMsg2: en.main.infoMsg2
+        infoMsg2: en.main.infoMsg2,
+        prefix1: en.main.prefix1,
+        prefix2: en.main.prefix2
       },
       headerCellBox: {
         label1: en.headerCellBox.label1,
@@ -345,11 +347,11 @@ const resources = {
         infoMsg3: ru.recordCard.infoMsg3
       },
       newContact: {
-        "label1": ru.newContact.label1,
-        "label2": ru.newContact.label2,
-        "label3": ru.newContact.label3,
-        "button": ru.newContact.button,
-        "infoMsg": ru.newContact.infoMsg
+        label1: ru.newContact.label1,
+        label2: ru.newContact.label2,
+        label3: ru.newContact.label3,
+        button: ru.newContact.button,
+        infoMsg: ru.newContact.infoMsg
       },
       main: {
         titleInbox: ru.main.titleInbox,
@@ -357,7 +359,9 @@ const resources = {
         tabInbox: ru.main.tabInbox,
         tabOutbox: ru.main.tabOutbox,
         infoMsg1: ru.main.infoMsg1,
-        infoMsg2: ru.main.infoMsg2
+        infoMsg2: ru.main.infoMsg2,
+        prefix1: ru.main.prefix1,
+        prefix2: ru.main.prefix2
       },
       headerCellBox: {
         label1: ru.headerCellBox.label1,

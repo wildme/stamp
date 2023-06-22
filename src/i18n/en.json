@@ -143,7 +143,9 @@
     "tabInbox": "Inbox",
     "tabOutbox": "Outbox",
     "infoMsg1": "Error. Failed to retrieve data",
-    "infoMsg2": "No records"
+    "infoMsg2": "No records",
+    "prefix1": "In. ",
+    "prefix2": "Out. "
   },
   "headerCellBox": {
     "label1": "Subject",

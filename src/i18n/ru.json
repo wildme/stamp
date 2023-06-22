@@ -143,7 +143,9 @@
     "tabInbox": "Входящие",
     "tabOutbox": "Исходящие",
     "infoMsg1": "Не удалось получить данные",
-    "infoMsg2": "Нет записей"
+    "infoMsg2": "Нет записей",
+    "prefix1": "Вх. ",
+    "prefix2": "Исх. "
   },
   "headerCellBox": {
     "label1": "Тема",
