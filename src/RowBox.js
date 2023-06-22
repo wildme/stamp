@@ -35,9 +35,9 @@ const RowBox = ({ entry, className, box }) => {
         </td>
         <td className={`${className}__td`}>
           {entry.reply ?
-              <>{prefix}<Link to={`/${replyToBox}/view/${entry.reply}`}>
-              {entry.reply}
-              </Link></>
+              <Link to={`/${replyToBox}/view/${entry.reply}`}>
+              {prefix}{entry.reply}
+              </Link>
               : '-'}
         </td>
         <td className={`${className}__td`}>
