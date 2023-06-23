@@ -3,6 +3,15 @@ import { initReactI18next } from 'react-i18next';
 import ru from './ru.json';
 import en from './en.json';
 
+(async () => {
+  await fetch("/api/get/language")
+    .then(res => res.json())
+    .then(data => localStorage.setItem("lang", data))
+}
+)();
+
+const lng = localStorage.getItem("lang");
+
 const resources = {
   en: {
     translation: {
@@ -425,16 +434,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
+    lng: lng,
     supportedLngs: ['en', 'ru'],
-    fallbackLng: 'ru',
+    fallbackLng: 'en',
     interpolation: { escapeValue: false }
   });
-
-(async () => {
-  await fetch("/api/get/language")
-    .then(res => res.json())
-    .then(data => i18n.changeLanguage(data))
-    .catch((e) => console.error(e))
-})();
 
 export default i18n;
