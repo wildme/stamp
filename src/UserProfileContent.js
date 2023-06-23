@@ -5,7 +5,6 @@ import UserPassword from './UserPassword.js';
 import UserSettings from './UserSettings.js';
 
 const UserProfileContent = (props) => {
-  const t = props.t;
   const username = props.username;
   const fullname = props.fullname;
   const setInfoMsg = props.setInfoMsg;
@@ -19,7 +18,6 @@ const UserProfileContent = (props) => {
           element={
             <UserEmail
               user={username}
-              t={t}
               setter={setInfoMsg}
             />
           }
@@ -28,7 +26,6 @@ const UserProfileContent = (props) => {
           element={
               <UserPassword
                 user={username}
-                t={t}
                 setter={setInfoMsg}
               />
           }
@@ -38,7 +35,6 @@ const UserProfileContent = (props) => {
               <UserSettings
                 user={username}
                 settings={settings}
-                t={t}
                 setter={setInfoMsg}
               />
           }
@@ -49,7 +45,6 @@ const UserProfileContent = (props) => {
                 user={username}
                 name1={name1}
                 name2={name2}
-                t={t}
                 setter={setInfoMsg}
               />
           }
