@@ -49,7 +49,6 @@ const UserInfo = ({ user, name1, name2, setter }) => {
         <h2 className="user-info__title_section">{t('personalInfo.title')}</h2>
       </div>
       <InputField
-        id="user-profile"
         attrs={attrs['userProfile'].find(x => x.name === "firstname")}
         setter={setFirstname}
         value={firstname}
@@ -57,7 +56,6 @@ const UserInfo = ({ user, name1, name2, setter }) => {
         labelClassName="user-info__label"
       />
       <InputField
-        id="user-profile"
         attrs={attrs['userProfile'].find(x => x.name === "lastname")}
         setter={setLastname}
         value={lastname}

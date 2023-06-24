@@ -51,7 +51,6 @@ const UserEmail = ({ user, setter }) => {
         <h2 className="user-info__title_section">{t('email.title')}</h2>
       </div>
       <InputField
-        id="user-profile"
         attrs={attrs['userProfile'].find(x => x.name === "email")}
         setter={setEmail}
         value={email}
