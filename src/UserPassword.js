@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { InputAttrs as attrs } from './InputAttrs.js';
+import InputField from './InputField.js';
 import PasswordInputEye from './PasswordInputEye.js';
 import SubmitButton from './SubmitButton.js';
 
@@ -51,18 +53,12 @@ const UserPassword = ({user, setter, setter2}) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('password.title')}</h2>
       </div>
-      <label
-        htmlFor="old-pass"
-        className="user-info__label"
-      ><b>{t('password.label1')}</b>
-      </label>
-      <input
-        className="user-info__input"
-        type="password"
-        name="old-pass"
+      <InputField
+        attrs={attrs['userProfile'].find(x => x.name === 'old-pass')}
+        setter={setOldPass}
         value={oldPass}
-        required
-        onChange={(e) => setOldPass(e.target.value)}
+        inputClassName="user-info__input"
+        labelClassName="user-info__label"
       />
       <PasswordInputEye
         className="user-info-password"
