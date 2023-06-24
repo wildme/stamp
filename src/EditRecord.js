@@ -116,10 +116,6 @@ const EditRecord = () => {
           setClearDropZone(!clearDropZone);
           setClearInputFile(!clearInputFile);
           setNewFile(null);
-          localStorage.removeItem(`${box}-subj-${id}`);
-          localStorage.removeItem(`${box}-addr-${id}`);
-          localStorage.removeItem(`${box}-note-${id}`);
-          localStorage.removeItem(`${box}-replyTo-${id}`);
           setInfoMsg({str: t('editRecord.infoMsg6'), id: Math.random(), type: 'success'});
           setDisableBtn(false);
           const contentType = res.headers.get('Content-Type');
@@ -167,11 +163,6 @@ const EditRecord = () => {
     const url = `/api/edit/${box}/${id}`;
     const token = localStorage.getItem('at');
 
-    const storeSubj = localStorage.getItem(`${box}-subj-${id}`);
-    const storeFromTo = localStorage.getItem(`${box}-addr-${id}`);
-    const storeNote = localStorage.getItem(`${box}-note-${id}`);
-    const storeReplyTo = localStorage.getItem(`${box}-replyTo-${id}`);
-
     fetch(url, { headers: { 'Authorization': `Bearer ${token}` }, signal })
       .then(res =>  {
         if (res.status === 200) {
@@ -196,10 +187,10 @@ const EditRecord = () => {
           localStorage.setItem('at', data.token);
         }
         if (data !== 1) {
-          setSubject(storeSubj || data.record.subj);
-          setFromTo(storeFromTo || data.record.addr);
-          setNote(storeNote || data.record?.note);
-          setReplyTo(storeReplyTo || data.record?.reply);
+          setSubject(data.record.subj);
+          setFromTo(data.record.addr);
+          setNote(data.record?.note);
+          setReplyTo(data.record?.reply);
           setFile(data.record?.file);
           setOwner(data.record.user);
         }
@@ -217,7 +208,6 @@ const EditRecord = () => {
           <FlashMessage msg={infoMsg.str} id={infoMsg.id} type={infoMsg.type} />}
         <div className="edit-record edit-record-grid__edit-record">
           <InputField
-            id={id}
             attrs={attrs[box].find(x => x.name ===`${box}-subj`)}
             setter={setSubject}
             value={subject}
@@ -225,7 +215,6 @@ const EditRecord = () => {
             labelClassName="edit-record__label"
           />
           <InputField
-            id={id}
             attrs={attrs[box].find(x => x.name === `${box}-addr`)}
             setter={setFromTo}
             value={fromTo}
@@ -234,7 +223,6 @@ const EditRecord = () => {
             labelClassName="edit-record__label"
           />
           <InputField
-            id={id}
             attrs={attrs[box].find(x => x.name === `${box}-replyTo`)}
             setter={setReplyTo}
             value={replyTo}
@@ -242,7 +230,6 @@ const EditRecord = () => {
             labelClassName="edit-record__label"
           />
           <InputField
-            id={id}
             attrs={attrs[box].find(x => x.name === `${box}-note`)}
             setter={setNote}
             value={note}

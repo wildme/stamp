@@ -88,10 +88,6 @@ const NewRecord = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          localStorage.removeItem(`${box}-subj-new`);
-          localStorage.removeItem(`${box}-addr-new`);
-          localStorage.removeItem(`${box}-note-new`);
-          localStorage.removeItem(`${box}-replyTo-new`);
           setSuccess(true);
           return res.json();
         }
@@ -182,7 +178,6 @@ const NewRecord = () => {
       />
       <div className="add-record add-record-grid__add-record">
         <InputField
-          id="new"
           attrs={attrs[box].find(x => x.name === `${box}-subj`)}
           setter={setSubject}
           value={subject}
@@ -190,7 +185,6 @@ const NewRecord = () => {
           labelClassName="add-record__label"
         />
         <InputField
-          id="new"
           attrs={attrs[box].find(x => x.name === `${box}-addr`)}
           setter={setFromTo}
           value={fromTo}
@@ -211,7 +205,6 @@ const NewRecord = () => {
           noMatchesMsg={t('newRecord.string1')}
         />
         <InputField
-          id="new"
           attrs={attrs[box].find(x => x.name === `${box}-note`)}
           setter={setNote}
           value={note}

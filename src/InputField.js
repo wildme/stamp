@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 
  const InputField = (props) => {
-  const id = props.id;
   const attrs = props.attrs;
   const setter = props.setter;
   const value = props.value;
@@ -11,17 +10,14 @@ import { Fragment } from 'react';
   return (
     <Fragment>
       <label htmlFor={attrs.for} className={labelClassName}>
-        {attrs.text}
+      {attrs.text}
       </label>
       <input
         className={inputClassName}
         type={attrs.type}
         name={attrs.name}
         value={value}
-        onChange={(e) => {
-          setter(e.target.value);
-          localStorage.setItem(`${attrs.name}-${id}`, e.target.value)
-        }}
+        onChange={(e) => setter(e.target.value)}
       />
     </Fragment>
   )
