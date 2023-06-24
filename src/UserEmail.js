@@ -5,14 +5,15 @@ import InputField from './InputField.js';
 import SubmitButton from './SubmitButton.js';
 import { InputAttrs as attrs } from './InputAttrs.js';
 
-const UserEmail = ({ user, setter }) => {
-  const state = useSelector((state) => state.info);
-  const [email, setEmail] = useState(state.email);
+const UserEmail = ({ setter }) => {
+  const user = useSelector((state) => state.user.username);
+  const info = useSelector((state) => state.info);
+  const [email, setEmail] = useState(info.email);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleEmailUpdate = () => {
-    if (email === state.email) return;
+    if (email === info.email) return;
     const url = "/api/user/update/email";
     const token = localStorage.getItem('at');
 
@@ -29,7 +30,7 @@ const UserEmail = ({ user, setter }) => {
           if (res.token) {
             localStorage.setItem('at', res.token);
           }
-          dispatch({ type: 'INFO', payload: { info: {...state,  email: email } }});
+          dispatch({ type: 'INFO', payload: { info: {...info,  email: email } }});
           setter({str: t('email.infoMsg3'), id: Math.random(), type: 'success'});
         }
         if (res.status === 401) {

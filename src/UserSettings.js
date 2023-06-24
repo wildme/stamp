@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SubmitButton from './SubmitButton.js';
 
-const UserSettings = ({ user, setter, settings }) => {
-  const [sortOrder, setSortOrder] = useState({
-    records: { sortOrder: settings.records.sortOrder }
-  });
-  const state = useSelector((state) => state.settings);
+const UserSettings = ({ setter }) => {
+  const user = useSelector((state) => state.user.username);
+  const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [sortOrder, setSortOrder] = useState({
+    records: { sortOrder: settings.records.sortOrder } });
 
   const handleSettingsUpdate = () => {
     const url = "/api/user/update/settings";
@@ -27,7 +27,7 @@ const UserSettings = ({ user, setter, settings }) => {
           if (res.token) {
             localStorage.setItem('at', res.token);
           }
-          dispatch({ type: 'SETTINGS', payload: { settings: {...state, ...sortOrder } }});
+          dispatch({ type: 'SETTINGS', payload: { settings: {...settings, ...sortOrder } }});
           setter({str: t('userSettings.infoMsg1'), id: Math.random(), type: 'success'});
         }
         if (res.status === 500) {

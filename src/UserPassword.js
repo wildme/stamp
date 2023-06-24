@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { InputAttrs as attrs } from './InputAttrs.js';
 import InputField from './InputField.js';
 import PasswordInputEye from './PasswordInputEye.js';
 import SubmitButton from './SubmitButton.js';
 
-const UserPassword = ({user, setter, setter2}) => {
+const UserPassword = ({ setter }) => {
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const user = useSelector((state) => state.user.username);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 

@@ -5,10 +5,12 @@ import InputField from './InputField.js';
 import SubmitButton from './SubmitButton.js';
 import { InputAttrs as attrs } from './InputAttrs.js';
 
-const UserInfo = ({ user, name1, name2, setter }) => {
+const UserInfo = ({ setter }) => {
+  const user = useSelector((state) => state.user.username);
+  const info = useSelector((state) => state.info);
+  const [name1, name2] = info.fullname.split(' ');
   const [firstname, setFirstname] = useState(name1);
   const [lastname, setLastname] = useState(name2);
-  const state = useSelector((state) => state.info);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -29,7 +31,7 @@ const UserInfo = ({ user, name1, name2, setter }) => {
             localStorage.setItem('at', res.token);
           }
           dispatch({ type: 'INFO',
-            payload: { info: {...state,  fullname: [firstname, lastname].join(' ') }}
+            payload: { info: {...info,  fullname: [firstname, lastname].join(' ') }}
           });
           setter({str: t('personalInfo.infoMsg2'), id: Math.random(), type: 'success'});
         }
