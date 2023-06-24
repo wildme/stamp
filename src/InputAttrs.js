@@ -91,6 +91,12 @@ export const InputAttrs = {
       text: i18next.t('email.label1'),
       name: 'email',
       type: 'email'
+    },
+    {
+      for: 'old-pass',
+      text: i18next.t('password.label1'),
+      name: 'old-pass',
+      type: 'password'
     }
   ]
 };
