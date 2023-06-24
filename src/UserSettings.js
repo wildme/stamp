@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import SubmitButton from './SubmitButton.js';
 
 const UserSettings = ({ user, setter, settings }) => {
   const [sortOrder, setSortOrder] = useState({
@@ -10,8 +11,7 @@ const UserSettings = ({ user, setter, settings }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const handleSettingsUpdate = (e) => {
-    e.preventDefault();
+  const handleSettingsUpdate = () => {
     const url = "/api/user/update/settings";
     const token = localStorage.getItem('at');
     fetch(url, {
@@ -45,7 +45,7 @@ const UserSettings = ({ user, setter, settings }) => {
       <label
         htmlFor="sortOrder"
         className="user-info__label"
-      ><b>{t('userSettings.label1')}</b>
+      >{t('userSettings.label1')}
       </label>
       <select
         className="user-info__select"
@@ -56,11 +56,12 @@ const UserSettings = ({ user, setter, settings }) => {
         <option value="asc">{t('userSettings.optSort1')}</option>
         <option value="desc">{t('userSettings.optSort2')}</option>
       </select>
-      <button
-        className="user-info__submit"
-        type="submit"
-        onClick={(e) => handleSettingsUpdate(e)}>{t('personalInfo.button')}
-      </button>
+      <SubmitButton
+        name={t('personalInfo.button')}
+        className={"user-info__submit"}
+        disabled={false}
+        setter={handleSettingsUpdate}
+      />
     </div>
   );
 };
