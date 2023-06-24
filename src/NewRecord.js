@@ -183,7 +183,7 @@ const NewRecord = () => {
       <div className="add-record add-record-grid__add-record">
         <InputField
           id="new"
-          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-subj`)[0]}
+          attrs={attrs[box].find(x => x.name === `${box}-subj`)}
           setter={setSubject}
           value={subject}
           inputClassName="add-record__input"
@@ -191,7 +191,7 @@ const NewRecord = () => {
         />
         <InputField
           id="new"
-          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
+          attrs={attrs[box].find(x => x.name === `${box}-addr`)}
           setter={setFromTo}
           value={fromTo}
           inputClassName="add-record__input"
@@ -199,7 +199,7 @@ const NewRecord = () => {
         />
         <InputSearchField
           setter={setReplyTo}
-          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
+          attrs={attrs[box].find(x => x.name === `${box}-replyTo`)}
           url={`/api/${replyToBox}/search-by-id`}
           prefix={replyToPrefix}
           inputClassName="add-record__input"
@@ -212,7 +212,7 @@ const NewRecord = () => {
         />
         <InputField
           id="new"
-          attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
+          attrs={attrs[box].find(x => x.name === `${box}-note`)}
           setter={setNote}
           value={note}
           inputClassName="add-record__input"

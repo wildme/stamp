@@ -50,7 +50,7 @@ const UserInfo = ({ user, name1, name2, setter }) => {
       </div>
       <InputField
         id="user-profile"
-        attrs={attrs['userProfile'].filter((x) => x.name === "firstname")[0]}
+        attrs={attrs['userProfile'].find(x => x.name === "firstname")}
         setter={setFirstname}
         value={firstname}
         inputClassName="user-info__input"
@@ -58,7 +58,7 @@ const UserInfo = ({ user, name1, name2, setter }) => {
       />
       <InputField
         id="user-profile"
-        attrs={attrs['userProfile'].filter((x) => x.name === "lastname")[0]}
+        attrs={attrs['userProfile'].find(x => x.name === "lastname")}
         setter={setLastname}
         value={lastname}
         inputClassName="user-info__input"

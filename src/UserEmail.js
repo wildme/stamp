@@ -52,7 +52,7 @@ const UserEmail = ({ user, setter }) => {
       </div>
       <InputField
         id="user-profile"
-        attrs={attrs['userProfile'].filter((x) => x.name === "email")[0]}
+        attrs={attrs['userProfile'].find(x => x.name === "email")}
         setter={setEmail}
         value={email}
         inputClassName="user-info__input"

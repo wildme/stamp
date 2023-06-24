@@ -218,7 +218,7 @@ const EditRecord = () => {
         <div className="edit-record edit-record-grid__edit-record">
           <InputField
             id={id}
-            attrs={attrs[`${box}`].filter((x) => x.name ===`${box}-subj`)[0]}
+            attrs={attrs[box].find(x => x.name ===`${box}-subj`)}
             setter={setSubject}
             value={subject}
             inputClassName="edit-record__input"
@@ -226,7 +226,7 @@ const EditRecord = () => {
           />
           <InputField
             id={id}
-            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-addr`)[0]}
+            attrs={attrs[box].find(x => x.name === `${box}-addr`)}
             setter={setFromTo}
             value={fromTo}
             field='name'
@@ -235,7 +235,7 @@ const EditRecord = () => {
           />
           <InputField
             id={id}
-            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-replyTo`)[0]}
+            attrs={attrs[box].find(x => x.name === `${box}-replyTo`)}
             setter={setReplyTo}
             value={replyTo}
             inputClassName="edit-record__input"
@@ -243,7 +243,7 @@ const EditRecord = () => {
           />
           <InputField
             id={id}
-            attrs={attrs[`${box}`].filter((x) => x.name === `${box}-note`)[0]}
+            attrs={attrs[box].find(x => x.name === `${box}-note`)}
             setter={setNote}
             value={note}
             inputClassName="edit-record__input"
