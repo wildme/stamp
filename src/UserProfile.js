@@ -8,9 +8,7 @@ import FlashMessage from './FlashMessage.js';
 
 const UserProfile = () => {
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0, type: 'error' });
-  const username = useSelector((state) => state.user.username);
   const fullname = useSelector((state) => state.info.fullname);
-  const settings = useSelector((state) => state.settings);
   const { t } = useTranslation();
 
   return (
@@ -23,12 +21,7 @@ const UserProfile = () => {
           fullname={fullname}
         />
         <UserProfileMenu />
-        <UserProfileContent
-          username={username}
-          fullname={fullname}
-          setInfoMsg={setInfoMsg}
-          settings={settings}
-        />
+        <UserProfileContent setInfoMsg={setInfoMsg} />
       </div>
     </div>
   );

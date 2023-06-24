@@ -4,51 +4,15 @@ import UserEmail from './UserEmail.js';
 import UserPassword from './UserPassword.js';
 import UserSettings from './UserSettings.js';
 
-const UserProfileContent = (props) => {
-  const username = props.username;
-  const fullname = props.fullname;
-  const setInfoMsg = props.setInfoMsg;
-  const settings = props.settings;
-  const [name1, name2] = fullname.split(' ');
+const UserProfileContent = ({ setInfoMsg }) => {
 
   return (
     <div className="user-profile-info">
       <Routes>
-        <Route path="e-mail"
-          element={
-            <UserEmail
-              user={username}
-              setter={setInfoMsg}
-            />
-          }
-        />
-        <Route path="password"
-          element={
-              <UserPassword
-                user={username}
-                setter={setInfoMsg}
-              />
-          }
-        />
-        <Route path="settings"
-          element={
-              <UserSettings
-                user={username}
-                settings={settings}
-                setter={setInfoMsg}
-              />
-          }
-        />
-        <Route path="*"
-          element={
-              <UserInfo
-                user={username}
-                name1={name1}
-                name2={name2}
-                setter={setInfoMsg}
-              />
-          }
-        />
+        <Route path="e-mail" element={<UserEmail setter={setInfoMsg} />} />
+        <Route path="password" element={<UserPassword setter={setInfoMsg} />} />
+        <Route path="settings" element={<UserSettings setter={setInfoMsg} />} />
+        <Route path="*" element={<UserInfo setter={setInfoMsg} />} />
       </Routes>
     </div>
   );
