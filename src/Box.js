@@ -8,24 +8,24 @@ import TableTabs from './TableTabs.js';
 import FlashMessage from './FlashMessage.js';
 import SimpleHeading2 from './SimpleHeading2.js';
 
-const Box = (props) => {
-  const state = useSelector((state) => state.settings.records.sortOrder);
+const Box = () => {
+  const records = useSelector((state) => state.settings.records);
   const dispatch = useDispatch();
   const thisYear = new Date().getFullYear();
+  const recordsPerPage = 20;
   const [box, setBox] = useState('outbox');
-  const [tableData, setTableData] = useState(null);
-  const [noData, setNoData] = useState(false);
   const [column, setColumn] = useState('date');
-  const [sortOrder, setSortOrder] = useState(state || 'asc');
+  const [tableData, setTableData] = useState([]);
+  const [noData, setNoData] = useState(false);
+  const [error, setError] = useState(false);
+  const [sortOrder, setSortOrder] = useState(records.sortOrder || 'asc');
   const [year, setYear] = useState(thisYear);
   const [yearsOfActivity, setYearsOfActivity] = useState([]);
-  const [error, setError] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [dataForPage, setDataForPage] = useState(null);
-  const [pageCount, setPageCount] = useState(0);
-  const [page, setPage] = useState(null);
+  const [dataForPage, setDataForPage] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
+  const [page, setPage] = useState(0);
   const { t } = useTranslation();
-  const recordsPerPage = 20;
 
   const handlePageClick = (e) => {
     const newOffset = (e.selected * recordsPerPage) % tableData.length;
