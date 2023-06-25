@@ -19,24 +19,20 @@ function logout(dispatch) {
 
 const NewRecord = () => {
   const { box } = useParams();
+  const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
+  const replyToPrefix = stampI18n[replyToBox].map(x => x.prefix);
   const user = useSelector((state) => state.user.username);
+  const MAX_FILE_SIZE = 5000000;
   const dispatch = useDispatch();
-  const storeSubj = localStorage.getItem(`${box}-subj-new`);
-  const storeFromTo = localStorage.getItem(`${box}-addr-new`);
-  const storeNote = localStorage.getItem(`${box}-note-new`);
-  const storeReplyTo = localStorage.getItem(`${box}-replyTo-new`);
-  const [subject, setSubject] = useState(storeSubj || '');
-  const [fromTo, setFromTo] = useState(storeFromTo || '');
-  const [note, setNote] = useState(storeNote || '');
-  const [replyTo, setReplyTo] = useState(storeReplyTo || '');
+  const { t } = useTranslation();
+  const [subject, setSubject] = useState('');
+  const [fromTo, setFromTo] = useState('');
+  const [note, setNote] = useState('');
+  const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
   const [nextId, setNextId] = useState(undefined);
   const [success, setSuccess] = useState(false);
-  const replyToBox = (box === 'inbox') ? 'outbox' : 'inbox';
-  const replyToPrefix = stampI18n[replyToBox].map(x => x.prefix);
-  const { t } = useTranslation();
-  const MAX_FILE_SIZE = 5000000;
 
   function uploadFile() {
     const url = `/api/${box}/upload`;
