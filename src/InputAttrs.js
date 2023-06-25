@@ -4,13 +4,13 @@ export const InputAttrs = {
   inbox: [
     {
       for: 'inbox-subj',
-      text: i18next.t('newRecord.label1'),
+      text: i18next.t('newRecord.label1') + '*',
       name: 'inbox-subj',
       type: 'text'
     },
     {
       for: 'inbox-addr',
-      text: i18next.t('newRecord.label2'),
+      text: i18next.t('newRecord.label2') + '*',
       name: 'inbox-addr',
       type: 'text'
     },
@@ -30,13 +30,13 @@ export const InputAttrs = {
   outbox: [
     {
       for: 'outbox-subj',
-      text: i18next.t('newRecord.label1'),
+      text: i18next.t('newRecord.label1') + '*',
       name: 'outbox-subj',
       type: 'text'
     },
     {
       for: 'outbox-addr',
-      text: i18next.t('newRecord.label3'),
+      text: i18next.t('newRecord.label3') + '*',
       name: 'outbox-addr',
       type: 'text'
     },
