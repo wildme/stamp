@@ -10,7 +10,7 @@ const SelectField = (props) => {
 
   return (
     <Fragment>
-      <lavel htmlFor={attrs.for} className={labelClassName}>
+      <label htmlFor={attrs.for} className={labelClassName}>
       {attrs.text}
       </label>
       <select
@@ -20,10 +20,8 @@ const SelectField = (props) => {
         onChange={(e) => setter(e.target.value)}
       >
       {options.map((k, v) => {
-        return (
-          <option value={k}>{v}</option>
-        );
-      })}
+        return (<option value={k}>{v}</option>);
+      });}
       </select>
     </Fragment>
   );
