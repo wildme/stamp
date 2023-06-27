@@ -10,6 +10,7 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
 
   const handleReqCreds = (e) => {
     e.preventDefault();
+    if (error) setError(false);
     const url = "/api/reset/password";
     fetch(url, {
       method: 'POST',
@@ -18,7 +19,6 @@ const ForgotPassModal = ({openModal, closeModal, t}) => {
     })
       .then(res => {
         if (res.status === 200) {
-          setError(false)
           setInfoMsg(t('forgotPassword.infoMsg4'));
         }
         if (res.status === 409) {
