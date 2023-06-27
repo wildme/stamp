@@ -8,8 +8,7 @@ const UserSettings = ({ setter }) => {
   const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [sortOrder, setSortOrder] = useState({
-    records: { sortOrder: settings.records.sortOrder } });
+  const [sortOrder, setSortOrder] = useState(settings.sortOrder);
 
   const handleSettingsUpdate = () => {
     const url = "/api/user/update/settings";
@@ -20,14 +19,14 @@ const UserSettings = ({ setter }) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({user, settings: {...sortOrder}})
+      body: JSON.stringify({user, settings: {sortOrder: sortOrder}})
     })
       .then(res => {
         if (res.status === 200) {
           if (res.token) {
             localStorage.setItem('at', res.token);
           }
-          dispatch({ type: 'SETTINGS', payload: { settings: {...settings, ...sortOrder } }});
+          dispatch({ type: 'SETTINGS', payload: { settings: {...settings, sortOrder: sortOrder } } });
           setter({str: t('userSettings.infoMsg1'), id: Math.random(), type: 'success'});
         }
         if (res.status === 500) {
@@ -50,8 +49,8 @@ const UserSettings = ({ setter }) => {
       <select
         className="user-info__select"
         name="sortOrder"
-        value={sortOrder.records.sortOrder}
-        onChange={(e) => setSortOrder({records: { sortOrder: e.target.value }})}
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
       >
         <option value="asc">{t('userSettings.optSort1')}</option>
         <option value="desc">{t('userSettings.optSort2')}</option>

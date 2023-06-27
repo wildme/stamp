@@ -9,7 +9,7 @@ import FlashMessage from './FlashMessage.js';
 import SimpleHeading2 from './SimpleHeading2.js';
 
 const Box = () => {
-  const records = useSelector((state) => state.settings.records);
+  const sorting = useSelector((state) => state.settings.sortOrder);
   const dispatch = useDispatch();
   const thisYear = new Date().getFullYear();
   const recordsPerPage = 20;
@@ -18,7 +18,7 @@ const Box = () => {
   const [tableData, setTableData] = useState([]);
   const [noData, setNoData] = useState(false);
   const [error, setError] = useState(false);
-  const [sortOrder, setSortOrder] = useState(records.sortOrder || 'asc');
+  const [sortOrder, setSortOrder] = useState(sorting || 'asc');
   const [year, setYear] = useState(thisYear);
   const [yearsOfActivity, setYearsOfActivity] = useState([]);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
