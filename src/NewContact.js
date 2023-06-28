@@ -7,14 +7,14 @@ import FlashMessage from './FlashMessage.js'
 import SuccessPage from './SuccessPage.js'
 
 const NewContact = () => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [orgLocation, setOrgLocation] = useState('');
   const [orgRegion, setOrgRegion] = useState('');
   const [orgName, setOrgName] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const handleAddContact = (e) => {
     e.preventDefault();
@@ -74,24 +74,21 @@ const NewContact = () => {
        { infoMsg.str && <FlashMessage msg={infoMsg.str} id={infoMsg.id} /> }
        <div className="add-contact add-contact-grid__add-contact">
          <InputField
-           id="new"
-           attrs={attrs['contact'].filter((x) => x.name === 'name')[0]}
+           attrs={attrs['contact'].find(x => x.name === 'name')}
            setter={setOrgName}
            value={orgName}
            inputClassName="add-contact__input"
            labelClassName="add-contact__label"
          />
          <InputField
-           id="new"
-           attrs={attrs['contact'].filter((x) => x.name === 'location')[0]}
+           attrs={attrs['contact'].find(x => x.name === 'location')}
            setter={setOrgLocation}
            value={orgLocation}
            inputClassName="add-contact__input"
            labelClassName="add-contact__label"
          />
          <InputField
-           id="new"
-           attrs={attrs['contact'].filter((x) => x.name === 'region')[0]}
+           attrs={attrs['contact'].find(x => x.name === 'region')}
            setter={setOrgRegion}
            value={orgRegion}
            inputClassName="add-contact__input"
