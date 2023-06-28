@@ -25,7 +25,14 @@ body {
   padding: 5px;
 }
 
-.menu__item:hover , .menu__item.active {
+.menu__item_active {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 19px;
+  padding: 5px;
+}
+
+.menu__item:hover {
   color: #ffffff;
   text-decoration: none;
 }
@@ -515,33 +522,37 @@ body {
 }
 
 /* User profile: navbar */
-.user-profile__navbar {
+.user-profile-navbar {
   font-size: 22px;
   width: 200px;
 }
 
-.user-profile__navbar_list {
+.user-profile-navbar-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.user-profile__navbar_link {
-  display: grid;
+.user-profile-navbar__link {
+  display: block;
   border-radius: 4px;
   text-decoration: none;
   color: grey;
   padding: 8px;
 }
 
-.user-profile__navbar_link.active {
-  background-color: #000000;
-  color: white;
+.user-profile-navbar__link_active {
+  display: block;
+  border-radius: 4px;
+  text-decoration: none;
+  color: grey;
+  padding: 8px;background-color: #000000;
+  color: #ffffff;
 }
 
-.user-profile__navbar_link:hover:not(.active) {
+.user-profile-navbar__link:hover:not(.user-profile-navbar__link_active) {
   background-color: #94b8b8;
-  color: white;
+  color: #ffffff;
 }
 
 /* User profile: email, pass, info */
