@@ -12,15 +12,21 @@ const HeaderLinks = () => {
         <Link className="navbar_logo__link" to="/"><Logo /></Link>
       </div>
       <div className="navbar_left">
-        <NavLink className="menu__item" to="/letters">
+        <NavLink
+          className={({ isActive, isPending }) => {
+            return isActive ? "menu__item_active": "menu__item"}} to="/letters">
           {t('navbar.letters')}
         </NavLink>
-        <NavLink className="menu__item" to="/contacts">
+        <NavLink
+          className={({ isActive, isPending }) => {
+            return isActive ? "menu__item_active": "menu__item"}} to="/contacts">
           {t('navbar.contacts')}
         </NavLink>
       </div>
       <div className="navbar_right">
-        <NavLink className="menu__item" to="/my-profile">
+        <NavLink
+          className={({ isActive, isPending }) => {
+            return isActive ? "menu__item_active": "menu__item"}} to="/my-profile">
           {t('navbar.profile')}
         </NavLink>
         <Link className="menu__item" to="/logout">{t('navbar.logout')}</Link>
