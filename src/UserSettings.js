@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SubmitButton from './SubmitButton.js';
+import { SelectAttrs as attrs } from './SelectAttrs.js';
+import SelectField from './SelectField.js';
 
 const UserSettings = ({ setter }) => {
   const user = useSelector((state) => state.user.username);
@@ -26,7 +28,8 @@ const UserSettings = ({ setter }) => {
           if (res.token) {
             localStorage.setItem('at', res.token);
           }
-          dispatch({ type: 'SETTINGS', payload: { settings: {...settings, sortOrder: sortOrder } } });
+          dispatch({ type: 'SETTINGS', payload: { settings:
+            { ...settings, sortOrder: sortOrder }}});
           setter({str: t('userSettings.infoMsg1'), id: Math.random(), type: 'success'});
         }
         if (res.status === 500) {
@@ -41,20 +44,13 @@ const UserSettings = ({ setter }) => {
       <div className="user-info__title">
         <h2 className="user-info__title_section">{t('userSettings.title')}</h2>
       </div>
-      <label
-        htmlFor="sortOrder"
-        className="user-info__label"
-      >{t('userSettings.label1')}
-      </label>
-      <select
-        className="user-info__select"
-        name="sortOrder"
+      <SelectField
+        attrs={attrs['UserProfile'].find(x => x.name === 'sortOrder')}
+        setter={setSortOrder}
         value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="asc">{t('userSettings.optSort1')}</option>
-        <option value="desc">{t('userSettings.optSort2')}</option>
-      </select>
+        selectClassName="user-info__select"
+        labelClassName="user-info__label"
+      />
       <SubmitButton
         name={t('personalInfo.button')}
         className={"user-info__submit"}
