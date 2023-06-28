@@ -3,7 +3,6 @@ import { Fragment } from 'react';
 const SelectField = (props) => {
   const attrs = props.attrs;
   const setter = props.setter;
-  const options = props.options;
   const value = props.value;
   const selectClassName = props.selectClassName;
   const labelClassName = props.labelClassName;
@@ -19,9 +18,13 @@ const SelectField = (props) => {
         value={value}
         onChange={(e) => setter(e.target.value)}
       >
-      {options.map((k, v) => {
-        return (<option value={k}>{v}</option>);
-      });}
+      {attrs.options.map((opt, i) => {
+        return (
+          <option value={Object.keys(opt)[0]} key={i}>
+          {Object.values(opt)[0]}
+          </option>
+        );
+      })}
       </select>
     </Fragment>
   );
