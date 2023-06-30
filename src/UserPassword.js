@@ -19,7 +19,7 @@ const UserPassword = ({ setter }) => {
     const token = localStorage.getItem('at');
     if (newPass === confirmPass) {
       fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`

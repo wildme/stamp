@@ -16,7 +16,7 @@ const UserSettings = ({ setter }) => {
     const url = "/api/user/update/settings";
     const token = localStorage.getItem('at');
     fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`

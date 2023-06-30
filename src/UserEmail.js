@@ -18,7 +18,7 @@ const UserEmail = ({ setter }) => {
     const token = localStorage.getItem('at');
 
     fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
