@@ -17,6 +17,7 @@ const PasswordInputEye = (props) => {
     padding: "4px"
   };
   const inputStyle = {
+    backgroundColor: "transparent",
     border: "none",
     margin: 0,
     padding: 0,
