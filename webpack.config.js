@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 new webpack.EnvironmentPlugin([
   'NODE_ENV', 'WEBPACK_PROXY_ip', 'WEBPACK_PROXY_PORT'
@@ -31,6 +32,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
+  stats: 'minimal',
   module: {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, use: "babel-loader" },
@@ -47,7 +49,10 @@ module.exports = {
     proxy: {
       "/api": proxyUrl
     },
+    client: {
+      overlay: { errors: true, runtimeErrors: true, warnings: false }
+    }
   },
   devtool: 'source-map',
-  plugins: [htmlWebpack, miniCssExtract]
+  plugins: [htmlWebpack, miniCssExtract, new ESLintPlugin]
 };
