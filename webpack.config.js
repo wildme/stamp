@@ -19,8 +19,8 @@ const miniCssExtract = new MiniCssExtractPlugin({
 }); 
 
 const devMode = process.env.NODE_ENV !== 'production';
-const proxyIp = process.env.WEBPACK_PROXY_IP;
-const proxyPort = process.env.WEBPACK_PROXY_PORT;
+const proxyIp = process.env.WEBPACK_PROXY_IP || 'localhost';
+const proxyPort = process.env.WEBPACK_PROXY_PORT || 3001;
 const proxyUrl = `http://${proxyIp}:${proxyPort}`;
 
 module.exports = {
