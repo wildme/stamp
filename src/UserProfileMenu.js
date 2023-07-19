@@ -9,7 +9,7 @@ const UserProfileMenu = () => {
           return (
             <li key={i}>
               <NavLink
-                className={({ isActive, isPending }) => {
+                className={({ isActive }) => {
                   return isActive ? "user-profile-navbar__link_active" :
                     "user-profile-navbar__link"}}
                 end

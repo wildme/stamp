@@ -13,19 +13,19 @@ const HeaderLinks = () => {
       </div>
       <div className="navbar_left">
         <NavLink
-          className={({ isActive, isPending }) => {
+          className={({ isActive }) => {
             return isActive ? "menu__item_active": "menu__item"}} to="/letters">
           {t('navbar.letters')}
         </NavLink>
         <NavLink
-          className={({ isActive, isPending }) => {
+          className={({ isActive }) => {
             return isActive ? "menu__item_active": "menu__item"}} to="/contacts">
           {t('navbar.contacts')}
         </NavLink>
       </div>
       <div className="navbar_right">
         <NavLink
-          className={({ isActive, isPending }) => {
+          className={({ isActive }) => {
             return isActive ? "menu__item_active": "menu__item"}} to="/my-profile">
           {t('navbar.profile')}
         </NavLink>
