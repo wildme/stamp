@@ -6,7 +6,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const WebpackDevServer = require("webpack-dev-server");
 
 new webpack.EnvironmentPlugin([
-  'NODE_ENV', 'WEBPACK_PROXY_ip', 'WEBPACK_PROXY_PORT'
+  'WEBPACK_PROXY_ip', 'WEBPACK_PROXY_PORT'
 ]);
 
 const htmlWebpack = new HtmlWebpackPlugin({
@@ -17,10 +17,9 @@ const htmlWebpack = new HtmlWebpackPlugin({
 });
 
 const miniCssExtract = new MiniCssExtractPlugin({
-  filename: "./static/css/[name].[contenthash].css"
+  filename: "./static/css/[name].css"
 }); 
 
-const devMode = process.env.NODE_ENV !== 'production';
 const proxyIp = process.env.WEBPACK_PROXY_IP || 'localhost';
 const proxyPort = process.env.WEBPACK_PROXY_PORT || 3001;
 const proxyUrl = `http://${proxyIp}:${proxyPort}`;
@@ -37,14 +36,15 @@ function customOutputMsg(devServer) {
   console.log("You can open \x1b[1m\x1b[36m%s\x1b[0m", name, "in browser.\n");
   console.log("\x1b[1m%s".padStart(8), "Loopback:", `\x1b[33m${loopback}\x1b[0m`);
   console.log("\x1b[1m%s".padStart(8), "LAN:".padEnd(9), `\x1b[33m${lan}\x1b[0m`, '\n');
-  }
+}
 
 module.exports = {
   name: 'stamp',
+  mode: 'development',
   entry: './src/index.js',
   output: {
     clean: true,
-    filename: './static/js/main.[contenthash].js',
+    filename: './static/js/main.js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
@@ -54,7 +54,7 @@ module.exports = {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, use: "babel-loader" },
       { test: /\.html$/, use: "html-loader" },
-      { test: /\.css$/, use: [devMode ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader"] }
+      { test: /\.css$/, use: ["style-loader", "css-loader"] }
     ]
   },
   devServer: {
