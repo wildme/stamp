@@ -26,18 +26,20 @@ const InputSearchField = (props) => {
   let optionList;
 
   const onClick = (e) => {
-    setter(e.currentTarget.innerText.replace(prefix, ''));
-    setInputValue(e.currentTarget.innerText.replace(prefix, ''));
+    const value = e.currentTarget.innerText.replace(prefix, '');
+    setter(value);
+    setInputValue(value);
     setVisibility(false);
     setActiveItem(0);
   };
 
   const onKeyDown = (e) =>  {
     if (e.key === 'Enter') {
-      setActiveItem(0);
+      const value = results[activeItem].replace(prefix, '');
+      setter(value);
+      setInputValue(value);
       setVisibility(false);
-      setter(results[activeItem].replace(prefix, ''));
-      setInputValue(results[activeItem]).replace(prefix, '');
+      setActiveItem(0);
       return;
     }
     if (e.key === 'ArrowUp') {
