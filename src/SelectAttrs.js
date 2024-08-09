@@ -11,5 +11,12 @@ export const SelectAttrs = {
         { desc: i18n.t('userSettings.optSort2') }
       ]
     }
+  ],
+  directive: [
+    {
+      for: 'directiveCode',
+      text: i18n.t('newRecord.label7'),
+      name: 'directiveCode'
+    }
   ]
 };
