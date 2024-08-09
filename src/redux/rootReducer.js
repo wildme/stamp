@@ -1,4 +1,4 @@
-const initialState =  { user: null, info: null, settings: null };
+const initialState =  { user: null, info: null, settings: null, roles: null };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -7,8 +7,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, user };
     }
     case 'LOGOUT': {
-      const { user, info, settings } = action.payload;
-      return { ...state, user, info, settings };
+      const { user, info, settings, roles } = action.payload;
+      return { ...state, user, info, settings, roles };
     }
     case 'INFO': {
       const { info } = action.payload;
@@ -17,6 +17,10 @@ const rootReducer = (state = initialState, action) => {
     case 'SETTINGS': {
       const { settings } = action.payload;
       return { ...state, settings };
+    }
+    case 'ROLES': {
+      const { roles } = action.payload;
+      return { ...state, roles };
     }
     default: return state;
   }
