@@ -1,11 +1,15 @@
 import { Fragment } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Box from './Box.js';
+import Directives from './Directives.js';
 import HomePage from './HomePage.js';
 import NewRecord from './NewRecord.js';
+import NewDirective from './NewDirective.js';
 import Signup from './Signup.js';
 import EditRecord from './EditRecord.js';
+import EditDirective from './EditDirective.js';
 import RecordCard from './RecordCard.js';
+import DirectiveCard from './DirectiveCard.js';
 import Logout from './Logout.js';
 import Login from './Login.js';
 import Contacts from './Contacts.js';
@@ -85,10 +89,42 @@ const Content = () => {
           }
         />
         <Route
+          path="/directive/edit/:id"
+          element={
+            <PrivateRoute>
+              <EditDirective />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/:box/edit/:id"
           element={
             <PrivateRoute>
               <EditRecord />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/directives"
+          element={
+            <PrivateRoute>
+              <Directives />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/directive/new"
+          element={
+            <PrivateRoute>
+              <NewDirective />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/directive/view/:id"
+          element={
+            <PrivateRoute>
+              <DirectiveCard />
             </PrivateRoute>
           }
         />
