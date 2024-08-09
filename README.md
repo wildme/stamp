@@ -1,2 +1,3 @@
 # Stamp
-Stamp is a web application to register official correspondence(letters) in an office.
+Stamp is a web application that deal with official correspondence(recieved and sent letters).
+Also there are forms to register directives issued by the organization.
