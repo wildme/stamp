@@ -79,4 +79,5 @@ const BoxTableColumnLabels = () => {
     ]
   }
 };
-export default BoxTableColumnLabels 
+
+export default BoxTableColumnLabels;
