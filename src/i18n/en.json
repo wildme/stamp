@@ -28,6 +28,7 @@
   },
   "navbar": {
     "letters": "Letters",
+    "directives": "Directives",
     "contacts": "Contacts",
     "profile": "Profile",
     "logout": "Logout"
@@ -88,6 +89,7 @@
     "label4": "Reply to",
     "label5": "Note",
     "label6": "File",
+    "label7": "Directive code",
     "button": "Add",
     "infoMsg1": "Error. Failed to add record",
     "infoMsg2": "Error. Failed to upload file",
@@ -113,6 +115,7 @@
     "confirm": "Are you sure?"
   },
   "recordCard": {
+    "titleDirective": "Directive",
     "titleinbox": "Inbox",
     "titleoutbox": "Outbox",
     "subject": "Subject",
@@ -140,6 +143,7 @@
   "main": {
     "titleInbox": "Inbox",
     "titleOutbox": "Outbox",
+    "titleDirectives": "Directives",
     "tabInbox": "Inbox",
     "tabOutbox": "Outbox",
     "infoMsg1": "Error. Failed to retrieve data",
@@ -155,6 +159,12 @@
     "label5": "File",
     "label6": "Reply to",
     "label7": "Actions"
+  },
+  "headerCellDir": {
+    "label1": "Subject",
+    "label2": "Date",
+    "label3": "File",
+    "label4": "Actions"
   },
   "headerCellContacts": {
     "label1": "Name",
@@ -183,7 +193,8 @@
     "string1": "Hello",
     "action1": "Incoming",
     "action2": "Outcoming",
-    "action3": "Contact"
+    "action3": "Contact",
+    "action4": "Directive"
   },
   "errorPage": {
     "title1": "Oops! Page not found",
@@ -195,7 +206,8 @@
   "successPage": {
     "title1": "Yay! It's done successfully!",
     "link1": "Go to Letters",
-    "link2": "Go to Contacts"
+    "link2": "Go to Contacts",
+    "link3": "Go to Directives"
   },
   "dropZoneFile": {
     "title1": "Or Drop File here",
