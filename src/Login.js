@@ -53,6 +53,9 @@ const Login = () => {
           dispatch({ type: 'SETTINGS', payload:
             { settings: data.settings }
           });
+          dispatch({ type: 'ROLES', payload:
+            { roles: data.roles }
+          });
           navigate(from, { replace: true });
         }
       })

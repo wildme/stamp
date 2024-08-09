@@ -9,7 +9,7 @@ const Logout = () => {
       if (res.ok) {
         localStorage.removeItem('at');
         dispatch({ type: 'LOGOUT', payload: { user: { loggedIn: false },
-          info: null, settings: null } });
+          info: null, settings: null, roles: null } });
       }
     })
     .catch((e) => console.error(e))

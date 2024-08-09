@@ -13,6 +13,7 @@ const onPageReload = (dispatch, navigate, location) => {
         localStorage.removeItem('at');
         dispatch({ type: 'INFO', payload: { info: null } });
         dispatch({ type: 'SETTINGS', payload: { settings: null } });
+        dispatch({ type: 'ROLES', payload: { roles: null } });
         dispatch({ type: 'LOGIN', payload: { user:
           { username: null, admin: null, loggedIn: false } }});
         return 1;
@@ -27,6 +28,7 @@ const onPageReload = (dispatch, navigate, location) => {
         dispatch({ type: 'INFO', payload:
           { info: { fullname: data.user.fullname, email: data.user.email }} });
         dispatch({ type: 'SETTINGS', payload: { settings: data.settings } });
+        dispatch({ type: 'ROLES', payload: { roles: data.roles } });
         dispatch({ type: 'LOGIN', payload:
           { user: { username: data.user.username,
             admin: data.user.admin, loggedIn: true } }});
