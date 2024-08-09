@@ -19,6 +19,11 @@ const HeaderLinks = () => {
         </NavLink>
         <NavLink
           className={({ isActive }) => {
+            return isActive ? "menu__item_active": "menu__item"}} to="/directives">
+          {t('navbar.directives')}
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => {
             return isActive ? "menu__item_active": "menu__item"}} to="/contacts">
           {t('navbar.contacts')}
         </NavLink>
