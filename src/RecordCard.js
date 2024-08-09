@@ -154,6 +154,7 @@ const RecordCard = () => {
         {file?.fsName &&
           <div className="record-card__file record-card__file_long">
             <DownloadLink
+              api={`/api/${box}/download/${file.fsName}`}
               linkname={file.name}
               hash={file.fsName}
               filename={file.name}
