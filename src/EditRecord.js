@@ -74,7 +74,7 @@ const EditRecord = () => {
   }
 
   function deleteFile(file) {
-    const url = `/api/attachment/delete/${file}`;
+    const url = `/api/${box}/attachment/delete/${file}`;
     const token = localStorage.getItem('at');
     return fetch(url, {
       method: 'DELETE',
@@ -250,6 +250,7 @@ const EditRecord = () => {
           {file?.fsName &&
           <div className="edit-record-file edit-record__edit-record-file">
             <DownloadLink
+              api={`/api/${box}/download/${file.fsName}`}
               linkname={t('editRecord.link')}
               hash={file.fsName}
               filename={file.name}
