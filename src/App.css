@@ -380,9 +380,9 @@ body {
 .record-card {
   display: grid;
   padding: 15px;
-  background-color: #ffe6b3;
   border-radius: 6px;
-  box-shadow: 4px 3px 8px 1px;
+  background: #ffffff;
+  box-shadow: 1px 0.8px 9px -1px;
   margin: 100px 0 100px 0;
 } 
 
@@ -838,6 +838,11 @@ body {
   grid-auto-flow: column;
   grid-column-gap: 7px;
   width: 100%;
+}
+
+.filter-by-year__page-title {
+  padding-top: 5px;
+  padding-bottom: 15px;
 }
 
 .filter-by-year__button {
