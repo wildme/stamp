@@ -10,7 +10,7 @@ const SelectField = (props) => {
   return (
     <Fragment>
       <label htmlFor={attrs.for} className={labelClassName}>
-      {attrs.text}
+        {attrs.text}
       </label>
       <select
         className={selectClassName}
