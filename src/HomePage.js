@@ -4,6 +4,8 @@ import ActionCard from './ActionCard.js';
 
 const HomePage = () => {
   const fullname = useSelector((state) => state.info.fullname);
+  const admin = useSelector((state) => state.user.admin);
+  const roles = useSelector((state) => state.roles);
   const [firstname] = fullname.split(' ');
   const { t } = useTranslation();
 
@@ -29,13 +31,22 @@ const HomePage = () => {
           linkClassName="action-open-page__link"
           iconClassName="action-open-page__icon"
         />
+        {admin || roles.includes('chief') ?
+        <ActionCard
+          path="/directive/new"
+          title={t('homepage.action4')}
+          className="action-open-page"
+          linkClassName="action-open-page__link"
+          iconClassName="action-open-page__icon"
+        />
+            : null}
         <ActionCard
           path="/contacts/new"
           title={t('homepage.action3')}
           className="action-open-page"
           linkClassName="action-open-page__link"
           iconClassName="action-open-page__icon"
-        />
+        /> 
       </div>
     </div>
   );
