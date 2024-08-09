@@ -31,7 +31,7 @@ const NewRecord = () => {
   const [replyTo, setReplyTo] = useState('');
   const [file, setFile] = useState(null);
   const [infoMsg, setInfoMsg] = useState({str: '', id: 0});
-  const [nextId, setNextId] = useState(undefined);
+  const [nextId, setNextId] = useState('Loading...');
   const [success, setSuccess] = useState(false);
 
   function uploadFile() {
