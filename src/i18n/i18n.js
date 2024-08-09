@@ -44,6 +44,7 @@ const resources = {
       },
       navbar: {
         letters: en.navbar.letters,
+        directives: en.navbar.directives,
         contacts: en.navbar.contacts,
         profile: en.navbar.profile,
         logout: en.navbar.logout
@@ -105,6 +106,7 @@ const resources = {
         label4: en.newRecord.label4,
         label5: en.newRecord.label5,
         label6: en.newRecord.label6,
+        label7: en.newRecord.label7,
         button: en.newRecord.button,
         infoMsg1: en.newRecord.infoMsg1,
         infoMsg2: en.newRecord.infoMsg2,
@@ -130,6 +132,7 @@ const resources = {
         confirm: en.editContact.confirm
       },
       recordCard: {
+        titleDirective: en.recordCard.titleDirective,
         titleinbox: en.recordCard.titleinbox,
         titleoutbox: en.recordCard.titleoutbox,
         subject: en.recordCard.subject,
@@ -157,6 +160,7 @@ const resources = {
       main: {
         titleInbox: en.main.titleInbox,
         titleOutbox: en.main.titleOutbox,
+        titleDirectives: en.main.titleDirectives,
         tabInbox: en.main.tabInbox,
         tabOutbox: en.main.tabOutbox,
         infoMsg1: en.main.infoMsg1,
@@ -172,6 +176,12 @@ const resources = {
         label5: en.headerCellBox.label5,
         label6: en.headerCellBox.label6,
         label7: en.headerCellBox.label7
+      },
+      headerCellDir: {
+        label1: en.headerCellDir.label1,
+        label2: en.headerCellDir.label2,
+        label3: en.headerCellDir.label3,
+        label4: en.headerCellDir.label4
       },
       headerCellContacts: {
         label1: en.headerCellContacts.label1,
@@ -200,7 +210,8 @@ const resources = {
         string1: en.homepage.string1,
         action1: en.homepage.action1,
         action2: en.homepage.action2,
-        action3: en.homepage.action3
+        action3: en.homepage.action3,
+        action4: en.homepage.action4
       },
       errorPage: {
         title1: en.errorPage.title1,
@@ -212,7 +223,8 @@ const resources = {
       successPage: {
         title1: en.successPage.title1,
         link1: en.successPage.link1,
-        link2: en.successPage.link2
+        link2: en.successPage.link2,
+        link3: en.successPage.link3
       },
       dropZoneFile: {
         title1: en.dropZoneFile.title1,
@@ -252,6 +264,7 @@ const resources = {
       },
       navbar: {
         letters: ru.navbar.letters,
+        directives: ru.navbar.directives,
         contacts: ru.navbar.contacts,
         profile: ru.navbar.profile,
         logout: ru.navbar.logout
@@ -313,6 +326,7 @@ const resources = {
         label4: ru.newRecord.label4,
         label5: ru.newRecord.label5,
         label6: ru.newRecord.label6,
+        label7: ru.newRecord.label7,
         button: ru.newRecord.button,
         infoMsg1: ru.newRecord.infoMsg1,
         infoMsg2: ru.newRecord.infoMsg2,
@@ -338,6 +352,7 @@ const resources = {
         confirm: ru.editContact.confirm
       },
       recordCard: {
+        titleDirective: ru.recordCard.titleDirective,
         titleinbox: ru.recordCard.titleinbox,
         titleoutbox: ru.recordCard.titleoutbox,
         subject: ru.recordCard.subject,
@@ -365,6 +380,7 @@ const resources = {
       main: {
         titleInbox: ru.main.titleInbox,
         titleOutbox: ru.main.titleOutbox,
+        titleDirectives: ru.main.titleDirectives,
         tabInbox: ru.main.tabInbox,
         tabOutbox: ru.main.tabOutbox,
         infoMsg1: ru.main.infoMsg1,
@@ -380,6 +396,12 @@ const resources = {
         label5: ru.headerCellBox.label5,
         label6: ru.headerCellBox.label6,
         label7: ru.headerCellBox.label7
+      },
+      headerCellDir: {
+        label1: ru.headerCellDir.label1,
+        label2: ru.headerCellDir.label2,
+        label3: ru.headerCellDir.label3,
+        label4: ru.headerCellDir.label4
       },
       headerCellContacts: {
         label1: ru.headerCellContacts.label1,
@@ -408,7 +430,8 @@ const resources = {
         string1: ru.homepage.string1,
         action1: ru.homepage.action1,
         action2: ru.homepage.action2,
-        action3: ru.homepage.action3
+        action3: ru.homepage.action3,
+        action4: ru.homepage.action4
       },
       errorPage: {
         title1: ru.errorPage.title1,
@@ -420,7 +443,8 @@ const resources = {
       successPage: {
         title1: ru.successPage.title1,
         link1: ru.successPage.link1,
-        link2: ru.successPage.link2
+        link2: ru.successPage.link2,
+        link3: ru.successPage.link3
       },
       dropZoneFile: {
         title1: ru.dropZoneFile.title1,
