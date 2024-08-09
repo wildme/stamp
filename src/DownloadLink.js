@@ -6,15 +6,15 @@ function logout(dispatch) {
 
 const DownloadLink = (props) => {
   const linkname = props.linkname;
+  const api = props.api;
   const hash = props.hash;
   const filename = props.filename;
   const dispatch = useDispatch();
 
   const handleDownload = (e) => {
     e.preventDefault();
-    const url = `/api/download/${hash}`;
     const token = localStorage.getItem('at');
-    fetch(url, { headers: { 'Authorization': `Bearer ${token}` } })
+    fetch(api, { headers: { 'Authorization': `Bearer ${token}` } })
       .then(res => {
         if (res.status === 200) {
           if (res.token) {

@@ -27,6 +27,7 @@ const RowBox = ({ entry, className, box }) => {
         <td className={`${className}__td`}>
           {entry.file ?
             <DownloadLink
+              api={`/api/${box}/download/${entry.file.fsName}`}
               linkname={<HiDownload />}
               hash={entry.file.fsName}
               filename={entry.file.name}
