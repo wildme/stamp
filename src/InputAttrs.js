@@ -1,6 +1,20 @@
 import i18next from './i18n/i18n.js';
 
 export const InputAttrs = {
+  directive: [
+    {
+      for: 'directive-subj',
+      text: i18next.t('newRecord.label1') + '*',
+      name: 'directive-subj',
+      type: 'text'
+    },
+    {
+      for: 'directive-note',
+      text: i18next.t('newRecord.label5'),
+      name: 'directive-note',
+      type: 'text'
+    },
+  ],
   inbox: [
     {
       for: 'inbox-subj',
