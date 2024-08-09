@@ -226,7 +226,7 @@ const NewDirective = () => {
           setter={setFile}
           setInfoMsg={setInfoMsg}
           maxFileSize={MAX_FILE_SIZE}
-          maxFileSizeExceededMsg={t('editRecorde.infoMsg5')}
+          maxFileSizeExceededMsg={t('editRecord.infoMsg5')}
         />
         <DropZoneFileUpload
           setter={setFile}
