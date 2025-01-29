@@ -64,9 +64,12 @@ module.exports = {
     port: 3000,
     open: true,
     host: '0.0.0.0',
-    proxy: {
-      "/api": proxyUrl
-    },
+    proxy: [
+      {
+        context: ["/api"],
+        target: proxyUrl
+      },
+    ],
     client: {
       overlay: { errors: true, runtimeErrors: true, warnings: false }
     }
